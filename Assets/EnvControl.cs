@@ -14,7 +14,8 @@ public class EnvControl : MonoBehaviour
     Component MovingSource;
 
     bool MovingCubeOn;
-    bool StaticCubeOn; 
+    bool StaticCubeOn;
+    bool VarRadiusOn;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class EnvControl : MonoBehaviour
         // perform a simple int to bool cast here..
         MovingCubeOn = (PlayerPrefs.GetInt("MovingOn") == 1) ? true : false;
         StaticCubeOn = (PlayerPrefs.GetInt("StaticOn") == 1) ? true : false;
+        VarRadiusOn = (PlayerPrefs.GetInt("VarRadOn") == 1) ? true : false;
         StartEnvironment();
     }
 
