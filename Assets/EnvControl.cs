@@ -38,8 +38,9 @@ public class EnvControl : MonoBehaviour
         // go back to main menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Go from Scene: " + SceneManager.GetActiveScene().buildIndex + " to " + (SceneManager.GetActiveScene().buildIndex - 1));
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex - 1);
+            //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
             //StopEnvironment();
         }
     }
@@ -56,11 +57,6 @@ public class EnvControl : MonoBehaviour
     {
         MovingCube.SetActive(false);
         StaticCube.SetActive(false);
-    }
-
-    private void OnLevelWasLoaded(int level)
-    {
-        StartEnvironment();
     }
 
 }

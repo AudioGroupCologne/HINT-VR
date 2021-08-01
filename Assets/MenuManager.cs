@@ -14,7 +14,6 @@ public class MenuManager : MonoBehaviour
     {
         Settings.SetActive(false);
         Main.SetActive(true);
-        SceneManager.UnloadSceneAsync(1);
     }
 
     // Update is called once per frame

@@ -364,7 +364,13 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7695743096594534270}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2092185516
+--- !u!82 &2092185517 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2223121483785052735, guid: 960ba8804cc5d6644af38a84185db553,
+    type: 3}
+  m_PrefabInstance: {fileID: 7695743096594534270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2092185518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,6 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b95ec44108803419d2b589eb740b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localSrc: {fileID: 2092185517}
   clipArray:
   - {fileID: 8300000, guid: 39775d9fa2c6c444ca3c7e3804065483, type: 3}
   - {fileID: 8300000, guid: 7ab2d8fb3360a0d448ea2838e1b040fa, type: 3}
