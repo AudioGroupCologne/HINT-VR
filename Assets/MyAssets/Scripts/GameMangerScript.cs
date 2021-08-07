@@ -27,7 +27,10 @@ public class GameMangerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("ESC in GameManager");
-            SceneManager.LoadSceneAsync("MenuScene");
+            // don't reload MenuScene when already active
+            if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MenuScene")) {
+                SceneManager.LoadSceneAsync("MenuScene");
+            }
         }
     }
 
