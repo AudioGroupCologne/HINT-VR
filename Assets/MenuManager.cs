@@ -12,24 +12,11 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("ScCnt: " + SceneManager.sceneCountInBuildSettings);
-        
-        for(int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
-        {
-            if (SceneManager.GetSceneByBuildIndex(i).isLoaded)
-            {
-                Debug.Log("Unload Scene " + i);
-                SceneManager.UnloadSceneAsync(i);
-            }
-            
-        }
-
         // Set MainMenu active
         Main.SetActive(true);
         // Set SettingsMenu inactive
         Settings.SetActive(false);
         
-
     }
 
     // Update is called once per frame
