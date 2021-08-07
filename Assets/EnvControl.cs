@@ -20,13 +20,6 @@ public class EnvControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            Debug.Log("UNLOAD ENV AT INIT");
-            SceneManager.UnloadSceneAsync(1);
-        }
-        */
         // PlayerPrefs can store data between scenes and closing/re-opening
         // perform a simple int to bool cast here..
         MovingCubeOn = (PlayerPrefs.GetInt("MovingOn") == 1) ? true : false;
@@ -38,14 +31,7 @@ public class EnvControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // go back to main menu
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Debug.Log("Go from Scene: " + SceneManager.GetActiveScene().buildIndex + " to " + (SceneManager.GetActiveScene().buildIndex - 1));
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex - 1);
-            //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-            //StopEnvironment();
-        }
+
     }
 
     // Start Cube Movement, enable Sound Sources etc.
