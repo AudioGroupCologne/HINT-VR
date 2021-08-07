@@ -6,6 +6,8 @@ public class CustomAudioPlayer : MonoBehaviour
 {
 
     public AudioSource localSrc;
+    // make this selectable via settings menu
+    public int mode = 0;        // 0 -> auto, 1 -> manual
 
     public AudioClip[] clipArray;
     int clip_ix = 0;
@@ -21,8 +23,19 @@ public class CustomAudioPlayer : MonoBehaviour
     {
         if (!localSrc.isPlaying)
         {
-            localSrc.PlayOneShot(clipArray[clip_ix]);
-            if (clip_ix++ >= clipArray.Length) clip_ix = 0;
+            if(mode == 0)
+            {
+                localSrc.PlayOneShot(clipArray[clip_ix]);
+                if (clip_ix++ >= clipArray.Length) clip_ix = 0;
+            }
+            else if(mode == 1)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    localSrc.PlayOneShot(clipArray[clip_ix]);
+                    if (clip_ix++ >= clipArray.Length) clip_ix = 0;
+                }
+            }
         }
         
     }

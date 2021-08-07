@@ -383,19 +383,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localSrc: {fileID: 2092185517}
+  mode: 1
   clipArray:
-  - {fileID: 8300000, guid: 39775d9fa2c6c444ca3c7e3804065483, type: 3}
-  - {fileID: 8300000, guid: 7ab2d8fb3360a0d448ea2838e1b040fa, type: 3}
-  - {fileID: 8300000, guid: 16c3c4f0e419b834ab60d835e6708d72, type: 3}
-  - {fileID: 8300000, guid: 1ca8d78515d59b149986e58e2373dff3, type: 3}
-  - {fileID: 8300000, guid: 14f5112a3f9b1c842ac02d7a387b70b0, type: 3}
-  - {fileID: 8300000, guid: 119bad2ca80100a4d95a03b28f2abb22, type: 3}
-  - {fileID: 8300000, guid: f139b817dfd7314419a77f438f4c75d6, type: 3}
-  - {fileID: 8300000, guid: efacd9d176c0fa341b0f522a14f46f56, type: 3}
-  - {fileID: 8300000, guid: cb3fb3c4cb6b18c4bbc9b492ef017da8, type: 3}
-  - {fileID: 8300000, guid: aafb9568cf9af684abcc8408ea3db0ea, type: 3}
-  - {fileID: 8300000, guid: 60b18a5c3216a464badbee7086cc88ed, type: 3}
-  - {fileID: 8300000, guid: 4fd0aa0f27bf3a14b81b254fd3f529a1, type: 3}
+  - {fileID: 8300000, guid: 9fe166bd6f3cb014ba256f58048eb89f, type: 3}
+  - {fileID: 8300000, guid: 97e452e1c0acad84182202ac74bf7a05, type: 3}
+  - {fileID: 8300000, guid: c977a0634f53e454c8e5c57c72405247, type: 3}
+  - {fileID: 8300000, guid: 79624156706a65b4499c32d392253d27, type: 3}
+  - {fileID: 8300000, guid: d3c2dade79f722048b8045b3e6d44201, type: 3}
+  - {fileID: 8300000, guid: 46c8229abe87e90419e58373d0db999c, type: 3}
+  - {fileID: 8300000, guid: d1b03495935eb1e4ab6861a94d1678ea, type: 3}
+  - {fileID: 8300000, guid: 4a1fe529231b3ef4bb1d503ccdb67ab4, type: 3}
+  - {fileID: 8300000, guid: e899e4a4844c42c46acabb03ca742941, type: 3}
+  - {fileID: 8300000, guid: 7f807a79e6ccbf744baea52fa3c6b458, type: 3}
+  - {fileID: 8300000, guid: 8be19937deae9a646a10c0b8d500828a, type: 3}
+  - {fileID: 8300000, guid: db8eebe49fc8c9f42951249ddbbc0d4d, type: 3}
   - {fileID: 8300000, guid: ea9a5375b715c6a49b6744bd8041d195, type: 3}
   - {fileID: 8300000, guid: df071a3caa5002d439123ec7c50a6609, type: 3}
   - {fileID: 8300000, guid: 83628b07ecb4f1047a1c5acc3f416ca6, type: 3}

@@ -20,10 +20,13 @@ public class EnvControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //MovingSource = MovingCube.GetComponent("AudioSource1");
-        //StaticSource = StaticCube.GetComponent("AudioSource1") as AudioSource;
-        //StopEnvironment();
-
+        /*
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Debug.Log("UNLOAD ENV AT INIT");
+            SceneManager.UnloadSceneAsync(1);
+        }
+        */
         // PlayerPrefs can store data between scenes and closing/re-opening
         // perform a simple int to bool cast here..
         MovingCubeOn = (PlayerPrefs.GetInt("MovingOn") == 1) ? true : false;
