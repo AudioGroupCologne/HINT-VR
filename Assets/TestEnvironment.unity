@@ -385,7 +385,7 @@ MonoBehaviour:
   localSrc: {fileID: 2092185517}
   mode: 1
   clipArray:
-  - {fileID: 8300000, guid: 9fe166bd6f3cb014ba256f58048eb89f, type: 3}
+  - {fileID: 8300000, guid: b92ad532910933b4abb77a34f2e83c8c, type: 3}
   - {fileID: 8300000, guid: 97e452e1c0acad84182202ac74bf7a05, type: 3}
   - {fileID: 8300000, guid: c977a0634f53e454c8e5c57c72405247, type: 3}
   - {fileID: 8300000, guid: 79624156706a65b4499c32d392253d27, type: 3}
