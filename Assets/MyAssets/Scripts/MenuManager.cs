@@ -12,10 +12,7 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Set MainMenu active
-        Main.SetActive(true);
-        // Set SettingsMenu inactive
-        Settings.SetActive(false);
+        ShowMainMenu();
         
     }
 
@@ -35,11 +32,19 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void OpenSettingsMenu()
+    public void ShowSettingsMenu()
     {
         // Set SettingsMenu active
         Settings.SetActive(true);
         // Set MainMenu inactive
         Main.SetActive(false);
+    }
+
+    public void ShowMainMenu()
+    {
+        // Set MainMenu active
+        Main.SetActive(true);
+        // Set SettingsMenu inactive
+        Settings.SetActive(false);
     }
 }

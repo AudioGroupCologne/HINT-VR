@@ -44,7 +44,6 @@ public class SettingsManager : MonoBehaviour
 
     public void ToggleVarRadChanged()
     {
-        //EanbleVaryingRadius = toggleVarRadius.isOn;
         PlayerPrefs.SetInt("VarRadOn", toggleVarRadius.isOn ? 1 : 0);
     }
 

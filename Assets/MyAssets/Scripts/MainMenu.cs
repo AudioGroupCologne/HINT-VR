@@ -21,6 +21,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadSceneAsync("DemonstrationGame");
     }
 
+    public void StartVRRoom()
+    {
+        SceneManager.LoadSceneAsync("VRRoom");
+    }
+
     public void QuitApp ()
     {
         Debug.Log("Quit");
