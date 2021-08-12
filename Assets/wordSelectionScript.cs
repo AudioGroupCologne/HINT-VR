@@ -12,15 +12,17 @@ public class wordSelectionScript : MonoBehaviour
     public Button wordBtn4;
     public DemoGameManager masterScript;
 
+    private string[] words;
+
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        wordBtn1.GetComponentInChildren<Text>().text = "word1";
-        wordBtn2.GetComponentInChildren<Text>().text = "word2";
-        wordBtn3.GetComponentInChildren<Text>().text = "word3";
-        wordBtn4.GetComponentInChildren<Text>().text = "word4";
         testfunc();
+        wordBtn1.GetComponentInChildren<Text>().text = words[0];
+        wordBtn2.GetComponentInChildren<Text>().text = words[1];
+        wordBtn3.GetComponentInChildren<Text>().text = words[2];
+        wordBtn4.GetComponentInChildren<Text>().text = words[3];   
     }
 
     void testfunc()
@@ -28,6 +30,9 @@ public class wordSelectionScript : MonoBehaviour
         Debug.Log("Try to get string");
         string[] currentSentence = masterScript.getSentenceString();
         Debug.Log(currentSentence[0] + currentSentence[1] + currentSentence[2]);
+
+        words = masterScript.getUserWordSelection(1, 4);
+        Debug.Log("WordSelection: " + words[0] + words[1] + words[2] + words[3]);
     }
 
 

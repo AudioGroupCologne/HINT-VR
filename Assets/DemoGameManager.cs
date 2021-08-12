@@ -164,14 +164,6 @@ public class DemoGameManager : MonoBehaviour
     public string[] getSentenceString()
     {
         return sent.words;
-        /*
-        string[] sentenceString = new string[wordCount];
-        for (int i = 0; i < wordCount; i++)
-        {
-            sentenceString[i] = sentenceAudio[i].ToString();
-        }
-        return sentenceString;
-        */
     }
 
     public string getWordFromSentence(int index)
@@ -179,7 +171,15 @@ public class DemoGameManager : MonoBehaviour
         if (index > wordCount)
             return null;
 
-        return sentenceAudio[index].ToString();
+        return sent.words[index];
+    }
+
+    public int getWordIxFromSentence(int index)
+    {
+        if (index > wordCount)
+            return -1;
+
+        return sent.indices[index];
     }
 
     // make this prettier with references... (word class or word[][] or something...)
@@ -234,6 +234,61 @@ public class DemoGameManager : MonoBehaviour
 
         return retString;
     }
+
+    /**
+     * There are no doubling of words allowed.
+     * 
+     * @param wordIndex - determines number of the word within the sentences
+     * @param count     - determines how many words shall be returned
+     * return           - array of strings, with correct word a index 0
+     *                    OR: null if wordIndex or count was invalid.
+     * 
+     */
+    public string[] getUserWordSelection(int wordIndex, int count)
+    {
+        // invalid parameters (also exclude 'the')
+        if (wordIndex >= aFiles.wordCount || count >= aFiles.wordOptions || wordIx == 0)
+        {
+            return null;
+        }
+
+        // hold selected strings to be returned
+        string[] retStr = new string[count];
+        // keep track of already selected words via their indices
+        int[] wordIxs = new int[count];
+        bool match = false;
+
+        // write the correct word at index 0
+        retStr[0] = getWordFromSentence(wordIndex);
+        wordIxs[0] = getWordIxFromSentence(wordIndex);
+
+        // select count - 1 random words from the same group
+        for(int i = 1; i < count; i++)
+        {
+            do
+            {
+                match = false;
+                // generate a new random number to select the next word
+                wordIxs[i] = Random.Range(0, aFiles.wordOptions);
+                // check if this index is already in use
+                for (int j = 0; j < i; j++)
+                {
+                    // if the index has already been used, 
+                    if (wordIxs[j] == wordIxs[i])
+                    {
+                        match = true;
+                        break;
+                    }
+                }
+            } while (match);
+
+            // get word from array via index
+            retStr[i] = aFiles.getAudioArray(wordIndex)[wordIxs[i]].ToString();
+        }
+
+        return retStr;
+    }
+
 
     public void UIBtn1()
     {
