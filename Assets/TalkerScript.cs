@@ -37,32 +37,31 @@ public class TalkerScript : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 wordIx = 0;
-                /*sentenceAudio = */createSentence();
+                createSentence();
                 audioSrc.PlayOneShot(sentenceAudio[wordIx++]);
                 sentenceReady = true;
             }
         }
     }
 
-
-
     private void createSentence()
     {
-        AudioClip[] sentence = new AudioClip[6];
-        int randIx = Random.Range(0, clipCount);
-        Debug.Log("Ix: " + randIx);
-
         sentenceAudio[0] = the;
-        sentenceAudio[1] = subjects[randIx];
-        randIx = Random.Range(0, clipCount);
-        sentenceAudio[2] = verbs[randIx];
-        randIx = Random.Range(0, clipCount);
-        sentenceAudio[3] = count[randIx];
-        randIx = Random.Range(0, clipCount);
-        sentenceAudio[4] = adjectives[randIx];
-        randIx = Random.Range(0, clipCount);
-        sentenceAudio[5] = objects[randIx];
-
+        sentenceAudio[1] = subjects[Random.Range(0, clipCount)];
+        sentenceAudio[2] = verbs[Random.Range(0, clipCount)];
+        sentenceAudio[3] = count[Random.Range(0, clipCount)];
+        sentenceAudio[4] = adjectives[Random.Range(0, clipCount)];
+        sentenceAudio[5] = objects[Random.Range(0, clipCount)];
     }
+
+    public string[] getSentenceString()
+    {
+        string[] sentenceString = new string[wordCount];
+        for(int i = 0; i < wordCount; i++)
+        {
+            sentenceString[i] = sentenceAudio[i].ToString();
+        }
+        return sentenceString;
+    } 
 
 }
