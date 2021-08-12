@@ -6,23 +6,32 @@ using UnityEngine.UI;
 public class wordSelectionScript : MonoBehaviour
 {
 
-    public Button wordBtn1;
-    public Button wordBtn2;
-    public Button wordBtn3;
-    public Button wordBtn4;
+    public Button[] wordBtns;
     public DemoGameManager masterScript;
 
     private string[] words;
+    private int correctBtn;
 
 
     // Start is called before the first frame update
     void OnEnable()
     {
         testfunc();
-        wordBtn1.GetComponentInChildren<Text>().text = words[0];
-        wordBtn2.GetComponentInChildren<Text>().text = words[1];
-        wordBtn3.GetComponentInChildren<Text>().text = words[2];
-        wordBtn4.GetComponentInChildren<Text>().text = words[3];   
+        correctBtn = Random.Range(0, 3);
+        Debug.Log("correctIx: " + correctBtn);
+        wordBtns[correctBtn].GetComponentInChildren<Text>().text = words[0];
+        int k = 0;
+        for(int i = 1; i < 4; i++)
+        {
+            // skip the correct Button
+            if(k == correctBtn)
+            {
+                k++;
+            }
+            wordBtns[k].GetComponentInChildren<Text>().text = words[i];
+            k++;
+        }
+
     }
 
     void testfunc()
@@ -33,6 +42,54 @@ public class wordSelectionScript : MonoBehaviour
 
         words = masterScript.getUserWordSelection(1, 4);
         Debug.Log("WordSelection: " + words[0] + words[1] + words[2] + words[3]);
+    }
+
+    public void Button0OnClick()
+    {
+        if(correctBtn == 0)
+        {
+            wordBtns[0].GetComponent<Image>().color = Color.green;
+        }
+        else
+        {
+            wordBtns[0].GetComponent<Image>().color = Color.red;
+        }
+    }
+
+    public void Button1OnClick()
+    {
+        if (correctBtn == 1)
+        {
+            wordBtns[1].GetComponent<Image>().color = Color.green;
+        }
+        else
+        {
+            wordBtns[1].GetComponent<Image>().color = Color.red;
+        }
+    }
+
+    public void Button2OnClick()
+    {
+        if (correctBtn == 2)
+        {
+            wordBtns[2].GetComponent<Image>().color = Color.green;
+        }
+        else
+        {
+            wordBtns[2].GetComponent<Image>().color = Color.red;
+        }
+    }
+
+    public void Button3OnClick()
+    {
+        if (correctBtn == 3)
+        {
+            wordBtns[3].GetComponent<Image>().color = Color.green;
+        }
+        else
+        {
+            wordBtns[3].GetComponent<Image>().color = Color.red;
+        }
     }
 
 

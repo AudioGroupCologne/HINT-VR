@@ -290,9 +290,9 @@ public class DemoGameManager : MonoBehaviour
     }
 
 
-    public void UIBtn1()
+    public void NextWordBtn()
     {
-        Debug.Log("UIBtn pressed");
+        Debug.Log("NextWord pressed");
         sentenceUI.SetActive(false);
     }
 
