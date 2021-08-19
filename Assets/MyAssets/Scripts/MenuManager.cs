@@ -7,13 +7,13 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject Main;
     public GameObject Settings;
+    public GameObject Results;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        ShowMainMenu();
-        
+        ShowMainMenu();  
     }
 
     // Update is called once per frame
@@ -44,7 +44,17 @@ public class MenuManager : MonoBehaviour
     {
         // Set MainMenu active
         Main.SetActive(true);
-        // Set SettingsMenu inactive
+        // Set all other screens inactive
         Settings.SetActive(false);
+        Results.SetActive(false);
+
+    }
+
+    public void ShowResults()
+    {
+        // Set ResutlsScreen active
+        Results.SetActive(true);
+        // SetMainMenu inactive
+        Main.SetActive(false);
     }
 }

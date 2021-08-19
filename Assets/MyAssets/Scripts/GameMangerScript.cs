@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameMangerScript : MonoBehaviour
 {
+    public GameObject eventSystem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +32,27 @@ public class GameMangerScript : MonoBehaviour
             // don't reload MenuScene when already active
             if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MenuScene")) {
                 SceneManager.LoadSceneAsync("MenuScene");
+                Debug.Log("Destroy EventSystem to avoid dublication");
+                DestroyImmediate(eventSystem);
             }
         }
     }
 
+
+    private static GameObject instance;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = gameObject;
+        }
+        else
+        {
+            Debug.Log("Destroy dublication");
+            Destroy(gameObject);
+        }
+            
     }
+
 }

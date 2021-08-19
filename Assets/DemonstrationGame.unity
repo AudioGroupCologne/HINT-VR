@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 129485200}
   - component: {fileID: 129485199}
   m_Layer: 0
-  m_Name: WordOption2
+  m_Name: WSBtn1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,12 +267,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1186897582}
         m_TargetAssemblyTypeName: wordSelectionScript, Assembly-CSharp
-        m_MethodName: Button1OnClick
-        m_Mode: 1
+        m_MethodName: ButtonHander
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 440332304}
   - component: {fileID: 440332303}
   m_Layer: 0
-  m_Name: WordOption4
+  m_Name: WSBtn3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,12 +479,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1186897582}
         m_TargetAssemblyTypeName: wordSelectionScript, Assembly-CSharp
-        m_MethodName: Button3OnClick
-        m_Mode: 1
+        m_MethodName: ButtonHander
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1036,7 +1036,7 @@ GameObject:
   - component: {fileID: 788593993}
   - component: {fileID: 788593992}
   m_Layer: 0
-  m_Name: WordOption1
+  m_Name: WSBtn0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,8 +1108,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1186897582}
         m_TargetAssemblyTypeName: wordSelectionScript, Assembly-CSharp
-        m_MethodName: Button0OnClick
-        m_Mode: 1
+        m_MethodName: ButtonHander
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1269,7 +1269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1186897582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1316,7 +1316,7 @@ GameObject:
   - component: {fileID: 1213719036}
   - component: {fileID: 1213719035}
   m_Layer: 0
-  m_Name: WordOption3
+  m_Name: WSBtn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1368,12 +1368,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1186897582}
         m_TargetAssemblyTypeName: wordSelectionScript, Assembly-CSharp
-        m_MethodName: Button2OnClick
-        m_Mode: 1
+        m_MethodName: ButtonHander
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1928,6 +1928,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1186897582}
+        m_TargetAssemblyTypeName: wordSelectionScript, Assembly-CSharp
+        m_MethodName: reset_buttons_colors
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2134307136}
         m_TargetAssemblyTypeName: DemoGameManager, Assembly-CSharp
         m_MethodName: NextWordBtn

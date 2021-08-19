@@ -8,14 +8,24 @@ public class wordSelectionScript : MonoBehaviour
 
     public Button[] wordBtns;
     public DemoGameManager masterScript;
+    public GameMangerScript gmScript;
 
     private string[] words;
     private int correctBtn;
+
+    private int total = 0;
+    private int hits = 0;
+    private int misses = 0;
 
 
     // Start is called before the first frame update
     void OnEnable()
     {
+        total = PlayerPrefs.GetInt("total");
+        hits = PlayerPrefs.GetInt("hits");
+        misses = PlayerPrefs.GetInt("misses");
+
+
         testfunc();
         correctBtn = Random.Range(0, 3);
         Debug.Log("correctIx: " + correctBtn);
@@ -40,55 +50,58 @@ public class wordSelectionScript : MonoBehaviour
         string[] currentSentence = masterScript.getSentenceString();
         Debug.Log(currentSentence[0] + currentSentence[1] + currentSentence[2]);
 
+        // alter the word selection: subject [1], count [3], object [5]
+        // but based on what?
+        // also alter the text on the UI to 'select the subject from the last sentence' or something like that...
         words = masterScript.getUserWordSelection(1, 4);
         Debug.Log("WordSelection: " + words[0] + words[1] + words[2] + words[3]);
     }
 
-    public void Button0OnClick()
+    public void ButtonHander(int btn_ix)
     {
-        if(correctBtn == 0)
+
+        total++;
+        PlayerPrefs.SetInt("total", total);
+
+        Debug.Log("Btn: " + btn_ix);
+        if (correctBtn == btn_ix)
         {
-            wordBtns[0].GetComponent<Image>().color = Color.green;
+            // add correct
+            Debug.Log("correct");
+            hits++;
+            PlayerPrefs.SetInt("hits", hits);
         }
         else
         {
-            wordBtns[0].GetComponent<Image>().color = Color.red;
+            // add miss
+            Debug.Log("miss");
+            misses++;
+            PlayerPrefs.SetInt("misses", misses);
+        }
+        show_results_on_buttons();
+    }
+
+    private void show_results_on_buttons()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == correctBtn)
+            {
+                wordBtns[i].GetComponent<Image>().color = Color.green;
+            }
+            else
+            {
+                wordBtns[i].GetComponent<Image>().color = Color.red;
+            }
+
         }
     }
 
-    public void Button1OnClick()
+    public void reset_buttons_colors()
     {
-        if (correctBtn == 1)
+        for(int i = 0; i < 4; i++)
         {
-            wordBtns[1].GetComponent<Image>().color = Color.green;
-        }
-        else
-        {
-            wordBtns[1].GetComponent<Image>().color = Color.red;
-        }
-    }
-
-    public void Button2OnClick()
-    {
-        if (correctBtn == 2)
-        {
-            wordBtns[2].GetComponent<Image>().color = Color.green;
-        }
-        else
-        {
-            wordBtns[2].GetComponent<Image>().color = Color.red;
-        }
-    }
-
-    public void Button3OnClick()
-    {
-        if (correctBtn == 3)
-        {
-            wordBtns[3].GetComponent<Image>().color = Color.green;
-        }
-        else
-        {
-            wordBtns[3].GetComponent<Image>().color = Color.red;
+            wordBtns[i].GetComponent<Image>().color = Color.white;
         }
     }
 
