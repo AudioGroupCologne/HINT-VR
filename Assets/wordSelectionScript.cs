@@ -8,7 +8,6 @@ public class wordSelectionScript : MonoBehaviour
 
     public Button[] wordBtns;
     public DemoGameManager masterScript;
-    public GameMangerScript gmScript;
 
     private string[] words;
     private int correctBtn;

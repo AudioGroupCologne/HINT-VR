@@ -134,10 +134,6 @@ public class DemoGameManager : MonoBehaviour
                 createSentence(sent, aFiles);              
             }
         }
-
-        // open canvas to offer user interface to give input for recognized words
-
-        // somehow map audiofiles to words...
     }
 
     private void createSentence(Sentence st, audioFiles af)
