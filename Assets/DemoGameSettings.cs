@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DemoGameSettings : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class DemoGameSettings : MonoBehaviour
 
         // disable DemoGameSettings
         gameObject.SetActive(false);
+    }
+
+    public void DemoGameSettingsQuitBtn()
+    {
+        SceneManager.LoadSceneAsync("MenuScene");
     }
 
     // for now: same as different voice due to lack of assets...
