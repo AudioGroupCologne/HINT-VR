@@ -13,19 +13,9 @@ public class wordSelectionScript : MonoBehaviour
     private string[] words;
     private int correctBtn;
 
-    private int total = 0;
-    private int hits = 0;
-    private int misses = 0;
-
-
     // Start is called before the first frame update
     void OnEnable()
     {
-        total = PlayerPrefs.GetInt("total");
-        hits = PlayerPrefs.GetInt("hits");
-        misses = PlayerPrefs.GetInt("misses");
-
-
         testfunc();
         correctBtn = Random.Range(0, 3);
         Debug.Log("correctIx: " + correctBtn);
@@ -46,7 +36,7 @@ public class wordSelectionScript : MonoBehaviour
 
     void testfunc()
     {
-        Debug.Log("Try to get string");
+        Debug.Log("Get new sentence string");
         string[] currentSentence = masterScript.getSentenceString();
         Debug.Log(currentSentence[0] + currentSentence[1] + currentSentence[2]);
 
@@ -54,29 +44,25 @@ public class wordSelectionScript : MonoBehaviour
         // but based on what?
         // also alter the text on the UI to 'select the subject from the last sentence' or something like that...
         words = masterScript.getUserWordSelection(1, 4);
-        Debug.Log("WordSelection: " + words[0] + words[1] + words[2] + words[3]);
+        //Debug.Log("WordSelection: " + words[0] + words[1] + words[2] + words[3]);
     }
 
     public void ButtonHander(int btn_ix)
     {
-
-        total++;
-        PlayerPrefs.SetInt("total", total);
+        DataStorage.DemoGameTotal++;
 
         Debug.Log("Btn: " + btn_ix);
         if (correctBtn == btn_ix)
         {
             // add correct
             Debug.Log("correct");
-            hits++;
-            PlayerPrefs.SetInt("hits", hits);
+            DataStorage.DemoGameHits++;
         }
         else
         {
             // add miss
             Debug.Log("miss");
-            misses++;
-            PlayerPrefs.SetInt("misses", misses);
+            DataStorage.DemoGameMisses++;
         }
         show_results_on_buttons();
     }
@@ -104,13 +90,5 @@ public class wordSelectionScript : MonoBehaviour
             wordBtns[i].GetComponent<Image>().color = Color.white;
         }
     }
-
-
-    // get correct word(i) from DemoGameManager
-    // get 3 other random words of group i from DemoGameManager
-    // assign the 4 words to the buttons and change their UI.Text
-    // Turn button 'green' when correct and 'red' when false
-    // repeat until wordCount is reached
-
 
 }

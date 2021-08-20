@@ -35,9 +35,7 @@ public class DemoGameManager : MonoBehaviour
 
         public audioFiles(int listIx)
         {
-            //words = new AudioClip[words, clips];
             loadAudioFiles();
-
         }
 
         public AudioClip[] getAudioArray(int index)
@@ -102,7 +100,6 @@ public class DemoGameManager : MonoBehaviour
 
         // make sure to disable UI at load.
         sentenceUI.SetActive(false);
-        //loadAudioFiles();
         
         sentenceAudio = new AudioClip[wordCount];
         sentenceWords = new string[wordCount];

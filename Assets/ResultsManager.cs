@@ -11,33 +11,38 @@ public class ResultsManager : MonoBehaviour
 
     void Start()
     {
-        total.GetComponent<TMPro.TextMeshProUGUI>().text = "Total: " + getTotal().ToString();
-        hits.GetComponent<TMPro.TextMeshProUGUI>().text = "Hits: " + getHits().ToString();
-        misses.GetComponent<TMPro.TextMeshProUGUI>().text = "Misses: " + getMisses().ToString();
+        writeResultsOnScreen();
     }
 
     public void clearResults()
     {
         Debug.Log("Clear results");
-        PlayerPrefs.SetInt("total", 0);
-        PlayerPrefs.SetInt("hits", 0);
-        PlayerPrefs.SetInt("misses", 0);
+        DataStorage.DemoGameTotal = 0;
+        DataStorage.DemoGameHits = 0;
+        DataStorage.DemoGameMisses = 0;
+        writeResultsOnScreen();
     }
 
     private int getTotal()
     {
-        return PlayerPrefs.GetInt("total");
+        return DataStorage.DemoGameTotal;
     }
 
     private int getHits()
     {
-        return PlayerPrefs.GetInt("hits");
+        return DataStorage.DemoGameHits;
     }
 
     private int getMisses()
     {
-        return PlayerPrefs.GetInt("misses");
+        return DataStorage.DemoGameMisses;
     }
 
+    private void writeResultsOnScreen()
+    {
+        total.GetComponent<TMPro.TextMeshProUGUI>().text = "Total: " + getTotal().ToString();
+        hits.GetComponent<TMPro.TextMeshProUGUI>().text = "Hits: " + getHits().ToString();
+        misses.GetComponent<TMPro.TextMeshProUGUI>().text = "Misses: " + getMisses().ToString();
+    }
 
 }
