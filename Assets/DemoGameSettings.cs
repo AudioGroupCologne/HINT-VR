@@ -5,32 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class DemoGameSettings : MonoBehaviour
 {
-
-    public GameObject Talker;
-    public GameObject Distractor;
+    public DemoGameManager dmScript;
 
     public void DemoGameSettingBtnHanlder(int index)
     {
         switch (index)
         {
             case 0:
-                loadSameVoice();
-                setDistractorPosOne();
+                dmScript.loadSameVoice();
+                dmScript.setDistractorPosOne();
                 break;
             case 1:
-                loadSameVoice();
-                setDistractorPosTwo();
+                dmScript.loadSameVoice();
+                dmScript.setDistractorPosTwo();
                 break;
             case 2:
-                loadDifferentVoice();
-                setDistractorPosOne();
+                dmScript.loadDifferentVoice();
+                dmScript.setDistractorPosOne();
                 break;
             case 3:
-                loadDifferentVoice();
+                dmScript.loadDifferentVoice();
                 // use this to also test Pos3
-                setDistractorPosThree();
+                dmScript.setDistractorPosThree();
                 break;
         }
+
+        dmScript.showObjects(true);
 
         // disable DemoGameSettings
         gameObject.SetActive(false);
@@ -41,33 +41,4 @@ public class DemoGameSettings : MonoBehaviour
         SceneManager.LoadSceneAsync("MenuScene");
     }
 
-    // for now: same as different voice due to lack of assets...
-    private void loadSameVoice()
-    {
-
-    }
-
-    private void loadDifferentVoice()
-    {
-
-    }
-
-    // 0 deg azimuth
-    private void setDistractorPosOne()
-    {
-        // slightly belwo talker
-        Distractor.transform.position = new Vector3(0, 2, 10);
-    }
-
-    // +90 deg azimuth
-    private void setDistractorPosTwo()
-    {
-        Distractor.transform.position = new Vector3(10, 2, 0);
-    }
-
-    // -90 deg azimuth
-    private void setDistractorPosThree()
-    {
-        Distractor.transform.position = new Vector3(-10, 2, 0);
-    }
 }

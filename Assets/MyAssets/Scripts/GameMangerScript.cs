@@ -32,8 +32,6 @@ public class GameMangerScript : MonoBehaviour
             // don't reload MenuScene when already active
             if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MenuScene")) {
                 SceneManager.LoadSceneAsync("MenuScene");
-                //Debug.Log("Destroy EventSystem to avoid dublication");
-                //DestroyImmediate(eventSystem);
             }
         }
     }

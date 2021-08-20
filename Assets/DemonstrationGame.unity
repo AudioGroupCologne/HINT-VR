@@ -1112,8 +1112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244b092f432784e409a010dd8dfa49e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Talker: {fileID: 0}
-  Distractor: {fileID: 369682864}
+  dmScript: {fileID: 2134307136}
 --- !u!1 &653467251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,7 +1669,7 @@ PrefabInstance:
     - target: {fileID: 4167766169678821420, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_Name
-      value: DGOption1Btnn
+      value: DGOption1Btn
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -2302,7 +2301,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 515772176}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -2311,12 +2310,12 @@ PrefabInstance:
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitApp
+      value: DemoGameSettingsQuitBtn
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
+      value: DemoGameSettings, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -3121,6 +3120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45a5589d4d6aa94c9809e7d75f42881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TalkerObj: {fileID: 990151947}
+  DistractorObj: {fileID: 369682864}
   targetSource: {fileID: 690801992}
   distracterSource: {fileID: 277072714}
   sentenceUI: {fileID: 1186897581}

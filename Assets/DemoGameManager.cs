@@ -88,6 +88,10 @@ public class DemoGameManager : MonoBehaviour
     private int wordIx = 0;
     private bool sentenceReady = false;
 
+    private bool sceneEntered = false;
+
+    public GameObject TalkerObj;
+    public GameObject DistractorObj;
     public AudioSource targetSource;
     public AudioSource distracterSource;
     public GameObject sentenceUI;
@@ -105,11 +109,15 @@ public class DemoGameManager : MonoBehaviour
         sentenceWords = new string[wordCount];
         sentenceIndices = new int[wordCount];
 
+        showObjects(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!sceneEntered)
+            return;
+
         // wait for user input to play new sentence
         if (!targetSource.isPlaying)
         {
@@ -289,5 +297,43 @@ public class DemoGameManager : MonoBehaviour
         sentenceUI.SetActive(false);
     }
 
+
+
+    // for now: same as different voice due to lack of assets...
+    public void loadSameVoice()
+    {
+
+    }
+
+    public void loadDifferentVoice()
+    {
+
+    }
+
+    // 0 deg azimuth
+    public void setDistractorPosOne()
+    {
+        // slightly belwo talker
+        DistractorObj.transform.position = new Vector3(0, 2, 10);
+    }
+
+    // +90 deg azimuth
+    public void setDistractorPosTwo()
+    {
+        DistractorObj.transform.position = new Vector3(10, 2, 0);
+    }
+
+    // -90 deg azimuth
+    public void setDistractorPosThree()
+    {
+        DistractorObj.transform.position = new Vector3(-10, 2, 0);
+    }
+
+    public void showObjects(bool show)
+    {
+        TalkerObj.SetActive(show);
+        DistractorObj.SetActive(show);
+        sceneEntered = show;
+    }
 
 }
