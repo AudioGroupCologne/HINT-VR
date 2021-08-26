@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartEnvironment ()
     {
-        SceneManager.LoadSceneAsync("TestEnvironment");
+        SceneManager.LoadSceneAsync("BrightDay");
     }
 
     public void StartTrainingGame()
