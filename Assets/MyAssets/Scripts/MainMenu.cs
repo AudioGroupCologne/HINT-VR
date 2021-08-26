@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
     public void StartEnvironment ()
     {
         SceneManager.LoadSceneAsync("BrightDay");
+        Debug.Log("lock cursor");
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void StartTrainingGame()

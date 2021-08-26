@@ -29,11 +29,15 @@ public class GameMangerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("ESC in GameManager");
+            Cursor.lockState = CursorLockMode.None;
+
             // don't reload MenuScene when already active
-            if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MenuScene")) {
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MenuScene")) {
                 SceneManager.LoadSceneAsync("MenuScene");
             }
         }
+
+        // maybe add an "press any key to start" (?)
     }
 
 
