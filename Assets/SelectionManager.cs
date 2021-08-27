@@ -5,37 +5,88 @@ using UnityEngine;
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private string selectableTag = "Selectable";
-    [SerializeField] private Material defaultMaterial;
-    [SerializeField] private Material highlightMaterial;
+    [SerializeField] private Color highlightColor;
+    [SerializeField] float rayDistance = 3f;
 
+    // reference of current selection
+    private Transform selection;
+    // keep reference of selected object
     private Transform _selection;
+    // keep default color of selected object
+    private Color _selectionColor;
+    
 
     // Update is called once per frame
     void Update()
     {
-        if(_selection != null)
-        {
-            var selectionRenderer = _selection.GetComponent<Renderer>();
-            selectionRenderer.material = defaultMaterial;
-            _selection = null;
-        }
+        RayCastSingle();
+    }
 
-        // center of screen will always equal mouse position
+    // add a function to be called if an object is hit via raycast
+    void RayCastSingle()
+    {
+        Ray ray;
         RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast(ray, out hit))
+        // center of screen will always equal mouse position (FPS logic)
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Debug.DrawRay();
+
+        // RayCast returns true if a hit was made
+        if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            var selection = hit.transform;
-            if (selection.CompareTag(selectableTag))
+            // get transform of RaycastHit
+            selection = hit.transform;
+
+            // check if 'selection' holds a new object or an already familiar one
+            if(selection == _selection)
             {
-                var selectionRenderer = selection.GetComponent<Renderer>();
-                if (selectionRenderer != null)
+                return;
+            }
+
+            // if a new object is selected, deselect the old one (this might happen if a RayCast goes directly from one object to another within the duration of one frame
+            deselectObject();
+
+            // check if the object is tagged as seletable
+            if (selection.CompareTag(selectableTag))
+            {  
+                // Handle missing Renderer()
+                if (selection.GetComponent<Renderer>() == null)
                 {
-                    selectionRenderer.material = highlightMaterial;
+                    return;
                 }
-                _selection = selection;
+
+                selectObject();
             }
         }
+        // reset selection, if Raycast did not hit anything
+        else
+        {
+            deselectObject();
+        }
     }
+
+
+    void selectObject()
+    {
+        Debug.Log("SELECT");
+        // store refence to selected object
+        _selection = selection;
+        // store color of selected object
+        _selectionColor = selection.GetComponent<Renderer>().material.color;
+        // highlight selected object
+        selection.GetComponent<Renderer>().material.color = highlightColor;
+    }
+
+    void deselectObject()
+    {
+        if (_selection != null)
+        {
+            Debug.Log("DESELECT");
+            _selection.GetComponent<Renderer>().material.color = _selectionColor;
+            _selection = null;
+        }
+    }
+
+
 }
