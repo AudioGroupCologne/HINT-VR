@@ -428,6 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localSrc: {fileID: 2092185517}
   mode: 1
+  pauseBetweenClips: 5
   clipArray:
   - {fileID: 8300000, guid: b92ad532910933b4abb77a34f2e83c8c, type: 3}
   - {fileID: 8300000, guid: 97e452e1c0acad84182202ac74bf7a05, type: 3}
