@@ -70,6 +70,10 @@ public class SelectionManager : MonoBehaviour
     void selectObject()
     {
         Debug.Log("SELECT");
+        // notify object about selection status
+        // maybe use this instead of tag (?)
+        selection.gameObject.GetComponent<SelectableObject>().setSelectionStatus(true);     
+
         // store refence to selected object
         _selection = selection;
         // store color of selected object
@@ -83,6 +87,7 @@ public class SelectionManager : MonoBehaviour
         if (_selection != null)
         {
             Debug.Log("DESELECT");
+            selection.gameObject.GetComponent<SelectableObject>().setSelectionStatus(false);
             _selection.GetComponent<Renderer>().material.color = _selectionColor;
             _selection = null;
         }
