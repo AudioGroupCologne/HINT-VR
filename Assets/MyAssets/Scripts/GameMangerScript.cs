@@ -37,6 +37,19 @@ public class GameMangerScript : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.AltGr))
+        {
+            Debug.Log("Toggle Cursor lockState");
+            if(Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
         // maybe add an "press any key to start" (?)
     }
 
