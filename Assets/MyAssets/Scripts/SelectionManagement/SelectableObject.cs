@@ -7,17 +7,6 @@ public class SelectableObject : MonoBehaviour
     [SerializeField] private string type;
     bool isSelected = false;
 
-    [System.Serializable] private enum PieceType
-    {
-        Hero,
-        Moveable,
-        Solid,
-        Empty
-    }
-
-    [SerializeField] private enum tmp { a, fgd, sf};
-
-    private PieceType teg;
 
     public void setSelectionStatus(bool selected)
     {
@@ -38,8 +27,4 @@ public class SelectableObject : MonoBehaviour
         return type;
     }
 
-    public int getSelectionTypeEnum()
-    {
-        return (int)teg;
-    }
 }

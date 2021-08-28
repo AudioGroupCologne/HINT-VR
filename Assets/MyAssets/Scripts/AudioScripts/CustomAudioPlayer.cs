@@ -2,54 +2,82 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomAudioPlayer : MonoBehaviour
+public partial class CustomAudioPlayer : MonoBehaviour, ICustomAudioPlayer
 {
 
-    public AudioSource localSrc;
-    // make this selectable via settings menu
-    public bool autoPlay = false;
-    // only used when 'autoPlay' is true. Delay between clips in seconds
-    public float pauseBetweenClips = 5;     
+    [SerializeField] private AudioSource src;
     // holds the audio clips to be played (maybe add option to load folder as resource)
-    public AudioClip[] clipArray;
+    [SerializeField] private AudioClip[] clipArray;
+    // make this selectable via settings menu
+    [SerializeField] private bool autoPlay = false;
+    // only used when 'autoPlay' is true. Delay between clips in seconds
+    [SerializeField] private float pauseSeconds = 5f;     
+    
     int clip_ix = 0;
-    bool playNextClip = true;
+    // is set to true, when it is allowed to play a clip (last clip is done [and pause has passed if autoPlay is enabled])
+    bool readyToPlayClip = true;
 
-
-    // Update is called once per frame
-    void Update()
-    {    
-        if (playNextClip)
+    private void Start()
+    {
+        if(autoPlay)
         {
-            // manual play mode
-             if (!autoPlay)
-            {
-                if (!Input.GetKeyDown(KeyCode.Space))
-                {
-                    return;          
-                }
-            }
+            PlayClip();
+        }
+    }
 
-            playNextClip = false;
-            localSrc.PlayOneShot(clipArray[clip_ix]);
-            if (++clip_ix >= clipArray.Length) clip_ix = 0;
-            Debug.Log("Start Coroutine");
-            StartCoroutine(waiter());
+    void ForcePlayClip()
+    {
+        readyToPlayClip = false;
+        src.PlayOneShot(clipArray[clip_ix]);
+        if (++clip_ix >= clipArray.Length) clip_ix = 0;
+        StartCoroutine(waiter());
+    }
 
-        }   
+
+    bool PlayClip()
+    {
+        // do nothing if Player is not ready
+        if (!readyToPlayClip)
+            return false;
+
+
+        readyToPlayClip = false;
+        src.PlayOneShot(clipArray[clip_ix]);
+        if (++clip_ix >= clipArray.Length) clip_ix = 0;
+        
+        // start Coroutine to reset 'readyToPlayClip' once current clip is done being played
+        StartCoroutine(waiter());
+        
+        return true;
     }
 
     IEnumerator waiter()
     {
         // wait until current clip is done being played
-        yield return new WaitUntil(() => !localSrc.isPlaying);
+        yield return new WaitUntil(() => !src.isPlaying);
 
-        // wait for 'pauseBetweenClips' seconds in autoPlay mode
+        // wait for 'pauseSeconds' in autoPlay mode
         if (autoPlay)
         {
-            yield return new WaitForSeconds(pauseBetweenClips);
+            yield return new WaitForSeconds(pauseSeconds);
+            PlayClip();
         }
-        playNextClip = true;       
+        readyToPlayClip = true;       
+    }
+
+    // EXTERNAL PLAY EVENTS AUTOMATICALLY DISABLE AUTOPLAY
+    // play clip if source is ready, if not: nothing happens
+    public bool externalPlayRequest()
+    {
+        autoPlay = false;
+        return PlayClip();
+    }
+
+    // don't wait until current clip is finished
+    public void externalPlayNow()
+    {
+        autoPlay = false;
+        ForcePlayClip();
     }
 
 }

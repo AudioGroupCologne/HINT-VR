@@ -8,7 +8,6 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] float rayDistance = 3f;
 
     private ISelectionResponseType _selectionResponseType;
-    private ISelectionResponse _selectionResponse;
 
     // keep reference of selected object
     private Transform _selection;
