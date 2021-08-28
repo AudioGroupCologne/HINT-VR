@@ -49,7 +49,6 @@ public class SelectionManager : MonoBehaviour
 
             // if a new object is selected, deselect the old one (this might happen if a RayCast goes directly from one object to another within the duration of one frame
             deselectObject(ref _selection);
-            //_selection = null;
 
             // check if the object is tagged as seletable
             if (selection.CompareTag(selectableTag))
@@ -68,9 +67,7 @@ public class SelectionManager : MonoBehaviour
         // reset selection, if Raycast did not hit anything
         else
         {
-            deselectObject(ref _selection);
-            //_selection = null;
-            
+            deselectObject(ref _selection);     
         }
     }
 

@@ -26,7 +26,7 @@ public class AudioSphere : MonoBehaviour
         // only allow to play audio is device is selected
         if (sObj.getSelectionStatus())
         {
-            //ShowHightlightText();
+            ShowHightlightText();
 
             // press E to play audio
             if(Input.GetKeyDown(KeyCode.E))
@@ -36,7 +36,7 @@ public class AudioSphere : MonoBehaviour
         }
         else
         {
-            //HideHightlightText();
+            HideHightlightText();
         }
     }
 
@@ -52,7 +52,9 @@ public class AudioSphere : MonoBehaviour
     {
         if(HighlightText != null && !highlightTextVisible)
         {
-            var hText = Instantiate(HighlightText, transform.position, Quaternion.identity, transform);
+            //var hText = Instantiate(HighlightText, transform.position + transform.forward, Quaternion.Inverse(Quaternion.identity));
+            var hText = Instantiate(HighlightText, transform.position + transform.forward, (Quaternion.identity));
+            //var hText = Instantiate(HighlightText, transform.position + transform.forward, transform.rotation);
             //hText.GetComponent<HighlightText>().setText("Testing");
             //hText.GetComponent<TMPro.TextMeshProUGUI>().text = "Trying";
             highlightTextVisible = true;
