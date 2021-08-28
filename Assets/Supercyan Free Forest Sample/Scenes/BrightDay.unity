@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c59745c6ffafa4485f97943ac7d814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: audio
 --- !u!114 &87762483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionUI: {fileID: 244466003}
-  UIText: Testing
+  defaultUIText: Press E
 --- !u!1 &404010242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,7 +1369,6 @@ GameObject:
   - component: {fileID: 1072890954}
   - component: {fileID: 1072890953}
   - component: {fileID: 1072890952}
-  - component: {fileID: 1072890957}
   - component: {fileID: 1072890956}
   m_Layer: 0
   m_Name: Cylinder
@@ -1463,24 +1463,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1072890951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55449253e5300a439b3a6eea432cbac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highlightText: Cylinder
-  distance: 5
-  hText: {fileID: 154565891595697173, guid: f48038771b8ddbe4493ad5c72d60c52a, type: 3}
---- !u!114 &1072890957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072890951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4c59745c6ffafa4485f97943ac7d814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 
 --- !u!1001 &1084220337
 PrefabInstance:
   m_ObjectHideFlags: 0

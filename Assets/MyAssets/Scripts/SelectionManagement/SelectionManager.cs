@@ -7,6 +7,7 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private string selectableTag = "Selectable";
     [SerializeField] float rayDistance = 3f;
 
+    private ISelectionResponseType _selectionResponseType;
     private ISelectionResponse _selectionResponse;
 
     // keep reference of selected object
@@ -15,7 +16,8 @@ public class SelectionManager : MonoBehaviour
     private void Awake()
     {
         // this allows to simply change the behaviour an selection by usign different SelectionResponse classes inhereting ISelectionResponse
-        _selectionResponse = GetComponent<ISelectionResponse>();
+        //_selectionResponse = GetComponent<ISelectionResponse>();
+        _selectionResponseType = GetComponent<ISelectionResponseType>();
     }
 
 
@@ -79,8 +81,20 @@ public class SelectionManager : MonoBehaviour
         Debug.Log("Select");
         // notify object about selection status
         selection.gameObject.GetComponent<SelectableObject>().setSelectionStatus(true);
-        // call selectionResponse
-        _selectionResponse.OnSelect(selection);
+        // get type from 'SelectableObject'
+        string type = selection.gameObject.GetComponent<SelectableObject>().getSelectionType();
+
+        if(type != null)
+        {
+            // call selectionResponse
+            _selectionResponseType.OnSelect(selection, type);
+        }
+        else
+        {
+            // call selectionResponse
+            _selectionResponseType.OnSelect(selection);
+        }
+        
     }
 
     void deselectObject(ref Transform selection)
@@ -92,7 +106,7 @@ public class SelectionManager : MonoBehaviour
         // set SelectionStatus back to false
         selection.gameObject.GetComponent<SelectableObject>().setSelectionStatus(false);
         // call selectionResponse
-        _selectionResponse.OnDeselect(selection);
+        _selectionResponseType.OnDeselect(selection);
         // delete reference
         selection = null;
 

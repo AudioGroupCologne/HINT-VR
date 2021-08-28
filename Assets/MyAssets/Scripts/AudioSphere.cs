@@ -26,7 +26,7 @@ public class AudioSphere : MonoBehaviour
         // only allow to play audio is device is selected
         if (sObj.getSelectionStatus())
         {
-            ShowHightlightText();
+            //ShowHightlightText();
 
             // press E to play audio
             if(Input.GetKeyDown(KeyCode.E))
@@ -36,7 +36,7 @@ public class AudioSphere : MonoBehaviour
         }
         else
         {
-            HideHightlightText();
+            //HideHightlightText();
         }
     }
 

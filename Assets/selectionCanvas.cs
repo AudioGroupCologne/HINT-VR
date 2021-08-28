@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class selectionCanvas : MonoBehaviour, ISelectionResponse
+public class selectionCanvas : MonoBehaviour
 {
 
     // add a functionality to show differnt text based on different objects (?)
