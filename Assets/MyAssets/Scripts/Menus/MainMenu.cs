@@ -6,26 +6,16 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    public void StartEnvironment ()
+    public void StartDemoGame ()
     {
-        SceneManager.LoadSceneAsync("BrightDay");
+        SceneManager.LoadSceneAsync("DemoScene");
         Debug.Log("lock cursor");
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void StartTrainingGame()
     {
-        SceneManager.LoadSceneAsync("TrainingGame");
-    }
-
-    public void StartDemoGame()
-    {
-        SceneManager.LoadSceneAsync("DemonstrationGame");
-    }
-
-    public void StartVRRoom()
-    {
-        SceneManager.LoadSceneAsync("VRRoom");
+        SceneManager.LoadSceneAsync("TrainingScene");
     }
 
     public void QuitApp ()
