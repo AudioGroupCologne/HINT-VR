@@ -4,92 +4,27 @@ using UnityEngine;
 using UnityEditor;
 
 
-public class DemoGameManager : MonoBehaviour
+public partial class DemoGameManager : MonoBehaviour
 {
+    [SerializeField] Vector3 talkerPos;
+    [SerializeField] Vector3 distractorPos1;
+    [SerializeField] Vector3 distractorPos2;
+    [SerializeField] Vector3 distractorPos3;
 
-    private class Sentence
-    {
-        public int[] indices;
-        public string[] words;
-        public AudioClip[] audio;
-
-        public Sentence(int len)
-        {
-            indices = new int[len];
-            words = new string[len];
-            audio = new AudioClip[len];
-        }
-    }
-
-    private class audioFiles
-    {
-        public AudioClip[] the;
-        public AudioClip[] subjects;
-        public AudioClip[] verbs;
-        public AudioClip[] count;
-        public AudioClip[] adjectives;
-        public AudioClip[] objects;
-
-        public int wordCount = 6;
-        public int wordOptions = 9;
-
-        public audioFiles(int listIx)
-        {
-            loadAudioFiles();
-        }
-
-        public AudioClip[] getAudioArray(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    return the;
-                case 1:
-                    return subjects;
-                case 2:
-                    return verbs;
-                case 3:
-                    return count;
-                case 4:
-                    return adjectives;
-                case 5:
-                    return objects;
-                default:
-                    return null;
-            }
-        }
-
-        private void loadAudioFiles()
-        {
-            the = Resources.LoadAll<AudioClip>("listTest/the");
-            subjects = Resources.LoadAll<AudioClip>("listTest/subjects");
-            Debug.Log(subjects.Length + " subjects loaded");
-            verbs = Resources.LoadAll<AudioClip>("listTest/verbs");
-            Debug.Log(verbs.Length + " verbs loaded");
-            count = Resources.LoadAll<AudioClip>("listTest/count");
-            Debug.Log(count.Length + " count loaded");
-            adjectives = Resources.LoadAll<AudioClip>("listTest/adjectives");
-            Debug.Log(adjectives.Length + " suadjectives loaded");
-            objects = Resources.LoadAll<AudioClip>("listTest/objects");
-            Debug.Log(objects.Length + " objects loaded");
-        }
-
-    }
-
-    //private wordClass testClass;
     private Sentence sent;
-    private audioFiles aFiles;
+    //private audioFiles aFiles;
+    private LiSN_database lisnData;
 
     private AudioClip[] sentenceAudio;
-    private string[] sentenceWords;
-    private int[] sentenceIndices;
     private int clipCount = 9;
     private int wordCount = 6;
+    // keep track of which word of a sentence has already been played
     private int wordIx = 0;
     private bool sentenceReady = false;
 
     private bool sceneEntered = false;
 
+    public GameObject PlayerCamera;
     public GameObject TalkerObj;
     public GameObject DistractorObj;
     public AudioSource targetSource;
@@ -100,14 +35,12 @@ public class DemoGameManager : MonoBehaviour
     void Start()
     {
         sent = new Sentence(wordCount);
-        aFiles = new audioFiles(1);
+        //aFiles = new audioFiles(1);
+        lisnData = new LiSN_database(1);
 
         // make sure to disable UI at load.
-        sentenceUI.SetActive(false);
-        
+        sentenceUI.SetActive(false);        
         sentenceAudio = new AudioClip[wordCount];
-        sentenceWords = new string[wordCount];
-        sentenceIndices = new int[wordCount];
 
         showObjects(false);
     }
@@ -124,7 +57,6 @@ public class DemoGameManager : MonoBehaviour
             // play full sentence
             if (wordIx < wordCount && sentenceReady)
             {
-                //targetSource.PlayOneShot(sentenceAudio[wordIx++]);
                 targetSource.PlayOneShot(sent.audio[wordIx++]);
             }
             // open UI element after playing last word
@@ -139,50 +71,14 @@ public class DemoGameManager : MonoBehaviour
             // wait for user input before creating new sentence
             else if (Input.GetKeyDown(KeyCode.Space))
             {            
-                createSentence(sent, aFiles);              
+                sent.createSentence(lisnData);
+                wordIx = 0;
+                sentenceReady = true;
             }
         }
     }
 
-    private void createSentence(Sentence st, audioFiles af)
-    {
-        // exception for 'the'
-        st.indices[0] = 0;
-        st.audio[0] = af.the[0];
-        st.words[0] = af.the[0].ToString();
-
-        for(int i = 1; i < af.wordCount; i++)
-        {
-            st.indices[i] = Random.Range(0, af.wordOptions);
-            st.audio[i] = af.getAudioArray(i)[st.indices[i]];
-            st.words[i] = st.audio[i].ToString();
-        }
-
-        wordIx = 0;
-        sentenceReady = true;
-    }
-
-    public string[] getSentenceString()
-    {
-        return sent.words;
-    }
-
-    public string getWordFromSentence(int index)
-    {
-        if (index > wordCount)
-            return null;
-
-        return sent.words[index];
-    }
-
-    public int getWordIxFromSentence(int index)
-    {
-        if (index > wordCount)
-            return -1;
-
-        return sent.indices[index];
-    }
-
+    /*
     // make this prettier with references... (word class or word[][] or something...)
     // Return count different words from the selected group (via wordIndex [e.g. verbs], excluding the correct one<
     public string[] getFalseWordsFromGroup(int groupIndex, int count)
@@ -191,7 +87,7 @@ public class DemoGameManager : MonoBehaviour
             return null;
 
         string[] retString = new string[count];
-        string correctWord = getWordFromSentence(groupIndex);
+        string correctWord = sent.getWordFromSentence(groupIndex);
         string tmp;
         int[] usedWords = new int[count];
 
@@ -214,7 +110,7 @@ public class DemoGameManager : MonoBehaviour
                         }
                     }
                     // get random word
-                    tmp = aFiles.subjects[i].ToString();
+                    tmp = lisnData.subjects[i].ToString();
                     if(tmp != correctWord)
                     {
                         retString[i] = tmp;
@@ -235,11 +131,14 @@ public class DemoGameManager : MonoBehaviour
 
         return retString;
     }
+    */
 
     /**
+     * Return 'count' words of a group (determined by 'wordIndex') from the current database.
+     * The "correct" word (which is used in the current sentence) will always be the first one (index 0 of returned string array)
      * There are no doubling of words allowed.
      * 
-     * @param wordIndex - determines number of the word within the sentences
+     * @param wordIndex - determines word group by index (e.g. 'adjective' or 'object') 
      * @param count     - determines how many words shall be returned
      * return           - array of strings, with correct word a index 0
      *                    OR: null if wordIndex or count was invalid.
@@ -248,7 +147,7 @@ public class DemoGameManager : MonoBehaviour
     public string[] getUserWordSelection(int wordIndex, int count)
     {
         // invalid parameters (also exclude 'the')
-        if (wordIndex >= aFiles.wordCount || count >= aFiles.wordOptions || wordIx == 0)
+        if (wordIndex >= lisnData.getLen() || count >= lisnData.getOptions() || wordIx == 0)
         {
             return null;
         }
@@ -260,34 +159,16 @@ public class DemoGameManager : MonoBehaviour
         bool match = false;
 
         // write the correct word at index 0
-        retStr[0] = getWordFromSentence(wordIndex);
-        wordIxs[0] = getWordIxFromSentence(wordIndex);
-
-        // select count - 1 random words from the same group
-        for(int i = 1; i < count; i++)
-        {
-            do
-            {
-                match = false;
-                // generate a new random number to select the next word
-                wordIxs[i] = Random.Range(0, aFiles.wordOptions);
-                // check if this index is already in use
-                for (int j = 0; j < i; j++)
-                {
-                    // if the index has already been used, 
-                    if (wordIxs[j] == wordIxs[i])
-                    {
-                        match = true;
-                        break;
-                    }
-                }
-            } while (match);
-
-            // get word from array via index
-            retStr[i] = aFiles.getAudioArray(wordIndex)[wordIxs[i]].ToString();
-        }
-
+        retStr[0] = sent.getWordFromSentence(wordIndex);
+        wordIxs[0] = sent.getWordIxFromSentence(wordIndex);
+        // copy other words to [1...count-1]
+        retStr.CopyTo(lisnData.getWordsByGroup(wordIndex, count), 1);
         return retStr;
+    }
+
+    public string[] getCurrentSentence()
+    {
+        return sent.getSentenceString();
     }
 
 
@@ -298,7 +179,8 @@ public class DemoGameManager : MonoBehaviour
     }
 
 
-
+    //// Seperate spawning talker/distractor from the whole Audio/word selection stuff...
+    ///
     // for now: same as different voice due to lack of assets...
     public void loadSameVoice()
     {
@@ -310,23 +192,22 @@ public class DemoGameManager : MonoBehaviour
 
     }
 
-    // 0 deg azimuth
-    public void setDistractorPosOne()
+    public void setObjectPositions(int selector)
     {
-        // slightly belwo talker
-        DistractorObj.transform.position = new Vector3(0, 2, 10);
-    }
+        DistractorObj.transform.position = PlayerCamera.transform.position + talkerPos;
 
-    // +90 deg azimuth
-    public void setDistractorPosTwo()
-    {
-        DistractorObj.transform.position = new Vector3(10, 2, 0);
-    }
-
-    // -90 deg azimuth
-    public void setDistractorPosThree()
-    {
-        DistractorObj.transform.position = new Vector3(-10, 2, 0);
+        switch (selector)
+        {
+            case 0:
+                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos1;
+                break;
+            case 1:
+                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos2;
+                break;
+            case 2:
+                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos3;
+                break;
+        }
     }
 
     public void showObjects(bool show)

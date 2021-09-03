@@ -36,7 +36,7 @@ public class wordSelectionScript : MonoBehaviour
     void testfunc()
     {
         Debug.Log("Get new sentence string");
-        string[] currentSentence = masterScript.getSentenceString();
+        string[] currentSentence = masterScript.getCurrentSentence();
         Debug.Log(currentSentence[0] + currentSentence[1] + currentSentence[2]);
 
         // alter the word selection: subject [1], count [3], object [5]
