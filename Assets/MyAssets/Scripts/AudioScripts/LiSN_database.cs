@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LiSN_database : MonoBehaviour
+public class LiSN_database
 {
     /*
      * There are 3 word lists given in the LiSN paper:
@@ -49,8 +49,7 @@ public class LiSN_database : MonoBehaviour
     
     public AudioClip[] getAudioArray(int index)
     {
-        int len = words[0].Length;
-        return words[0];
+        return words[index];
     }
 
     public int[] getSentence()
@@ -104,6 +103,9 @@ public class LiSN_database : MonoBehaviour
 
 
     // Return 'n' different words of a word group (determined by 'groupIx') as an array of strings
+    // This method does not know, which word is within a sentence!!! FIX THIS
+    // Option A: Submit correct word as parameter (by index)
+    // Option B: Hold current sentence within this class
     public string[] getWordsByGroup(int groupIx, int n)
     {
         bool match = false;
@@ -117,6 +119,50 @@ public class LiSN_database : MonoBehaviour
         // exclude 'the' entries (containing only one option) .Length would return '1'...
         if (words[groupIx].Length < n)
             return null;
+
+        for (int i = 0; i < n; i++)
+        {
+            do
+            {
+                match = false;
+                // generate a new random number to select the next word
+                tmp[i] = Random.Range(0, options);
+                // check if this index is already in use
+                for (int j = 0; j < i; j++)
+                {
+                    // if the index has already been used, 
+                    if (tmp[j] == tmp[i])
+                    {
+                        match = true;
+                        break;
+                    }
+                }
+            } while (match);
+
+            // get word from array via index
+            groupWords[i] = getAudioArray(groupIx)[tmp[i]].ToString();
+        }
+
+        return groupWords;
+    }
+
+    public string[] getWordsByGroup(int groupIx, int n, int exclude)
+    {
+        bool match = false;
+        int[] tmp = new int[n];
+        string[] groupWords = new string[n];
+        AudioClip[] clips = getAudioArray(groupIx);
+
+        // exclude invalid options
+        if (n > options || groupIx > length - 1)
+            return null;
+
+        // exclude 'the' entries (containing only one option) .Length would return '1'...
+        if (words[groupIx].Length < n)
+            return null;
+
+        tmp[0] = exclude;
+        groupWords[0] = clips[tmp[0]].ToString();
 
         for (int i = 1; i < n; i++)
         {
@@ -138,7 +184,7 @@ public class LiSN_database : MonoBehaviour
             } while (match);
 
             // get word from array via index
-            groupWords[i] = getAudioArray(groupIx)[tmp[i]].ToString();
+            groupWords[i] = clips[tmp[i]].ToString();
         }
 
         return groupWords;

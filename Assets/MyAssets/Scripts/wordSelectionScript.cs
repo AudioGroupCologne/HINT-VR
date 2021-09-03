@@ -43,7 +43,7 @@ public class wordSelectionScript : MonoBehaviour
         // but based on what?
         // also alter the text on the UI to 'select the subject from the last sentence' or something like that...
         words = masterScript.getUserWordSelection(1, 4);
-        //Debug.Log("WordSelection: " + words[0] + words[1] + words[2] + words[3]);
+        Debug.Log("WordSelection: " + words[0] + words[1] + words[2] + words[3]);
     }
 
     public void ButtonHander(int btn_ix)
