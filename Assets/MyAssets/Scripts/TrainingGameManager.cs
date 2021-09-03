@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 
-public partial class DemoGameManager : MonoBehaviour
+public partial class TrainingGameManager : MonoBehaviour
 {
     [SerializeField] Vector3 talkerPos;
     [SerializeField] Vector3 distractorPos1;
@@ -77,61 +77,6 @@ public partial class DemoGameManager : MonoBehaviour
             }
         }
     }
-
-    /*
-    // make this prettier with references... (word class or word[][] or something...)
-    // Return count different words from the selected group (via wordIndex [e.g. verbs], excluding the correct one<
-    public string[] getFalseWordsFromGroup(int groupIndex, int count)
-    {
-        if (groupIndex > wordCount || count > wordCount - 1)
-            return null;
-
-        string[] retString = new string[count];
-        string correctWord = sent.getWordFromSentence(groupIndex);
-        string tmp;
-        int[] usedWords = new int[count];
-
-        switch (groupIndex)
-        {
-            case 0:
-                // get count DIFFERENT words, that are not the correct word
-                for (int i = 0; i < count; i++)
-                {
-                    // generate new rand int to access word
-                    usedWords[i] = Random.Range(0, clipCount);
-                    
-                    for(int j = 0; j < i; j++)
-                    {
-                        if(usedWords[j] == usedWords[i])
-                        {
-                            // reroll and set j back to 0
-                            usedWords[i] = Random.Range(0, clipCount);
-                            j = 0;
-                        }
-                    }
-                    // get random word
-                    tmp = lisnData.subjects[i].ToString();
-                    if(tmp != correctWord)
-                    {
-                        retString[i] = tmp;
-                    }
-                    else
-                    {
-                        i--;
-                    }
-                }
-                break;
-        }
-
-
-        for(int i = 0; i < count; i++)
-        {
-            retString[i] = sentenceAudio[groupIndex].ToString();
-        }
-
-        return retString;
-    }
-    */
 
     /**
      * Return 'count' words of a group (determined by 'wordIndex') from the current database.
