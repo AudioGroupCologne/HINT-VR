@@ -12,16 +12,11 @@ public partial class TrainingGameManager : MonoBehaviour
     [SerializeField] Vector3 distractorPos3;
 
     private Sentence sent;
-    //private audioFiles aFiles;
     private LiSN_database lisnData;
 
-    private AudioClip[] sentenceAudio;
-    private int clipCount = 9;
-    private int wordCount = 6;
     // keep track of which word of a sentence has already been played
     private int wordIx = 0;
     private bool sentenceReady = false;
-
     private bool sceneEntered = false;
 
     public GameObject PlayerCamera;
@@ -34,13 +29,12 @@ public partial class TrainingGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sent = new Sentence(wordCount);
-        //aFiles = new audioFiles(1);
+        
         lisnData = new LiSN_database(1);
+        sent = new Sentence(lisnData.getLen());
 
         // make sure to disable UI at load.
         sentenceUI.SetActive(false);        
-        sentenceAudio = new AudioClip[wordCount];
 
         showObjects(false);
     }
@@ -55,7 +49,7 @@ public partial class TrainingGameManager : MonoBehaviour
         if (!targetSource.isPlaying)
         {
             // play full sentence
-            if (wordIx < wordCount && sentenceReady)
+            if (wordIx < lisnData.getLen() && sentenceReady)
             {
                 targetSource.PlayOneShot(sent.audio[wordIx++]);
             }
