@@ -149,7 +149,7 @@ public partial class TrainingGameManager : MonoBehaviour
 
     public void setObjectPositions(int selector)
     {
-        DistractorObj.transform.position = PlayerCamera.transform.position + talkerPos;
+        TalkerObj.transform.position = PlayerCamera.transform.position + talkerPos;
 
         switch (selector)
         {
