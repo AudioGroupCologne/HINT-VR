@@ -91,33 +91,24 @@ public partial class TrainingGameManager : MonoBehaviour
      */
     public string[] getUserWordSelection(int wordIndex, int count)
     {
+        // hold selected strings to be returned
+        string[] retStr = new string[count];
+        // keep track of already selected words via their indices
+        int[] wordIxs = new int[count];
+
         // invalid parameters (also exclude 'the')
         if (wordIndex >= lisnData.getLen() || count >= lisnData.getOptions() || wordIx == 0)
         {
             return null;
         }
 
-        // hold selected strings to be returned
-        string[] retStr = new string[count];
-        //string[] tmp = new string[count - 1];
-        // keep track of already selected words via their indices
-        int[] wordIxs = new int[count];
-        bool match = false;
 
         // write the correct word at index 0
         retStr[0] = sent.getWordFromSentence(wordIndex);
         wordIxs[0] = sent.getWordIxFromSentence(wordIndex);
-        // copy other words to [1...count-1]
+
         retStr = lisnData.getWordsByGroup(wordIndex, count, wordIxs[0]);
-        /*
-        for (int i = 1; i < count; i++)
-        {
-            retStr[i] = tmp[i - 1];
-        }
-        Debug.Log("tmp: " + tmp[0] + tmp[1] + tmp[2]);
-        */
-        Debug.Log("count: "+ count + " ret: " + retStr[0] + retStr[1] + retStr[2] + retStr[3]);
-        //retStr.CopyTo(lisnData.getWordsByGroup(wordIndex, count-1), 1);
+
         return retStr;
     }
 
