@@ -5680,14 +5680,15 @@ AudioSource:
   m_GameObject: {fileID: 509973300}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -350709709009436195, guid: 71a768edbca59a5489350524443deff8,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
+  Spatialize: 1
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
@@ -5727,7 +5728,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -15169,6 +15170,9 @@ MonoBehaviour:
   distractorPos1: {x: 0, y: 2, z: 10}
   distractorPos2: {x: 10, y: 2, z: 0}
   distractorPos3: {x: -10, y: 2, z: 0}
+  targetMixer: {fileID: 24100000, guid: 71a768edbca59a5489350524443deff8, type: 2}
+  hit: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  miss: {fileID: 8300000, guid: f325749c3d245e54ab09948594b62f68, type: 3}
   PlayerCamera: {fileID: 650543663}
   TalkerObj: {fileID: 977963208}
   DistractorObj: {fileID: 1621460129}
@@ -16114,9 +16118,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3173470547539580899, guid: 18fc5249e39dcb04cbce06d69e1beb58,
         type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173470547539580899, guid: 18fc5249e39dcb04cbce06d69e1beb58,
+        type: 3}
+      propertyPath: Spatialize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173470547539580899, guid: 18fc5249e39dcb04cbce06d69e1beb58,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173470547539580899, guid: 18fc5249e39dcb04cbce06d69e1beb58,
+        type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 3a28e996e65cdba43a0466a1eacfcf99, type: 3}
+    - target: {fileID: 3173470547539580899, guid: 18fc5249e39dcb04cbce06d69e1beb58,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -8558297043848001660, guid: 71a768edbca59a5489350524443deff8,
+        type: 2}
     - target: {fileID: 3173470547575092097, guid: 18fc5249e39dcb04cbce06d69e1beb58,
         type: 3}
       propertyPath: m_RootOrder
