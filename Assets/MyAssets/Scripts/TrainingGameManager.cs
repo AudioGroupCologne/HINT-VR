@@ -139,7 +139,14 @@ public partial class TrainingGameManager : MonoBehaviour
 
     public void setObjectPositions(int selector)
     {
+        // set position of TalkerObj based on MainCameras position
         TalkerObj.transform.position = PlayerCamera.transform.position + talkerPos;
+        // get rotation of camera
+        Vector3 rot = Quaternion.identity.eulerAngles;
+        // turn by 180 degree (object shall face camera, not look into the same direction)
+        rot = new Vector3(rot.x, rot.y + 180, rot.z);
+        // apply rotation to object
+;       TalkerObj.transform.rotation = Quaternion.Euler(rot);
 
         switch (selector)
         {
