@@ -6,6 +6,15 @@ using UnityEngine.UI;
 public class wordSelectionScript : MonoBehaviour
 {
 
+    /**
+     * Get n words from a group including the correct one (index 0)
+     * Map these words randomly to the presented buttons
+     * Offer a callback for each button, in which it is checked if the selected word was 'hit' or a 'miss'
+     * Give visual and auditorial feedback for each case (grn/red color, success/failure sound)
+     * 
+     * 
+     */
+
     public Button[] wordBtns;
     public TrainingGameManager masterScript;
 
@@ -56,12 +65,14 @@ public class wordSelectionScript : MonoBehaviour
             // add correct
             Debug.Log("correct");
             DataStorage.DemoGameHits++;
+            masterScript.OnHit();
         }
         else
         {
             // add miss
             Debug.Log("miss");
             DataStorage.DemoGameMisses++;
+            masterScript.OnMiss();
         }
         show_results_on_buttons();
     }
