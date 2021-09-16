@@ -7,39 +7,46 @@ using UnityEditor;
 
 public partial class TrainingGameManager : MonoBehaviour
 {
+
+    AudioManager audioManager;
+    [SerializeField] GameObject PlayerCamera;
+    [SerializeField] GameObject wordSelectionObj;
+
+    [SerializeField] GameObject TalkerObj;
+    [SerializeField] GameObject DistractorObj;
+    
     [SerializeField] Vector3 talkerPos;
     [SerializeField] Vector3 distractorPos1;
     [SerializeField] Vector3 distractorPos2;
     [SerializeField] Vector3 distractorPos3;
-    [SerializeField] AudioMixer targetMixer;
-
-    [SerializeField] AudioClip hit;
-    [SerializeField] AudioClip miss;
-
 
     private Sentence sent;
     private LiSN_database lisnData;
 
-    // keep track of which word of a sentence has already been played
-    private int wordIx = 0;
+
     private bool sentenceReady = false;
     private bool sceneEntered = false;
+    private bool isPlaying = false;
 
-    public GameObject PlayerCamera;
-    public GameObject TalkerObj;
-    public GameObject DistractorObj;
-    public AudioSource targetSource;
-    public AudioSource distracterSource;
-    public GameObject sentenceUI;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        // get 'audioManger' component
+        Debug.Log("Start Training Game");
+        audioManager = GetComponent<AudioManager>();
+        if (audioManager == null)
+            Debug.Log("ERR: audio manager not found!");
+
+        // create LiSN_database object
         lisnData = new LiSN_database(1);
+
+        // create sentence object
         sent = new Sentence(lisnData.getLen());
 
         // make sure to disable UI at load.
-        sentenceUI.SetActive(false);        
+        wordSelectionObj.SetActive(false);        
 
         showObjects(false);
     }
@@ -50,32 +57,67 @@ public partial class TrainingGameManager : MonoBehaviour
         if (!sceneEntered)
             return;
 
-        // wait for user input to play new sentence
-        if (!targetSource.isPlaying)
+        // nothing is being played and a new sentence is available
+        if (!isPlaying && sentenceReady)
         {
-            // play full sentence
-            if (wordIx < lisnData.getLen() && sentenceReady)
-            {
-                targetSource.PlayOneShot(sent.audio[wordIx++]);
-            }
-            // open UI element after playing last word
-            else if (sentenceReady)
-            {
-                // a new sentence has to be created...
-                sentenceReady = false;
-                Debug.Log("Set UI active");
-                // show UI element
-                sentenceUI.SetActive(true);
-            }
-            // wait for user input before creating new sentence
-            else if (Input.GetKeyDown(KeyCode.Space))
-            {
-                sent.createSentence(lisnData);
-                wordIx = 0;
-                sentenceReady = true;
-            }
+           // if (Input.GetKeyDown(KeyCode.E))
+           // {
+                audioManager.startPlaying();
+                isPlaying = true;
+           // }
         }
     }
+
+
+    /// Audio Manager Callbacks
+    // when audio manager has finished playing, reset control variable
+    public void onPlayingDone()
+    {
+        isPlaying = false;
+
+        // a new sentence has to be created, after user input
+        sentenceReady = false;
+
+        // show wordSelection UI elements
+        wordSelectionObj.SetActive(true);
+
+    }
+
+    /// Word Selection UI Callbacks
+    public void OnHit()
+    {
+        audioManager.playOnHit();
+        // decrease SNR by reducing talker volume by -2 dB
+        audioManager.changeLevel(AudioManager.source.talkerSrc, -2.0f);
+    }
+
+    // Called when the player selected a false word option
+    // Increase SNR, play 'false' sound
+    public void OnMiss()
+    {
+        // stop distracter (do this wihtin audio manager?)
+        audioManager.playOnMiss();
+        // improve SNR by increasing talker volume by 1.5 dB
+        audioManager.changeLevel(AudioManager.source.talkerSrc, 1.5f);
+    }
+
+    public void OnContinue()
+    {
+
+        // hide wordSelection UI elements
+        wordSelectionObj.SetActive(false);
+
+        // generate a new sentence
+        sent.createSentence(lisnData);
+
+        // move new sentence audio to audioManager
+        audioManager.setTargetSentence(sent.audio);
+
+        // set 'sentenceReady' flag
+        sentenceReady = true;
+
+    }
+
 
     /**
      * Return 'count' words of a group (determined by 'wordIndex') from the current database.
@@ -96,11 +138,10 @@ public partial class TrainingGameManager : MonoBehaviour
         int[] wordIxs = new int[count];
 
         // invalid parameters (also exclude 'the')
-        if (wordIndex >= lisnData.getLen() || count >= lisnData.getOptions() || wordIx == 0)
+        if (wordIndex >= lisnData.getLen() || count >= lisnData.getOptions())
         {
             return null;
         }
-
 
         // write the correct word at index 0
         retStr[0] = sent.getWordFromSentence(wordIndex);
@@ -117,26 +158,7 @@ public partial class TrainingGameManager : MonoBehaviour
     }
 
 
-    public void NextWordBtn()
-    {
-        Debug.Log("NextWord pressed");
-        sentenceUI.SetActive(false);
-    }
-
-
-    //// Seperate spawning talker/distractor from the whole Audio/word selection stuff...
-    ///
-    // for now: same as different voice due to lack of assets...
-    public void loadSameVoice()
-    {
-
-    }
-
-    public void loadDifferentVoice()
-    {
-
-    }
-
+    // scene setup
     public void setObjectPositions(int selector)
     {
         // set position of TalkerObj based on MainCameras position
@@ -170,57 +192,40 @@ public partial class TrainingGameManager : MonoBehaviour
     }
 
 
+
+    /// Create an audio player manager:
+    /// Manages when to play and when to stop
+    /// e.g. start target sentence n seconds after distracter
+    /// stop distracter nn seconnds after target sentence
+    /// generate "finishedplaying" event (used to show word selection UI)
+    /// play hit/miss
     
     // Called when player selected the correct word option.
     // Decrese SNR by x dB
     // play 'success' sound
-    public void OnHit()
-    {
-        // decrease SNR by reducing talker volume by -2 dB
-        changeTalkerVolume(-2);
-        // play 'hit' AudioClip
-        targetSource.PlayOneShot(hit);
 
-    }
 
-    // Called when the player selected a false word option
-    // Increase SNR, play 'false' sound
-    public void OnMiss()
-    {
-        // improve SNR by increasing talker volume by 1.5 dB
-        changeTalkerVolume(+1.5f);
 
-        // stop distracter
 
-        // play 'hit' AudioClip
-        targetSource.PlayOneShot(miss);
+    // show "press E to play sentence" via UI elements 
+    // hide UI when 'E' is pressed (checked from Update)
+    
+    // call audioManager and let talker/distractor start
 
-        // start distracter again, once "next word" is selected (?)
+    // callback when finished playing both sentences (?) audioManager call public function from here (?)
 
-    }
+    // show wordSelection UI
 
-    // Channge volume of the talker via 'AudioMixer'
-    // dVol: volume change in dB to be added to current level
-    private void changeTalkerVolume(float dVol)
-    {
-        float vol;
+    // WS1-4 or "not sure"
+    // alter SNR based on hit, miss or unsure
+    // play sound based on hit, miss or unsure
+    // store result
 
-        // get volume in dB from talker
-        targetMixer.GetFloat("TalkerVol", out vol);
-        // increase/decrease by dVol
-        vol += dVol;
 
-        // apply limits (-40 dB & 20 dB)
-        if (vol < -40)
-            vol = -40;
-        if (vol > 20)
-            vol = 20;
+    // generate next sentence
+    // show "press E" again (UI)
 
-        Debug.Log("Volume: " + vol + " dB");
-        // write updated volume level to 'AudioMixer'
-        targetMixer.SetFloat("TalkerVol", vol);
 
-    }
 
 
 }

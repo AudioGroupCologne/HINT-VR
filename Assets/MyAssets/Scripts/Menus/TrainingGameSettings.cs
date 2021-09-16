@@ -11,6 +11,7 @@ public class TrainingGameSettings : MonoBehaviour
     {
         masterScript.setObjectPositions(index);
         masterScript.showObjects(true);
+        masterScript.OnContinue();
 
         // disable DemoGameSettings
         gameObject.SetActive(false);

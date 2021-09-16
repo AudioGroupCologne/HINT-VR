@@ -15,8 +15,8 @@ public class wordSelectionScript : MonoBehaviour
      * 
      */
 
-    public Button[] wordBtns;
-    public TrainingGameManager masterScript;
+    [SerializeField] Button[] wordBtns;
+    [SerializeField] TrainingGameManager masterScript;
 
     private string[] words;
     private int correctBtn;
@@ -24,9 +24,11 @@ public class wordSelectionScript : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        testfunc();
+        getWordOptions();
+
         correctBtn = Random.Range(0, 3);
         Debug.Log("correctIx: " + correctBtn);
+
         wordBtns[correctBtn].GetComponentInChildren<Text>().text = words[0];
         int k = 0;
         for(int i = 1; i < 4; i++)
@@ -42,11 +44,12 @@ public class wordSelectionScript : MonoBehaviour
 
     }
 
-    void testfunc()
+    void getWordOptions()
     {
-        Debug.Log("Get new sentence string");
-        string[] currentSentence = masterScript.getCurrentSentence();
-        Debug.Log(currentSentence[0] + currentSentence[1] + currentSentence[2]);
+        Debug.Log("Get word options from master...");
+
+        if (masterScript == null)
+            Debug.Log("No master in wordSelection");
 
         // alter the word selection: subject [1], count [3], object [5]
         // but based on what?
@@ -59,18 +62,13 @@ public class wordSelectionScript : MonoBehaviour
     {
         DataStorage.DemoGameTotal++;
 
-        Debug.Log("Btn: " + btn_ix);
         if (correctBtn == btn_ix)
         {
-            // add correct
-            Debug.Log("correct");
             DataStorage.DemoGameHits++;
             masterScript.OnHit();
         }
         else
         {
-            // add miss
-            Debug.Log("miss");
             DataStorage.DemoGameMisses++;
             masterScript.OnMiss();
         }
