@@ -10,7 +10,7 @@ public partial class TrainingGameManager : MonoBehaviour
 
     AudioManager audioManager;
     [SerializeField] GameObject PlayerCamera;
-    [SerializeField] GameObject wordSelectionObj;
+    [SerializeField] wordSelectionScript wordSel;
 
     [SerializeField] GameObject TalkerObj;
     [SerializeField] GameObject DistractorObj;
@@ -33,11 +33,8 @@ public partial class TrainingGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // get 'audioManger' component
         Debug.Log("Start Training Game");
         audioManager = GetComponent<AudioManager>();
-        if (audioManager == null)
-            Debug.Log("ERR: audio manager not found!");
 
         // create LiSN_database object
         lisnData = new LiSN_database(1);
@@ -46,7 +43,7 @@ public partial class TrainingGameManager : MonoBehaviour
         sent = new Sentence(lisnData.getLen());
 
         // make sure to disable UI at load.
-        wordSelectionObj.SetActive(false);        
+        wordSel.showWordSelectionUI(false);
 
         showObjects(false);
     }
@@ -79,7 +76,7 @@ public partial class TrainingGameManager : MonoBehaviour
         sentenceReady = false;
 
         // show wordSelection UI elements
-        wordSelectionObj.SetActive(true);
+        wordSel.startWordSelection(1);
 
     }
 
@@ -103,9 +100,11 @@ public partial class TrainingGameManager : MonoBehaviour
 
     public void OnContinue()
     {
+        // set buttons back to their default color
+        wordSel.reset_buttons_colors();
 
         // hide wordSelection UI elements
-        wordSelectionObj.SetActive(false);
+        wordSel.showWordSelectionUI(false);
 
         // generate a new sentence
         sent.createSentence(lisnData);
