@@ -17,25 +17,25 @@ public class ResultsManager : MonoBehaviour
     public void clearResults()
     {
         Debug.Log("Clear results");
-        DataStorage.DemoGameTotal = 0;
-        DataStorage.DemoGameHits = 0;
-        DataStorage.DemoGameMisses = 0;
+        DataStorage.TrainingGame_Total = 0;
+        DataStorage.TrainingGame_Hits = 0;
+        DataStorage.TrainingGame_Misses = 0;
         writeResultsOnScreen();
     }
 
     private int getTotal()
     {
-        return DataStorage.DemoGameTotal;
+        return DataStorage.TrainingGame_Total;
     }
 
     private int getHits()
     {
-        return DataStorage.DemoGameHits;
+        return DataStorage.TrainingGame_Hits;
     }
 
     private int getMisses()
     {
-        return DataStorage.DemoGameMisses;
+        return DataStorage.TrainingGame_Misses;
     }
 
     private void writeResultsOnScreen()
