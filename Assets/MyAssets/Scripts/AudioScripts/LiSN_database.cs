@@ -140,7 +140,7 @@ public class LiSN_database
             } while (match);
 
             // get word from array via index
-            groupWords[i] = getAudioArray(groupIx)[tmp[i]].ToString();
+            groupWords[i] = getAudioArray(groupIx)[tmp[i]].ToString().Split(' ')[0];
         }
 
         return groupWords;
@@ -162,7 +162,7 @@ public class LiSN_database
             return null;
 
         tmp[0] = exclude;
-        groupWords[0] = clips[tmp[0]].ToString();
+        groupWords[0] = clips[tmp[0]].ToString().Split(' ')[0];
 
         for (int i = 1; i < n; i++)
         {
@@ -184,7 +184,7 @@ public class LiSN_database
             } while (match);
 
             // get word from array via index
-            groupWords[i] = clips[tmp[i]].ToString();
+            groupWords[i] = clips[tmp[i]].ToString().Split(' ')[0];
         }
 
         return groupWords;
