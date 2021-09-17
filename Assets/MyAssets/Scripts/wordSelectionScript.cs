@@ -16,63 +16,84 @@ public class wordSelectionScript : MonoBehaviour
      */
 
     [SerializeField] Button[] wordBtns;
+    [SerializeField] Button continueBtn;
     [SerializeField] TrainingGameManager masterScript;
+
+    [SerializeField] int wordOptions = 4;
 
     private string[] words;
     private int correctBtn;
+    private bool selectionMade;
 
-    // Start is called before the first frame update
-    void OnEnable()
+    public void startWordSelection(int wordGroup)
     {
-        getWordOptions();
-
-        correctBtn = Random.Range(0, 3);
-        Debug.Log("correctIx: " + correctBtn);
-
-        wordBtns[correctBtn].GetComponentInChildren<Text>().text = words[0];
-        int k = 0;
-        for(int i = 1; i < 4; i++)
-        {
-            // skip the correct Button
-            if(k == correctBtn)
-            {
-                k++;
-            }
-            wordBtns[k].GetComponentInChildren<Text>().text = words[i];
-            k++;
-        }
-
+        selectionMade = false;
+        gameObject.SetActive(true);
+        getWordOptions(wordGroup);
+        mapWordsToUI();
     }
 
-    void getWordOptions()
+    void mapWordsToUI()
+    {
+        // get random poosition for correct Btn
+        correctBtn = Random.Range(0, wordOptions - 1);
+
+        // first assign correct word
+        wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
+        
+        // assign remaining words
+        for (int k = 0; k < wordOptions; k++)
+        {
+            // skip the correct Button
+            if (k == correctBtn)
+            {
+                continue;
+            }
+            wordBtns[k].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[k];
+        }
+    }
+
+
+    void getWordOptions(int wordGroup)
     {
         Debug.Log("Get word options from master...");
 
-        if (masterScript == null)
-            Debug.Log("No master in wordSelection");
-
         // alter the word selection: subject [1], count [3], object [5]
-        // but based on what?
-        // also alter the text on the UI to 'select the subject from the last sentence' or something like that...
-        words = masterScript.getUserWordSelection(1, 4);
-        Debug.Log("WordSelection: " + words[0] + words[1] + words[2] + words[3]);
+        words = masterScript.getUserWordSelection(wordGroup, wordOptions);
     }
 
     public void ButtonHander(int btn_ix)
     {
-        DataStorage.DemoGameTotal++;
+        if (selectionMade)
+            return;
+
+        DataStorage.TrainingGame_Total++;
 
         if (correctBtn == btn_ix)
         {
-            DataStorage.DemoGameHits++;
+            DataStorage.TrainingGame_Hits++;
             masterScript.OnHit();
         }
         else
         {
-            DataStorage.DemoGameMisses++;
+            DataStorage.TrainingGame_Misses++;
             masterScript.OnMiss();
         }
+
+        selectionMade = true;
         show_results_on_buttons();
+        continueBtn.gameObject.SetActive(true);
+    }
+
+    public void UnsureButtonHanlder()
+    {
+        if (selectionMade)
+            return;
+
+        // TODO: Generate new sentence after 2 consecutive unsures, otherwise repeat with improved SNR
+        DataStorage.TrainingGame_Unsure++;
+        // show 'continue' button
+        continueBtn.gameObject.SetActive(true);
     }
 
     private void show_results_on_buttons()
@@ -91,12 +112,18 @@ public class wordSelectionScript : MonoBehaviour
         }
     }
 
+
     public void reset_buttons_colors()
     {
         for(int i = 0; i < 4; i++)
         {
             wordBtns[i].GetComponent<Image>().color = Color.white;
         }
+    }
+
+    public void showWordSelectionUI(bool show)
+    {
+        gameObject.SetActive(show);
     }
 
 }
