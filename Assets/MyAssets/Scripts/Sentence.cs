@@ -28,9 +28,9 @@ class Sentence
         libIndex = data.getSentence();
         audio = data.getSentenceAudio(libIndex);
 
-        for(int i = 0; i < numWords; i++)
+        for (int i = 0; i < numWords; i++)
         {
-            words[i] = audio[i].ToString();
+            words[i] = (audio[i].ToString()).Split(' ')[0];
         }
     }
 
