@@ -32,6 +32,7 @@ public class AudioManager : MonoBehaviour
 
 
     public enum source { talkerSrc, distSrc};
+    private bool distracterPaused = false;
 
     private void Start()
     {
@@ -134,8 +135,18 @@ public class AudioManager : MonoBehaviour
         // whole duration of a single iteration
         float waitDuration = startDelay + talker.clip.length + endDelay;
 
+
+        if (distracterPaused)
+        {
+            distracter.UnPause();//Play();
+        }
+        else
+        {
+            distracter.Play();
+        }
         // immediately start playing distracter
-        distracter.Play();
+        
+        
 
         // set delay to play
         talker.PlayDelayed(startDelay);
@@ -147,7 +158,8 @@ public class AudioManager : MonoBehaviour
     {
         yield return new WaitForSeconds(audioCycle);
         Debug.Log("StopPlaying");
-        distracter.Stop();
+        distracter.Pause(); //Stop();
+        distracterPaused = true;
 
         // notify master about end of iteration
         master.onPlayingDone();
