@@ -17,20 +17,24 @@ public class LiSN_database
     
     // create a list in which each entry is an array of words (the options for the selected word)
     private List<AudioClip[]> words;
+    private List<Sprite[]> icons;
 
 
     // basic constructor, determining the list the shall be used
     public LiSN_database(int list)
     {
         words = new List<AudioClip[]>();
+        icons = new List<Sprite[]>();
         switch (list)
         {
             case 1:
                 loadList1();
+                loadPics1();
                 break;
             // other lists have yet to be included
             default:
                 loadList1();
+                loadPics1();
                 break;
 
         }
@@ -190,6 +194,24 @@ public class LiSN_database
         return groupWords;
     }
 
+
+    public Sprite getIcon(string word)
+    {
+        for(int i = 0; i < icons[0].Length; i++)
+        {
+            if (word == icons[0][i].ToString().Split(' ')[0])
+                return icons[0][i];
+        }
+        Debug.Log("No icon found!");
+        return icons[0][0];
+    }
+
+    public Sprite getIcon(int index)
+    {
+        return icons[0][index];
+    }
+
+
     private void loadList1()
     {
         words.Add(Resources.LoadAll<AudioClip>("listTest/the"));
@@ -198,6 +220,11 @@ public class LiSN_database
         words.Add(Resources.LoadAll<AudioClip>("listTest/count"));
         words.Add(Resources.LoadAll<AudioClip>("listTest/adjectives"));
         words.Add(Resources.LoadAll<AudioClip>("listTest/objects"));
+    }
+
+    private void loadPics1()
+    {
+        icons.Add(Resources.LoadAll<Sprite>("icons/list1/subjects"));
     }
 
 

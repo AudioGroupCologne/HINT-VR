@@ -151,6 +151,18 @@ public partial class TrainingGameManager : MonoBehaviour
         return retStr;
     }
 
+    public Sprite[] getUserIconSelection(int wordIndex, string[] words)
+    {
+        Sprite[] sprites = new Sprite[words.Length];
+
+        for(int i = 0; i < words.Length; i++)
+        {
+            sprites[i] = lisnData.getIcon(words[i]);
+        }
+
+        return sprites;
+    }
+
     public string[] getCurrentSentence()
     {
         return sent.getSentenceString();

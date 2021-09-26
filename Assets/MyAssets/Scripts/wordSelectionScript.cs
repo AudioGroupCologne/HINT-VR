@@ -15,6 +15,8 @@ public class wordSelectionScript : MonoBehaviour
      * 
      */
 
+
+    [SerializeField] Image[] btnIcons;
     [SerializeField] Button[] wordBtns;
     [SerializeField] Button continueBtn;
     [SerializeField] TrainingGameManager masterScript;
@@ -22,6 +24,7 @@ public class wordSelectionScript : MonoBehaviour
     [SerializeField] int wordOptions = 4;
 
     private string[] words;
+    private Sprite[] icons;
     private int correctBtn;
     private bool selectionMade;
 
@@ -40,16 +43,23 @@ public class wordSelectionScript : MonoBehaviour
 
         // first assign correct word
         wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
-        
+        //wordBtns[correctBtn].GetComponentInChildren<Image>().sprite = icons[0];
+        btnIcons[correctBtn].sprite = icons[0];
+
+        int k = 0;
+
         // assign remaining words
-        for (int k = 0; k < wordOptions; k++)
+        for (int i = 1; i < wordOptions; i++)
         {
             // skip the correct Button
             if (k == correctBtn)
             {
-                continue;
+                k++;
             }
-            wordBtns[k].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[k];
+            wordBtns[k].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[i];
+            //wordBtns[k].GetComponentInChildren<Image>().sprite = icons[k];
+            btnIcons[k].sprite = icons[i];
+            k++;
         }
     }
 
@@ -60,6 +70,9 @@ public class wordSelectionScript : MonoBehaviour
 
         // alter the word selection: subject [1], count [3], object [5]
         words = masterScript.getUserWordSelection(wordGroup, wordOptions);
+        Debug.Log(words[0] + words[1] + words[2] + words[3]);
+        icons = masterScript.getUserIconSelection(wordGroup, words);
+        Debug.Log(icons[0].ToString() + icons[1].ToString() + icons[2].ToString() + icons[3].ToString());
     }
 
     public void ButtonHander(int btn_ix)
