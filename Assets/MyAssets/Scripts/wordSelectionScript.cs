@@ -123,6 +123,7 @@ public class wordSelectionScript : MonoBehaviour
 
     public void showWordSelectionUI(bool show)
     {
+        continueBtn.gameObject.SetActive(false);
         gameObject.SetActive(show);
     }
 
