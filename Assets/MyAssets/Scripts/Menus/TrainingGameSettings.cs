@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class TrainingGameSettings : MonoBehaviour
 {
-    public TrainingGameManager masterScript;
+    [SerializeField] TrainingGameManager masterScript;
+    [SerializeField] GameObject settings;
+    [SerializeField] GameObject results;
 
     public void TrainingGameSettingBtnHanlder(int index)
     {
@@ -21,5 +23,17 @@ public class TrainingGameSettings : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("MenuScene");
     }
+
+
+
+    // ### Refactor this to a sort of general UI/overlay for the scene...
+
+
+    public void showResults()
+    {
+        settings.gameObject.SetActive(false);
+        results.gameObject.SetActive(true);
+    }
+
 
 }

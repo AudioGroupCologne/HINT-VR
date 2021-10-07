@@ -9,8 +9,13 @@ public partial class TrainingGameManager : MonoBehaviour
 {
 
     AudioManager audioManager;
+    [SerializeField] int gameLength;
+    private int roundsPlayed = 0;
+
     [SerializeField] GameObject PlayerCamera;
     [SerializeField] wordSelectionScript wordSel;
+    // ### refactor this!
+    [SerializeField] TrainingGameSettings settingsUI;
 
     [SerializeField] GameObject TalkerObj;
     [SerializeField] GameObject DistractorObj;
@@ -90,6 +95,13 @@ public partial class TrainingGameManager : MonoBehaviour
         // hide wordSelection UI elements
         wordSel.showWordSelectionUI(false);
 
+        if (roundsPlayed >= gameLength)
+        {
+            OnSessionDone();
+            return;
+        }
+
+
         // generate a new sentence
         sent.createSentence(lisnData);
 
@@ -99,6 +111,15 @@ public partial class TrainingGameManager : MonoBehaviour
         // start playing again
         audioManager.startPlaying();
 
+        roundsPlayed++;
+
+    }
+
+    private void OnSessionDone()
+    {
+        Debug.Log("Training session done!");
+        settingsUI.gameObject.SetActive(true);
+        settingsUI.showResults();
     }
 
     // scene setup
@@ -114,7 +135,7 @@ public partial class TrainingGameManager : MonoBehaviour
 ;       TalkerObj.transform.rotation = Quaternion.Euler(rot);
 
         switch (selector)
-        {
+        { 
             case 0:
                 DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos1;
                 break;
