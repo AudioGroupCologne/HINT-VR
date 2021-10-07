@@ -127,6 +127,7 @@ public class AudioManager : MonoBehaviour
     public void setDistracterSequence(AudioClip story)
     {
         distracter.clip = story;
+        distracterPaused = false;
     }
 
     public void startPlaying()
@@ -135,7 +136,7 @@ public class AudioManager : MonoBehaviour
         // whole duration of a single iteration
         float waitDuration = startDelay + talker.clip.length + endDelay;
 
-
+        // immediately start playing distracter
         if (distracterPaused)
         {
             distracter.UnPause();//Play();
@@ -143,10 +144,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             distracter.Play();
-        }
-        // immediately start playing distracter
-        
-        
+        }          
 
         // set delay to play
         talker.PlayDelayed(startDelay);
@@ -162,7 +160,7 @@ public class AudioManager : MonoBehaviour
         distracterPaused = true;
 
         // notify master about end of iteration
-        master.onPlayingDone();
+        master.OnPlayingDone();
     }
 
     // play both of these through a separate audio source (non-directional and unaffected by adaptive AudioMixing)

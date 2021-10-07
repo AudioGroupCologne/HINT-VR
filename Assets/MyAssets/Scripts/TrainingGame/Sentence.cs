@@ -5,12 +5,16 @@ class Sentence
 {
     // holds the number of words within a sentence
     private int numWords;
-    // holds the index of each word from the library (here: audioFiles)
+
+    private int num_selectableWords = 3;
+    // holds the index of each word from the library (lisnDatabase)
     public int[] libIndex;
     // holds each word of a sentence as a string
     public string[] words;
     // holds each word of a sentrence as AudioClip
     public AudioClip[] audio;
+
+    private int[] seletableWords;
 
     // create data structe of sentence
     public Sentence(int len)
@@ -18,6 +22,7 @@ class Sentence
         numWords = len;
         libIndex = new int[len];
         words = new string[len];
+        seletableWords = new int[num_selectableWords];
         audio = new AudioClip[len];
     }
 
@@ -27,6 +32,7 @@ class Sentence
 
         libIndex = data.getSentence();
         audio = data.getSentenceAudio(libIndex);
+        data.getSelectableGroups(out seletableWords);
 
         for (int i = 0; i < numWords; i++)
         {
@@ -35,27 +41,43 @@ class Sentence
     }
 
     // return full sentence as array of strings
-    public string[] getSentenceString()
+    public string[] getSentenceStrings()
     {
         return words;
     }
 
     // retrun a single word from by index
-    public string getWordFromSentence(int index)
+    public string getWordString(int word_index)
     {
-        if (index > numWords)
+        if (word_index > numWords)
             return null;
 
-        return words[index];
+        return words[word_index];
     }
 
     // return the index of a single word by index
-    public int getWordIxFromSentence(int index)
+    public int getWordIndex(int word_index)
     {
-        if (index > numWords)
+        if (word_index > numWords)
             return -1;
 
-        return libIndex[index];
+        return libIndex[word_index];
+    }
+
+    public string getSelectableWordString(int index)
+    {
+        if (index > num_selectableWords)
+            return null;
+
+        return words[seletableWords[index]];
+    }
+
+    public int getSelectableWordIndex(int index)
+    {
+        if (index > num_selectableWords)
+            return -1;
+
+        return libIndex[seletableWords[index]];
     }
 }
 

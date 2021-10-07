@@ -14,10 +14,14 @@ public class LiSN_database
 
     private const int length = 6;
     private const int options = 9;
-    
+    private const int selections = 3;
+
     // create a list in which each entry is an array of words (the options for the selected word)
     private List<AudioClip[]> words;
     private List<Sprite[]> icons;
+    private List<string[]> wordStrings;
+
+    public int[] selectableGroup;
 
 
     // basic constructor, determining the list the shall be used
@@ -25,27 +29,28 @@ public class LiSN_database
     {
         words = new List<AudioClip[]>();
         icons = new List<Sprite[]>();
+        wordStrings = new List<string[]>();
+        selectableGroup = new int[selections];
+
         switch (list)
         {
             case 1:
-                loadList1();
-                loadPics1();
+                load_resources_list1();
                 break;
             // other lists have yet to be included
             default:
-                loadList1();
-                loadPics1();
+                load_resources_list1();
                 break;
 
         }
     }
 
-    public int getLen()
+    public int getSentenceLen()
     {
         return length;
     }
 
-    public int getOptions()
+    public int getWordOptions()
     {
         return options;
     }
@@ -56,6 +61,7 @@ public class LiSN_database
         return words[index];
     }
 
+    // get sentence by indicies within 'words' list
     public int[] getSentence()
     {
         int[] indices = new int[length];
@@ -102,9 +108,6 @@ public class LiSN_database
 
         return sentenceAudio;
     }
-
-
-
 
     // Return 'n' different words of a word group (determined by 'groupIx') as an array of strings
     // This method does not know, which word is within a sentence!!! FIX THIS
@@ -195,36 +198,150 @@ public class LiSN_database
     }
 
 
-    public Sprite getIcon(string word)
+    // only added icons to 'highlighted' words...
+    // create data structure, which holds 'selectable' words within a list (List1: subjects [0], numbers[3], objects[5]
+    public Sprite getIcon(int group, string word)
     {
-        for(int i = 0; i < icons[0].Length; i++)
+        for(int i = 0; i < icons[group].Length; i++)
         {
-            if (word == icons[0][i].ToString().Split(' ')[0])
-                return icons[0][i];
+            if (word == icons[group][i].ToString().Split(' ')[0])
+                return icons[group][i];
         }
         Debug.Log("No icon found!");
         return icons[0][0];
     }
 
-    public Sprite getIcon(int index)
+    public Sprite getIcon(int group, int index)
     {
-        return icons[0][index];
+        return icons[group][index];
+    }
+
+    private int[] createRandomSelection(int groupIndex, int count, int exclude)
+    {
+        bool match = false;
+        int[] selection = new int[count];
+
+        // exclude invalid options
+        if (count > options || groupIndex > length - 1)
+            return null;
+
+        // exclude 'the' entries (containing only one option) .Length would return '1'...
+        if (words[groupIndex].Length < count)
+            return null;
+
+        selection[0] = exclude;
+        for (int i = 1; i < count; i++)
+        {
+            do
+            {
+                match = false;
+                // generate a new random number to select the next word
+                selection[i] = Random.Range(0, options);
+                // check if this index is already in use
+                for (int j = 0; j < i; j++)
+                {
+                    // if the index has already been used, 
+                    if (selection[j] == selection[i])
+                    {
+                        match = true;
+                        break;
+                    }
+                }
+            } while (match);
+
+        }
+        return selection;
+    }
+
+    public void getSelectableWords(int sel, int count, int correctWordIx, out string[] o_words, out Sprite[] o_icons)
+    {
+        int[] select = new int[count];
+        string[] outStrings = new string[count];
+        Sprite[] outSprites = new Sprite[count];
+
+        select = createRandomSelection(selectableGroup[sel], count, correctWordIx);
+
+        for(int i = 0; i < count; i++)
+        {
+            outStrings[i] = wordStrings[sel][select[i]];
+            outSprites[i] = icons[sel][select[i]];
+        }
+
+        o_words = outStrings;
+        o_icons = outSprites;
     }
 
 
-    private void loadList1()
+    public void getSelectableGroups(out int[] o_selectableGroups)
     {
-        words.Add(Resources.LoadAll<AudioClip>("listTest/the"));
-        words.Add(Resources.LoadAll<AudioClip>("listTest/subjects"));
-        words.Add(Resources.LoadAll<AudioClip>("listTest/verbs"));
-        words.Add(Resources.LoadAll<AudioClip>("listTest/count"));
-        words.Add(Resources.LoadAll<AudioClip>("listTest/adjectives"));
-        words.Add(Resources.LoadAll<AudioClip>("listTest/objects"));
+        o_selectableGroups = selectableGroup;
     }
 
-    private void loadPics1()
+    private void load_resources_list1()
     {
-        icons.Add(Resources.LoadAll<Sprite>("icons/list1/subjects"));
+
+        selectableGroup[0] = 1; // subject
+        selectableGroup[1] = 3; // count
+        selectableGroup[2] = 5; // obeject
+        load_audioclips();
+        load_icons();
+        create_words();
+    }
+
+    private void create_words()
+    {
+        string[] tmp1 = new string[options];
+        string[] tmp2 = new string[options];
+        string[] tmp3 = new string[options];
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < options; j++)
+            {
+                tmp1[j] = words[1][j].ToString().Split(' ')[0];
+                tmp2[j] = words[3][j].ToString().Split(' ')[0];
+                tmp3[j] = words[5][j].ToString().Split(' ')[0];
+            }
+        }
+
+        wordStrings.Add(tmp1);
+        wordStrings.Add(tmp2);
+        wordStrings.Add(tmp3);
+
+    }
+
+    private void load_audioclips()
+    {
+        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/the"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/subjects"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/verbs"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/count"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/adjectives"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/objects"));
+
+        for (int i = 1; i < 6; i++)
+        {
+            if (words[i].Length != options)
+            {
+                Debug.LogError("Loading audio clips failed!");
+            }
+        }
+
+    }
+
+    private void load_icons()
+    {
+        icons.Add(Resources.LoadAll<Sprite>("icons/list_1/subjects"));
+        icons.Add(Resources.LoadAll<Sprite>("icons/list_1/count"));
+        icons.Add(Resources.LoadAll<Sprite>("icons/list_1/objects"));
+
+        for (int i = 0; i < 3; i ++)
+        {
+            if (icons[i].Length != options)
+            {
+                Debug.LogError("Loading icons failed!");
+            }
+        }
     }
 
 

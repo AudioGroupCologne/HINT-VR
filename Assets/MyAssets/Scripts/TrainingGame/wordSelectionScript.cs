@@ -23,16 +23,25 @@ public class wordSelectionScript : MonoBehaviour
 
     [SerializeField] int wordOptions = 4;
 
+    // words to be written onto UI
     private string[] words;
+    // icons to be showed on UI
     private Sprite[] icons;
+    // index of the button, holding the correct option (randomized)
     private int correctBtn;
+    // an option or 'unsure' was selected by the user
     private bool selectionMade;
 
-    public void startWordSelection(int wordGroup)
+    // show a reward for 5 consecutive correct answers
+    private int rewardCount;
+
+
+    public void startWordSelection(string[] randomWords, Sprite[] randomIcons)
     {
         selectionMade = false;
         gameObject.SetActive(true);
-        getWordOptions(wordGroup);
+        words = randomWords;
+        icons = randomIcons;
         mapWordsToUI();
     }
 
@@ -43,7 +52,6 @@ public class wordSelectionScript : MonoBehaviour
 
         // first assign correct word
         wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
-        //wordBtns[correctBtn].GetComponentInChildren<Image>().sprite = icons[0];
         btnIcons[correctBtn].sprite = icons[0];
 
         int k = 0;
@@ -57,22 +65,9 @@ public class wordSelectionScript : MonoBehaviour
                 k++;
             }
             wordBtns[k].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[i];
-            //wordBtns[k].GetComponentInChildren<Image>().sprite = icons[k];
             btnIcons[k].sprite = icons[i];
             k++;
         }
-    }
-
-
-    void getWordOptions(int wordGroup)
-    {
-        Debug.Log("Get word options from master...");
-
-        // alter the word selection: subject [1], count [3], object [5]
-        words = masterScript.getUserWordSelection(wordGroup, wordOptions);
-        Debug.Log(words[0] + words[1] + words[2] + words[3]);
-        icons = masterScript.getUserIconSelection(wordGroup, words);
-        Debug.Log(icons[0].ToString() + icons[1].ToString() + icons[2].ToString() + icons[3].ToString());
     }
 
     public void ButtonHander(int btn_ix)
@@ -85,11 +80,18 @@ public class wordSelectionScript : MonoBehaviour
         if (correctBtn == btn_ix)
         {
             DataStorage.TrainingGame_Hits++;
+            if(rewardCount++ >= 5)
+            {
+                rewardCount = 0;
+                Debug.Log("Player Reward achieved!");
+                // show trophy
+            }
             masterScript.OnHit();
         }
         else
         {
             DataStorage.TrainingGame_Misses++;
+            rewardCount = 0;
             masterScript.OnMiss();
         }
 
