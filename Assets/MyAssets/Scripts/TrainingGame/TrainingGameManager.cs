@@ -24,12 +24,6 @@ public partial class TrainingGameManager : MonoBehaviour
     private LiSN_database lisnData;
 
 
-    private bool sentenceReady = false;
-    private bool sceneEntered = false;
-    private bool isPlaying = false;
-
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -48,30 +42,11 @@ public partial class TrainingGameManager : MonoBehaviour
         showObjects(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!sceneEntered)
-            return;
-
-        // nothing is being played and a new sentence is available
-        if (!isPlaying && sentenceReady)
-        {
-            audioManager.startPlaying();
-            isPlaying = true;
-        }
-    }
-
 
     /// Audio Manager Callbacks
     // when audio manager has finished playing, reset control variable
     public void OnPlayingDone()
     {
-        isPlaying = false;
-
-        // a new sentence has to be created, after user input
-        sentenceReady = false;
-
         // do something to randonly select a group based on the options
         // there are always 3 selectable groups within each word list so do: 0,1,2
         // simply exclude non-selectable groups from API?
@@ -121,8 +96,8 @@ public partial class TrainingGameManager : MonoBehaviour
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(sent.audio);
 
-        // set 'sentenceReady' flag
-        sentenceReady = true;
+        // start playing again
+        audioManager.startPlaying();
 
     }
 
@@ -156,7 +131,6 @@ public partial class TrainingGameManager : MonoBehaviour
     {
         TalkerObj.SetActive(show);
         DistractorObj.SetActive(show);
-        sceneEntered = show;
     }
 
 }

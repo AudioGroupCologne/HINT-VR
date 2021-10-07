@@ -20,6 +20,7 @@ public class wordSelectionScript : MonoBehaviour
     [SerializeField] Button[] wordBtns;
     [SerializeField] Button continueBtn;
     [SerializeField] TrainingGameManager masterScript;
+    [SerializeField] OverlayManager overlayScript;
 
     [SerializeField] int wordOptions = 4;
 
@@ -33,7 +34,8 @@ public class wordSelectionScript : MonoBehaviour
     private bool selectionMade;
 
     // show a reward for 5 consecutive correct answers
-    private int rewardCount;
+    private int rewardCount = 0;
+    private int currentRewards = 0;
 
 
     public void startWordSelection(string[] randomWords, Sprite[] randomIcons)
@@ -80,11 +82,11 @@ public class wordSelectionScript : MonoBehaviour
         if (correctBtn == btn_ix)
         {
             DataStorage.TrainingGame_Hits++;
-            if(rewardCount++ >= 5)
+            if(++rewardCount >= 5)
             {
                 rewardCount = 0;
                 Debug.Log("Player Reward achieved!");
-                // show trophy
+                overlayScript.showReward(currentRewards++);
             }
             masterScript.OnHit();
         }
