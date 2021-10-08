@@ -7597,7 +7597,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -7605,7 +7605,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.6869564
       value: 1
       inSlope: 0
       outSlope: 0
@@ -17790,7 +17790,7 @@ MonoBehaviour:
   startDelay: 2
   endDelay: 1
   hit: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
-  miss: {fileID: 8300000, guid: e899e4a4844c42c46acabb03ca742941, type: 3}
+  miss: {fileID: 8300000, guid: a8d3f3fd1e75ff74a9f729c1f8405555, type: 3}
   min_vol_dB: -40
   max_vol_dB: 20
 --- !u!1001 &1551986405
@@ -18604,6 +18604,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 42246233dc59f6b4aa3ab67a80a9de79, type: 3}
     - target: {fileID: 3173470547539580899, guid: 18fc5249e39dcb04cbce06d69e1beb58,
         type: 3}
+      propertyPath: rolloffMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173470547539580899, guid: 18fc5249e39dcb04cbce06d69e1beb58,
+        type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -18613,6 +18618,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8558297043848001660, guid: 71a768edbca59a5489350524443deff8,
         type: 2}
+    - target: {fileID: 3173470547539580899, guid: 18fc5249e39dcb04cbce06d69e1beb58,
+        type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[0].time
+      value: 0.99710083
+      objectReference: {fileID: 0}
     - target: {fileID: 3173470547575092097, guid: 18fc5249e39dcb04cbce06d69e1beb58,
         type: 3}
       propertyPath: m_RootOrder
