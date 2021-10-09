@@ -17791,6 +17791,8 @@ MonoBehaviour:
   endDelay: 1
   hit: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
   miss: {fileID: 8300000, guid: a8d3f3fd1e75ff74a9f729c1f8405555, type: 3}
+  attention: {fileID: 8300000, guid: c1907e9a914b9904b9b77753b88ca1ac, type: 3}
+  playAttentionClip: 1
   min_vol_dB: -40
   max_vol_dB: 20
 --- !u!1001 &1551986405

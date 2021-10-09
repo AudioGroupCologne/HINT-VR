@@ -25,6 +25,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip hit;
     // clip to be played on an incorrect answer
     [SerializeField] AudioClip miss;
+
+    [SerializeField] AudioClip attention;
+    [SerializeField] bool playAttentionClip;
     
     // AudioMixer limitations
     [SerializeField] float min_vol_dB = -40;
@@ -121,7 +124,15 @@ public class AudioManager : MonoBehaviour
 
     public void setTargetSentence(AudioClip[] sentence)
     {
-        talker.clip = Combine(sentence);
+        if(playAttentionClip)
+        {
+            talker.clip = Combine(sentence);
+        }
+        else
+        {
+            talker.clip = Combine(sentence);
+        }
+        
     }
 
     public void setDistracterSequence(AudioClip story)
@@ -133,20 +144,28 @@ public class AudioManager : MonoBehaviour
     public void startPlaying()
     {
         Debug.Log("StartPlaying");
+
+
         // whole duration of a single iteration
-        float waitDuration = startDelay + talker.clip.length + endDelay;
+        float waitDuration = startDelay + talker.clip.length + endDelay;    
 
         // immediately start playing distracter
         if (distracterPaused)
         {
-            distracter.UnPause();//Play();
+            distracter.UnPause();
         }
         else
         {
             distracter.Play();
-        }          
+        }
 
         // set delay to play
+        if(playAttentionClip)
+        {
+            player.clip = attention;
+            player.PlayDelayed(startDelay - attention.length);
+        }
+
         talker.PlayDelayed(startDelay);
 
         StartCoroutine(AudioIsPlaying(waitDuration));
