@@ -12,7 +12,7 @@ public class LiSN_database
      * This class shall construct a database, which is able to load any of the 3 lists and offers an interface for the other components to access the audio files and associated strings.
     */
 
-    private const int length = 6;
+    private int length = 5;
     private const int options = 9;
     private const int selections = 3;
 
@@ -35,6 +35,7 @@ public class LiSN_database
         switch (list)
         {
             case 1:
+                length = 5;
                 load_resources_list1();
                 break;
             // other lists have yet to be included
@@ -280,9 +281,9 @@ public class LiSN_database
     private void load_resources_list1()
     {
 
-        selectableGroup[0] = 1; // subject
-        selectableGroup[1] = 3; // count
-        selectableGroup[2] = 5; // obeject
+        selectableGroup[0] = 0; // subject
+        selectableGroup[1] = 2; // count
+        selectableGroup[2] = 4; // obeject
         load_audioclips();
         load_icons();
         create_words();
@@ -294,15 +295,14 @@ public class LiSN_database
         string[] tmp2 = new string[options];
         string[] tmp3 = new string[options];
 
-        for (int i = 0; i < 3; i++)
+        // ToDo: IMPROVE THIS!
+        for (int j = 0; j < options; j++)
         {
-            for (int j = 0; j < options; j++)
-            {
-                tmp1[j] = words[1][j].ToString().Split(' ')[0];
-                tmp2[j] = words[3][j].ToString().Split(' ')[0];
-                tmp3[j] = words[5][j].ToString().Split(' ')[0];
-            }
+            tmp1[j] = words[selectableGroup[0]][j].ToString().Split(' ')[0];
+            tmp2[j] = words[selectableGroup[1]][j].ToString().Split(' ')[0];
+            tmp3[j] = words[selectableGroup[2]][j].ToString().Split(' ')[0];
         }
+        
 
         wordStrings.Add(tmp1);
         wordStrings.Add(tmp2);
@@ -312,18 +312,17 @@ public class LiSN_database
 
     private void load_audioclips()
     {
-        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/the"));
-        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/subjects"));
-        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/verbs"));
-        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/count"));
-        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/adjectives"));
-        words.Add(Resources.LoadAll<AudioClip>("audio/list_1/objects"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/subjects"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/verbs"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/numbers"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/adjectives"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/objects"));
 
-        for (int i = 1; i < 6; i++)
+        for (int i = 0; i < length; i++)
         {
             if (words[i].Length != options)
             {
-                Debug.LogError("Loading audio clips failed!");
+                Debug.LogError("Loading audio clips failed: " + i + " len: " + words[i].Length);
             }
         }
 
@@ -335,11 +334,11 @@ public class LiSN_database
         icons.Add(Resources.LoadAll<Sprite>("icons/list_1/count"));
         icons.Add(Resources.LoadAll<Sprite>("icons/list_1/objects"));
 
-        for (int i = 0; i < 3; i ++)
+        for (int i = 0; i < selections; i ++)
         {
             if (icons[i].Length != options)
             {
-                Debug.LogError("Loading icons failed!");
+                Debug.LogError("Loading icons failed: " + i + " len: " + icons[i].Length);
             }
         }
     }
