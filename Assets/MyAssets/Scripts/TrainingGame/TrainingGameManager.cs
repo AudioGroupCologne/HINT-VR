@@ -22,7 +22,7 @@ public partial class TrainingGameManager : MonoBehaviour
     private Sentence sent;
     private LiSN_database lisnData;
 
-    private bool unsureHandling = false;
+    private bool repeatSentence = false;
 
 
     // Start is called before the first frame update
@@ -42,14 +42,22 @@ public partial class TrainingGameManager : MonoBehaviour
 
     }
 
+    private void OnSessionDone()
+    {
+        Debug.Log("Training session done!");
+        settingsUI.gameObject.SetActive(true);
+        settingsUI.showResults();
+    }
+
 
     /// Audio Manager Callbacks
     // when audio manager has finished playing, reset control variable
     public void OnPlayingDone()
     {
-        // do something to randonly select a group based on the options
-        // there are always 3 selectable groups within each word list so do: 0,1,2
-        // simply exclude non-selectable groups from API?
+
+        if (repeatSentence)
+            return;
+ 
         int randGroup = Random.Range(0, 3);
         string[] words;
         Sprite[] icons;
@@ -96,13 +104,21 @@ public partial class TrainingGameManager : MonoBehaviour
 
     public void OnUnsure()
     {   
+
         // improve SNR by increasing talker volume by 1.5 dB
         audioManager.changeLevel(AudioManager.source.talkerSrc, 1.5f);
 
-        if(unsureHandling)
+        if(!repeatSentence)
         {
-            unsureHandling = false;
+            repeatSentence = true;
+
+            // start playing again
+            audioManager.startPlaying();
+
+            return;
         }
+
+        OnContinue();
 
     }
 
@@ -120,16 +136,6 @@ public partial class TrainingGameManager : MonoBehaviour
             return;
         }
 
-        // play same sentence again (this does not count as a separate round! don't increase 'roundsPlayed')
-        if (unsureHandling)
-        {
-            // start playing again
-            audioManager.startPlaying();
-
-            return;
-        }
-
-
         // generate a new sentence
         sent.createSentence(lisnData);
 
@@ -142,14 +148,11 @@ public partial class TrainingGameManager : MonoBehaviour
 
         roundsPlayed++;
 
+        repeatSentence = false;
+
     }
 
-    private void OnSessionDone()
-    {
-        Debug.Log("Training session done!");
-        settingsUI.gameObject.SetActive(true);
-        settingsUI.showResults();
-    }
+
 
 
 }
