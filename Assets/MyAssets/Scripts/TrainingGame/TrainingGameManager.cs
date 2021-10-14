@@ -11,22 +11,18 @@ public partial class TrainingGameManager : MonoBehaviour
     AudioManager audioManager;
     [SerializeField] int gameLength;
     private int roundsPlayed = 0;
+    private bool practiceMode = true;
+    private int practiveRounds = 0;
 
-    [SerializeField] GameObject PlayerCamera;
     [SerializeField] wordSelectionScript wordSel;
     // ### refactor this!
     [SerializeField] TrainingGameSettings settingsUI;
 
-    [SerializeField] GameObject TalkerObj;
-    [SerializeField] GameObject DistractorObj;
-    
-    [SerializeField] Vector3 talkerPos;
-    [SerializeField] Vector3 distractorPos1;
-    [SerializeField] Vector3 distractorPos2;
-    [SerializeField] Vector3 distractorPos3;
 
     private Sentence sent;
     private LiSN_database lisnData;
+
+    private bool unsureHandling = false;
 
 
     // Start is called before the first frame update
@@ -44,7 +40,6 @@ public partial class TrainingGameManager : MonoBehaviour
         // make sure to disable UI at load.
         wordSel.showWordSelectionUI(false);
 
-        showObjects(false);
     }
 
 
@@ -69,12 +64,24 @@ public partial class TrainingGameManager : MonoBehaviour
 
     }
 
+    public void OnStart()
+    {
+        // generate a new sentence
+        sent.createSentence(lisnData);
+
+        // move new sentence audio to audioManager
+        audioManager.setTargetSentence(sent.audio);
+
+        // start playing again
+        audioManager.startPlaying();
+    }
+
     /// Word Selection UI Callbacks
     public void OnHit()
     {
         audioManager.playOnHit();
-        // decrease SNR by reducing talker volume by -2 dB
-        audioManager.changeLevel(AudioManager.source.talkerSrc, -2.0f);
+        // decrease SNR by reducing talker volume by -1.5 dB
+        audioManager.changeLevel(AudioManager.source.talkerSrc, -1.5f);
     }
 
     // Called when the player selected a false word option
@@ -83,8 +90,20 @@ public partial class TrainingGameManager : MonoBehaviour
     {
         // stop distracter (do this wihtin audio manager?)
         audioManager.playOnMiss();
+        // improve SNR by increasing talker volume by 2.5 dB
+        audioManager.changeLevel(AudioManager.source.talkerSrc, 2.5f);
+    }
+
+    public void OnUnsure()
+    {   
         // improve SNR by increasing talker volume by 1.5 dB
         audioManager.changeLevel(AudioManager.source.talkerSrc, 1.5f);
+
+        if(unsureHandling)
+        {
+            unsureHandling = false;
+        }
+
     }
 
     public void OnContinue()
@@ -101,12 +120,22 @@ public partial class TrainingGameManager : MonoBehaviour
             return;
         }
 
+        // play same sentence again (this does not count as a separate round! don't increase 'roundsPlayed')
+        if (unsureHandling)
+        {
+            // start playing again
+            audioManager.startPlaying();
+
+            return;
+        }
+
 
         // generate a new sentence
         sent.createSentence(lisnData);
 
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(sent.audio);
+
 
         // start playing again
         audioManager.startPlaying();
@@ -122,36 +151,5 @@ public partial class TrainingGameManager : MonoBehaviour
         settingsUI.showResults();
     }
 
-    // scene setup
-    public void setObjectPositions(int selector)
-    {
-        // set position of TalkerObj based on MainCameras position
-        TalkerObj.transform.position = PlayerCamera.transform.position + talkerPos;
-        // get rotation of camera
-        Vector3 rot = Quaternion.identity.eulerAngles;
-        // turn by 180 degree (object shall face camera, not look into the same direction)
-        rot = new Vector3(rot.x, rot.y + 180, rot.z);
-        // apply rotation to object
-;       TalkerObj.transform.rotation = Quaternion.Euler(rot);
-
-        switch (selector)
-        { 
-            case 0:
-                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos1;
-                break;
-            case 1:
-                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos2;
-                break;
-            case 2:
-                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos3;
-                break;
-        }
-    }
-
-    public void showObjects(bool show)
-    {
-        TalkerObj.SetActive(show);
-        DistractorObj.SetActive(show);
-    }
 
 }

@@ -126,7 +126,11 @@ public class AudioManager : MonoBehaviour
     {
         if(playAttentionClip)
         {
-            talker.clip = Combine(sentence);
+            AudioClip[] tmp = new AudioClip[sentence.Length + 1];
+            Debug.Log("tmpLen: " + tmp.Length + " sentenceLen: " + sentence.Length);
+            tmp[0] = attention;
+            sentence.CopyTo(tmp, 1);
+            talker.clip = Combine(tmp);
         }
         else
         {
@@ -158,13 +162,14 @@ public class AudioManager : MonoBehaviour
         {
             distracter.Play();
         }
-
+        /*
         // set delay to play
         if(playAttentionClip)
         {
             player.clip = attention;
             player.PlayDelayed(startDelay - attention.length);
         }
+        */
 
         talker.PlayDelayed(startDelay);
 

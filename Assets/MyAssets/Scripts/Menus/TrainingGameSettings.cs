@@ -5,18 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class TrainingGameSettings : MonoBehaviour
 {
-    [SerializeField] TrainingGameManager masterScript;
+    [SerializeField] TrainingGameManager master;
+    [SerializeField] LevelObjectManager levelObjects;
     [SerializeField] GameObject settings;
     [SerializeField] GameObject results;
 
     public void TrainingGameSettingBtnHanlder(int index)
     {
-        masterScript.setObjectPositions(index);
-        masterScript.showObjects(true);
-        masterScript.OnContinue();
+        levelObjects.setLevelObjectPositions(index);
+        levelObjects.showLevelObjects(true);
 
         // disable DemoGameSettings
         gameObject.SetActive(false);
+
+        // start TrainingGame once settings have been done
+        master.OnStart();
     }
 
     public void TrainingGameSettingsQuitBtn()
