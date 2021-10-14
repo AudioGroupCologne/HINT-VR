@@ -10,19 +10,28 @@ public partial class TrainingGameManager : MonoBehaviour
 
     AudioManager audioManager;
     [SerializeField] int gameLength;
-    private int roundsPlayed = 0;
-    private bool practiceMode = true;
-    private int practiveRounds = 0;
-
     [SerializeField] wordSelectionScript wordSel;
     // ### refactor this!
     [SerializeField] TrainingGameSettings settingsUI;
+    [SerializeField] OverlayManager overlayScript;
 
 
     private Sentence sent;
     private LiSN_database lisnData;
 
+
+    private bool practiceMode = true;
+    private int practiveRounds = 0;
+
+    private int roundsPlayed = 0;
+
+    // show a reward for 5 consecutive correct answers
+    private int rewardCount = 0;
+    private int currentRewards = 0;
+
+    
     private bool repeatSentence = false;
+
 
 
     // Start is called before the first frame update
@@ -56,7 +65,10 @@ public partial class TrainingGameManager : MonoBehaviour
     {
 
         if (repeatSentence)
+        {
+            wordSel.showWordSelectionUI(true);
             return;
+        }
  
         int randGroup = Random.Range(0, 3);
         string[] words;
@@ -87,29 +99,90 @@ public partial class TrainingGameManager : MonoBehaviour
     /// Word Selection UI Callbacks
     public void OnHit()
     {
+
         audioManager.playOnHit();
+
+        repeatSentence = false;
+
+        if (practiceMode)
+        {
+            // decrease SNR by reducing talker volume by 3.0 dB
+            audioManager.changeLevel(AudioManager.source.talkerSrc, -3.0f);
+            return;
+        }
+
         // decrease SNR by reducing talker volume by -1.5 dB
         audioManager.changeLevel(AudioManager.source.talkerSrc, -1.5f);
+
+
+        DataStorage.TrainingGame_Hits++;
+
+        if (++rewardCount >= 5)
+        {
+            // Add OnReward handler for this
+            rewardCount = 0;
+            Debug.Log("Player Reward achieved!");
+            overlayScript.showReward(currentRewards++);
+        }
+
     }
 
     // Called when the player selected a false word option
     // Increase SNR, play 'false' sound
     public void OnMiss()
     {
-        // stop distracter (do this wihtin audio manager?)
+
         audioManager.playOnMiss();
+
+        repeatSentence = false;
+
+        if (practiceMode)
+        {
+            // decrease SNR by reducing talker volume by 3.0 dB
+            audioManager.changeLevel(AudioManager.source.talkerSrc, -3.0f);
+            if (practiveRounds >= 5)
+            {
+                Debug.Log("Leave practive mode");
+                practiceMode = false;
+            }
+
+            return;
+        }
+
+
         // improve SNR by increasing talker volume by 2.5 dB
         audioManager.changeLevel(AudioManager.source.talkerSrc, 2.5f);
+
+        DataStorage.TrainingGame_Misses++;
+
+        rewardCount = 0;
+
     }
 
     public void OnUnsure()
     {
-        audioManager.playOnUnsure();
+        //audioManager.playOnUnsure();
+
+        if (practiceMode)
+        {
+            // decrease SNR by reducing talker volume by 3.0 dB
+            audioManager.changeLevel(AudioManager.source.talkerSrc, -3.0f);
+            if (practiveRounds >= 5)
+            {
+                Debug.Log("Leave practive mode");
+                practiceMode = false;
+            }
+            return;
+        }
+  
+
         // improve SNR by increasing talker volume by 1.5 dB
         audioManager.changeLevel(AudioManager.source.talkerSrc, 1.5f);
+        
 
         if(!repeatSentence)
         {
+            Debug.Log("Unsure: repeat sentence with increase SNR");
             repeatSentence = true;
 
             // either give a small delay or wait for another user input...
@@ -120,10 +193,15 @@ public partial class TrainingGameManager : MonoBehaviour
             // start playing again
             audioManager.startPlaying();
 
-            return;
+            // hide wordSelection UI elements
+            wordSel.showWordSelectionUI(false);
+        }
+        else
+        {
+            repeatSentence = false;
         }
 
-        OnContinue();
+        //OnContinue();
 
     }
 
@@ -141,19 +219,27 @@ public partial class TrainingGameManager : MonoBehaviour
             return;
         }
 
-        // generate a new sentence
-        sent.createSentence(lisnData);
+        if(!repeatSentence)
+        {
+            // generate a new sentence
+            sent.createSentence(lisnData);
 
-        // move new sentence audio to audioManager
-        audioManager.setTargetSentence(sent.audio);
+            // move new sentence audio to audioManager
+            audioManager.setTargetSentence(sent.audio);
 
+            if(practiceMode)
+            {
+                practiveRounds++;
+            }
+            else
+            {
+                roundsPlayed++;
+            }
+            
+        }
 
         // start playing again
         audioManager.startPlaying();
-
-        roundsPlayed++;
-
-        repeatSentence = false;
 
     }
 

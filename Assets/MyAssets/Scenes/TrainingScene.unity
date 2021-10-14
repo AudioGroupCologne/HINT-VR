@@ -9123,7 +9123,6 @@ MonoBehaviour:
   - {fileID: 1501886103}
   continueBtn: {fileID: 817347324}
   masterScript: {fileID: 1551984276}
-  overlayScript: {fileID: 1854563861}
   wordOptions: 4
 --- !u!4 &621046634
 Transform:
@@ -12021,23 +12020,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1551984276}
+      objectReference: {fileID: 621046633}
+    - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1319000582}
+    - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnUnsure
+      value: UnsureButtonHanlder
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: wordSelectionScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: TrainingGameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706489, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
@@ -17751,6 +17785,7 @@ MonoBehaviour:
   gameLength: 40
   wordSel: {fileID: 621046633}
   settingsUI: {fileID: 1319000583}
+  overlayScript: {fileID: 1854563861}
 --- !u!4 &1551984277
 Transform:
   m_ObjectHideFlags: 0
@@ -17785,7 +17820,7 @@ MonoBehaviour:
   startDelay: 2
   endDelay: 1
   hit: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
-  miss: {fileID: 8300000, guid: a8d3f3fd1e75ff74a9f729c1f8405555, type: 3}
+  miss: {fileID: 8300000, guid: 44a86a2be425e4340962f9e1ad5ee0d5, type: 3}
   unsure: {fileID: 8300000, guid: a01d85e77c89ab6448dfbeb6935cfb79, type: 3}
   reward: {fileID: 0}
   attention: {fileID: 8300000, guid: c1907e9a914b9904b9b77753b88ca1ac, type: 3}

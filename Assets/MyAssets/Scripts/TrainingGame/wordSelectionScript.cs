@@ -11,8 +11,6 @@ public class wordSelectionScript : MonoBehaviour
      * Map these words randomly to the presented buttons
      * Offer a callback for each button, in which it is checked if the selected word was 'hit' or a 'miss'
      * Give visual and auditorial feedback for each case (grn/red color, success/failure sound)
-     * 
-     * 
      */
 
 
@@ -20,7 +18,6 @@ public class wordSelectionScript : MonoBehaviour
     [SerializeField] Button[] wordBtns;
     [SerializeField] Button continueBtn;
     [SerializeField] TrainingGameManager masterScript;
-    [SerializeField] OverlayManager overlayScript;
 
     [SerializeField] int wordOptions = 4;
 
@@ -32,10 +29,6 @@ public class wordSelectionScript : MonoBehaviour
     private int correctBtn;
     // an option or 'unsure' was selected by the user
     private bool selectionMade;
-
-    // show a reward for 5 consecutive correct answers
-    private int rewardCount = 0;
-    private int currentRewards = 0;
 
 
     public void startWordSelection(string[] randomWords, Sprite[] randomIcons)
@@ -81,19 +74,10 @@ public class wordSelectionScript : MonoBehaviour
 
         if (correctBtn == btn_ix)
         {
-            DataStorage.TrainingGame_Hits++;
-            if(++rewardCount >= 5)
-            {
-                rewardCount = 0;
-                Debug.Log("Player Reward achieved!");
-                overlayScript.showReward(currentRewards++);
-            }
             masterScript.OnHit();
         }
         else
         {
-            DataStorage.TrainingGame_Misses++;
-            rewardCount = 0;
             masterScript.OnMiss();
         }
 
@@ -107,10 +91,13 @@ public class wordSelectionScript : MonoBehaviour
         if (selectionMade)
             return;
 
-        // TODO: Generate new sentence after 2 consecutive unsures, otherwise repeat with improved SNR
         DataStorage.TrainingGame_Unsure++;
+
+        masterScript.OnUnsure();
+
         // show 'continue' button
         continueBtn.gameObject.SetActive(true);
+
     }
 
     private void show_results_on_buttons()

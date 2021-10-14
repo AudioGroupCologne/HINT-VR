@@ -111,9 +111,6 @@ public class LiSN_database
     }
 
     // Return 'n' different words of a word group (determined by 'groupIx') as an array of strings
-    // This method does not know, which word is within a sentence!!! FIX THIS
-    // Option A: Submit correct word as parameter (by index)
-    // Option B: Hold current sentence within this class
     public string[] getWordsByGroup(int groupIx, int n)
     {
         bool match = false;
@@ -124,7 +121,7 @@ public class LiSN_database
         if (n > options || groupIx > length - 1)
             return null;
 
-        // exclude 'the' entries (containing only one option) .Length would return '1'...
+        // make sure the selected word group has enough options
         if (words[groupIx].Length < n)
             return null;
 
@@ -154,6 +151,7 @@ public class LiSN_database
         return groupWords;
     }
 
+    // Return 'n' different words of a word group (determined by 'groupIx') as an array of strings. 'exclude' can be used to make sure, that the word of the current sentence is not chosen.
     public string[] getWordsByGroup(int groupIx, int n, int exclude)
     {
         bool match = false;
