@@ -25,6 +25,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip hit;
     // clip to be played on an incorrect answer
     [SerializeField] AudioClip miss;
+    // clip to be played on 'unsure' selection
+    [SerializeField] AudioClip unsure;
+    // clip to be played on receiving a reward sticker
+    [SerializeField] AudioClip reward;
 
     [SerializeField] AudioClip attention;
     [SerializeField] bool playAttentionClip;
@@ -162,14 +166,6 @@ public class AudioManager : MonoBehaviour
         {
             distracter.Play();
         }
-        /*
-        // set delay to play
-        if(playAttentionClip)
-        {
-            player.clip = attention;
-            player.PlayDelayed(startDelay - attention.length);
-        }
-        */
 
         talker.PlayDelayed(startDelay);
 
@@ -196,6 +192,17 @@ public class AudioManager : MonoBehaviour
     public void playOnMiss()
     {
         player.PlayOneShot(miss);
+    }
+
+    public void playOnUnsure()
+    {
+        player.PlayOneShot(unsure);
+    }
+
+    public void playOnReward()
+    {
+        // wait until OnHit is done!
+        player.PlayOneShot(reward);
     }
 
 

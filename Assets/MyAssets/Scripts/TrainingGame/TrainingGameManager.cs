@@ -103,14 +103,19 @@ public partial class TrainingGameManager : MonoBehaviour
     }
 
     public void OnUnsure()
-    {   
-
+    {
+        audioManager.playOnUnsure();
         // improve SNR by increasing talker volume by 1.5 dB
         audioManager.changeLevel(AudioManager.source.talkerSrc, 1.5f);
 
         if(!repeatSentence)
         {
             repeatSentence = true;
+
+            // either give a small delay or wait for another user input...
+            
+            // this requires a CoRoutine...
+            //yield WaitForSeconds(1);
 
             // start playing again
             audioManager.startPlaying();
