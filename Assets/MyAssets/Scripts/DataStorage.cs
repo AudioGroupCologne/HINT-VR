@@ -8,4 +8,5 @@ public static class DataStorage
     public static int TrainingGame_Hits;
     public static int TrainingGame_Misses;
     public static int TrainingGame_Unsure;
+    public static float[] TrainingGame_SNR = new float[40];
 }

@@ -13,7 +13,7 @@ public class wordSelectionScript : MonoBehaviour
      * Give visual and auditorial feedback for each case (grn/red color, success/failure sound)
      */
 
-
+    [SerializeField] GameObject wordSelectionUI;
     [SerializeField] Image[] btnIcons;
     [SerializeField] Button[] wordBtns;
     [SerializeField] Button continueBtn;
@@ -30,11 +30,10 @@ public class wordSelectionScript : MonoBehaviour
     // an option or 'unsure' was selected by the user
     private bool selectionMade;
 
-
     public void startWordSelection(string[] randomWords, Sprite[] randomIcons)
     {
         selectionMade = false;
-        gameObject.SetActive(true);
+        wordSelectionUI.SetActive(true);
         words = randomWords;
         icons = randomIcons;
         mapWordsToUI();
@@ -128,7 +127,7 @@ public class wordSelectionScript : MonoBehaviour
     public void showWordSelectionUI(bool show)
     {
         continueBtn.gameObject.SetActive(false);
-        gameObject.SetActive(show);
+        wordSelectionUI.SetActive(show);
     }
 
 }

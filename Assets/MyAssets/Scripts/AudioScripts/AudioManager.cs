@@ -38,7 +38,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] float max_vol_dB = 20;
 
 
-    public enum source { talkerSrc, distSrc};
+    public int talkerVol = 0;
+    public int distracterVol = 1;
+    private string[] channels = { "TalkerVol", "DistVol" };
+
     private bool distracterPaused = false;
 
     private void Start()
@@ -48,26 +51,13 @@ public class AudioManager : MonoBehaviour
 
 
     // change level of selected AudioSource
-    public void changeLevel(source src, float deltaVolume_db)
+    public void changeLevel(int src, float deltaVolume_db)
     {
 
         float volume;
-        string param;
-
-        switch (src)
-        {
-            case source.talkerSrc:
-                param = "TalkerVol";
-                break;
-            case source.distSrc:
-                param = "DistVol";
-                break;
-            default:
-                return;
-        }
 
         // get volume in dB from talker
-        mixer.GetFloat(param, out volume);
+        mixer.GetFloat(channels[src], out volume);
         // increase/decrease by dVol
         volume += deltaVolume_db;
 
@@ -81,8 +71,16 @@ public class AudioManager : MonoBehaviour
         Debug.Log("Volume: " + volume + " dB");
 
         // write updated volume level to 'AudioMixer'
-        mixer.SetFloat(param, volume);
+        mixer.SetFloat(channels[src], volume);
 
+    }
+
+    public float getLevel(int src)
+    {
+        float volume;
+        mixer.GetFloat(channels[src], out volume);
+        return volume;
+        
     }
 
 

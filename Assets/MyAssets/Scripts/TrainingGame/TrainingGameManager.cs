@@ -17,8 +17,8 @@ public partial class TrainingGameManager : MonoBehaviour
 
     // other components (maybe refactor this a bit)
     [SerializeField] wordSelectionScript wordSel;
-    [SerializeField] TrainingGameSettings settingsUI;
-    [SerializeField] OverlayManager overlayScript;
+    [SerializeField] ResultManager results;
+    [SerializeField] RewardManager rewards;
 
 
     private Sentence sent;
@@ -61,8 +61,7 @@ public partial class TrainingGameManager : MonoBehaviour
     private void OnSessionDone()
     {
         Debug.Log("Training session done!");
-        settingsUI.gameObject.SetActive(true);
-        settingsUI.showResults();
+        results.showResults();
     }
 
 
@@ -70,6 +69,8 @@ public partial class TrainingGameManager : MonoBehaviour
     // when audio manager has finished playing, reset control variable
     public void OnPlayingDone()
     {
+
+        Debug.Log("OnPlayingDone");
 
         if (repeatSentence)
         {
@@ -115,21 +116,21 @@ public partial class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeLevel(AudioManager.source.talkerSrc, -3.0f);
+            audioManager.changeLevel(audioManager.talkerVol, -3.0f);
             return;
         }
 
-        // decrease SNR by reducing talker volume by -1.5 dB
-        audioManager.changeLevel(AudioManager.source.talkerSrc, -1.5f);
-
-
         DataStorage.TrainingGame_Hits++;
+        DataStorage.TrainingGame_SNR[roundsPlayed] = audioManager.getLevel(audioManager.talkerVol);
+
+        // decrease SNR by reducing talker volume by -1.5 dB
+        audioManager.changeLevel(audioManager.talkerVol, -1.5f);        
 
         if (++rewardCount >= rewardHits)
         {
             Debug.Log("Player Reward achieved!");
             audioManager.playOnReward();
-            overlayScript.showReward(currentRewards++);
+            rewards.showReward(currentRewards++);
             // reset rewardCount
             rewardCount = 0;
         }
@@ -148,7 +149,7 @@ public partial class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeLevel(AudioManager.source.talkerSrc, -3.0f);
+            audioManager.changeLevel(audioManager.talkerVol, -3.0f);
             if (practiceRounds >= min_practiceRounds)
             {
                 Debug.Log("Leave practive mode");
@@ -158,11 +159,11 @@ public partial class TrainingGameManager : MonoBehaviour
             return;
         }
 
+        DataStorage.TrainingGame_Misses++;
+        DataStorage.TrainingGame_SNR[roundsPlayed] = audioManager.getLevel(audioManager.talkerVol);
 
         // improve SNR by increasing talker volume by 2.5 dB
-        audioManager.changeLevel(AudioManager.source.talkerSrc, 2.5f);
-
-        DataStorage.TrainingGame_Misses++;
+        audioManager.changeLevel(audioManager.talkerVol, 2.5f);
 
         rewardCount = 0;
 
@@ -175,7 +176,7 @@ public partial class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeLevel(AudioManager.source.talkerSrc, -3.0f);
+            audioManager.changeLevel(audioManager.talkerVol, -3.0f);
             if (practiceRounds >= min_practiceRounds)
             {
                 Debug.Log("Leave practive mode");
@@ -186,7 +187,7 @@ public partial class TrainingGameManager : MonoBehaviour
   
 
         // improve SNR by increasing talker volume by 1.5 dB
-        audioManager.changeLevel(AudioManager.source.talkerSrc, 1.5f);
+        audioManager.changeLevel(audioManager.talkerVol, 1.5f);
         
 
         if(!repeatSentence)
@@ -244,6 +245,7 @@ public partial class TrainingGameManager : MonoBehaviour
             else
             {
                 roundsPlayed++;
+                Debug.Log("Round: " + roundsPlayed + " of " + gameLength);
             }
             
         }
