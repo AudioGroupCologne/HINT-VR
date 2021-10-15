@@ -131,7 +131,6 @@ public class AudioManager : MonoBehaviour
         if(playAttentionClip)
         {
             AudioClip[] tmp = new AudioClip[sentence.Length + 1];
-            Debug.Log("tmpLen: " + tmp.Length + " sentenceLen: " + sentence.Length);
             tmp[0] = attention;
             sentence.CopyTo(tmp, 1);
             talker.clip = Combine(tmp);

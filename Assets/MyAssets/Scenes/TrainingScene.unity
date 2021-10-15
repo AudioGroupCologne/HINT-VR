@@ -17822,7 +17822,7 @@ MonoBehaviour:
   hit: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
   miss: {fileID: 8300000, guid: 44a86a2be425e4340962f9e1ad5ee0d5, type: 3}
   unsure: {fileID: 8300000, guid: a01d85e77c89ab6448dfbeb6935cfb79, type: 3}
-  reward: {fileID: 0}
+  reward: {fileID: 8300000, guid: e485a4163bb611d4c951c54d2a382613, type: 3}
   attention: {fileID: 8300000, guid: c1907e9a914b9904b9b77753b88ca1ac, type: 3}
   playAttentionClip: 1
   min_vol_dB: -40

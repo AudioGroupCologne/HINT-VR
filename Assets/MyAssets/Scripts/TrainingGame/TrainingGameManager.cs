@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEditor;
 
 
@@ -9,9 +8,15 @@ public partial class TrainingGameManager : MonoBehaviour
 {
 
     AudioManager audioManager;
+    // number of sentences (excluding practice rounds and repetitions) to be played within a session
     [SerializeField] int gameLength;
+    // min number of practice rounds to be played (stops @ first mistake after a correct answer)
+    [SerializeField] int min_practiceRounds;
+    // number of consecutive correct answers to achieve a reward
+    [SerializeField] int rewardHits;
+
+    // other components (maybe refactor this a bit)
     [SerializeField] wordSelectionScript wordSel;
-    // ### refactor this!
     [SerializeField] TrainingGameSettings settingsUI;
     [SerializeField] OverlayManager overlayScript;
 
@@ -20,16 +25,18 @@ public partial class TrainingGameManager : MonoBehaviour
     private LiSN_database lisnData;
 
 
+    /// Control variables
+    // start each session with practice mode
     private bool practiceMode = true;
-    private int practiveRounds = 0;
-
+    // keep track of practice rounds/sentences
+    private int practiceRounds = 0;
+    // keep track of rounds/sentences played within current session
     private int roundsPlayed = 0;
-
-    // show a reward for 5 consecutive correct answers
+    // keep track of current consecutive hits
     private int rewardCount = 0;
+    // keep track of rewards achieved within current session
     private int currentRewards = 0;
-
-    
+    // repeat last sentence if 'unsure' was selected (do this only once!)
     private bool repeatSentence = false;
 
 
@@ -67,6 +74,7 @@ public partial class TrainingGameManager : MonoBehaviour
         if (repeatSentence)
         {
             wordSel.showWordSelectionUI(true);
+            Debug.Log("Repeat sentence...");
             return;
         }
  
@@ -117,12 +125,13 @@ public partial class TrainingGameManager : MonoBehaviour
 
         DataStorage.TrainingGame_Hits++;
 
-        if (++rewardCount >= 5)
+        if (++rewardCount >= rewardHits)
         {
-            // Add OnReward handler for this
-            rewardCount = 0;
             Debug.Log("Player Reward achieved!");
+            audioManager.playOnReward();
             overlayScript.showReward(currentRewards++);
+            // reset rewardCount
+            rewardCount = 0;
         }
 
     }
@@ -140,7 +149,7 @@ public partial class TrainingGameManager : MonoBehaviour
         {
             // decrease SNR by reducing talker volume by 3.0 dB
             audioManager.changeLevel(AudioManager.source.talkerSrc, -3.0f);
-            if (practiveRounds >= 5)
+            if (practiceRounds >= min_practiceRounds)
             {
                 Debug.Log("Leave practive mode");
                 practiceMode = false;
@@ -167,7 +176,7 @@ public partial class TrainingGameManager : MonoBehaviour
         {
             // decrease SNR by reducing talker volume by 3.0 dB
             audioManager.changeLevel(AudioManager.source.talkerSrc, -3.0f);
-            if (practiveRounds >= 5)
+            if (practiceRounds >= min_practiceRounds)
             {
                 Debug.Log("Leave practive mode");
                 practiceMode = false;
@@ -229,7 +238,8 @@ public partial class TrainingGameManager : MonoBehaviour
 
             if(practiceMode)
             {
-                practiveRounds++;
+                practiceRounds++;
+                Debug.Log("Practice round: " + practiceRounds + " of " + min_practiceRounds + " (min)");
             }
             else
             {
