@@ -4084,7 +4084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &360060608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15608,7 +15608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1351366839
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17228,6 +17228,7 @@ MonoBehaviour:
   wordSel: {fileID: 621046633}
   results: {fileID: 679436614}
   rewards: {fileID: 1208634651}
+  settings: {fileID: 1319000583}
 --- !u!4 &1551984277
 Transform:
   m_ObjectHideFlags: 0

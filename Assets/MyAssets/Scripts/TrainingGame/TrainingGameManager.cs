@@ -19,6 +19,7 @@ public partial class TrainingGameManager : MonoBehaviour
     [SerializeField] wordSelectionScript wordSel;
     [SerializeField] ResultManager results;
     [SerializeField] RewardManager rewards;
+    [SerializeField] TrainingGameSettings settings;
 
 
     private Sentence sent;
@@ -55,6 +56,9 @@ public partial class TrainingGameManager : MonoBehaviour
 
         // make sure to disable UI at load.
         wordSel.showWordSelectionUI(false);
+
+        // show settings menu
+        settings.gameObject.SetActive(true);
 
     }
 

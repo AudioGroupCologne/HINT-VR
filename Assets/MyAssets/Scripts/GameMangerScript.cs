@@ -5,21 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class GameMangerScript : MonoBehaviour
 {
-    public GameObject eventSystem;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("ScCnt: " + SceneManager.sceneCountInBuildSettings);
 
+        // unload all Scenes except preload and MenuScene
         for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
         {
             if (SceneManager.GetSceneByBuildIndex(i).isLoaded)
             {
+                if(SceneManager.GetSceneByBuildIndex(i).name == "MenuScene")
+                {
+                    Debug.Log("Don't unload MenuScene");
+                    continue;
+                }
                 Debug.Log("Unload Scene " + i);
                 SceneManager.UnloadSceneAsync(i);
             }
         }
+
+        if(!SceneManager.GetSceneByName("MenuScene").isLoaded)
+        {
+            SceneManager.LoadSceneAsync("MenuScene");
+        }
+
     }
 
     // Update is called once per frame
@@ -49,8 +60,6 @@ public class GameMangerScript : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
-
-        // maybe add an "press any key to start" (?)
     }
 
 

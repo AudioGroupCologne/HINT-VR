@@ -9,6 +9,11 @@ public class TrainingGameSettings : MonoBehaviour
     [SerializeField] LevelObjectManager levelObjects;
     [SerializeField] GameObject settings;
 
+    private void Start()
+    {
+        settings.gameObject.SetActive(true);
+    }
+
     public void TrainingGameSettingBtnHanlder(int index)
     {
         levelObjects.setLevelObjectPositions(index);
