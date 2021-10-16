@@ -78,7 +78,13 @@ public partial class TrainingGameManager : MonoBehaviour
             Debug.Log("Repeat sentence...");
             return;
         }
- 
+
+        if(!practiceMode)
+        {
+            DataStorage.TrainingGame_SNR[roundsPlayed] = audioManager.getLevel(audioManager.talkerVol);
+            Debug.Log("Stored SNR: " + DataStorage.TrainingGame_SNR[roundsPlayed] + " round: " + roundsPlayed);
+        }
+        
         int randGroup = Random.Range(0, 3);
         string[] words;
         Sprite[] icons;
@@ -121,7 +127,6 @@ public partial class TrainingGameManager : MonoBehaviour
         }
 
         DataStorage.TrainingGame_Hits++;
-        DataStorage.TrainingGame_SNR[roundsPlayed] = audioManager.getLevel(audioManager.talkerVol);
 
         // decrease SNR by reducing talker volume by -1.5 dB
         audioManager.changeLevel(audioManager.talkerVol, -1.5f);        
@@ -160,7 +165,6 @@ public partial class TrainingGameManager : MonoBehaviour
         }
 
         DataStorage.TrainingGame_Misses++;
-        DataStorage.TrainingGame_SNR[roundsPlayed] = audioManager.getLevel(audioManager.talkerVol);
 
         // improve SNR by increasing talker volume by 2.5 dB
         audioManager.changeLevel(audioManager.talkerVol, 2.5f);
@@ -245,6 +249,7 @@ public partial class TrainingGameManager : MonoBehaviour
             else
             {
                 roundsPlayed++;
+                DataStorage.TrainingGame_Total++;
                 Debug.Log("Round: " + roundsPlayed + " of " + gameLength);
             }
             

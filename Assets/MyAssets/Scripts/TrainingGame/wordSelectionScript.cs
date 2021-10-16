@@ -69,8 +69,6 @@ public class wordSelectionScript : MonoBehaviour
         if (selectionMade)
             return;
 
-        DataStorage.TrainingGame_Total++;
-
         if (correctBtn == btn_ix)
         {
             masterScript.OnHit();
