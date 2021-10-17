@@ -11,7 +11,7 @@ public class TrainingGameSettings : MonoBehaviour
 
     private void Start()
     {
-        settings.gameObject.SetActive(true);
+        settings.SetActive(true);
     }
 
     public void TrainingGameSettingBtnHanlder(int index)

@@ -139,6 +139,7 @@ public partial class TrainingGameManager : MonoBehaviour
         {
             Debug.Log("Player Reward achieved!");
             audioManager.playOnReward();
+            DataStorage.TrainingGame_Rewards++;
             rewards.showReward(currentRewards++);
             // reset rewardCount
             rewardCount = 0;

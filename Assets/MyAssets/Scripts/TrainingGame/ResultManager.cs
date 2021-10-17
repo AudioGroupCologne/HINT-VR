@@ -11,6 +11,7 @@ public class ResultManager : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI misses;
     [SerializeField] TMPro.TextMeshProUGUI total;
     [SerializeField] TMPro.TextMeshProUGUI snr;
+    [SerializeField] TMPro.TextMeshProUGUI rewards;
 
 
     // Start is called before the first frame update
@@ -31,6 +32,12 @@ public class ResultManager : MonoBehaviour
         DataStorage.TrainingGame_Total = 0;
         DataStorage.TrainingGame_Hits = 0;
         DataStorage.TrainingGame_Misses = 0;
+        DataStorage.TrainingGame_Rewards = 0;
+        for (int i = 0; i < DataStorage.TrainingGame_Total; i++)
+        {
+            DataStorage.TrainingGame_SNR[i] = 0.0f;
+        }
+
         showResults();
     }
 
@@ -42,8 +49,9 @@ public class ResultManager : MonoBehaviour
         hits.text = "Hits: " + DataStorage.TrainingGame_Hits.ToString();
         misses.text = "Misses: " + DataStorage.TrainingGame_Misses.ToString();
         total.text = "Total: " + DataStorage.TrainingGame_Total.ToString();
+        rewards.text = "Rewards: " + DataStorage.TrainingGame_Rewards.ToString();
 
-        for(int i = 0; i < DataStorage.TrainingGame_SNR.Length; i++)
+        for (int i = 0; i < DataStorage.TrainingGame_Total; i++)
         {
             snr_avg += DataStorage.TrainingGame_SNR[i];
         }
