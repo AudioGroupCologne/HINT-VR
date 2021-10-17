@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     public GameObject Main;
     public GameObject Settings;
     public GameObject Results;
+    public GameObject UserSelection;
 
 
     // Start is called before the first frame update
@@ -47,6 +48,7 @@ public class MenuManager : MonoBehaviour
         // Set all other screens inactive
         Settings.SetActive(false);
         Results.SetActive(false);
+        UserSelection.SetActive(false);
 
     }
 
@@ -55,6 +57,12 @@ public class MenuManager : MonoBehaviour
         // Set ResutlsScreen active
         Results.SetActive(true);
         // SetMainMenu inactive
+        Main.SetActive(false);
+    }
+
+    public void ShowUserSelection()
+    {
+        UserSelection.SetActive(true);
         Main.SetActive(false);
     }
 }

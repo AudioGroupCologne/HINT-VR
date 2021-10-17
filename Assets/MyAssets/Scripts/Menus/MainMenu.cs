@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
+    [SerializeField] MenuManager menu;
+
     public void StartDemoGame ()
     {
         SceneManager.LoadSceneAsync("DemoScene");
@@ -15,7 +17,10 @@ public class MainMenu : MonoBehaviour
 
     public void StartTrainingGame()
     {
-        SceneManager.LoadSceneAsync("TrainingScene");
+        // go to userseleciton
+        menu.ShowUserSelection();
+
+        //SceneManager.LoadSceneAsync("TrainingScene");
     }
 
     public void QuitApp ()
