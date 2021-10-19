@@ -7,16 +7,23 @@ using UnityEngine.SceneManagement;
 public class UserSelection : MonoBehaviour
 {
 
-    [SerializeField] UserManagement userManager;
+    UserManagement userManager;
     [SerializeField] TMPro.TMP_InputField username;
     [SerializeField] TMPro.TMP_InputField password;
 
+    private void Start()
+    {
+        userManager = UserManagement.usrMng;
+        if(userManager == null)
+        {
+            Debug.LogError("userManager not found");
+        }
+    }
+
     public void OnSubmit()
     {
-        Debug.Log("Username: " + username.text);
-        Debug.Log("Password: " + password.text);
 
-        if(userManager.CheckPassword(username.text, password.text))
+        if(userManager.UserLogin(username.text, password.text))
         {
             OnLoginSuccess();
             return;

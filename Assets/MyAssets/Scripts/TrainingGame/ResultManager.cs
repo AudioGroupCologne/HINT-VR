@@ -61,5 +61,8 @@ public class ResultManager : MonoBehaviour
 
         snr.text = "SNR: " + snr_avg.ToString("#.00");
         Debug.Log(snr.text);
+
+        UserManagement.usrMng.AddUserResults(snr_avg, DataStorage.TrainingGame_Rewards);
+        Debug.Log("Write results to user Manager");
     }
 }

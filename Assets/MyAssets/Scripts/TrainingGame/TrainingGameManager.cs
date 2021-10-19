@@ -180,7 +180,6 @@ public partial class TrainingGameManager : MonoBehaviour
 
     public void OnUnsure()
     {
-        //audioManager.playOnUnsure();
 
         if (practiceMode)
         {
@@ -204,11 +203,6 @@ public partial class TrainingGameManager : MonoBehaviour
             Debug.Log("Unsure: repeat sentence with increase SNR");
             repeatSentence = true;
 
-            // either give a small delay or wait for another user input...
-            
-            // this requires a CoRoutine...
-            //yield WaitForSeconds(1);
-
             // start playing again
             audioManager.startPlaying();
 
@@ -219,8 +213,6 @@ public partial class TrainingGameManager : MonoBehaviour
         {
             repeatSentence = false;
         }
-
-        //OnContinue();
 
     }
 
@@ -264,8 +256,5 @@ public partial class TrainingGameManager : MonoBehaviour
         audioManager.startPlaying();
 
     }
-
-
-
 
 }
