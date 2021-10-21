@@ -16,10 +16,11 @@ public partial class TrainingGameManager : MonoBehaviour
     [SerializeField] int rewardHits;
 
     // other components (maybe refactor this a bit)
-    [SerializeField] wordSelectionScript wordSel;
-    [SerializeField] ResultManager results;
-    [SerializeField] RewardManager rewards;
     [SerializeField] TrainingGameSettings settings;
+    [SerializeField] wordSelectionScript wordSel;
+    [SerializeField] ResultManager resultManager;
+    [SerializeField] RewardManager rewardManager;
+    
 
 
     private Sentence sent;
@@ -31,15 +32,20 @@ public partial class TrainingGameManager : MonoBehaviour
     private bool practiceMode = true;
     // keep track of practice rounds/sentences
     private int practiceRounds = 0;
+
+
     // keep track of rounds/sentences played within current session
     private int roundsPlayed = 0;
     // keep track of current consecutive hits
     private int rewardCount = 0;
-    // keep track of rewards achieved within current session
-    private int currentRewards = 0;
     // repeat last sentence if 'unsure' was selected (do this only once!)
     private bool repeatSentence = false;
 
+    // SNR ratio stored for each round (average over whole session will be used)
+    private float[] SNR_values;
+    private int hits = 0;
+    private int misses = 0;
+    private int rewards = 0;
 
 
     // Start is called before the first frame update
@@ -54,6 +60,8 @@ public partial class TrainingGameManager : MonoBehaviour
         // create sentence object
         sent = new Sentence(lisnData.getSentenceLen());
 
+        SNR_values = new float[gameLength];
+
         // make sure to disable UI at load.
         wordSel.showWordSelectionUI(false);
 
@@ -65,7 +73,21 @@ public partial class TrainingGameManager : MonoBehaviour
     private void OnSessionDone()
     {
         Debug.Log("Training session done!");
-        results.showResults();
+
+        // calculate average SNR of the session
+        float average_SNR = 0;
+        for (int i = 0; i < roundsPlayed; i++)
+        {
+            average_SNR += SNR_values[i];
+        }
+        average_SNR /= roundsPlayed;
+        // set current session data onto result UI
+        resultManager.setTrainingGameResults(average_SNR, rewards, hits, misses, roundsPlayed);
+        // show result UI
+        resultManager.showResults();
+        // store session data in userManagement
+        UserManagement.selfReference.AddUserResults(average_SNR, rewards);
+
     }
 
 
@@ -83,19 +105,18 @@ public partial class TrainingGameManager : MonoBehaviour
             return;
         }
 
-        if(!practiceMode)
-        {
-            DataStorage.TrainingGame_SNR[roundsPlayed] = audioManager.getLevel(audioManager.talkerVol);
-            Debug.Log("Stored SNR: " + DataStorage.TrainingGame_SNR[roundsPlayed] + " round: " + roundsPlayed);
-        }
-        
         int randGroup = Random.Range(0, 3);
         string[] words;
         Sprite[] icons;
 
+
+        if (!practiceMode)
+        {
+            SNR_values[roundsPlayed-1] = audioManager.getLevel(audioManager.talkerVol);
+            Debug.Log("Stored SNR: " + SNR_values[roundsPlayed-1] + " round: " + roundsPlayed);
+        }
+
         lisnData.getSelectableWords(randGroup, 4, sent.getSelectableWordIndex(randGroup), out words, out icons);
-
-
         Debug.Log("Correct word: " + sent.getSelectableWordString(randGroup));
 
         // show wordSelection UI elements
@@ -130,17 +151,20 @@ public partial class TrainingGameManager : MonoBehaviour
             return;
         }
 
-        DataStorage.TrainingGame_Hits++;
-
         // decrease SNR by reducing talker volume by -1.5 dB
-        audioManager.changeLevel(audioManager.talkerVol, -1.5f);        
+        audioManager.changeLevel(audioManager.talkerVol, -1.5f);
 
-        if (++rewardCount >= rewardHits)
+        hits++;
+        rewardCount++;
+        Debug.Log("Hit: " + hits + " Streak: " + rewardCount);
+
+            
+
+        if (rewardCount >= rewardHits)
         {
             Debug.Log("Player Reward achieved!");
             audioManager.playOnReward();
-            DataStorage.TrainingGame_Rewards++;
-            rewards.showReward(currentRewards++);
+            rewardManager.showReward(rewards++);
             // reset rewardCount
             rewardCount = 0;
         }
@@ -169,7 +193,7 @@ public partial class TrainingGameManager : MonoBehaviour
             return;
         }
 
-        DataStorage.TrainingGame_Misses++;
+        misses++;
 
         // improve SNR by increasing talker volume by 2.5 dB
         audioManager.changeLevel(audioManager.talkerVol, 2.5f);
@@ -246,7 +270,6 @@ public partial class TrainingGameManager : MonoBehaviour
             else
             {
                 roundsPlayed++;
-                DataStorage.TrainingGame_Total++;
                 Debug.Log("Round: " + roundsPlayed + " of " + gameLength);
             }
             

@@ -8,6 +8,9 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] MenuManager menu;
 
+
+    // this class holds all options to be performed from the main menu
+    // each public function is a 'OnClick' button callback
     public void StartDemoGame ()
     {
         SceneManager.LoadSceneAsync("DemoScene");
@@ -17,10 +20,43 @@ public class MainMenu : MonoBehaviour
 
     public void StartTrainingGame()
     {
-        // go to userseleciton
-        menu.ShowUserSelection();
+        if(!UserManagement.selfReference.LoggedIn())
+        {
+            menu.ShowUserSelection();
+            menu.UserSelection.GetComponent<UserSelection>().loginCallback = LoadTrainingGame;
+        }
+    }
 
-        //SceneManager.LoadSceneAsync("TrainingScene");
+    public void LoadTrainingGame(bool success)
+    {
+        Debug.Log("Enter callback");
+        if(success)
+        {
+            SceneManager.LoadSceneAsync("TrainingScene");
+            return;
+        }
+
+        Debug.Log("Login Failed. Dont load Scene...");
+    }
+
+    public void ShowPlayerProgress()
+    {
+        if(!UserManagement.selfReference.LoggedIn())
+        {
+            menu.ShowUserSelection();
+            menu.UserSelection.GetComponent<UserSelection>().loginCallback = LoadPlayerProgress;
+        }
+    }
+
+    public void LoadPlayerProgress(bool success)
+    {
+        if (success)
+        {
+            menu.ShowResults();
+            return;
+        }
+
+        Debug.Log("Login Failed. Dont show player progress...");
     }
 
     public void QuitApp ()

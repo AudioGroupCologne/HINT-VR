@@ -88,8 +88,6 @@ public class wordSelectionScript : MonoBehaviour
         if (selectionMade)
             return;
 
-        DataStorage.TrainingGame_Unsure++;
-
         masterScript.OnUnsure();
 
         // show 'continue' button

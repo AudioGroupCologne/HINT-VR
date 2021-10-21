@@ -54,6 +54,7 @@ public class MenuManager : MonoBehaviour
 
     public void ShowResults()
     {
+        UserSelection.SetActive(false);
         // Set ResutlsScreen active
         Results.SetActive(true);
         // SetMainMenu inactive

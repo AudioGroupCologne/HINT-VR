@@ -7,13 +7,16 @@ using UnityEngine.SceneManagement;
 public class UserSelection : MonoBehaviour
 {
 
+    public delegate void OnLoginEvent(bool success);
+    public OnLoginEvent loginCallback = delegate { Debug.Log("No Login delegate set!"); };
+
     UserManagement userManager;
     [SerializeField] TMPro.TMP_InputField username;
     [SerializeField] TMPro.TMP_InputField password;
 
     private void Start()
     {
-        userManager = UserManagement.usrMng;
+        userManager = UserManagement.selfReference;
         if(userManager == null)
         {
             Debug.LogError("userManager not found");
@@ -46,15 +49,17 @@ public class UserSelection : MonoBehaviour
     }
 
 
-    // Move these via Interface to a different file/class (?)
+    // Delegate wrapper
     void OnLoginSuccess()
     {
-        SceneManager.LoadSceneAsync("TrainingScene");
+        Debug.Log("Login successful");
+        loginCallback(true);
     }
 
     void OnLoginFailed()
     {
-        Debug.Log("Login failed. Submit data again or create a new user");
+        Debug.Log("Login failed");
+        loginCallback(false);
     }
 
 }

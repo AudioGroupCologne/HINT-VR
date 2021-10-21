@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class UserManagement : MonoBehaviour
 {
 
-    public static UserManagement usrMng;
+    public static UserManagement selfReference;
     private int activeUser = -1;
     // move this into an individual class/file
     // add userResults to this entry:
@@ -23,6 +23,7 @@ public class UserManagement : MonoBehaviour
 
         int gamesPlayed;
         int rewardsGained;
+        float totalSNR;
         // rewards gained at a particular game
         List<int> rewards;
         // average SNR of a particular game
@@ -67,7 +68,7 @@ public class UserManagement : MonoBehaviour
 
     private void Start()
     {
-        usrMng = this;
+        selfReference = this;
         users = new List<userEntry>();
         if(loadUserListFromFile())
         {
@@ -180,6 +181,14 @@ public class UserManagement : MonoBehaviour
         return false;
     }
 
+    public bool LoggedIn()
+    {
+        if (activeUser < 0)
+            return false;
+
+        return true;
+    }
+       
 
     public bool CheckPassword(string username, string pw)
     {
