@@ -25,7 +25,7 @@ public class LiSN_database
 
 
     // basic constructor, determining the list the shall be used
-    public LiSN_database(int list)
+    public LiSN_database(int list, int voice)
     {
         words = new List<AudioClip[]>();
         icons = new List<Sprite[]>();
@@ -36,11 +36,11 @@ public class LiSN_database
         {
             case 1:
                 length = 5;
-                load_resources_list1();
+                load_resources_list1(voice);
                 break;
             // other lists have yet to be included
             default:
-                load_resources_list1();
+                load_resources_list1(voice);
                 break;
 
         }
@@ -276,13 +276,13 @@ public class LiSN_database
         o_selectableGroups = selectableGroup;
     }
 
-    private void load_resources_list1()
+    private void load_resources_list1(int voiceSelection)
     {
 
         selectableGroup[0] = 0; // subject
         selectableGroup[1] = 2; // count
         selectableGroup[2] = 4; // obeject
-        load_audioclips();
+        load_audioclips(voiceSelection);
         load_icons();
         create_words();
     }
@@ -308,7 +308,7 @@ public class LiSN_database
 
     }
 
-    private void load_audioclips()
+    private void load_audioclips(int voiceSelection)
     {
         words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/subjects"));
         words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/verbs"));

@@ -19,6 +19,11 @@ public class TrainingGameSettings : MonoBehaviour
         Debug.Log("Add option to load mutliple voices...");
 
         SetupSelection(UserManagement.selfReference.getUserGroup());
+
+        settings.SetActive(false);
+
+        master.OnStart(1, index);
+
     }
 
     void SetupSelection(int index)
@@ -42,8 +47,7 @@ public class TrainingGameSettings : MonoBehaviour
         }
 
         levelObjects.showLevelObjects(true);
-        settings.SetActive(false);
-        master.OnStart();
+        
     }
 
     public void TrainingGameSettingsQuitBtn()

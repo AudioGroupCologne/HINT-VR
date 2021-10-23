@@ -51,6 +51,7 @@ public partial class TrainingGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         Debug.Log("Start Training Game");
         audioManager = GetComponent<AudioManager>();
 
@@ -67,7 +68,40 @@ public partial class TrainingGameManager : MonoBehaviour
 
         // show settings menu
         settings.gameObject.SetActive(true);
+        */
+    }
 
+    public void OnStart(int list, int voice)
+    {
+
+        Debug.Log("Start Training Game");
+        audioManager = GetComponent<AudioManager>();
+
+        // create LiSN_database object
+        lisnData = new LiSN_database(list, voice);
+
+        // create sentence object
+        sent = new Sentence(lisnData.getSentenceLen());
+
+        SNR_values = new float[gameLength];
+
+        // make sure to disable UI at load.
+        wordSel.showWordSelectionUI(false);
+
+        // show settings menu
+        settings.gameObject.SetActive(true);
+
+
+
+
+        // generate a new sentence
+        sent.createSentence(lisnData);
+
+        // move new sentence audio to audioManager
+        audioManager.setTargetSentence(sent.audio);
+
+        // start playing again
+        audioManager.startPlaying();
     }
 
     private void OnSessionDone()
@@ -124,17 +158,7 @@ public partial class TrainingGameManager : MonoBehaviour
 
     }
 
-    public void OnStart()
-    {
-        // generate a new sentence
-        sent.createSentence(lisnData);
 
-        // move new sentence audio to audioManager
-        audioManager.setTargetSentence(sent.audio);
-
-        // start playing again
-        audioManager.startPlaying();
-    }
 
     /// Word Selection UI Callbacks
     public void OnHit()
