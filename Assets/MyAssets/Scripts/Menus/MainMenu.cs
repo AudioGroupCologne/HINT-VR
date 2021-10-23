@@ -24,7 +24,14 @@ public class MainMenu : MonoBehaviour
         {
             menu.ShowUserSelection();
             menu.UserSelection.GetComponent<UserSelection>().loginCallback = LoadTrainingGame;
+            // userCreation shall always use the same callback action as login
+            menu.UserCreation.GetComponent<UserCreation>().createCallback = LoadTrainingGame;
         }
+        else
+        {
+            LoadTrainingGame(true);
+        }
+
     }
 
     public void LoadTrainingGame(bool success)
@@ -45,6 +52,11 @@ public class MainMenu : MonoBehaviour
         {
             menu.ShowUserSelection();
             menu.UserSelection.GetComponent<UserSelection>().loginCallback = LoadPlayerProgress;
+            menu.UserCreation.GetComponent<UserCreation>().createCallback = LoadPlayerProgress;
+        }
+        else
+        {
+            LoadPlayerProgress(true);
         }
     }
 
@@ -52,7 +64,7 @@ public class MainMenu : MonoBehaviour
     {
         if (success)
         {
-            menu.ShowResults();
+            menu.ShowProgess();
             return;
         }
 

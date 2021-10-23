@@ -17,22 +17,28 @@ public class TrainingGameSettings : MonoBehaviour
     public void VoiceSelection(int index)
     {
         Debug.Log("Add option to load mutliple voices...");
-        // highlight selection that was made...
-        // make other buttons not selectable before voice was chosen?
+
+        SetupSelection(UserManagement.selfReference.getUserGroup());
     }
 
-    public void SetupSelection(int index)
+    void SetupSelection(int index)
     {
+
         switch(index)
         {
-            case 0:
-                // Setup A: same direction (control group)
-                levelObjects.setLevelObjectPositions(index);
-                break;
             case 1:
-                // Setup B: different direction
+                // Setup A: same direction (control group)
+                Debug.Log("Same direction (control) [1]");
                 levelObjects.setLevelObjectPositions(index);
                 break;
+            case 2:
+                // Setup B: different direction
+                Debug.Log("Differenct directions [2]");
+                levelObjects.setLevelObjectPositions(index);
+                break;
+            default:
+                Debug.LogError("Invalid setupOption: " + index);
+                return;
         }
 
         levelObjects.showLevelObjects(true);

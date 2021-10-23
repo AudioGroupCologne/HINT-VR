@@ -7,8 +7,9 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject Main;
     public GameObject Settings;
-    public GameObject Results;
+    public GameObject Progress;
     public GameObject UserSelection;
+    public GameObject UserCreation;
 
 
     // Start is called before the first frame update
@@ -45,18 +46,21 @@ public class MenuManager : MonoBehaviour
     {
         // Set MainMenu active
         Main.SetActive(true);
+
         // Set all other screens inactive
         Settings.SetActive(false);
-        Results.SetActive(false);
+        Progress.SetActive(false);
         UserSelection.SetActive(false);
+        UserCreation.SetActive(false);
 
     }
 
-    public void ShowResults()
+    public void ShowProgess()
     {
         UserSelection.SetActive(false);
+        UserCreation.SetActive(false);
         // Set ResutlsScreen active
-        Results.SetActive(true);
+        Progress.SetActive(true);
         // SetMainMenu inactive
         Main.SetActive(false);
     }
@@ -64,6 +68,13 @@ public class MenuManager : MonoBehaviour
     public void ShowUserSelection()
     {
         UserSelection.SetActive(true);
+        Main.SetActive(false);
+    }
+
+    public void ShowUserCreation()
+    {
+        UserSelection.SetActive(false);
+        UserCreation.SetActive(true);
         Main.SetActive(false);
     }
 }

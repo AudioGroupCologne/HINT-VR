@@ -86,7 +86,7 @@ public partial class TrainingGameManager : MonoBehaviour
         // show result UI
         resultManager.showResults();
         // store session data in userManagement
-        UserManagement.selfReference.AddUserResults(average_SNR, rewards);
+        UserManagement.selfReference.addUserResults(average_SNR, rewards);
 
     }
 
@@ -156,7 +156,7 @@ public partial class TrainingGameManager : MonoBehaviour
 
         hits++;
         rewardCount++;
-        Debug.Log("Hit: " + hits + " Streak: " + rewardCount);
+        Debug.Log("Hits: " + hits + " Streak: " + rewardCount);
 
             
 

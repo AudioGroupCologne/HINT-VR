@@ -9,172 +9,86 @@ public class UserManagement : MonoBehaviour
 
     public static UserManagement selfReference;
     private int activeUser = -1;
-    // move this into an individual class/file
-    // add userResults to this entry:
-    // totalGames
-    // snr[totalGames]
-    // totalRewards
-    // rewards[totalGames]
-    [System.Serializable]
-    class userEntry
-    {
-        string name;
-        string password;
 
-        int gamesPlayed;
-        int rewardsGained;
-        float totalSNR;
-        // rewards gained at a particular game
-        List<int> rewards;
-        // average SNR of a particular game
-        List<float> avg_snr;
-
-        public userEntry(string uname, string upw)
-        {
-            name = uname;
-            password = upw;
-        }
-
-        public string getUserName()
-        {
-            return name;
-        }
-
-        public bool checkPassword(string pw)
-        {
-            if (password == pw)
-                return true;
-
-            return false;
-        }
-
-        public void addResult(float snr, int reward)
-        {
-            avg_snr.Add(snr);
-            rewards.Add(reward);
-            gamesPlayed++;
-            rewardsGained += reward;
-        }
-
-    }
-
-    // UserSelection could have this component, bc. this is (for now) more or less the only instance where the userselection matters
-    // But TrainingGame would also need user to know where/how to store data
-    // Also the "Progress" screen needs to know the user.
-    // Simply set currentUserID in __app (?)
-    // This could be / together with some settings etc. the only data needed across multiple scenes/classes...
-
-    List<userEntry> users;
+    private List<userData> userList;
 
     private void Start()
     {
         selfReference = this;
-        users = new List<userEntry>();
-        if(loadUserListFromFile())
+
+        userList = new List<userData>();
+
+        if(jsonFiles.userDataAvalable())
         {
-            Debug.Log(users.Count + " users loaded...");
+            Debug.Log("Load userList from JSON");
+            jsonFiles.loadUserData(out userList);
+            Debug.Log(userList.Count + " users loaded");
         }
         
     }
 
-    private void saveUserListToFile()
-    {
-        FileStream file;
-        BinaryFormatter bf = new BinaryFormatter();
-        string targetPath = Application.persistentDataPath + "/users.dat";
-
-        if (File.Exists(targetPath))
-        {
-            file = File.OpenWrite(targetPath);
-        }
-        else 
-        {
-            file = File.Create(targetPath);
-        }
-
-        bf.Serialize(file, users);
-        file.Close();
-        
-        
-    }
-
-    private bool loadUserListFromFile()
-    {
-
-        FileStream file;
-        BinaryFormatter bf = new BinaryFormatter();
-        string targetPath = Application.persistentDataPath + "/users.dat";
-
-        if (File.Exists(targetPath))
-        {
-            file = File.OpenRead(targetPath);
-        }
-        else
-        {
-            Debug.Log("File not found");
-            return false;
-        }
-
-        users = (List<userEntry>)bf.Deserialize(file);
-        file.Close();
-        return true;
-    }
-
-    public bool AddUser(string name, string password)
+    public bool addUser(string name, string password, int group)
     {
         // check if username is already in use
-        if (DoesUserNameExist(name))
+        if (doesUserNameExist(name))
             return false;
 
-        userEntry newUser = new userEntry(name, password);
-        users.Add(newUser);
-        saveUserListToFile();
+        // construct new userData object
+        userData newUser = new userData(name, password, group);
+        // add newUser to userLstr
+        userList.Add(newUser);
+        // save updated userList to JSON
+        jsonFiles.saveUserData(userList);
 
-        activeUser = GetUserID(name);
+        // set new user as 'activeUser'
+        activeUser = getUserID(name);
 
         return true;
     }
 
-    public void AddUserResults(float snr, int rewards)
+    public void addUserResults(float snr, int rewards)
     {
         if (activeUser < 0)
         {
             Debug.LogError("No user selected!");
             return;
         }
-            
-        users[activeUser].addResult(snr, rewards);
-        Debug.Log("Set SNR and rewards to user: " + users[activeUser].getUserName());
+
+        userList[activeUser].addResult(snr, rewards);
+        Debug.Log("Set SNR and rewards to user: " + userList[activeUser].getUserName());
+
+        // save updated userList to JSON
+        jsonFiles.saveUserData(userList);
 
     }
 
-    bool DoesUserNameExist(string username)
+    bool doesUserNameExist(string username)
     {
-        for (int i = 0; i < users.Count; i++)
+        for (int i = 0; i < userList.Count; i++)
         {
-            if (name == users[i].getUserName())
+            if (name == userList[i].getUserName())
                 return true;
         }
 
         return false;
     }
 
-    int GetUserID(string username)
+    int getUserID(string username)
     {
-        for (int i = 0; i < users.Count; i++)
+        for (int i = 0; i < userList.Count; i++)
         {
-            if (username == users[i].getUserName())
+            if (username == userList[i].getUserName())
                 return i;
         }
 
         return -1;
     }
 
-    public bool UserLogin(string uname, string pw)
+    public bool userLogin(string uname, string pw)
     {
-        if(CheckPassword(uname, pw))
+        if(checkPassword(uname, pw))
         {
-            activeUser = GetUserID(uname);
+            activeUser = getUserID(uname);
             return true;
         }
 
@@ -188,12 +102,35 @@ public class UserManagement : MonoBehaviour
 
         return true;
     }
+
+    public int getUserGroup()
+    {
+        if (!LoggedIn())
+            return -1;
+
+        return userList[activeUser].getGroup();
+    }
+
+    public void getUserData(out string username, out int gamesPlayed, out int rewards, out float averageSNR, out List<float> snrValues)
+    {
+        if (!LoggedIn())
+        {
+            username = null;
+            gamesPlayed = 0;
+            rewards = 0;
+            averageSNR = 0.0f;
+            snrValues = null;
+            return;
+        }
+
+        userList[activeUser].getData(out username, out gamesPlayed, out rewards, out averageSNR, out snrValues);
+    }
        
 
-    public bool CheckPassword(string username, string pw)
+    public bool checkPassword(string username, string pw)
     {
 
-        int userID = GetUserID(username);
+        int userID = getUserID(username);
 
         if (userID == -1)
         {
@@ -201,6 +138,6 @@ public class UserManagement : MonoBehaviour
             return false;
         }
 
-        return users[userID].checkPassword(pw);
+        return userList[userID].checkPassword(pw);
     }
 }

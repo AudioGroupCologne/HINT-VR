@@ -26,7 +26,7 @@ public class UserSelection : MonoBehaviour
     public void OnSubmit()
     {
 
-        if(userManager.UserLogin(username.text, password.text))
+        if(userManager.userLogin(username.text, password.text))
         {
             OnLoginSuccess();
             return;
@@ -38,16 +38,8 @@ public class UserSelection : MonoBehaviour
 
     public void OnCreateUser()
     {
-        // check if username already exists
-        if(!userManager.AddUser(username.text, password.text))
-        {
-            Debug.LogError("Username already exists");
-            return;
-        }
 
-        OnLoginSuccess();
     }
-
 
     // Delegate wrapper
     void OnLoginSuccess()
