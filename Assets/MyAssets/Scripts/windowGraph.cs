@@ -7,15 +7,23 @@ public class windowGraph : MonoBehaviour
 {
 
     [SerializeField]  private Sprite circleSprite;
+    private RectTransform labelTemplateX;
+    private RectTransform labelTemplateY;
     private RectTransform graphContainer;
+
+    private List<GameObject> gameObjectList;
 
     void Awake()
     {
         graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
+        labelTemplateX = graphContainer.Find("labelTemplateX").GetComponent<RectTransform>();
+        labelTemplateY = graphContainer.Find("labelTemplateY").GetComponent<RectTransform>();
+        gameObjectList = new List<GameObject>();
+    }
 
-        //createCircle(new Vector2(200, 200));
-        List<int> valueList = new List<int>() { 5, 98, 56, 45, 30, 22, 17, 15, 13, 17, 25};
-        ShowGraph(valueList);
+    public void SetProgressGraph(List<float> snrValues)
+    {
+        ShowGraph(snrValues);
     }
 
     private GameObject createCircle(Vector2 anchoredPosition)
@@ -32,29 +40,89 @@ public class windowGraph : MonoBehaviour
         return gameObject;
     }
 
-    private void ShowGraph(List <int> valueList)
+    private void ShowGraph(List <float> valueList)
     {
-        float xSize = 50f;
-        float yMax = 100f;
-        float xOffset = xSize;
+        float xSize;
+        float yMin;
+        float yMax;
+        float xOffset;
         float graphHeight = graphContainer.sizeDelta.y;
+
+        foreach (GameObject gameObject in gameObjectList)
+        {
+            Destroy(gameObject);
+        }
+        gameObjectList.Clear();
+
+        // get bounds of x-axis
+        xSize = graphContainer.sizeDelta.x / (valueList.Count + 1);
+        xOffset = xSize;
+
+        // get bounds of y-axis
+        yMin = valueList[0];
+        yMax = valueList[0];
+
+        for (int i = 0; i < valueList.Count; i++)
+        {
+            if(valueList[i] < yMin)
+            {
+                yMin = valueList[i];
+            }
+            if (valueList[i] > yMax)
+            {
+                yMax = valueList[i];
+            }
+        }
+
+        // give a bit of overhead
+        yMax = yMax + (yMax - yMin) * 0.2f;
+        yMin = yMin - (yMax - yMin) * 0.2f;
 
         GameObject lastCircle = null;
 
-        for(int i= 0; i < valueList.Count; i++)
+        for(int i = 0; i < valueList.Count; i++)
         {
             float xPosition = (i * xSize) + xOffset;
-            float yPosition = (valueList[i] / yMax) * graphHeight;
+            float yPosition = Mathf.Abs((valueList[i] - yMin) / ((yMax - yMin)) * graphHeight);
+
+            Debug.Log("yPos " + i + " is " + yPosition + " from " + valueList[i]);
+
             GameObject currentCircle = createCircle(new Vector2(xPosition, yPosition));
+            gameObjectList.Add(currentCircle);
             if(lastCircle != null)
             {
-                CreateDotConnection(lastCircle.gameObject.GetComponent<RectTransform>().anchoredPosition, currentCircle.gameObject.GetComponent<RectTransform>().anchoredPosition);
+                GameObject connection = CreateDotConnection(lastCircle.gameObject.GetComponent<RectTransform>().anchoredPosition, currentCircle.gameObject.GetComponent<RectTransform>().anchoredPosition);
+                gameObjectList.Add(connection);
             }
             lastCircle = currentCircle;
+
+
+            RectTransform labelX = Instantiate(labelTemplateX);
+            labelX.SetParent(graphContainer);
+            labelX.gameObject.SetActive(true);
+            labelX.anchoredPosition = new Vector2(xPosition, -20f);
+            labelX.GetComponent<Text>().text = i.ToString();
+            gameObjectList.Add(labelX.gameObject);
+
         }
+
+        int separatorCount = 10;
+        for(int i = 0; i <= separatorCount; i++)
+        {
+            RectTransform labelY = Instantiate(labelTemplateY);
+            labelY.SetParent(graphContainer, false);
+            labelY.gameObject.SetActive(true);
+            
+            float normalizedValue = i * 1f / separatorCount;
+
+            labelY.anchoredPosition = new Vector2(-7f, normalizedValue * graphHeight);
+            labelY.GetComponent<Text>().text = Mathf.RoundToInt(yMin + (normalizedValue * (yMax - yMin))).ToString();
+            gameObjectList.Add(labelY.gameObject);
+        }
+
     }
 
-    private void CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)
+    private GameObject CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)
     {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
         gameObject.transform.SetParent(graphContainer, false);
@@ -70,19 +138,11 @@ public class windowGraph : MonoBehaviour
         rectTransform.sizeDelta = new Vector2(distance, 3f);
         rectTransform.anchoredPosition = dotPositionA + direction * distance * 0.5f;
 
-        float angle = (Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI);//Angle(direction);
+        float angle = (Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI);
         rectTransform.localEulerAngles = new Vector3(0, 0, angle);
+
+        return gameObject;
     }
 
-    private static float Angle(Vector2 p_vector2)
-    {
-        if (p_vector2.x < 0)
-        {
-            return 360 - (Mathf.Atan2(p_vector2.x, p_vector2.y) * Mathf.Rad2Deg * -1);
-        }
-        else
-        {
-            return Mathf.Atan2(p_vector2.x, p_vector2.y) * Mathf.Rad2Deg;
-        }
-    }
+
 }
