@@ -8,6 +8,9 @@ public class menuScroll : MonoBehaviour
     Button[] btns;
     int selectedBtn = 0;
 
+    // ToDo: make this work with Oculus Controls
+    // ToDo: write somethings similar for word selection
+
     // Start is called before the first frame update
     void Start()
     {
