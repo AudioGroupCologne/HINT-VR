@@ -11,12 +11,6 @@ public class MainMenu : MonoBehaviour
 
     // this class holds all options to be performed from the main menu
     // each public function is a 'OnClick' button callback
-    public void StartDemoGame ()
-    {
-        SceneManager.LoadSceneAsync("DemoScene");
-        Debug.Log("lock cursor");
-        Cursor.lockState = CursorLockMode.Locked;
-    }
 
     public void StartTrainingGame()
     {
