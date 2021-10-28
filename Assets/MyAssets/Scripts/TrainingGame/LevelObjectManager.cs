@@ -9,20 +9,21 @@ public class LevelObjectManager : MonoBehaviour
 
     [SerializeField] GameObject TalkerObj;
     [SerializeField] GameObject DistractorObj;
+    [SerializeField] GameObject generalUI;
 
     [SerializeField] Vector3 talkerPos;
     [SerializeField] Vector3 distractorPos1;
     [SerializeField] Vector3 distractorPos2;
     [SerializeField] Vector3 distractorPos3;
 
-
-    [SerializeField] TrainingGameManager master;
+    [SerializeField] Vector3 relativeUIPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         // hide LevelObjects by default
         showLevelObjects(false);
+        generalUI.transform.position = PlayerCamera.transform.position + relativeUIPosition;
     }
 
     public void setLevelObjectPositions(int selector)

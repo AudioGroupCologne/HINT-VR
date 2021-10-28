@@ -15,6 +15,7 @@ public class menuScroll : MonoBehaviour
     void Start()
     {
         btns = gameObject.GetComponentsInChildren<Button>();
+        Debug.Log("Button count: " + btns.Length);
         btns[selectedBtn].Select();
     }
 
@@ -41,6 +42,7 @@ public class menuScroll : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Debug.Log("Invoke button " + selectedBtn);
             btns[selectedBtn].onClick.Invoke();
         }
     }

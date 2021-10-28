@@ -81,6 +81,7 @@ public class wordSelectionScript : MonoBehaviour
         selectionMade = true;
         show_results_on_buttons();
         continueBtn.gameObject.SetActive(true);
+        continueBtn.Select();
     }
 
     public void UnsureButtonHanlder()
