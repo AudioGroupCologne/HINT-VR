@@ -16,6 +16,7 @@ public class wordSelectionScript : MonoBehaviour
     [SerializeField] GameObject wordSelectionUI;
     [SerializeField] Image[] btnIcons;
     [SerializeField] Button[] wordBtns;
+    [SerializeField] Button unsureBtn;
     [SerializeField] Button continueBtn;
     [SerializeField] TrainingGameManager masterScript;
 
@@ -29,6 +30,11 @@ public class wordSelectionScript : MonoBehaviour
     private int correctBtn;
     // an option or 'unsure' was selected by the user
     private bool selectionMade;
+
+    private void Start()
+    {
+        wordSelectionUI.SetActive(false);
+    }
 
     public void startWordSelection(string[] randomWords, Sprite[] randomIcons)
     {
@@ -79,7 +85,15 @@ public class wordSelectionScript : MonoBehaviour
         }
 
         selectionMade = true;
-        show_results_on_buttons();
+
+        // maybe add a 1-2s delay with a CoRoutine here?
+
+        //show_results_on_buttons();
+        for(int i = 0; i < wordBtns.Length; i++)
+        {
+            wordBtns[i].gameObject.SetActive(false);
+        }
+        unsureBtn.gameObject.SetActive(false);
         continueBtn.gameObject.SetActive(true);
         continueBtn.Select();
     }
@@ -96,6 +110,7 @@ public class wordSelectionScript : MonoBehaviour
 
     }
 
+    /*
     private void show_results_on_buttons()
     {
         for (int i = 0; i < 4; i++)
@@ -111,7 +126,7 @@ public class wordSelectionScript : MonoBehaviour
 
         }
     }
-
+    */
 
     public void reset_buttons_colors()
     {
@@ -125,6 +140,11 @@ public class wordSelectionScript : MonoBehaviour
     {
         continueBtn.gameObject.SetActive(false);
         wordSelectionUI.SetActive(show);
+        for (int i = 0; i < wordBtns.Length; i++)
+        {
+            wordBtns[i].gameObject.SetActive(true);
+        }
+        unsureBtn.gameObject.SetActive(true);
     }
 
 }
