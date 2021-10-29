@@ -21,7 +21,7 @@ public class wordSelectionScript : MonoBehaviour
     [SerializeField] TrainingGameManager masterScript;
 
     [SerializeField] int wordOptions = 4;
-    [SerializeField] int nextDelay = 1;
+    [SerializeField] float nextDelay = 1.5f;
 
     // words to be written onto UI
     private string[] words;
@@ -44,7 +44,10 @@ public class wordSelectionScript : MonoBehaviour
         words = randomWords;
         icons = randomIcons;
         mapWordsToUI();
+
+        Debug.Log("Select first button");
         wordBtns[0].Select();
+        wordBtns[0].OnSelect(null);
     }
 
     void mapWordsToUI()
@@ -106,35 +109,7 @@ public class wordSelectionScript : MonoBehaviour
 
     }
 
-    /*
-    private void show_results_on_buttons()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            if (i == correctBtn)
-            {
-                wordBtns[i].GetComponent<Image>().color = Color.green;
-            }
-            else
-            {
-                wordBtns[i].GetComponent<Image>().color = Color.red;
-            }
-
-        }
-    }
-    */
-
-    /*
-    public void reset_buttons_colors()
-    {
-        for(int i = 0; i < 4; i++)
-        {
-            wordBtns[i].GetComponent<Image>().color = Color.white;
-        }
-    }
-    */
-
-    private IEnumerator showNextWait(int delay)
+    private IEnumerator showNextWait(float delay)
     {
         yield return new WaitForSeconds(delay);
         showNextButton();
