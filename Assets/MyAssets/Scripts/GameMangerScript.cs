@@ -14,7 +14,7 @@ public class GameMangerScript : MonoBehaviour
         {
             if (SceneManager.GetSceneByBuildIndex(i).isLoaded)
             {
-                if(SceneManager.GetSceneByBuildIndex(i).name == "MenuScene")
+                if(SceneManager.GetSceneByBuildIndex(i).name == "VRMenuScene")
                 {
                     Debug.Log("Don't unload MenuScene");
                     continue;
@@ -24,9 +24,9 @@ public class GameMangerScript : MonoBehaviour
             }
         }
 
-        if(!SceneManager.GetSceneByName("MenuScene").isLoaded)
+        if(!SceneManager.GetSceneByName("VRMenuScene").isLoaded)
         {
-            SceneManager.LoadSceneAsync("MenuScene");
+            SceneManager.LoadSceneAsync("VRMenuScene");
         }
 
     }
@@ -38,8 +38,8 @@ public class GameMangerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             // don't reload MenuScene when already active
-            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MenuScene")) {
-                SceneManager.LoadSceneAsync("MenuScene");
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("VRMenuScene")) {
+                SceneManager.LoadSceneAsync("VRMenuScene");
             }
         }
     }

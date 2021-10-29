@@ -20,8 +20,6 @@ public partial class TrainingGameManager : MonoBehaviour
     [SerializeField] wordSelectionScript wordSel;
     [SerializeField] ResultManager resultManager;
     [SerializeField] RewardManager rewardManager;
-    
-
 
     private Sentence sent;
     private LiSN_database lisnData;
@@ -46,30 +44,6 @@ public partial class TrainingGameManager : MonoBehaviour
     private int hits = 0;
     private int misses = 0;
     private int rewards = 0;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        /*
-        Debug.Log("Start Training Game");
-        audioManager = GetComponent<AudioManager>();
-
-        // create LiSN_database object
-        lisnData = new LiSN_database(1);
-
-        // create sentence object
-        sent = new Sentence(lisnData.getSentenceLen());
-
-        SNR_values = new float[gameLength];
-
-        // make sure to disable UI at load.
-        wordSel.showWordSelectionUI(false);
-
-        // show settings menu
-        settings.gameObject.SetActive(true);
-        */
-    }
 
     public void OnStart(int list, int voice)
     {

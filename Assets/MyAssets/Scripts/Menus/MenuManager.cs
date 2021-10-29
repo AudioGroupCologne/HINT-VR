@@ -11,11 +11,10 @@ public class MenuManager : MonoBehaviour
     public GameObject UserSelection;
     public GameObject UserCreation;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        ShowMainMenu();  
+        ShowMainMenu();
     }
 
     // Update is called once per frame
@@ -27,6 +26,11 @@ public class MenuManager : MonoBehaviour
             {
                 ShowMainMenu();
             }
+        }
+
+        if(OVRInput.GetDown(OVRInput.Button.One))
+        {
+            Debug.Log("One down");
         }
     }
 

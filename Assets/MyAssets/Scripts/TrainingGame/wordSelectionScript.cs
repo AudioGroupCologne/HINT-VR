@@ -45,9 +45,11 @@ public class wordSelectionScript : MonoBehaviour
         icons = randomIcons;
         mapWordsToUI();
 
+        /*
         Debug.Log("Select first button");
         wordBtns[0].Select();
         wordBtns[0].OnSelect(null);
+        */
     }
 
     void mapWordsToUI()

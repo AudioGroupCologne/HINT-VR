@@ -52,7 +52,7 @@ public class TrainingGameSettings : MonoBehaviour
 
     public void TrainingGameSettingsQuitBtn()
     {
-        SceneManager.LoadSceneAsync("MenuScene");
+        SceneManager.LoadSceneAsync("VRMenuScene");
     }
 
 

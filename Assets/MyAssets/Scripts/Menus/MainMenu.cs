@@ -54,6 +54,11 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void ShowSettings()
+    {
+        menu.ShowSettingsMenu();
+    }
+
     public void LoadPlayerProgress(bool success)
     {
         if (success)

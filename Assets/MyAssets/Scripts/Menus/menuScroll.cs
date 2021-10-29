@@ -7,9 +7,9 @@ public class menuScroll : MonoBehaviour
 {
     Button[] btns;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        Debug.Log("Select first button");
         btns = gameObject.GetComponentsInChildren<Button>();
         StartCoroutine(initialSelection());
     }
