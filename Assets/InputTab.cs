@@ -23,16 +23,25 @@ public class InputTab : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            if (++selectedField > 1)
+            if (++selectedField > 2)
             {
                 selectedField = 0;
             }
             SelectField();
         }
 
-        if(selectedField == 1 && Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetKeyDown(KeyCode.Return))
         {
-            submit.onClick.Invoke();
+            switch(selectedField)
+            {
+                case 0:
+                    break;
+                case 1:
+                case 2:
+                    submit.onClick.Invoke();
+                    break;
+            }
+            
         }
 
     }
@@ -46,6 +55,9 @@ public class InputTab : MonoBehaviour
                 break;
             case 1:
                 password.Select();
+                break;
+            case 2:
+                submit.Select();
                 break;
         }
     }
