@@ -10,6 +10,7 @@ public class InputTab : MonoBehaviour
     [SerializeField] TMP_InputField username; // 0
     [SerializeField] TMP_InputField password; // 1
     [SerializeField] Button submit;
+    [SerializeField] Button createUser;
     private int selectedField = 0;
 
     private void Awake()
@@ -23,7 +24,7 @@ public class InputTab : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            if (++selectedField > 2)
+            if (++selectedField > 3)
             {
                 selectedField = 0;
             }
@@ -39,6 +40,9 @@ public class InputTab : MonoBehaviour
                 case 1:
                 case 2:
                     submit.onClick.Invoke();
+                    break;
+                case 3:
+                    createUser.onClick.Invoke();
                     break;
             }
             
@@ -58,6 +62,9 @@ public class InputTab : MonoBehaviour
                 break;
             case 2:
                 submit.Select();
+                break;
+            case 3:
+                createUser.Select();
                 break;
         }
     }
