@@ -26,7 +26,7 @@ public class ShowUserProgress : MonoBehaviour
 
         TopText.text = "Progress  (" + _username + ")";
         gamesPlayed.text = "Games played: " + _roundsPlayed.ToString();
-        averageSNR.text = "Average SNR: " + _average_snr.ToString("#.00");
+        averageSNR.text = "Average SNR: " + _average_snr.ToString("#.00") + " dB";
         rewards.text = "Rewards: " + _rewards.ToString();
 
         GetComponentInChildren<windowGraph>().SetProgressGraph(_snrValues);
