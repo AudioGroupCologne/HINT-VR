@@ -92,10 +92,9 @@ public class UserManagement : MonoBehaviour
     {
         for (int i = 0; i < userList.Count; i++)
         {
-            if (name == userList[i].getUserName())
+            if (username == userList[i].getUserName())
                 return true;
         }
-
         return false;
     }
 
