@@ -9,6 +9,8 @@ public class SettingsManager : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Slider volume;
     [SerializeField] AudioMixer mixer;
+    [SerializeField] AudioSource playerSource;
+    [SerializeField] AudioClip onVolumeChanged;
 
     private void Start()
     {
@@ -17,8 +19,16 @@ public class SettingsManager : MonoBehaviour
 
     public void SilderChanged()
     {
+        // this is a bit unresponsive
+        if (playerSource.isPlaying)
+            return;
+
         Debug.Log("Volume Slider: " + volume.value);
         mixer.SetFloat("MasterVol", volume.value);
+        playerSource.PlayOneShot(onVolumeChanged);
+
+        // store changes in userData
+        UserManagement.selfReference.changeUserVolume(volume.value);
     }
 
 

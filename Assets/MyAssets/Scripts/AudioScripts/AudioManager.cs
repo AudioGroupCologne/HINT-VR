@@ -40,13 +40,14 @@ public class AudioManager : MonoBehaviour
 
     public int talkerVol = 0;
     public int distracterVol = 1;
-    private string[] channels = { "TalkerVol", "DistVol" };
+    private string[] channels = {"TalkerVol", "DistVol", "MasterVol" };
 
     private bool distracterPaused = false;
 
     private void Start()
     {
         master = GetComponent<TrainingGameManager>();
+        changeLevel(2, UserManagement.selfReference.getUserVolume());
     }
 
 
@@ -173,7 +174,7 @@ public class AudioManager : MonoBehaviour
     {
         yield return new WaitForSeconds(audioCycle);
         Debug.Log("StopPlaying");
-        distracter.Pause(); //Stop();
+        distracter.Pause();
         distracterPaused = true;
 
         // notify master about end of iteration

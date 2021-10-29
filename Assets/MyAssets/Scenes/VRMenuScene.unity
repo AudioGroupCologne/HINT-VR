@@ -1992,7 +1992,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1428333996}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -3353,6 +3353,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume: {fileID: 1341601058}
   mixer: {fileID: 24100000, guid: 71a768edbca59a5489350524443deff8, type: 2}
+  playerSource: {fileID: 8303898656669004741}
+  onVolumeChanged: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
 --- !u!1 &1282990146
 GameObject:
   m_ObjectHideFlags: 0
@@ -3796,7 +3798,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1428333996}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -5731,6 +5733,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1688071022604481160, guid: 92ed3b8ffe986b4459518078ee5b2389,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 71a768edbca59a5489350524443deff8,
+        type: 2}
     - target: {fileID: 8303898657411862438, guid: 92ed3b8ffe986b4459518078ee5b2389,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5798,3 +5806,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92ed3b8ffe986b4459518078ee5b2389, type: 3}
+--- !u!82 &8303898656669004741 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1688071022604481160, guid: 92ed3b8ffe986b4459518078ee5b2389,
+    type: 3}
+  m_PrefabInstance: {fileID: 8303898656669004740}
+  m_PrefabAsset: {fileID: 0}

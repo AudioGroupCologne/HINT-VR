@@ -65,9 +65,6 @@ public partial class TrainingGameManager : MonoBehaviour
         // show settings menu
         settings.gameObject.SetActive(true);
 
-
-
-
         // generate a new sentence
         sent.createSentence(lisnData);
 

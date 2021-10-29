@@ -7732,7 +7732,7 @@ MonoBehaviour:
   continueBtn: {fileID: 1761833870}
   masterScript: {fileID: 1551984276}
   wordOptions: 4
-  nextDelay: 2
+  nextDelay: 1.5
 --- !u!4 &621046634
 Transform:
   m_ObjectHideFlags: 0
@@ -7747,6 +7747,12 @@ Transform:
   m_Father: {fileID: 1551984277}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &629000501 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8303898657653653688, guid: 92ed3b8ffe986b4459518078ee5b2389,
+    type: 3}
+  m_PrefabInstance: {fileID: 360873932933436369}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &637343226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16473,7 +16479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 71a768edbca59a5489350524443deff8, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 360873932933436370}
   talker: {fileID: 509973301}
   distracter: {fileID: 18533764}
   startDelay: 2
@@ -20104,7 +20110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6940115fe5e648341a7eb14e1a418c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerCamera: {fileID: 0}
+  PlayerCamera: {fileID: 629000501}
   TalkerObj: {fileID: 976071746}
   DistractorObj: {fileID: 964807457}
   generalUI: {fileID: 180784699}
@@ -23657,6 +23663,17 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 881937887}
+    - target: {fileID: 1688071022604481160, guid: 92ed3b8ffe986b4459518078ee5b2389,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 71a768edbca59a5489350524443deff8,
+        type: 2}
+    - target: {fileID: 7179089855643162161, guid: 92ed3b8ffe986b4459518078ee5b2389,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8303898657653653689, guid: 92ed3b8ffe986b4459518078ee5b2389,
         type: 3}
       propertyPath: m_RootOrder
@@ -23670,7 +23687,7 @@ PrefabInstance:
     - target: {fileID: 8303898657653653689, guid: 92ed3b8ffe986b4459518078ee5b2389,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8303898657653653689, guid: 92ed3b8ffe986b4459518078ee5b2389,
         type: 3}
@@ -23679,3 +23696,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92ed3b8ffe986b4459518078ee5b2389, type: 3}
+--- !u!82 &360873932933436370 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1688071022604481160, guid: 92ed3b8ffe986b4459518078ee5b2389,
+    type: 3}
+  m_PrefabInstance: {fileID: 360873932933436369}
+  m_PrefabAsset: {fileID: 0}
