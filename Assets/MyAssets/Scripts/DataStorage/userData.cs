@@ -12,6 +12,7 @@ public class userData
     // player settings
     // this can either be 1 (A) [no binaural difference] or 2 (B) [90 degree offset between target and distractor]
     [JsonProperty] int group = 0;
+    [JsonProperty] float masterVolume = 0;
 
     // player progress
     [JsonProperty] int gamesPlayed = 0;
@@ -64,6 +65,16 @@ public class userData
     public int getGroup()
     {
         return group;
+    }
+
+    public void setMasterVolume(float _vol)
+    {
+        masterVolume = _vol;
+    }
+
+    public float getMasterVolume()
+    {
+        return masterVolume;
     }
 
     public void addResult(float snr, int reward)
