@@ -55,22 +55,21 @@ public class MenuManager : MonoBehaviour
     {
         UserSelection.SetActive(false);
         UserCreation.SetActive(false);
-        // Set ResutlsScreen active
-        Progress.SetActive(true);
-        // SetMainMenu inactive
         Main.SetActive(false);
+
+        Progress.SetActive(true);
+        
     }
 
     public void ShowUserSelection()
     {
-        UserSelection.SetActive(true);
         Main.SetActive(false);
+        UserSelection.SetActive(true);
     }
 
     public void ShowUserCreation()
     {
         UserSelection.SetActive(false);
-        UserCreation.SetActive(true);
-        Main.SetActive(false);
+        UserCreation.SetActive(true);   
     }
 }
