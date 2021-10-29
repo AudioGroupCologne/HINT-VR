@@ -23,13 +23,9 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(Settings.activeSelf == true)
+            if(!Main.activeSelf)
             {
-                Debug.Log("Go back from settings to Main");
-                // Set MainMenu active
-                Main.SetActive(true);
-                // Set SettingsMenu inactive
-                Settings.SetActive(false);
+                ShowMainMenu();
             }
         }
     }
