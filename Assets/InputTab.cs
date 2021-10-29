@@ -9,14 +9,24 @@ public class InputTab : MonoBehaviour
 
     [SerializeField] TMP_InputField username; // 0
     [SerializeField] TMP_InputField password; // 1
-    [SerializeField] Button submit;
-    [SerializeField] Button createUser;
+    [SerializeField] Button onPasswordEnteredBtn;
+    [SerializeField] Button[] additionalBtns;
     private int selectedField = 0;
+    private int staticOptions = 2;
+    private int options;
 
     private void Awake()
     {
         username.Select();
         selectedField = 0;
+        options = staticOptions + additionalBtns.Length;
+        Debug.Log("InputTab: Options: " + options);
+        if(onPasswordEnteredBtn != null)
+        {
+            options++;
+            staticOptions++;
+            Debug.Log("InputTab: onPassword Btn set! " + options);
+        }
     }
 
     // Update is called once per frame
@@ -24,7 +34,7 @@ public class InputTab : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            if (++selectedField > 3)
+            if (++selectedField >= options)
             {
                 selectedField = 0;
             }
@@ -39,11 +49,15 @@ public class InputTab : MonoBehaviour
                     break;
                 case 1:
                 case 2:
-                    submit.onClick.Invoke();
+                    if(onPasswordEnteredBtn != null)
+                    {
+                        onPasswordEnteredBtn.onClick.Invoke();
+                    }
                     break;
-                case 3:
-                    createUser.onClick.Invoke();
+                default:
+                    additionalBtns[selectedField - staticOptions].onClick.Invoke();
                     break;
+
             }
             
         }
@@ -61,10 +75,21 @@ public class InputTab : MonoBehaviour
                 password.Select();
                 break;
             case 2:
-                submit.Select();
+                if(onPasswordEnteredBtn != null)
+                {
+                    onPasswordEnteredBtn.Select();
+                }
+                else
+                {
+                    additionalBtns[selectedField - staticOptions].Select();
+                }
                 break;
-            case 3:
-                createUser.Select();
+            default:
+                if(additionalBtns[selectedField - staticOptions] != null)
+                {
+                    additionalBtns[selectedField - staticOptions].Select();
+                }
+                
                 break;
         }
     }

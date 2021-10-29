@@ -9,6 +9,7 @@ public class UserLogin : MonoBehaviour
     [SerializeField] GameObject creation;
     void Start()
     {
+        creation.SetActive(false);
         login.SetActive(true);
         login.GetComponent<UserSelection>().loginCallback = loadMainMenu;
         creation.GetComponentInChildren<UserCreation>().GetComponent<UserCreation>().createCallback = loadMainMenu;
