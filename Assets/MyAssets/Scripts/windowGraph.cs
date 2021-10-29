@@ -85,8 +85,6 @@ public class windowGraph : MonoBehaviour
             float xPosition = (i * xSize) + xOffset;
             float yPosition = Mathf.Abs((valueList[i] - yMin) / ((yMax - yMin)) * graphHeight);
 
-            Debug.Log("yPos " + i + " is " + yPosition + " from " + valueList[i]);
-
             GameObject currentCircle = createCircle(new Vector2(xPosition, yPosition));
             gameObjectList.Add(currentCircle);
             if(lastCircle != null)
@@ -98,7 +96,7 @@ public class windowGraph : MonoBehaviour
 
 
             RectTransform labelX = Instantiate(labelTemplateX);
-            labelX.SetParent(graphContainer);
+            labelX.SetParent(graphContainer, false);
             labelX.gameObject.SetActive(true);
             labelX.anchoredPosition = new Vector2(xPosition, -20f);
             labelX.GetComponent<Text>().text = i.ToString();
