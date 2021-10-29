@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1032,6 +1032,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151194721}
   m_CullTransparentMesh: 1
+--- !u!114 &1201341846 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 1915591894}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1274234715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1808,6 +1820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 464489537}
   password: {fileID: 1274234716}
+  userCreation: {fileID: 2050680716}
 --- !u!114 &1580289242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1823,6 +1836,7 @@ MonoBehaviour:
   username: {fileID: 464489537}
   password: {fileID: 1274234716}
   submit: {fileID: 1842308048}
+  createUser: {fileID: 1201341846}
 --- !u!1001 &1607923854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2180,7 +2194,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1580289241}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2199,7 +2213,7 @@ PrefabInstance:
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowUserCreation
+      value: OnCreateUser
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -2209,7 +2223,7 @@ PrefabInstance:
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuManager, Assembly-CSharp
+      value: UserSelection, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -2562,6 +2576,7 @@ MonoBehaviour:
   username: {fileID: 683521563}
   password: {fileID: 1149829984}
   submit: {fileID: 500770318}
+  createUser: {fileID: 0}
 --- !u!1 &2106438407
 GameObject:
   m_ObjectHideFlags: 0

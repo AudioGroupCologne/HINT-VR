@@ -13,6 +13,7 @@ public class UserSelection : MonoBehaviour
     UserManagement userManager;
     [SerializeField] TMPro.TMP_InputField username;
     [SerializeField] TMPro.TMP_InputField password;
+    [SerializeField] GameObject userCreation;
 
     private void Start()
     {
@@ -38,7 +39,8 @@ public class UserSelection : MonoBehaviour
 
     public void OnCreateUser()
     {
-
+        userCreation.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     // Delegate wrapper
