@@ -62,6 +62,32 @@ public class UserManagement : MonoBehaviour
 
     }
 
+    public void changeUserVolume(float masterVol)
+    {
+        if (activeUser < 0)
+        {
+            Debug.LogError("No user selected!");
+            return;
+        }
+
+        userList[activeUser].setMasterVolume(masterVol);
+        Debug.Log("Set volume of user: " + userList[activeUser].getUserName());
+
+        // save updated userList to JSON
+        jsonFiles.saveUserData(userList);
+    }
+
+    public float getUserVolume()
+    {
+        if (activeUser < 0)
+        {
+            Debug.LogError("No user selected!");
+            return 0.0f;
+        }
+
+        return userList[activeUser].getMasterVolume();
+    }
+
     bool doesUserNameExist(string username)
     {
         for (int i = 0; i < userList.Count; i++)
