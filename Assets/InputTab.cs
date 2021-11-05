@@ -17,8 +17,6 @@ public class InputTab : MonoBehaviour
 
     private void Awake()
     {
-        username.Select();
-        selectedField = 0;
         options = staticOptions + additionalBtns.Length;
         Debug.Log("InputTab: Options: " + options);
         if(onPasswordEnteredBtn != null)
@@ -27,6 +25,9 @@ public class InputTab : MonoBehaviour
             staticOptions++;
             Debug.Log("InputTab: onPassword Btn set! " + options);
         }
+        username.Select();
+        Debug.Log("Select username field");
+        selectedField = 0;
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class InputTab : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
+            Debug.Log("Tab between fields");
             if (++selectedField >= options)
             {
                 selectedField = 0;
@@ -55,7 +57,10 @@ public class InputTab : MonoBehaviour
                     }
                     break;
                 default:
-                    additionalBtns[selectedField - staticOptions].onClick.Invoke();
+                    if(additionalBtns[selectedField - staticOptions] != null)
+                    {
+                        additionalBtns[selectedField - staticOptions].onClick.Invoke();
+                    }                   
                     break;
 
             }
