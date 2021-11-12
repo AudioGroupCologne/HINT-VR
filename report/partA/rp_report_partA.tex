@@ -1,0 +1,340 @@
+\documentclass[a4paper,11pt]{article}%Schriftgröße
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage[german, english]{babel}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage[format=plain,
+	justification=RaggedRight,
+	singlelinecheck=false,
+	font={small},labelsep=space]{caption}
+\usepackage{xcolor}	
+\usepackage[a4paper]{geometry}
+	\geometry{left=3.5cm,right=2.5cm,top=2.4cm,bottom=2cm}%Seitenränder
+	\usepackage[onehalfspacing]{setspace}%Zeilenabstand
+	\renewcommand{\\}{\vspace*{0.5\baselineskip} \newline}
+\renewcommand*\MakeUppercase[1]{#1}	
+\usepackage{fancyhdr}
+	\pagestyle{fancy}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+	\fancyhead[R]{\footnotesize{\thepage}}
+	\fancyhead[L]{\footnotesize{\leftmark}}
+	\fancyfoot{}
+\usepackage[colorlinks,
+	pdfpagelabels,
+	pdfstartview = FitH,
+	bookmarks = true,
+	bookmarksnumbered = true,
+	linkcolor = black,
+	urlcolor = black,
+	plainpages = false,
+	hypertexnames = false,
+	citecolor = black] {hyperref}
+
+
+
+\usepackage[bottom]{footmisc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\usepackage{float}
+\usepackage{xurl}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{acronym}
+\usepackage{nameref}
+\usepackage{setspace}
+\usepackage{threeparttable}
+\usepackage{tabularx}
+\usepackage{color,soul}
+\usepackage{multirow}
+\usepackage{subfigure}
+
+\usepackage{stackengine}
+\usepackage{trfsigns}
+\usepackage{bytefield}
+%\usepackage[table]{xcolor}
+\usepackage{colortbl}
+
+\newcommand{\colorbitbox}[3]{%
+         \rlap{\bitbox{#2}{\color{#1}\rule{\width}{\height}}}%
+         \bitbox{#2}{#3}}
+\definecolor{lightcyan}{rgb}{0.84,1,1}
+
+% settings
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\graphicspath{
+    {Bilder/}
+}
+
+% Fußnote linksbündig
+\usepackage{scrextend}
+\deffootnote[2em]{2em}{1em}{\textsuperscript{\thefootnotemark}\,}
+
+\usepackage{listings}
+\usepackage{units}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+\graphicspath{
+    {pictures/}
+}
+
+\begin{document}
+\pagenumbering{gobble}
+\pagenumbering{roman}
+
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE TH Köln \par}
+	\vspace{1cm}
+	{\scshape\Large project report\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Realizing spatial listening tests in Virtual Reality using Unity\par}
+	\vspace{2cm}
+	{\Large\itshape Alexander Müller \par}
+	\vfill
+	Supervised by\par
+	M.Sc. Melissa Andrea Ramirez Caro \par \&  \par Prof. Dr. Christoph Pörschmann
+	\vfill
+
+% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+\section{Introduction}
+\label{sec:introduction}
+Spatial hearing describes the ability to uses binaural clues to localize the source of a noise. This ability relies upon three main features: the difference in level (1) and phase (2) of a signal between the left and the right ear and the spectral coloring of a known noise, caused by the geometry of the listeners head and upper body.
+\newline
+\newline
+Apart from obvious advantages of spatial hearing, like localizing the origin of a given sound (e.g. a nearby car), it also provides the listener an option the filter noises based on their direction. This is particularly important in noisy environments. This situation is most commonly described in the \dq cocktail-party-effect\dq{}. A listener can use the information of position of a given audio source to reduce noises from other directions within their perception.
+
+
+%Apart from the obvious advantages of spatial hearing, like quickly identifying incoming dangers (e.g. a car), it provides an additional aid to the way we perceive sound. In noisy environments, binaural clues can be used to focus on a particular sound source. This situation is most commonly described in the \dq cocktail-party-effect\dq{}. A listener can use the information of position of a given audio source to reduce noises from other directions within their perception.
+\newline
+\newline
+Since noisy environments with a lot of similar audio signals (in particular speech) are very common within a lot of every day occasions, the advantage of using binaural clues has a great importance. In most cases the lack of this ability is found on people with hearing disabilities. Even if hearing aids have advanced throughout the last decades, they still can't offer their users the same subtle binaural clues as a person with intact hearing abilities.
+\newline
+\newline
+But apart from physiological issues causing problems with spatial hearing it has been found, that children with perfect hearing still might not be able to correctly interpret binaural clues. This effect is described as \ac{SPD}. Since the actual hearing abilities of the affected children is not impaired, they are - in contrast to persons with typical hearing inabilities - provided with all the information required to localize a given sound source. Based on this knowledge the idea was formed, to treat SPD by \textit{training} affected children and therefore teaching them, how to correctly interpret binaural clues.
+\newline
+\newline
+Within the \textit{Development and Evaluation of the LiSN $\&$ Learn Auditory Training Software for Deficit-Specific Remediation of Binaural Processing Deficits in Children: Preliminary Findings} \cite{LISN-A} paper by Sharon Cameron and Harvey Dillon it is described how such a training process could look like and already gave some hints \footnote{The original experiments have only been done with a small sample size. Within the conclusion of the paper the requirement of a clinical trial is mentioned, to validate the efficacy of the training process.}.
+\newline
+\newline
+Building upon this approach the training concept described by Cameron and Dillon shall be transferred into a virtual reality application. This shall bring the additional advantage of combining auditory and visual clues and also allows to further extend the process. 
+
+
+\section{Motivation}
+\label{sec:motivation}
+Realizing this listening test as a Unity-based VR application offers several advantages. The first one being the open nature of this project. Since only free-to-use assets have been included, both the compiled application and the source files can be made publicly available. Combined with simple setup required to perform the listening experiments, this will hopefully allow a variety of interested groups to perform these tests to collect further data and offer affected children access to work on the condition.
+\newline
+\newline
+Furthermore the Unity framework in conjunction with the prefabs and scripts, that have been created for this project, it would be relatively easy to extend upon the original training concept. For example the addition of multiple distracters within a given scene could very easily be realized.
+\newline
+\newline
+Apart from the previously mentioned aspects the usage VR peripherals for this project also offers a lot more possiblilites. Some of them will be discussed in \Ref{sec:outlook}. But especially adaptive 3D audio in combination with head tracking would allow for a much more realistic scenario. Also the novelty of the VR headset itself will most likely already spark a lot of interest in the participants in comparison to a regular learning/training game.
+ 
+
+\section{Fundamentals}
+\label{sec:fundamentals}
+Before discussing the approach towards this project, some basic principles of modern day audio processing shall be explained.
+
+% How do humans locazia audio signals
+\subsection{Auditive localization}
+The human ability of locating audio sources is based upon two main principles. The first being the perception of the time and level differences between an acoustic event on the left and right ear. The different time points at which the signal is perceived at the two ears, translates to a different phase at which the audio wave is registered. On the other side the level differences mainly derive from the shadowing caused by the head. Both of these effects are not frequency independent, for lower tones the localization via phase differences works better, while at higher frequencies the level variations offer a better indication.
+\newline
+\newline
+The second way of locating a sound source is based upon the spectral differences that occur through the different paths a sound wave can take around the listeners head and upper body. This effect is strongly influenced by the shape of the outer ear, but also the general geometry of the head makes a difference. Basically the head and the ear can be described as directional filters. This kind of localization is mostly based on experiences. The listener can learn to associate the spectral differences in a known noise to the location from which the noise is originated (e.g. by looking for the sound source).
+
+%The actual localization from these perceived spectral differences is based upon previous experience. This means that well known sounds are generally easier to locate, since the listener has more reference data on how a certain kind of noise sounds coming from different directions. However this type of localization is usually more vulnerable towards mistakes. A well known example for this is the so called \dq Front Back Confusion\dq{}.
+
+
+% How can spatial information be recorded, recreated and simulated
+\subsection{Auralization}
+\label{Sec:auralization}
+Auralization describes the process of recreating not only a given audio signal but also the spatial information. With correct auralization a recorded scene (e.g. a classical concert in a concert hall) can be rec
+
+This requires advanced recording processes to capture the spatial information of a scene (e.g. a concert hall)
+
+Auralization describes the process of adding spatial features to audio signals. The simplest example for this would be the move from mono to stereo audio. However, since these initial steps the options of simulating and re-creating spatial features in digital audio processing have advanced quite a lot. This can be easily seen in many consumer electronic products such as AV-Receivers, Soundbars or Headphones supporting 5.1, 7.1  etc. or in particular VR peripherals coming with their own 3D audio frameworks for developers.
+\newline
+\newline
+The basic principle remains more or less the same for all these products. Within a given \textit{listening space} the original auditory environment shall be recreated.
+
+
+% why is the type of distracter signal important (noise vs speech (same or differnt voice)
+\subsection{Hearing perception (energy and similarity)}
+
+
+
+% what are the theoretical foundations of learning to localize sound sources by binaural clues?
+\subsection{Training abilities}
+
+
+
+% 1. Recreating an existing test
+% 2. Advantages of OpenSource/free license
+% 3. Extensions, adaptions (flexibility as development guideline) 
+
+\section{Approach}
+\label{sec:approach}
+
+
+
+Before evaluating possible improvements of virtual reality support in listening tests, it has to be made sure that there are no major other influences alternating the results of this test. Therefore the first iteration of the new test environment will be developed as close as possible to the original LiSN software. This allows to compare test and training results from this test environment with the data already available from previous experiments. If the new software allows to recreate similar test results, it can be assumed that the unenivitable differnce don't affect the results in a too drastic manner. Afterwards the data from these initial tests can also be used to validate whether VR exclusive features like head tracking add further beneftis to the training process.
+\newline
+\newline
+%Since the leading question of this project is the possible improvements of the original training game described in \cite{LiSN}, the development will be strongly orientated on the known parameters.
+
+
+
+\paragraph{Development tools} As already mentioned, the major part of the development will be done in Unity with the addition of Visual Studio as IDE. The other major tool is the Oculus VR SDK, which will be used for audio spatialization and of course rendering the visuals to be properly displayed on the given VR peripherals.
+
+
+
+\subsection{Unity overview}
+\label{sec:unity}
+Unity is a development framework, which is mainly used as a engine for video games. However due to the requirements to realism in modern video games, the amount of audio processing included, is already pretty elaborate. In conjunction with the large user base and support by hardware manufacturer (e.g. Oculus), Unity offers a great starting point for this project.
+
+
+\subsection{Orientation on LiSN project}
+
+
+\subsection{Audio assets}
+\label{sec:audio_assets}
+As basis for this project the word lists given in the appendix of the LiSN paper \cite{lins} are used. Since due to the huge variety of options, the only feasible way to construct the sentences is by assembling a sentence through seperate audio files for each word. This however comes with a problem. Simply recording single words and then playing the files one after another strongly alter the speech flow and accentuation, which would normally be present when the sentence is spoken.
+\newline
+\newline
+To handle this problem, the words won't be recorded separately but instead a subset of the possible sentences from each list will be recorded. Within this subset all words from the list are included within the recordings. Afterwards the recorded sentences will be cut into the individual words and then will be used the assemble randomly generated sequences based on these assets. This should work fine, since the structure of all sentences within any list remains the same. So the speech flow and pronunciation between the sentences should not be too larger. GET SOME REFERENCES FOR THIS ASSUMPTION!
+
+
+\subsection{Visuals}
+\label{sec:visuals}
+Since this project shall be used to perform research with children as participants the graphical presentation is of great importance. Especially since Virtual Reality (as of today) is in general a quite unfamiliar setting, it is very important to give the user a sense of space within the setting.
+
+\paragraph{Matching audio parameters to visuals} The audio scenario shall be based upon free-field sound propagation. To avoid confusion of the listener the environment presented within the VR application should represent this setting. So a closed room would not be a good option, since we inherently expect reflections and reverberation within such a setting. A better approach would be an open field, where the lack of reflexions feels more natural.
+
+\paragraph{Avatars} Another important part is the graphical representation of the audio sources. Since we have the visual component given through the VR headset, the sound should not simply come from an invisible sources, but have a origin which the user can identify through the graphics. This however includes another challenge. Of course it would be possible to create humanoid avatars with complex animations - including lip syncing - to convey that the object is indeed active and not just a passive talking rock. However this would take a huge amount of effort to pull of. Instead a different path will be used here, which is also pretty common in budget oriented game design (e.g. indie games). Through abstract avatars and simple animations/movements it is possible to convince the user, that the object is alive and active, while at the same time requiring a lot less effort to pull of.
+SOURCE...REFERENCES
+
+
+\subsection{User interface}
+\label{sec:approach_ui}
+
+
+
+\subsubsection{Audio Sources}
+Within the level both interactive and regular audio sources are implemented. All of them use 3D rendering, so that the preceived sound changes based on the position of the player to the object, emitting the sound. The advantage of adding interactive sound sources is that,...
+
+% Tatsächliche Testumgebung mit Datenerfassung
+% 4 Optionen: 0/90 deb, same/different voice
+% 4 Listen, zufällige Sätze, 4 Rate Optionen
+% Audio parameter (SNR zwischen Talker/Distractor)
+% Welche Daten werden erfasst: Totals, Hits, Misses, List, Group (?)
+% Wie/Wann wird zwischen Wordgruppen gewechselt?
+\subsection{Training-Game}
+\label{sec:training_game}
+
+
+\subsubsection{Audio files}
+Target sentences are constructed in a way that the co-articulation in between the sentences of a list is similar enough the allow randomly scrambling up sentences will maintaining a natural sounding result.
+
+\subsubsection{Game loop}
+Continuous distracter stories creating a noise with similar characteristics as the target sentences.
+\newline
+\newline
+Both the target sentences and the distracter stories shall be omitted by actual objects within the game world. This association between audio and visual representation shall create further immersion (FIND REFERENCE!).
+\newline
+\newline
+Whenever a target sentence was played, four word options will be displayed. (IMAGES OR WORDS?). When the correct result is picked, the selected option turns green and a celebratory sound is played. Otherwise if an incorrect option is selected, it is marked red and a failure sound is played. Alternatively an  \dq uncertain\dq{} option is presented.
+\newline
+\newline
+SNR: For every correct guess, the SNR is decreased by 2.5 dB. For every incorrect guess, SNR is increased by 1.5 dB. At uncertain at first the same sentence is repeated with 1.5 dB higher SNR. At a second consecutive \textit{uncertain} a new sentence will be played, with again increased SNR.
+
+
+
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+Within the scope of this project a simple binaural recreation plug-in has been implemented using the Juce framework and the FFTW library. Unfortunately the focus of this project has been moved heavily onto software development and typical coding issues, instead of digging deeper into the actual subject of audio auralization. But nonetheless the current state of the plug-in might be a good starting point for further projects, at cutting some of the very time consuming setup procedures. Of course this would require to encapsulate the currently implemented processing further into individual functions, or possibly even better an additional class. With a bit added abstraction, a generic processing chain could be implemented (similar to the one already implemented by Juce), which would allow to add and move individual auralization processes much more easily. Another working point would be to amp up the current convolution, to also feature e.g. elevation. This not too much would have to be changed in the elemental parts of the source code, this should be a rather simple addition.
+
+
+\section{Outlook}
+\label{sec:outlook}
+
+
+\newpage
+\section*{Abbreviations}
+\vspace{5mm}
+\begin{acronym}[SEVENLTH]
+ \acro{API}{Application Programming Interface}
+ \acro{DAW}{Digital Audio Workstation}
+ \acro{DSP}{Digital Signal Processing}
+ \acro{GUI}{Graphical User Interface}
+ \acro{HRTF}{Head Related Transfer Function}
+ \acro{IDE}{Integrated Development Environment}
+ \acro{LISN}{Listening in Spatialized Noise}
+ \acro{SDK}{Software Development Kit}
+ \acro{SNR}{Signal to Noise Ratio}
+ \acro{SPD}{Spatial Processing Disorder}
+ \acro{UI}{User Interface}
+\end{acronym}
+
+\newpage
+\listoffigures
+\addcontentsline{toc}{section}{List of Figures}
+%\newpage
+\renewcommand\refname{Sources}
+\addcontentsline{toc}{section}{Sources}
+\begin{thebibliography}{14}
+\bibitem{OCU_SPA}{Oculus Spatializer: \url{https://developer.oculus.com/documentation/unity/audio-osp-unity-spatialize/}}
+\bibitem{LISN-A}{Development and Evaluation of the LiSN $\&$ Learn Auditory Training Software for Deficit-Specific Remediation of Binaural Processing Deficits in Children: Preliminary Findings, Sharon Camerion, Harvey Dillon, Date: 2011}
+\bibitem{LISN-B}{Correlating performance on the Listening in Spatialized Noise – Sentences Test (LiSN-S) with the Listening in Spatialized Noise – Universal Test (LiSN-U), Kiri Mealingsa, Sharon Camerona and Harvey Dillon, Published: April 2020, Date: 2019}
+\end{thebibliography}
+
+\end{document}
