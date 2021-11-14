@@ -131,7 +131,7 @@
 	{\Large\itshape Alexander Müller \par}
 	\vfill
 	Supervised by\par
-	M.Sc. Melissa Andrea Ramirez Caro \par \&  \par Prof. Dr. Christoph Pörschmann
+	M.Sc. Melissa Andrea Ramírez Caro \par \&  \par Prof. Dr. Christoph Pörschmann
 	\vfill
 
 % Bottom of the page
@@ -145,15 +145,57 @@
 \newpage
 
 \pagenumbering{arabic}
+
+
+\section{Abstract}
+\ac{CAPD} is described by the \ac{ASHA} as a condition, which \dq may lead to or be associated with difficulties in higher order language, learning, and communication functions\dq{} without being caused by actual hearing loss or inabilities \cite{ASHA}.
+
+Based on the research done by Cameron and Dillon about \ac{SPD} and \ac{LiSN} a similar test shall be developed based on the Unity development engine with support for \ac{VR} peripherals.
+
+% What is spatial hearing (short)
+% What are the advantages of spatial hearing?
+% Obvious: (orientation, reaction to dangers)
+% Not so obvious: directive noise filtering, managing noisy environments
+% Who has problems: People with hearing inabilities
+% Exception:  spatial processing disorder
+% Problems of SPD: noisy classrooms and other social events
+% LiSN: explanaition of the original paper/study
+% What will be done here
 \section{Introduction}
 \label{sec:introduction}
-Spatial hearing describes the ability to uses binaural clues to localize the source of a noise. This ability relies upon three main features: the difference in level (1) and phase (2) of a signal between the left and the right ear and the spectral coloring of a known noise, caused by the geometry of the listeners head and upper body.
+Spatial hearing describes the ability, to localize the origin of a given sound event, by using binaural clues of the respective signal. The more obvious advantages of this capability include an aid in orientation and improved possibilities to react to events (like an approaching car), which aren't in the filed of view.
 \newline
 \newline
-Apart from obvious advantages of spatial hearing, like localizing the origin of a given sound (e.g. a nearby car), it also provides the listener an option the filter noises based on their direction. This is particularly important in noisy environments. This situation is most commonly described in the \dq cocktail-party-effect\dq{}. A listener can use the information of position of a given audio source to reduce noises from other directions within their perception.
+But apart from this, spatial hearing also allows to separate different sound sources and helps managing noisy environments. This is especially useful if the incoming audio signals are similar to each other. A popular example for this is the so called \dq cocktail-party-effect\dq{}, which basically described a situation where a listener has to distinguish between a lot of speech signals and focus on a single one in order to be able to maintain a conversation.
+\newline
+\newline
+Even though this scenario does not cause too much problems for the average person, it contains a lot of problems for everyone with hearing inabilities. Unfortunately, in many cases these impairments affect the ability of spatial hearing and therefore reducing or eliminating information that could otherwise be used to separate the different audio sources from each other. Even modern day hearing aids still can't offer the nuances required to precisely determine the location of a given sound source \cite{HA-SRT}.
+\newline
+\newline
+But, apart from physiological issues causing problems with spatial hearing, it has been found that children with normal hearing thresholds still might not be able to correctly interpret binaural clues. This effect is described as \ac{SPD}. Since the actual hearing abilities of the affected children is not impaired, they are - in contrast to persons with typical hearing inabilities - provided with all the information required to localize a given sound source. Based on this knowledge the idea was formed, to treat \ac{SPD} by \textit{training} affected children and therefore teaching them, how to correctly interpret binaural clues.
+\newline
+\newline
+Within the \textit{Development and Evaluation of the \ac{LiSN} $\&$ Learn Auditory Training Software for Deficit-Specific Remediation of Binaural Processing Deficits in Children: Preliminary Findings} \cite{LISN-A} paper by Sharon Cameron and Harvey Dillon it is described how such a training process could look like and already gave some hints \footnote{The original experiments have only been done with a small sample size. Within the conclusion of the paper the requirement of a clinical trial is mentioned, to validate the efficacy of the training process.}.
+\newline
+\newline
+Building upon this approach the training concept described by Cameron and Dillon shall be transferred into a virtual reality application. This shall bring the additional advantage of combining auditory and visual clues and also allows to further extend the process. 
 
 
-%Apart from the obvious advantages of spatial hearing, like quickly identifying incoming dangers (e.g. a car), it provides an additional aid to the way we perceive sound. In noisy environments, binaural clues can be used to focus on a particular sound source. This situation is most commonly described in the \dq cocktail-party-effect\dq{}. A listener can use the information of position of a given audio source to reduce noises from other directions within their perception.
+
+
+
+
+
+
+\newpage
+\section{Introduction B}
+\label{sec:introduction_b}
+Spatial hearing describes the ability to use clues in a given sound event to localize its source. This can be achieved by taking advantage of three main features: the difference in level (1) and phase (2) of a signal between the left and the right ear and the spectral colouring (3) of a known noise, which is dependant on the path of the sound waves around the listeners head and upper body.
+%Spatial hearing describes the ability to use binaural clues to localize the source of a noise. This ability relies upon three main features: the difference in level (1) and phase (2) of a signal between the left and the right ear and the spectral colouring (3) of a known noise, caused by the geometry of the listeners head and upper body.
+\newline
+\newline
+%Apart from being helpful for orientating and quickly identifying reacting to possible dangers (e.g. an approaching car), spatial hearing also allows to better manage noisy environments. This is done by using the information of the directivity 
+Apart from obvious advantages of spatial hearing, like localizing the origin of a given sound (e.g. a nearby car), it also provides the listener an option the filter sounds based on their direction. This is particularly important in noisy environments. This situation is most commonly described in the \dq cocktail-party-effect\dq{} (see \cite{CP} for further details). A listener can use the information of position of a given audio source to reduce noises from other directions within their perception.
 \newline
 \newline
 Since noisy environments with a lot of similar audio signals (in particular speech) are very common within a lot of every day occasions, the advantage of using binaural clues has a great importance. In most cases the lack of this ability is found on people with hearing disabilities. Even if hearing aids have advanced throughout the last decades, they still can't offer their users the same subtle binaural clues as a person with intact hearing abilities.
@@ -197,10 +239,10 @@ The second way of locating a sound source is based upon the spectral differences
 \subsection{Auralization}
 \label{Sec:auralization}
 Auralization describes the process of recreating not only a given audio signal but also the spatial information. With correct auralization a recorded scene (e.g. a classical concert in a concert hall) can be rec
-
+\newline
 This requires advanced recording processes to capture the spatial information of a scene (e.g. a concert hall)
-
-Auralization describes the process of adding spatial features to audio signals. The simplest example for this would be the move from mono to stereo audio. However, since these initial steps the options of simulating and re-creating spatial features in digital audio processing have advanced quite a lot. This can be easily seen in many consumer electronic products such as AV-Receivers, Soundbars or Headphones supporting 5.1, 7.1  etc. or in particular VR peripherals coming with their own 3D audio frameworks for developers.
+\newline
+Auralization describes the process of adding spatial features to audio signals. The simplest example for this would be the move from mono to stereo audio. However, since these initial steps the options of simulating and re-creating spatial features in digital audio processing have advanced quite a lot. This can be easily seen in many consumer electronic products such as AV-Receivers, Soundbars or Headphones supporting 5.1, 7.1  etc. or in particular \ac{VR} peripherals coming with their own 3D audio frameworks for developers.
 \newline
 \newline
 The basic principle remains more or less the same for all these products. Within a given \textit{listening space} the original auditory environment shall be recreated.
@@ -225,7 +267,7 @@ The basic principle remains more or less the same for all these products. Within
 
 
 
-Before evaluating possible improvements of virtual reality support in listening tests, it has to be made sure that there are no major other influences alternating the results of this test. Therefore the first iteration of the new test environment will be developed as close as possible to the original LiSN software. This allows to compare test and training results from this test environment with the data already available from previous experiments. If the new software allows to recreate similar test results, it can be assumed that the unenivitable differnce don't affect the results in a too drastic manner. Afterwards the data from these initial tests can also be used to validate whether VR exclusive features like head tracking add further beneftis to the training process.
+Before evaluating possible improvements of virtual reality support in listening tests, it has to be made sure that there are no major other influences alternating the results of this test. Therefore the first iteration of the new test environment will be developed as close as possible to the original \ac{LiSN} software. This allows to compare test and training results from this test environment with the data already available from previous experiments. If the new software allows to recreate similar test results, it can be assumed that the unenviable difference don't affect the results in a too drastic manner. Afterwards the data from these initial tests can also be used to validate whether VR exclusive features like head tracking add further benefits to the training process.
 \newline
 \newline
 %Since the leading question of this project is the possible improvements of the original training game described in \cite{LiSN}, the development will be strongly orientated on the known parameters.
@@ -296,7 +338,81 @@ Whenever a target sentence was played, four word options will be displayed. (IMA
 SNR: For every correct guess, the SNR is decreased by 2.5 dB. For every incorrect guess, SNR is increased by 1.5 dB. At uncertain at first the same sentence is repeated with 1.5 dB higher SNR. At a second consecutive \textit{uncertain} a new sentence will be played, with again increased SNR.
 
 
+\section{Concept}
+\label{sec:concept}
+While section \ref{sec:approach} only described the general design principles and foundations of the application, this section shall be used to discuss how these requirements  actually be fulfilled and which parts of the project might cause issues.
+\newline
+\newline
+The biggest part will be achieving flexibility in the projects structure, to allow other users to adapt the application to their requirements.
 
+\subsection{Asset import}
+Icons and audio clips, namespacing!
+\newline
+How does an "outsider" determine whether a word shall be selectable?
+\newline
+Option A: Only offer icons for selectables and compares names of clips and icons.
+\newline
+Option B: Add a prefix or suffix to selectable words, like: \dq sel-apples\dq{}. This might work better within a folder?
+\newline
+\newline
+Refacto the way files are imported! Folder names are not feasible for flexibility! Create a list for each available folder and separate groups via fileNames... Or for now just support one group at a time, which can be replaced...
+
+\subsection{Word selection}
+Even though the initial scope of the application shall only feature a single word list from the original paper (see Appendix A of \cite{LiSN-A}), the implementation should be flexible enough to support any desired word database. This is particularly important when considering the desire to offer the application in different languages. To further elaborate on how this should be done, List 1 from the original paper will be used as an example.  Within table \ref{tab:list1} all highlighted words are can be used as an \textit{option} to question the user.
+\begin{table}[h!]
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+& Subject & Verb & Count & Adjective & Objects \\
+\hline
+The & \textbf{baby} & bought & \textbf{two} & big & \textbf{apples} \\
+\cline{2-6}
+ & \textbf{boy} & carried & \textbf{three} & blue & \textbf{bottles} \\
+\cline{2-6}
+ & \textbf{clown} & cleaned & \textbf{four} & borken & \textbf{cars} \\
+\cline{2-6}
+ & \textbf{doctor} & drew & \textbf{five} & green & \textbf{chairs} \\
+\cline{2-6}
+ & \textbf{girl} & dropped & \textbf{six} & little & \textbf{crayons} \\
+\cline{2-6}
+ & \textbf{lady} & had & \textbf{seven} & old & \textbf{cups} \\
+\cline{2-6}
+ & \textbf{man} & liked & \textbf{eight} & orange & \textbf{shoes} \\
+\cline{2-6}
+ & \textbf{nurse} & saw & \textbf{nine} & red & \textbf{spoons} \\
+\cline{2-6}
+ & \textbf{teacher} & watched & \textbf{ten} & yellow & \textbf{trucks} \\
+\hline
+\end{tabular}
+\caption{LiSN - List 1}
+\label{tab:list1}
+\end{table}
+\vspace{5mm}
+When observing this table three parameters can be determined:
+\begin{itemize}
+\item The sentences length: 6 words
+\item The possibilities for each group: 9 options
+\item The number of 'selectable' groups: 3 groups
+\end{itemize}
+All three of these parameters have to be considered when creating a dynamic framework, which shall be able to support different word lists. Additionally this example also provides and interesting anomaly. All \textit{options} within a given \textit{group} are sorted alphabetically, except the \textbf{Count} - words. It is important to not rely on any order in which the list might be created, or any other parameter that depends on the actual content of a given word list.
+\newline
+\newline
+However, issues like co-articulation effects have to be considered by the creator of a given group.
+
+\subsection{Training Game}
+Here are the training game audio setups (0 and 90 degrees:).
+%\vspace{5mm}
+\begin{figure}[h!]
+	\hspace{0.1\textwidth}
+    \subfigure[Setup A]{\includegraphics[width=0.4\textwidth]{trainingSetupPageA.png}}
+    %\hspace{0.2\textwidth}
+    \subfigure[Setup B]{\includegraphics[width=0.4\textwidth]{trainingSetupPageB.png}}
+    %\hspace{0.1\textwidth}
+\caption{Training Game Setup}
+\vspace{3mm}
+\end{figure}
+\newline
+%\vspace{8cm}
+\newline
 
 
 \section{Conclusion}
@@ -304,25 +420,26 @@ SNR: For every correct guess, the SNR is decreased by 2.5 dB. For every incorrec
 Within the scope of this project a simple binaural recreation plug-in has been implemented using the Juce framework and the FFTW library. Unfortunately the focus of this project has been moved heavily onto software development and typical coding issues, instead of digging deeper into the actual subject of audio auralization. But nonetheless the current state of the plug-in might be a good starting point for further projects, at cutting some of the very time consuming setup procedures. Of course this would require to encapsulate the currently implemented processing further into individual functions, or possibly even better an additional class. With a bit added abstraction, a generic processing chain could be implemented (similar to the one already implemented by Juce), which would allow to add and move individual auralization processes much more easily. Another working point would be to amp up the current convolution, to also feature e.g. elevation. This not too much would have to be changed in the elemental parts of the source code, this should be a rather simple addition.
 
 
-\section{Outlook}
-\label{sec:outlook}
-
 
 \newpage
 \section*{Abbreviations}
 \vspace{5mm}
 \begin{acronym}[SEVENLTH]
  \acro{API}{Application Programming Interface}
+ \acro{ASHA}{American Speech-Language-Hearing Association}
+ \acro{CAPD}{Central Auditory Processing Disorder}
  \acro{DAW}{Digital Audio Workstation}
  \acro{DSP}{Digital Signal Processing}
  \acro{GUI}{Graphical User Interface}
  \acro{HRTF}{Head Related Transfer Function}
  \acro{IDE}{Integrated Development Environment}
- \acro{LISN}{Listening in Spatialized Noise}
+ \acro{LiSN}{Listening in Spatialized Noise}
  \acro{SDK}{Software Development Kit}
  \acro{SNR}{Signal to Noise Ratio}
  \acro{SPD}{Spatial Processing Disorder}
+ \acro{SRT}{Speech Reception Threshold}
  \acro{UI}{User Interface}
+ \acro{VR}{Virtual Reality}
 \end{acronym}
 
 \newpage
@@ -332,9 +449,12 @@ Within the scope of this project a simple binaural recreation plug-in has been i
 \renewcommand\refname{Sources}
 \addcontentsline{toc}{section}{Sources}
 \begin{thebibliography}{14}
-\bibitem{OCU_SPA}{Oculus Spatializer: \url{https://developer.oculus.com/documentation/unity/audio-osp-unity-spatialize/}}
-\bibitem{LISN-A}{Development and Evaluation of the LiSN $\&$ Learn Auditory Training Software for Deficit-Specific Remediation of Binaural Processing Deficits in Children: Preliminary Findings, Sharon Camerion, Harvey Dillon, Date: 2011}
-\bibitem{LISN-B}{Correlating performance on the Listening in Spatialized Noise – Sentences Test (LiSN-S) with the Listening in Spatialized Noise – Universal Test (LiSN-U), Kiri Mealingsa, Sharon Camerona and Harvey Dillon, Published: April 2020, Date: 2019}
+%\bibitem{OCU_SPA}{Oculus Spatializer: \url{https://developer.oculus.com/documentation/unity/audio-osp-unity-spatialize/}}
+\bibitem{LISN-A}{\textit{Development and Evaluation of the LiSN $\&$ Learn Auditory Training Software for Deficit-Specific Remediation of Binaural Processing Deficits in Children: Preliminary Findings}, Sharon Camerion, Harvey Dillon, Date: 2011}
+\bibitem{LISN-B}{\textit{Correlating performance on the Listening in Spatialized Noise – Sentences Test (LiSN-S) with the Listening in Spatialized Noise – Universal Test (LiSN-U)}, Kiri Mealingsa, Sharon Camerona and Harvey Dillon, Published: April 2020, Date: 2019}
+\bibitem{CP}{The cocktail-party problem revisited: early processing and selection of multi-talker speech, Adelbert W. Bronkhosrt, Date: April 2015}
+\bibitem{HA-SRT}{\textit{Listening through hearing aids affects spatial perception and speech intelligibility in normal-hearing listeners}, Jens Cubick, Jörg M Buchholz, Virginia Best, Mathieu Lavandier, Torsten Dau, Date: 2016, \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6246072/}}
+\bibitem{ASHA}{\textit{Central Auditory Processing Disorder}, \acf{ASHA}, \url{https://www.asha.org/Practice-Portal/Clinical-Topics/Central-Auditory-Processing-Disorder/}}
 \end{thebibliography}
 
 \end{document}
