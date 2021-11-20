@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.6.6)  14 NOV 2021 14:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.6.6)  19 NOV 2021 16:28
 entering extended mode
 **./rp_report_partA.tex
 (rp_report_partA.tex
@@ -886,45 +886,78 @@ Package: subfigure 2002/07/30 v2.1.4 subfigure package
 \subfig@top=\skip85
 \subfig@bottom=\skip86
 )
+("E:\Programme (x86)\MiKTeX\tex/latex/svg\svg.sty"
+Package: svg 2020/11/26 v2.02k (include SVG pictures)
+
+("E:\Programme (x86)\MiKTeX\tex/latex/koma-script\scrbase.sty"
+Package: scrbase 2020/04/19 v3.30 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+("E:\Programme (x86)\MiKTeX\tex/latex/koma-script\scrlfile.sty"
+Package: scrlfile 2020/04/19 v3.30 KOMA-Script package (loading files)
+))
+
+LaTeX Warning: You have requested, on input line 67, version
+               `2020/09/21' of package scrbase,
+               but only version
+               `2020/04/19 v3.30 KOMA-Script package (KOMA-Script-independent b
+asics and keyval usage)'
+               is available.
+
+("E:\Programme (x86)\MiKTeX\tex/latex/trimspaces\trimspaces.sty"
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+)
+("E:\Programme (x86)\MiKTeX\tex/latex/tools\shellesc.sty"
+Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
+Package shellesc Info: Restricted shell escape enabled on input line 77.
+)
+\c@svg@param@lastpage=\count313
+\svg@box=\box64
+\c@svg@param@currpage=\count314
+)
+("E:\Programme (x86)\MiKTeX\tex/latex/transparent\transparent.sty"
+Package: transparent 2019/11/29 v1.4 Transparency via pdfTeX's color stack (HO)
+
+)
 ("E:\Programme (x86)\MiKTeX\tex/latex/stackengine\stackengine.sty"
 Package: stackengine 2017/02/13 v4.01\ Stacking text and objects in convenient 
 ways
 
 ("E:\Programme (x86)\MiKTeX\tex/latex/etoolbox\etoolbox.sty"
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count313
+\etb@tempcnta=\count315
 )
 ("E:\Programme (x86)\MiKTeX\tex/latex/listofitems\listofitems.sty"
 ("E:\Programme (x86)\MiKTeX\tex/generic/listofitems\listofitems.tex"
-\loi_cnt_foreach_nest=\count314
-\loi_nestcnt=\count315
+\loi_cnt_foreach_nest=\count316
+\loi_nestcnt=\count317
 )
 Package: listofitems 2019/08/21 v1.63 Grab items in lists using user-specified 
 sep char (CT)
 )
 ("E:\Programme (x86)\MiKTeX\tex/latex/tools\calc.sty"
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count316
-\calc@Bcount=\count317
+\calc@Acount=\count318
+\calc@Bcount=\count319
 \calc@Adimen=\dimen313
 \calc@Bdimen=\dimen314
 \calc@Askip=\skip87
 \calc@Bskip=\skip88
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count318
+\calc@Ccount=\count320
 \calc@Cskip=\skip89
 )
-\c@@stackindex=\count319
+\c@@stackindex=\count321
 \@boxshift=\skip90
 \stack@tmplength=\skip91
 \temp@stkl=\skip92
 \@stackedboxwidth=\skip93
-\@addedbox=\box64
-\@anchorbox=\box65
-\stackedbox=\box66
-\@centerbox=\box67
-\c@ROWcellindex@=\count320
+\@addedbox=\box65
+\@anchorbox=\box66
+\stackedbox=\box67
+\@centerbox=\box68
+\c@ROWcellindex@=\count322
 )
 ("E:\Programme (x86)\MiKTeX\tex/latex/trfsigns\trfsigns.sty"
 Package: trfsigns 
@@ -933,16 +966,16 @@ Package: trfsigns
 Package: bytefield 2017/09/15 v2.4 Network protocol diagrams
 \bytefield@height=\skip94
 \bytefield@height@increment=\skip95
-\entire@bytefield@picture=\box68
+\entire@bytefield@picture=\box69
 \bf@bitwidth=\skip96
 \bf@bitheight=\skip97
 \units@wide=\skip98
 \units@tall=\skip99
 \units@high=\skip100
 \header@xpos=\skip101
-\c@header@val=\count321
-\c@max@header@val=\count322
-\curly@box=\box69
+\c@header@val=\count323
+\c@max@header@val=\count324
+\curly@box=\box70
 \wordlabelr@start=\skip102
 \wordlabelr@end=\skip103
 \wordlabell@start=\skip104
@@ -950,7 +983,7 @@ Package: bytefield 2017/09/15 v2.4 Network protocol diagrams
 \total@lbox@width=\skip106
 \label@box@width=\skip107
 \label@box@height=\skip108
-\word@label@box=\box70
+\word@label@box=\box71
 )
 ("E:\Programme (x86)\MiKTeX\tex/latex/colortbl\colortbl.sty"
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
@@ -964,37 +997,30 @@ ith features of KOMA-Script classes)
 ("E:\Programme (x86)\MiKTeX\tex/latex/koma-script\scrkbase.sty"
 Package: scrkbase 2020/04/19 v3.30 KOMA-Script package (KOMA-Script-dependent b
 asics and keyval usage)
-
-("E:\Programme (x86)\MiKTeX\tex/latex/koma-script\scrbase.sty"
-Package: scrbase 2020/04/19 v3.30 KOMA-Script package (KOMA-Script-independent 
-basics and keyval usage)
-
-("E:\Programme (x86)\MiKTeX\tex/latex/koma-script\scrlfile.sty"
-Package: scrlfile 2020/04/19 v3.30 KOMA-Script package (loading files)
-)))
+)
 
 LaTeX Warning: Command \@footnotemark  has changed.
                Check if current package is valid.
 
 ) ("E:\Programme (x86)\MiKTeX\tex/latex/listings\listings.sty"
-\lst@mode=\count323
-\lst@gtempboxa=\box71
+\lst@mode=\count325
+\lst@gtempboxa=\box72
 \lst@token=\toks52
-\lst@length=\count324
+\lst@length=\count326
 \lst@currlwidth=\dimen315
-\lst@column=\count325
-\lst@pos=\count326
+\lst@column=\count327
+\lst@pos=\count328
 \lst@lostspace=\dimen316
 \lst@width=\dimen317
-\lst@newlines=\count327
-\lst@lineno=\count328
+\lst@newlines=\count329
+\lst@lineno=\count330
 \lst@maxwidth=\dimen318
 
 ("E:\Programme (x86)\MiKTeX\tex/latex/listings\lstmisc.sty"
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count329
-\lst@skipnumbers=\count330
-\lst@framebox=\box72
+\c@lstnumber=\count331
+\lst@skipnumbers=\count332
+\lst@framebox=\box73
 )
 ("E:\Programme (x86)\MiKTeX\tex/latex/listings\listings.cfg"
 File: listings.cfg 2020/03/24 1.8d listings configuration
@@ -1015,41 +1041,41 @@ Package: nicefrac 1998/08/04 v0.9b Nice fractions
 ))
 ("E:\Programme (x86)\MiKTeX\tex/latex/l3backend\l3backend-pdfmode.def"
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count331
-\l__pdf_internal_box=\box73
+\l__kernel_color_stack_int=\count333
+\l__pdf_internal_box=\box74
 )
 (rp_report_partA.aux)
 \openout1 = `rp_report_partA.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
 
 ("E:\Programme (x86)\MiKTeX\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count332
+\scratchcounter=\count334
 \scratchdimen=\dimen319
-\scratchbox=\box74
-\nofMPsegments=\count333
-\nofMParguments=\count334
+\scratchbox=\box75
+\nofMPsegments=\count335
+\nofMParguments=\count336
 \everyMPshowfont=\toks53
-\MPscratchCnt=\count335
+\MPscratchCnt=\count337
 \MPscratchDim=\dimen320
-\MPnumerator=\count336
-\makeMPintoPDFobject=\count337
+\MPnumerator=\count338
+\makeMPintoPDFobject=\count339
 \everyMPtoPDFconversion=\toks54
 ) ("E:\Programme (x86)\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty"
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1057,7 +1083,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 )
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 119.
+LaTeX Info: Redefining \selectfont on input line 117.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -1100,11 +1126,11 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box75
-Package hyperref Info: Link coloring ON on input line 119.
-LaTeX Info: Redefining \ref on input line 119.
-LaTeX Info: Redefining \pageref on input line 119.
-LaTeX Info: Redefining \nameref on input line 119.
+\AtBeginShipoutBox=\box76
+Package hyperref Info: Link coloring ON on input line 117.
+LaTeX Info: Redefining \ref on input line 117.
+LaTeX Info: Redefining \pageref on input line 117.
+LaTeX Info: Redefining \nameref on input line 117.
 (rp_report_partA.out) (rp_report_partA.out)
 \@outlinefile=\write4
 \openout4 = `rp_report_partA.out'.
@@ -1114,16 +1140,16 @@ ABD: EveryShipout initializing macros
 Package pgfplots notification 'compat/show suggested version=true': you might b
 enefit from \pgfplotsset{compat=1.17} (current compat level: 1.16).
 
-\c@lstlisting=\count338
+\c@lstlisting=\count340
 [1
 
 {C:/Users/cocot/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 (rp_report_partA.toc
-LaTeX Font Info:    Trying to load font information for U+msa on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
  ("E:\Programme (x86)\MiKTeX\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
 
 ("E:\Programme (x86)\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1134,304 +1160,315 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1]
 Package acronym Info: Label `acro:CAPD' newly defined as it shall be overridden
 
-although it is yet undefined on input line 151.
+although it is yet undefined on input line 149.
 Package acronym Info: Label `acro:ASHA' newly defined as it shall be overridden
 
-although it is yet undefined on input line 151.
+although it is yet undefined on input line 149.
 Package acronym Info: Label `acro:SPD' newly defined as it shall be overridden
-although it is yet undefined on input line 153.
+although it is yet undefined on input line 149.
 Package acronym Info: Label `acro:LiSN' newly defined as it shall be overridden
 
-although it is yet undefined on input line 153.
+although it is yet undefined on input line 149.
 Package acronym Info: Label `acro:VR' newly defined as it shall be overridden
-although it is yet undefined on input line 153.
+although it is yet undefined on input line 152.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
+52.
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--182
+("E:\Programme (x86)\MiKTeX\tex/latex/base\t1cmtt.fd"
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+Underfull \hbox (badness 10000) in paragraph at lines 149--153
+
+ []
+
+[1]
+
+LaTeX Warning: Citation `LISN-A' on page 2 undefined on input line 180.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 168--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--182
+Underfull \hbox (badness 10000) in paragraph at lines 168--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--182
+Underfull \hbox (badness 10000) in paragraph at lines 168--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--182
+Underfull \hbox (badness 10000) in paragraph at lines 168--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--182
-
- []
-
-[1] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 193--211
+Underfull \hbox (badness 10000) in paragraph at lines 168--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--211
+LaTeX Warning: Reference `sec:outlook' on page 2 undefined on input line 217.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--218
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--211
+Underfull \hbox (badness 10000) in paragraph at lines 211--218
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 226--235
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--211
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--211
-
- []
-
-
-LaTeX Warning: Reference `sec:outlook' on page 3 undefined on input line 221.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--222
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--222
+Underfull \hbox (badness 10000) in paragraph at lines 226--235
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 230--234
+Underfull \hbox (badness 10000) in paragraph at lines 242--250
+
+ []
+
+Package acronym Info: Label `acro:SRT' newly defined as it shall be overridden
+although it is yet undefined on input line 262.
+
+Underfull \hbox (badness 10000) in paragraph at lines 259--267
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--249
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 270--274
+Underfull \hbox (badness 10000) in paragraph at lines 259--267
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 270--274
+Underfull \hbox (badness 10000) in paragraph at lines 271--275
 
  []
 
-[5]
+[4] [5]
 
-LaTeX Warning: Citation `lins' on page 6 undefined on input line 291.
+LaTeX Warning: Citation `lins' on page 6 undefined on input line 313.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--295
+Underfull \hbox (badness 10000) in paragraph at lines 313--317
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 329--339
+Underfull \hbox (badness 10000) in paragraph at lines 348--358
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--339
+Underfull \hbox (badness 10000) in paragraph at lines 348--358
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--339
+Underfull \hbox (badness 10000) in paragraph at lines 348--358
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 343--347
+Underfull \hbox (badness 10000) in paragraph at lines 362--366
+
+ []
+
+<pictures/trainingSetupPageA.png, id=242, 353.82187pt x 295.85532pt>
+File: pictures/trainingSetupPageA.png Graphic file (type png)
+<use pictures/trainingSetupPageA.png>
+Package pdftex.def Info: pictures/trainingSetupPageA.png  used on input line 37
+6.
+(pdftex.def)             Requested size: 170.71393pt x 142.74928pt.
+<pictures/trainingSetupPageB.png, id=244, 346.29375pt x 300.3722pt>
+File: pictures/trainingSetupPageB.png Graphic file (type png)
+<use pictures/trainingSetupPageB.png>
+Package pdftex.def Info: pictures/trainingSetupPageB.png  used on input line 37
+8.
+(pdftex.def)             Requested size: 170.71393pt x 148.0774pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 372--387
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 349--359
+Underfull \hbox (badness 10000) in paragraph at lines 372--387
 
  []
 
 [7]
 
-LaTeX Warning: Citation `LiSN-A' on page 8 undefined on input line 361.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--400
+Underfull \hbox (badness 10000) in paragraph at lines 425--434
 
  []
 
-<pictures/trainingSetupPageA.png, id=227, 353.82187pt x 295.85532pt>
-File: pictures/trainingSetupPageA.png Graphic file (type png)
-<use pictures/trainingSetupPageA.png>
-Package pdftex.def Info: pictures/trainingSetupPageA.png  used on input line 40
+
+Underfull \hbox (badness 10000) in paragraph at lines 425--434
+
+ []
+
+[8 <./pictures/trainingSetupPageA.png> <./pictures/trainingSetupPageB.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 438--445
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 438--445
+
+ []
+
+Package acronym Info: Label `acro:SNR' newly defined as it shall be overridden
+although it is yet undefined on input line 451.
+
+Underfull \hbox (badness 10000) in paragraph at lines 448--455
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 448--455
+
+ []
+
+[9]
+Package acronym Info: Label `acro:UI' newly defined as it shall be overridden
+although it is yet undefined on input line 468.
+
+Underfull \hbox (badness 10000) in paragraph at lines 468--472
+
+ []
+
+[10]
+<pictures/screens2.png, id=289, 522.95375pt x 440.64626pt>
+File: pictures/screens2.png Graphic file (type png)
+<use pictures/screens2.png>
+Package pdftex.def Info: pictures/screens2.png  used on input line 485.
+(pdftex.def)             Requested size: 298.75264pt x 251.73576pt.
+ [11 <./pictures/screens2.png>] [12]
+
+LaTeX Warning: Hyper reference `acro:API' on page 13 undefined on input line 51
+2.
+
+
+LaTeX Warning: Hyper reference `acro:API' on page 13 undefined on input line 51
+2.
+
+
+LaTeX Warning: Hyper reference `acro:DAW' on page 13 undefined on input line 51
+5.
+
+
+LaTeX Warning: Hyper reference `acro:DAW' on page 13 undefined on input line 51
+5.
+
+
+LaTeX Warning: Hyper reference `acro:GUI' on page 13 undefined on input line 51
 6.
-(pdftex.def)             Requested size: 170.71393pt x 142.74928pt.
-<pictures/trainingSetupPageB.png, id=229, 346.29375pt x 300.3722pt>
-File: pictures/trainingSetupPageB.png Graphic file (type png)
-<use pictures/trainingSetupPageB.png>
-Package pdftex.def Info: pictures/trainingSetupPageB.png  used on input line 40
-8.
-(pdftex.def)             Requested size: 170.71393pt x 148.0774pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 402--416
-
- []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--416
+LaTeX Warning: Hyper reference `acro:GUI' on page 13 undefined on input line 51
+6.
 
- []
 
-[8] [9 <./pictures/trainingSetupPageA.png> <./pictures/trainingSetupPageB.png>]
+LaTeX Warning: Hyper reference `acro:HRTF' on page 13 undefined on input line 5
+17.
 
-LaTeX Warning: Hyper reference `acro:API' on page 10 undefined on input line 42
+
+LaTeX Warning: Hyper reference `acro:HRTF' on page 13 undefined on input line 5
+17.
+
+
+LaTeX Warning: Hyper reference `acro:IDE' on page 13 undefined on input line 51
 8.
 
 
-LaTeX Warning: Hyper reference `acro:API' on page 10 undefined on input line 42
+LaTeX Warning: Hyper reference `acro:IDE' on page 13 undefined on input line 51
 8.
 
 
-LaTeX Warning: Hyper reference `acro:DAW' on page 10 undefined on input line 43
-1.
-
-
-LaTeX Warning: Hyper reference `acro:DAW' on page 10 undefined on input line 43
-1.
-
-
-LaTeX Warning: Hyper reference `acro:DSP' on page 10 undefined on input line 43
-2.
-
-
-LaTeX Warning: Hyper reference `acro:DSP' on page 10 undefined on input line 43
-2.
-
-
-LaTeX Warning: Hyper reference `acro:GUI' on page 10 undefined on input line 43
-3.
-
-
-LaTeX Warning: Hyper reference `acro:GUI' on page 10 undefined on input line 43
-3.
-
-
-LaTeX Warning: Hyper reference `acro:HRTF' on page 10 undefined on input line 4
-34.
-
-
-LaTeX Warning: Hyper reference `acro:HRTF' on page 10 undefined on input line 4
-34.
-
-
-LaTeX Warning: Hyper reference `acro:IDE' on page 10 undefined on input line 43
-5.
-
-
-LaTeX Warning: Hyper reference `acro:IDE' on page 10 undefined on input line 43
-5.
-
-
-LaTeX Warning: Hyper reference `acro:SDK' on page 10 undefined on input line 43
-7.
-
-
-LaTeX Warning: Hyper reference `acro:SDK' on page 10 undefined on input line 43
-7.
-
-
-LaTeX Warning: Hyper reference `acro:SNR' on page 10 undefined on input line 43
-8.
-
-
-LaTeX Warning: Hyper reference `acro:SNR' on page 10 undefined on input line 43
-8.
-
-
-LaTeX Warning: Hyper reference `acro:SRT' on page 10 undefined on input line 44
+LaTeX Warning: Hyper reference `acro:SDK' on page 13 undefined on input line 52
 0.
 
 
-LaTeX Warning: Hyper reference `acro:SRT' on page 10 undefined on input line 44
+LaTeX Warning: Hyper reference `acro:SDK' on page 13 undefined on input line 52
 0.
 
-
-LaTeX Warning: Hyper reference `acro:UI' on page 10 undefined on input line 441
-.
-
-
-LaTeX Warning: Hyper reference `acro:UI' on page 10 undefined on input line 441
-.
-
-[10] (rp_report_partA.lof)
+[13] (rp_report_partA.lof)
 \tf@lof=\write6
 \openout6 = `rp_report_partA.lof'.
 
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
-56.
- ("E:\Programme (x86)\MiKTeX\tex/latex/base\t1cmtt.fd"
-File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 460.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 460.
+ [14]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 543.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 543.
  (rp_report_partA.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 460.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 460.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 543.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 543.
 Package rerunfilecheck Info: File `rp_report_partA.out' has not changed.
-(rerunfilecheck)             Checksum: 728994A85419A037C4005FC59D43BAD1;1622.
+(rerunfilecheck)             Checksum: 8B93BC1833BCB54CEA56BD0354F5AD0D;1721.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 460.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 543.
  ) 
 Here is how much of TeX's memory you used:
- 33603 strings out of 480930
- 750910 string characters out of 2910480
- 1148151 words of memory out of 3000000
- 48734 multiletter control sequences out of 15000+200000
- 552789 words of font info for 71 fonts, out of 3000000 for 9000
+ 34065 strings out of 480930
+ 760590 string characters out of 2910480
+ 1169525 words of memory out of 3000000
+ 49156 multiletter control sequences out of 15000+200000
+ 554489 words of font info for 74 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,12n,127p,1114b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not ex
+ 73i,12n,127p,1257b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{Hfootnote.39} has been referenced but does not ex
 ist, replaced by a fixed one
 
-pdfTeX warning (dest): name{Hfootnote.9} has been referenced but does not exist
+pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.8} has been referenced but does not exist
 , replaced by a fixed one
 
  <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ec
 tt1095.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec
-/dpi600\tcrm1095.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/j
-knappen/ec/dpi600\ecrm1000.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/p
-k/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2
-.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\cocot\AppData\Loca
+/dpi600\ecbi1095.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/j
+knappen/ec/dpi600\tcrm1095.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/p
+k/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2
+.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\cocot\AppData\Loca
 l\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\cocot\Ap
-pData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\User
-s\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk
+pData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\User
+s\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk
 > <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\e
-cbx1440.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/e
-c/dpi600\ecrm0900.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/
-jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/
-pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\cocot\AppData\Local\MiKTeX\
-2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.pk> <C:\Users\cocot\AppData\Loc
-al\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\cocot\A
-ppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1440.pk> <C:\Use
-rs\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1728.p
-k><E:/Programme (x86)/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on rp_report_partA.pdf (13 pages, 221730 bytes).
+cti0800.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/e
+c/dpi600\ecti1095.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/
+jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/
+pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\cocot\AppData\Local\MiKTeX\
+2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\cocot\AppData\Loc
+al\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\cocot\A
+ppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Use
+rs\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.p
+k> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
+ecbx2074.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/
+ec/dpi600\eccc1440.pk> <C:\Users\cocot\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour
+/jknappen/ec/dpi600\eccc1728.pk><E:/Programme (x86)/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmr10.pfb>
+Output written on rp_report_partA.pdf (16 pages, 256779 bytes).
 PDF statistics:
- 770 PDF objects out of 1000 (max. 8388607)
- 76 named destinations out of 1000 (max. 500000)
- 231 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 880 PDF objects out of 1000 (max. 8388607)
+ 97 named destinations out of 1000 (max. 500000)
+ 244 words of extra memory for PDF output out of 10000 (max. 10000000)
 

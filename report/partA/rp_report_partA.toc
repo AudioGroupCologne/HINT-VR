@@ -1,30 +1,41 @@
 \babel@toc {english}{}
 \contentsline {section}{\numberline {1}Abstract}{1}{section.2}%
-\contentsline {section}{\numberline {2}Introduction}{1}{section.8}%
-\contentsline {section}{\numberline {3}Introduction B}{3}{section.10}%
-\contentsline {section}{\numberline {4}Motivation}{4}{section.12}%
-\contentsline {section}{\numberline {5}Fundamentals}{4}{section.13}%
-\contentsline {subsection}{\numberline {5.1}Auditive localization}{4}{subsection.14}%
-\contentsline {subsection}{\numberline {5.2}Auralization}{5}{subsection.15}%
-\contentsline {subsection}{\numberline {5.3}Hearing perception (energy and similarity)}{5}{subsection.16}%
-\contentsline {subsection}{\numberline {5.4}Training abilities}{5}{subsection.17}%
-\contentsline {section}{\numberline {6}Approach}{5}{section.18}%
-\contentsline {paragraph}{Development tools}{5}{section*.19}%
-\contentsline {subsection}{\numberline {6.1}Unity overview}{5}{subsection.20}%
-\contentsline {subsection}{\numberline {6.2}Orientation on LiSN project}{6}{subsection.21}%
-\contentsline {subsection}{\numberline {6.3}Audio assets}{6}{subsection.22}%
-\contentsline {subsection}{\numberline {6.4}Visuals}{6}{subsection.23}%
-\contentsline {paragraph}{Matching audio parameters to visuals}{6}{section*.24}%
-\contentsline {paragraph}{Avatars}{6}{section*.25}%
-\contentsline {subsection}{\numberline {6.5}User interface}{7}{subsection.26}%
-\contentsline {subsubsection}{\numberline {6.5.1}Audio Sources}{7}{subsubsection.27}%
-\contentsline {subsection}{\numberline {6.6}Training-Game}{7}{subsection.28}%
-\contentsline {subsubsection}{\numberline {6.6.1}Audio files}{7}{subsubsection.29}%
-\contentsline {subsubsection}{\numberline {6.6.2}Game loop}{7}{subsubsection.30}%
-\contentsline {section}{\numberline {7}Concept}{7}{section.31}%
-\contentsline {subsection}{\numberline {7.1}Asset import}{8}{subsection.32}%
-\contentsline {subsection}{\numberline {7.2}Word selection}{8}{subsection.33}%
-\contentsline {subsection}{\numberline {7.3}Training Game}{9}{subsection.35}%
-\contentsline {section}{\numberline {8}Conclusion}{9}{section.39}%
-\contentsline {section}{List of Figures}{11}{section*.41}%
-\contentsline {section}{Sources}{11}{section*.41}%
+\contentsline {section}{\numberline {2}Introduction}{2}{section.9}%
+\contentsline {section}{\numberline {3}Motivation}{2}{section.11}%
+\contentsline {section}{\numberline {4}Fundamentals}{3}{section.12}%
+\contentsline {subsection}{\numberline {4.1}Spatial hearing}{3}{subsection.13}%
+\contentsline {subsection}{\numberline {4.2}Auralization}{4}{subsection.14}%
+\contentsline {subsection}{\numberline {4.3}Hearing perception (energy and similarity)}{4}{subsection.15}%
+\contentsline {subsection}{\numberline {4.4}Training abilities}{4}{subsection.16}%
+\contentsline {section}{\numberline {5}Approach}{4}{section.18}%
+\contentsline {paragraph}{Comparability}{5}{section*.22}%
+\contentsline {paragraph}{Free distribution}{5}{section*.23}%
+\contentsline {paragraph}{Extensibility}{5}{section*.24}%
+\contentsline {paragraph}{Development tools}{5}{section*.25}%
+\contentsline {subsection}{\numberline {5.1}Unity overview}{5}{subsection.26}%
+\contentsline {subsection}{\numberline {5.2}Orientation on LiSN project}{6}{subsection.27}%
+\contentsline {subsection}{\numberline {5.3}Audio assets}{6}{subsection.28}%
+\contentsline {subsection}{\numberline {5.4}Visuals}{6}{subsection.29}%
+\contentsline {paragraph}{Matching audio parameters to visuals}{6}{section*.30}%
+\contentsline {paragraph}{Avatars}{6}{section*.31}%
+\contentsline {subsubsection}{\numberline {5.4.1}Audio Sources}{7}{subsubsection.32}%
+\contentsline {subsection}{\numberline {5.5}Training-Game}{7}{subsection.33}%
+\contentsline {subsubsection}{\numberline {5.5.1}Audio files}{7}{subsubsection.34}%
+\contentsline {subsubsection}{\numberline {5.5.2}Game loop}{7}{subsubsection.35}%
+\contentsline {section}{\numberline {6}Concept}{7}{section.36}%
+\contentsline {subsection}{\numberline {6.1}Training Game}{8}{subsection.37}%
+\contentsline {subsubsection}{\numberline {6.1.1}Audio Sources}{8}{subsubsection.38}%
+\contentsline {subsubsection}{\numberline {6.1.2}Word databases}{8}{subsubsection.43}%
+\contentsline {subsection}{\numberline {6.2}Asset management}{9}{subsection.45}%
+\contentsline {subsection}{\numberline {6.3}Progress tracking}{10}{subsection.46}%
+\contentsline {paragraph}{User System}{10}{section*.48}%
+\contentsline {paragraph}{Progress export}{10}{section*.49}%
+\contentsline {paragraph}{In-app visualization}{10}{section*.50}%
+\contentsline {subsection}{\numberline {6.4}User interface}{11}{subsection.51}%
+\contentsline {paragraph}{Main Menu}{11}{section*.53}%
+\contentsline {paragraph}{Login}{11}{section*.54}%
+\contentsline {paragraph}{User Creation}{11}{section*.55}%
+\contentsline {paragraph}{Progress}{11}{section*.56}%
+\contentsline {section}{\numberline {7}Conclusion}{11}{section.58}%
+\contentsline {section}{List of Figures}{14}{section*.60}%
+\contentsline {section}{Sources}{14}{section*.60}%

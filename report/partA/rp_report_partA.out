@@ -1,26 +1,27 @@
 \BOOKMARK [1][-]{section.2}{1 Abstract}{}% 1
-\BOOKMARK [1][-]{section.8}{2 Introduction}{}% 2
-\BOOKMARK [1][-]{section.10}{3 Introduction B}{}% 3
-\BOOKMARK [1][-]{section.12}{4 Motivation}{}% 4
-\BOOKMARK [1][-]{section.13}{5 Fundamentals}{}% 5
-\BOOKMARK [2][-]{subsection.14}{5.1 Auditive localization}{section.13}% 6
-\BOOKMARK [2][-]{subsection.15}{5.2 Auralization}{section.13}% 7
-\BOOKMARK [2][-]{subsection.16}{5.3 Hearing perception \(energy and similarity\)}{section.13}% 8
-\BOOKMARK [2][-]{subsection.17}{5.4 Training abilities}{section.13}% 9
-\BOOKMARK [1][-]{section.18}{6 Approach}{}% 10
-\BOOKMARK [2][-]{subsection.20}{6.1 Unity overview}{section.18}% 11
-\BOOKMARK [2][-]{subsection.21}{6.2 Orientation on LiSN project}{section.18}% 12
-\BOOKMARK [2][-]{subsection.22}{6.3 Audio assets}{section.18}% 13
-\BOOKMARK [2][-]{subsection.23}{6.4 Visuals}{section.18}% 14
-\BOOKMARK [2][-]{subsection.26}{6.5 User interface}{section.18}% 15
-\BOOKMARK [3][-]{subsubsection.27}{6.5.1 Audio Sources}{subsection.26}% 16
-\BOOKMARK [2][-]{subsection.28}{6.6 Training-Game}{section.18}% 17
-\BOOKMARK [3][-]{subsubsection.29}{6.6.1 Audio files}{subsection.28}% 18
-\BOOKMARK [3][-]{subsubsection.30}{6.6.2 Game loop}{subsection.28}% 19
-\BOOKMARK [1][-]{section.31}{7 Concept}{}% 20
-\BOOKMARK [2][-]{subsection.32}{7.1 Asset import}{section.31}% 21
-\BOOKMARK [2][-]{subsection.33}{7.2 Word selection}{section.31}% 22
-\BOOKMARK [2][-]{subsection.35}{7.3 Training Game}{section.31}% 23
-\BOOKMARK [1][-]{section.39}{8 Conclusion}{}% 24
-\BOOKMARK [1][-]{section*.41}{List of Figures}{}% 25
-\BOOKMARK [1][-]{section*.41}{Sources}{}% 26
+\BOOKMARK [1][-]{section.9}{2 Introduction}{}% 2
+\BOOKMARK [1][-]{section.11}{3 Motivation}{}% 3
+\BOOKMARK [1][-]{section.12}{4 Fundamentals}{}% 4
+\BOOKMARK [2][-]{subsection.13}{4.1 Spatial hearing}{section.12}% 5
+\BOOKMARK [2][-]{subsection.14}{4.2 Auralization}{section.12}% 6
+\BOOKMARK [2][-]{subsection.15}{4.3 Hearing perception \(energy and similarity\)}{section.12}% 7
+\BOOKMARK [2][-]{subsection.16}{4.4 Training abilities}{section.12}% 8
+\BOOKMARK [1][-]{section.18}{5 Approach}{}% 9
+\BOOKMARK [2][-]{subsection.26}{5.1 Unity overview}{section.18}% 10
+\BOOKMARK [2][-]{subsection.27}{5.2 Orientation on LiSN project}{section.18}% 11
+\BOOKMARK [2][-]{subsection.28}{5.3 Audio assets}{section.18}% 12
+\BOOKMARK [2][-]{subsection.29}{5.4 Visuals}{section.18}% 13
+\BOOKMARK [3][-]{subsubsection.32}{5.4.1 Audio Sources}{subsection.29}% 14
+\BOOKMARK [2][-]{subsection.33}{5.5 Training-Game}{section.18}% 15
+\BOOKMARK [3][-]{subsubsection.34}{5.5.1 Audio files}{subsection.33}% 16
+\BOOKMARK [3][-]{subsubsection.35}{5.5.2 Game loop}{subsection.33}% 17
+\BOOKMARK [1][-]{section.36}{6 Concept}{}% 18
+\BOOKMARK [2][-]{subsection.37}{6.1 Training Game}{section.36}% 19
+\BOOKMARK [3][-]{subsubsection.38}{6.1.1 Audio Sources}{subsection.37}% 20
+\BOOKMARK [3][-]{subsubsection.43}{6.1.2 Word databases}{subsection.37}% 21
+\BOOKMARK [2][-]{subsection.45}{6.2 Asset management}{section.36}% 22
+\BOOKMARK [2][-]{subsection.46}{6.3 Progress tracking}{section.36}% 23
+\BOOKMARK [2][-]{subsection.51}{6.4 User interface}{section.36}% 24
+\BOOKMARK [1][-]{section.58}{7 Conclusion}{}% 25
+\BOOKMARK [1][-]{section*.60}{List of Figures}{}% 26
+\BOOKMARK [1][-]{section*.60}{Sources}{}% 27
