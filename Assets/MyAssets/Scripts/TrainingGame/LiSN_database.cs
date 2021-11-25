@@ -22,8 +22,7 @@ public class LiSN_database
     private List<string[]> wordStrings;
 
     public int[] selectableGroup;
-
-
+   
     // basic constructor, determining the list the shall be used
     public LiSN_database(int list, int voice)
     {
@@ -32,6 +31,7 @@ public class LiSN_database
         wordStrings = new List<string[]>();
         selectableGroup = new int[selections];
 
+        
         switch (list)
         {
             case 1:
@@ -44,6 +44,95 @@ public class LiSN_database
                 break;
 
         }
+    }
+
+    public LiSN_database(string _targetAudioPath, string _iconsPath, int _wordGroups, int[] _selectables)
+    {
+        words = new List<AudioClip[]>();
+        icons = new List<Sprite[]>();
+        wordStrings = new List<string[]>();
+        selectableGroup = new int[selections];
+        string subPath;
+
+        selectableGroup = _selectables;
+
+        for (int i = 0; i < _wordGroups; i++)
+        {
+            if (_wordGroups < 10)
+            {
+                subPath = _targetAudioPath + "0" + i;
+            }
+            else
+            {
+                subPath = _targetAudioPath + i;
+            }
+            words.Add(Resources.LoadAll<AudioClip>(subPath));
+            Debug.Log("Entries " + i + ": " + words[i].Length);
+        }
+
+        Debug.Log("Count: " + words.Count);
+
+
+        for(int i = 0; i < _selectables.Length; i++)
+        {
+            if (_wordGroups < 10)
+            {
+                subPath = _iconsPath + "0" + i;
+            }
+            else
+            {
+                subPath = _iconsPath + i;
+            }
+            icons.Add(Resources.LoadAll<Sprite>(subPath));
+            Debug.Log("Entries " + i + ": " + icons[i].Length);
+        }
+    }
+
+    /*
+    public LiSN_database(string _audioPath, string _iconPath, int _length, int _options, int[] _selectables)
+    {
+        words = new List<AudioClip[]>();
+        icons = new List<Sprite[]>();
+        wordStrings = new List<string[]>();
+
+        selectableGroup = _selectables;
+
+        var audioDir =  new DirectoryInfo(_audioPath);
+        var fileInfo = audioDir.GetFiles();
+
+        string[] files = Directory.GetFiles(_audioPath);
+        string[] dirs = Directory.GetDirectories(_audioPath);
+        foreach (string file in files)
+        {
+            //Do work on the files here
+            Debug.Log(file);
+        }
+        foreach (string dir in dirs)
+        {
+            //Do work on the files here
+            Debug.Log(dir);
+        }
+
+    }
+    */
+
+    private void asset_loader(string path)
+    {
+
+        words.Add(Resources.LoadAll<AudioClip>(path));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/verbs"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/numbers"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/adjectives"));
+        words.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/objects"));
+
+        for (int i = 0; i < length; i++)
+        {
+            if (words[i].Length != options)
+            {
+                Debug.LogError("Loading audio clips failed: " + i + " len: " + words[i].Length);
+            }
+        }
+
     }
 
     public int getSentenceLen()

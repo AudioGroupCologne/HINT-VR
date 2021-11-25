@@ -21,6 +21,16 @@ public partial class TrainingGameManager : MonoBehaviour
     [SerializeField] ResultManager resultManager;
     [SerializeField] RewardManager rewardManager;
 
+
+    // there can only be one wordList (even only one voice)
+    [SerializeField] string male_targetAudioPath;
+    [SerializeField] string female_targetAudioPath;
+    [SerializeField] AudioClip distracterStory_male;
+    [SerializeField] AudioClip distracterStory_female;
+    [SerializeField] string iconsPath;
+    [SerializeField] int targetWordGroups;
+    [SerializeField] int[] targetSelectables;
+
     private Sentence sent;
     private LiSN_database lisnData;
 
@@ -52,7 +62,17 @@ public partial class TrainingGameManager : MonoBehaviour
         audioManager = GetComponent<AudioManager>();
 
         // create LiSN_database object
-        lisnData = new LiSN_database(list, voice);
+        if(voice == 1)
+        {
+            lisnData = new LiSN_database(male_targetAudioPath, iconsPath, targetWordGroups, targetSelectables);
+            audioManager.setDistracterSequence(distracterStory_male);
+        }
+        else
+        {
+            lisnData = new LiSN_database(female_targetAudioPath, iconsPath, targetWordGroups, targetSelectables);
+            audioManager.setDistracterSequence(distracterStory_female);
+        }
+        
 
         // create sentence object
         sent = new Sentence(lisnData.getSentenceLen());
@@ -67,6 +87,8 @@ public partial class TrainingGameManager : MonoBehaviour
 
         // generate a new sentence
         sent.createSentence(lisnData);
+
+        
 
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(sent.audio);

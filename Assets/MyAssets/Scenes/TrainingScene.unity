@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16447,6 +16447,15 @@ MonoBehaviour:
   wordSel: {fileID: 621046633}
   resultManager: {fileID: 679436614}
   rewardManager: {fileID: 1208634651}
+  male_targetAudioPath: audio/list_1/voice_male/
+  female_targetAudioPath: audio/list_1/voice_female/
+  distracterStory_male: {fileID: 8300000, guid: 534840bda3b64e54a80d869d69b1f735,
+    type: 3}
+  distracterStory_female: {fileID: 8300000, guid: b596c308fd7755d4db109263c1314998,
+    type: 3}
+  iconsPath: icons/list_1/
+  targetWordGroups: 5
+  targetSelectables: 010000000300000005000000
 --- !u!4 &1551984277
 Transform:
   m_ObjectHideFlags: 0
