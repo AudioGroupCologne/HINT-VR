@@ -149,7 +149,7 @@
 \ac{CAPD} is described by the \ac{ASHA} as a condition, which \dq may lead to or be associated with difficulties in higher order language, learning, and communication functions\dq{} without being caused by actual hearing loss or inabilities \cite{ASHA}. Focusing on the aspect of spatial hearing Cameron and Dillon established the term \ac{SPD} and designed the \ac{LiSN} $\&$ Learn auditory training software to improve binaural processing abilities of affected children \cite{LiSN-A}.
 \newline
 \newline
-Based on this foundation a new training software shall be created as an OpenSource project with \ac{VR} support inside the \textit{Unity} game development engine. Apart from offering a free and easy to use alternative to the follow up product of the original program (\textit{Soundstorm) \footnote{See \url{https://www.soundstorm.app/}}} this project shall also evaluate the possible improvements to the concept using the features of an \ac{VR} application. This includes improved immersion into the auditory environment, the support of real 3D-audio in conjunction with head tracking.
+Based on this foundation a new training software shall be created as an OpenSource project with \ac{VR} support inside the \textit{Unity} game development engine. Apart from offering a free and easy to use alternative to the follow up product of the original program (\textit{Soundstorm) \footnote{Reference: \url{https://www.soundstorm.app/}}} this project shall also evaluate the possible improvements to the concept using the features of an \ac{VR} application. This includes improved immersion into the auditory environment, the support of real 3D-audio in conjunction with head tracking.
 
 \newpage
 
@@ -165,7 +165,7 @@ Based on this foundation a new training software shall be created as an OpenSour
 % What will be done here
 \section{Introduction}
 \label{sec:introduction}
-Spatial hearing describes the ability, to localize the origin of a given sound event, by using binaural clues of the respective signal. The more obvious advantages of this capability include an aid in orientation and improved possibilities to react to events (like an approaching car), which aren't in the filed of view.
+Spatial hearing describes the ability, to localize the origin of a given sound event, by using binaural clues of the respective signal. The more obvious advantages of this capability include an aid in orientation and improved possibilities to react to events (like an approaching car), which are currently not within the field of view.
 \newline
 \newline
 But apart from this, spatial hearing also allows to separate different sound sources and helps managing noisy environments. This is especially useful if the incoming audio signals are similar to each other. A popular example for this is the so called \dq cocktail-party-effect\dq{}, which basically described a situation where a listener has to distinguish between a lot of speech signals and focus on a single one in order to be able to maintain a conversation.
@@ -278,7 +278,7 @@ There are three main tasks which shall be used as guidelines for this project:
 \item Create all assets and code segments to be easily adjustable for further extensions
 \end{enumerate}
 
-
+%\subsection{Desing principles}
 \paragraph{Comparability} To validate if the new application does actually qualify as a training environment to improve spatial processing abilities, it is sensible to re-create the existing software as close as possible. This would not only allow to compare data from existing research with newly collected data, but also eliminate a lot of effort to check if e.g. the chosen speech stimuli are appropriate for the desired purpose. Additionally if this project does indeed lead to a final application, which could be proven to be a viable alternative, the existing data pools can also be used as reference to evaluate whether extensions (like the addition of head tracking) improves the training effect.
 
 
@@ -296,7 +296,12 @@ There are three main tasks which shall be used as guidelines for this project:
 
 
 
-\paragraph{Development tools} As already mentioned, the major part of the development will be done in Unity with the addition of Visual Studio as IDE. The other major tool is the Oculus VR SDK, which will be used for audio spatialization and of course rendering the visuals to be properly displayed on the given VR peripherals.
+% subseciton{Development tools}
+% Unity
+% Oculus SDK
+% Visual Studio
+% Audacity
+\paragraph{Development tools} As already mentioned, the major part of the development will be done in Unity with the addition of Visual Studio as \ac{IDE}. The other major tool is the Oculus \ac{VR} \ac{SDK}, which will be used for audio spatialization and of course rendering the visuals to be properly displayed on the given \ac{VR} peripherals.
 
 
 
@@ -314,7 +319,9 @@ As basis for this project the word lists given in the appendix of the LiSN paper
 \newline
 \newline
 To handle this problem, the words won't be recorded separately but instead a subset of the possible sentences from each list will be recorded. Within this subset all words from the list are included within the recordings. Afterwards the recorded sentences will be cut into the individual words and then will be used the assemble randomly generated sequences based on these assets. This should work fine, since the structure of all sentences within any list remains the same. So the speech flow and pronunciation between the sentences should not be too larger. GET SOME REFERENCES FOR THIS ASSUMPTION!
-
+\newline
+\newline
+It also has to be considered that of course the phonetic differences between a given word group will also differ. So in some cases it might be a lot easier for a listener to guess the correct word, since some options of the given selection can be excluded, even if the correct word wasn't fully understood.
 
 \subsection{Visuals}
 \label{sec:visuals}
@@ -430,7 +437,7 @@ All three of these parameters have to be considered when creating a dynamic fram
 Additionally this example also provides and interesting anomaly. All \textit{options} within a given \textit{group} are sorted alphabetically, except the \textbf{Count} - words. It is important to not rely on any order in which the list might be created, or any other parameter that depends on the actual content of a given word list.
 \newline
 \newline
-However, issues like co-articulation effects have to be considered by the creator of a given group.
+Issues like co-articulation effects have to be considered by the creator of a given group.
 
 
 \subsection{Asset management}

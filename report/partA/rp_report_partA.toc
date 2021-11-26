@@ -1,4 +1,4 @@
-\babel@toc {english}{}
+\babel@toc {english}{}\relax 
 \contentsline {section}{\numberline {1}Abstract}{1}{section.2}%
 \contentsline {section}{\numberline {2}Introduction}{2}{section.9}%
 \contentsline {section}{\numberline {3}Motivation}{2}{section.11}%
@@ -12,30 +12,30 @@
 \contentsline {paragraph}{Free distribution}{5}{section*.23}%
 \contentsline {paragraph}{Extensibility}{5}{section*.24}%
 \contentsline {paragraph}{Development tools}{5}{section*.25}%
-\contentsline {subsection}{\numberline {5.1}Unity overview}{5}{subsection.26}%
-\contentsline {subsection}{\numberline {5.2}Orientation on LiSN project}{6}{subsection.27}%
-\contentsline {subsection}{\numberline {5.3}Audio assets}{6}{subsection.28}%
-\contentsline {subsection}{\numberline {5.4}Visuals}{6}{subsection.29}%
-\contentsline {paragraph}{Matching audio parameters to visuals}{6}{section*.30}%
-\contentsline {paragraph}{Avatars}{6}{section*.31}%
-\contentsline {subsubsection}{\numberline {5.4.1}Audio Sources}{7}{subsubsection.32}%
-\contentsline {subsection}{\numberline {5.5}Training-Game}{7}{subsection.33}%
-\contentsline {subsubsection}{\numberline {5.5.1}Audio files}{7}{subsubsection.34}%
-\contentsline {subsubsection}{\numberline {5.5.2}Game loop}{7}{subsubsection.35}%
-\contentsline {section}{\numberline {6}Concept}{7}{section.36}%
-\contentsline {subsection}{\numberline {6.1}Training Game}{8}{subsection.37}%
-\contentsline {subsubsection}{\numberline {6.1.1}Audio Sources}{8}{subsubsection.38}%
-\contentsline {subsubsection}{\numberline {6.1.2}Word databases}{8}{subsubsection.43}%
-\contentsline {subsection}{\numberline {6.2}Asset management}{9}{subsection.45}%
-\contentsline {subsection}{\numberline {6.3}Progress tracking}{10}{subsection.46}%
-\contentsline {paragraph}{User System}{10}{section*.48}%
-\contentsline {paragraph}{Progress export}{10}{section*.49}%
-\contentsline {paragraph}{In-app visualization}{10}{section*.50}%
-\contentsline {subsection}{\numberline {6.4}User interface}{11}{subsection.51}%
-\contentsline {paragraph}{Main Menu}{11}{section*.53}%
-\contentsline {paragraph}{Login}{11}{section*.54}%
-\contentsline {paragraph}{User Creation}{11}{section*.55}%
-\contentsline {paragraph}{Progress}{11}{section*.56}%
-\contentsline {section}{\numberline {7}Conclusion}{11}{section.58}%
-\contentsline {section}{List of Figures}{14}{section*.60}%
-\contentsline {section}{Sources}{14}{section*.60}%
+\contentsline {subsection}{\numberline {5.1}Unity overview}{6}{subsection.28}%
+\contentsline {subsection}{\numberline {5.2}Orientation on LiSN project}{6}{subsection.29}%
+\contentsline {subsection}{\numberline {5.3}Audio assets}{6}{subsection.30}%
+\contentsline {subsection}{\numberline {5.4}Visuals}{6}{subsection.31}%
+\contentsline {paragraph}{Matching audio parameters to visuals}{6}{section*.32}%
+\contentsline {paragraph}{Avatars}{6}{section*.33}%
+\contentsline {subsubsection}{\numberline {5.4.1}Audio Sources}{7}{subsubsection.34}%
+\contentsline {subsection}{\numberline {5.5}Training-Game}{7}{subsection.35}%
+\contentsline {subsubsection}{\numberline {5.5.1}Audio files}{7}{subsubsection.36}%
+\contentsline {subsubsection}{\numberline {5.5.2}Game loop}{7}{subsubsection.37}%
+\contentsline {section}{\numberline {6}Concept}{7}{section.38}%
+\contentsline {subsection}{\numberline {6.1}Training Game}{8}{subsection.39}%
+\contentsline {subsubsection}{\numberline {6.1.1}Audio Sources}{8}{subsubsection.40}%
+\contentsline {subsubsection}{\numberline {6.1.2}Word databases}{8}{subsubsection.45}%
+\contentsline {subsection}{\numberline {6.2}Asset management}{9}{subsection.47}%
+\contentsline {subsection}{\numberline {6.3}Progress tracking}{10}{subsection.48}%
+\contentsline {paragraph}{User System}{10}{section*.50}%
+\contentsline {paragraph}{Progress export}{10}{section*.51}%
+\contentsline {paragraph}{In-app visualization}{10}{section*.52}%
+\contentsline {subsection}{\numberline {6.4}User interface}{11}{subsection.53}%
+\contentsline {paragraph}{Main Menu}{11}{section*.55}%
+\contentsline {paragraph}{Login}{11}{section*.56}%
+\contentsline {paragraph}{User Creation}{11}{section*.57}%
+\contentsline {paragraph}{Progress}{11}{section*.58}%
+\contentsline {section}{\numberline {7}Conclusion}{11}{section.60}%
+\contentsline {section}{List of Figures}{14}{section*.62}%
+\contentsline {section}{Sources}{14}{section*.62}%
