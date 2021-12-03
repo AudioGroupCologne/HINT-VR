@@ -124,7 +124,7 @@
 	\vspace{1cm}
 	{\scshape\Large project report\par}
 	\vspace{1.5cm}
-	{\huge\bfseries Realizing spatial listening tests in Virtual Reality using Unity\par}
+	{\huge\bfseries Rebuilding the \acs{LiSN} \& Learn auditory training software as Untiy \acs{VR} application\par}
 	\vspace{2cm}
 	{\Large\itshape Alexander Müller \par}
 	\vfill
@@ -168,7 +168,7 @@ Based on this foundation a new training software shall be created as an OpenSour
 Spatial hearing describes the ability, to localize the origin of a given sound event, by using binaural clues of the respective signal. The more obvious advantages of this capability include an aid in orientation and improved possibilities to react to events (like an approaching car), which are currently not within the field of view.
 \newline
 \newline
-But apart from this, spatial hearing also allows to separate different sound sources and helps managing noisy environments. This is especially useful if the incoming audio signals are similar to each other. A popular example for this is the \textit{cocktail-party-effect}, which basically described a situation where a listener has to distinguish between a lot of speech signals and focus on a single one in order to be able to maintain a conversation \footnote{For more information refer to \cite{CP}}.
+But apart from this, spatial hearing also allows to separate different sound sources and helps managing noisy environments. This is especially useful if the incoming audio signals are similar to each other. A popular example for this is the \textit{cocktail-party-effect}, which basically described a situation where a listener has to distinguish between a lot of speech signals and focus on a single one in order to be able to maintain a conversation\footnote{For more information refer to Bronkhorst \textit{The cocktail-party problem revisited} \cite{CP}}.
 \newline
 \newline
 Even though this scenario does not cause too much problems for the average person, it contains a lot of difficulties for everyone with hearing inabilities. Unfortunately, in many cases these impairments affect the ability of spatial hearing and therefore reducing or eliminating information that could otherwise be used to separate the different audio sources from each other. Even modern day hearing aids still can't offer the nuances required to precisely determine the location of a given sound source \cite{HA-SRT}.
@@ -204,7 +204,7 @@ Building upon this approach, the training concept described by Cameron and Dillo
 % 5. Option zur Datenerhebung (freiwillig!) -> könnte Forschung weitervorreantreiben...
 \section{Motivation}
 \label{sec:motivation}
-Re-creating the \ac{LiSN} training software as an open-source \ac{VR} application offers several interesting perspectives and possible advantages. The first point would be the option to establish Unity \ac{VR} as a valid foundation for listening related training and test projects. If this can indeed be proven, this project can maybe be used to establish a foundation upon more application can be developed with reasonable resources.
+Re-creating the \ac{LiSN} \& Learn training software as an open-source \ac{VR} application offers several interesting perspectives and possible advantages. The first point would be the option to establish Unity \ac{VR} as a valid foundation for listening related training and test projects. If this can indeed be proven, this project can maybe be used to establish a foundation upon more application can be developed with reasonable resources.
 \newline
 \newline
 The next interesting point would be the evaluation of the additional features that \ac{VR} can bring into this field like head tracking and a more in depth association between auditory and visual clues.
@@ -216,16 +216,6 @@ Moving on, using an open-source and free-license approach also offers a lot of o
 Offering the software for free in combination with the - even though not particularly cheap - but rather simple hardware requirements to run such an application, this approach might help improving the availability of such test and training applications for affected persons. If the set-up can be kept simple enough doctors offices, schools or even private households could be able to offer this project.
 
 
-
-%Realizing this listening test as a Unity-based \ac{VR} application offers several advantages. The first one being the possibility to implement the project as an OpenSource application. Since only free-to-use assets have been included, both the compiled application and the source files can be made publicly available. Combined with simple setup required to perform the listening experiments, this will hopefully allow a variety of interested groups to perform these tests to collect further data and offer affected children access to work on the condition.
-%\newline
-%\newline
-%Furthermore the Unity framework in conjunction with the prefabs and scripts, that have been created for this project, it would be relatively easy to extend upon the original training concept. For example the addition of multiple distracters within a given scene could very easily be realized.
-%\newline
-%\newline
-%Apart from the previously mentioned aspects the usage VR peripherals for this project also offers a lot more possiblilites. Some of them will be discussed in \Ref{sec:outlook}. But especially adaptive 3D audio in combination with head tracking would allow for a much more realistic scenario. Also the novelty of the VR headset itself will most likely already spark a lot of interest in the participants in comparison to a regular learning/training game.
- 
-
 \section{Fundamentals}
 \label{sec:fundamentals}
 Before describing the general approach of this project in section \ref{sec:approach}, some underlying principles and theoretical foundations shall be discussed. The contents within this section are not supposed to be used as a general explanation but rather as a brief introduction into the topic.
@@ -235,8 +225,6 @@ Before describing the general approach of this project in section \ref{sec:appro
 In order to localize the source of a given noise, we can use several clues within the perceived sound event. The most important ones being the differences in time and level between the signal on the right and the left ear (Interaul Time/Level Differences [ITD/ILD]). Additionally there are spectral colouring effects, which are based on the path an audio signal takes from it's source, around the listeners head and upper body into the ears. In comparison to ITD/ILDs this effect can only be applied to well known noises, because the listener has to compare the currently perceived noise with previous times in order to identify the spectral differences and assign them to a general direction.   
 \newline
 \newline
-%Auditive localization is based upon the ability to use binaural clues to localize the source of a noise. This ability relies upon three main features: the difference in level (1) and phase (2) of a signal between the left and the right ear and the spectral colouring (3) of a known noise, caused by the geometry of the listeners head and upper body [REFERENCE].
-%The human ability of locating audio sources is based upon two main principles
 The human ability of locating audio sources can be divided into two main features. The first being the perception of the time and level differences between an acoustic event on the left and right ear. The different time points at which the signal is perceived at the two ears, translates to a different phase at which the audio wave is registered. On the other side the level differences mainly derive from shadowing caused by the head. Both of these effects are not frequency independent, for lower tones the localization via phase differences works better, while at higher frequencies the level variations offer a better indication.
 \newline
 \newline
@@ -298,7 +286,7 @@ There are three main tasks which shall be used as guidelines for this project:
 \paragraph{Free distribution} Again assuming the outcome of this project will qualify as a valid training software, the opportunity to be able to make it available as an OpenSource project offers several opportunities. The first one being, that combined with the relatively simple hardware requirements, a free to use software might help improve access to an aid against \ac{SPD} to previously excluded demographics. Additionally a solution, which is more accessible offers the opportunity to gain access to more data, which could be used in further research (e.g. by adding a voluntary option to share progress data within a database). Another aspect would be, that as with any OpenSource project, there is a possibility that other developers or researches use the project as a foundation and extend upon it. This might results in a final product with a widely improved functionality than what would be possible for a single team. However, in any case it is required to only include free to use assets within the implementation to make sure that such a publication won't break any license agreements. So a lot of caution is required when selection third party assets, like sound effects or graphics.
 
 
-\paragraph{Extensibility} Writing flexible software might be more complicated during the initial development, especially when the scope of the project is rather small. However, to allow the easy addition of new features and simultaneously setting the requirements for a successful OpenSource project, a certain level of flexibility within all parts of the project is necessary. Of course within the given development time frame the extend to that this design principle can be fulfilled is limited, but a lot can be achieved even within the concept phase, if considered and prioritised correctly.
+\paragraph{Extensibility} Writing flexible software might be more complicated during the initial development, especially when the scope of the project is rather small. However, to allow the easy addition of new features and simultaneously setting the requirements for a successful open-source project, a certain level of flexibility within all parts of the project is necessary. Of course within the given development time frame the extend to that this design principle can be fulfilled is limited, but a lot can be achieved even within the concept phase, if considered and prioritised correctly.
 
 
 % subseciton{Development tools}
@@ -318,31 +306,24 @@ There are three main tasks which shall be used as guidelines for this project:
 \label{sec:unity}
 Unity is a development platform, which is mainly used as a engine for video games. It is free to use for non-commercial, educational or small revenue purposes and therefore qualifies as a foundation for an open-source project \footnote{See \url{https://store.unity.com/\# plans-individual} (retrieval date: November 2021)}. One of the key advantages of using such a framework is that issues like rendering of graphics and audio, portability between different systems etc. are already taken care of. Also Unity includes a wide variety of features, components and available documentation, which significantly speed up the development process. Also the Unity inspector - if used correctly - allows for several ways of adjusting parameters or switching assets without requiring any programming skills. This is especially interesting for this project, since it allows for a low entrance barrier for third parties who want to alter the application in small means to better fit their requirements. However, the vast scope of options given in Unity also adds some drawbacks, like an increased risk of choosing a suboptimal approach when implementing features.
 
-\paragraph{Oculus SDK} The Oculus \acs{SDK} offers a lot of utilities, which make the implementation of a \ac{VR} application a lot easier. This goes from prefabs for camera setups, to input management over the a dedicated audio spatializer.
+\paragraph{Oculus SDK} The Oculus \acs{SDK} offers a lot of utilities, which make the implementation of  \ac{VR} applications a lot easier. This goes from starting points for special camera rigs, to an adjusted input system over the the Oculus Audio Spatializer\footnote{For more details see: \url{https://developer.oculus.com/documentation/unity/unity-gs-overview/}}.
+
+
+%This goes from prefabs for camera setups, to input management over the a dedicated audio spatializer.
 
 
 
 % describe what parameters will be directly taken from LiSN
 \subsection{Orientation on LiSN \& Learn software}
 Within this section the given parameters for the training game shall be presented, which have to be followed in order to maintain comparability.
-%At this point the fixed parameters from the original training software, which have to be considered to maintain comparability, shall briefly be discussed. 
 
-\begin{itemize}
-%\item Adaptive SNR (hit: - 1.5 dB, miss: + 1.5 dB, unsure: + 1.5 dB)
-%\item Unsure: Repeat one time with increased SNR
-%\item practice rounds (min 5 with 3 dB steps to find SRT of participant)
-\item Word list (List 1)
-%\item Reward system (5 consecutive correct guesses)
-%\item Four word options for each guess
-%\item Session length (40 rounds)
-%\item 2 Speakers (male, female)
-%\item 2 groups (with or without spatial information (90 deg target/dist offset)
-%\item Given RMS levels of target (-22 dB) and distracter (-25 dB)
-\item Target sentence generation (cutting sentences into words, then randomly assembling them)
-\end{itemize}
+%\begin{itemize}
+%\item Word list (List 1)
+%\item Target sentence generation (cutting sentences into words, then randomly assembling them)
+%\end{itemize}
 
 % \subsection{Training Game}
-\paragraph{Game loop} Like in the original project the main game loop will consist of target sentences being playing along with a distracter story. After every round \textbf{4 options} for a word from the target sentence and an \textit{Unsure} button will be presented to the player. A training session consists of 40 rounds / sentences.
+\paragraph{Game loop} Like in the original project the main game loop will consist of target sentences being playing along with a distracter story. After every round \textbf{4 options} for a word from the target sentence (including the correct one) and an \textit{Unsure} button will be presented to the player. If the player selects the correct answer a 'success sound' (e.g. a bell) has to be played, while after an incorrect selection a 'failure sound' is issued. If \textit{Unsure} was selected the same sentence will be repeated once. When \textit{Unsure} is submitted twice in a row, a new sentence will be created. A training session consists of 40 rounds / sentences.
 
 \paragraph{Scenarios} The training game shall feature \textbf{4 different scenarios}:
 \begin{enumerate}
@@ -352,8 +333,6 @@ Within this section the given parameters for the training game shall be presente
 \item Different voices with $\pm$ 90 degrees (high cue \ac{SRT})
 \end{enumerate}
 For this purpose both all the target sentences and distracter stories have to be available with two differnt voices (ideally a female and a male one).
-
-\paragraph{Unsure} If the player selects \textit{Unsure} the same sentence will be repeated once. If \textit{Unsure} is selected a second time, a new sentence will be played.
 
 \paragraph{Adaptive SNR} Based upon whether the participant guess a word correctly (\textit{hit}), incorrectly (\textit{miss)} or select the \textit{unsure} option the audio levels between target and distracter will be adjusted:
 \begin{itemize}
@@ -366,8 +345,6 @@ For this purpose both all the target sentences and distracter stories have to be
 
 \paragraph{Rewards} When \textbf{5 consecutive correct answers} have been given, the participant is granted a reward sticker, which will be shown on the screen for the remaining duration of the session.
 
-\paragraph{Sound feedback} On every \textit{hit} or \textit{miss} either a \dq success\dq{} or \dq failure\dq{} has to be played.
-
 \paragraph{Attention sound} 500 ms before the start of every target sentence a short attention sound has to be played (1000 Hz tone of 200 ms).
 
 \paragraph{Playback delays} The disctracter story shall always start 2 s before the target sentences and end approx. 1s after the target speaker has finished.
@@ -379,6 +356,14 @@ For this purpose both all the target sentences and distracter stories have to be
 % voice options
 % RMS for distractor and target
 % audio editing guidelines
+
+\subsection{Speech stimuli}
+\label{sec:speech}
+To further maintain comparability and to avoid the additional workload of re-evaluating appropriate speech stimuli the new application will feature the same word databases as used in the original project. Cameron and Dillon dedicated a whole section to the considerations which went into the subject of speech capabilities of children at a certain age. The only difference that will be made, is that the distracter stories have to be changed, because the original stories aren't publicly available.
+\newline
+\newline
+Considering the recordings of the speech stimuli a neural \ac{TTS} tool will be used. This mitigates the problem of not having a native English speaker or the appropriate equipment and skillset to reproduce professional speech stimuli. Additionally this makes it a lot easier to add new speech stimuli into the project later on.
+
 
 %\subsection{Audio assets}
 %\label{sec:audio_assets}
@@ -396,7 +381,7 @@ For this purpose both all the target sentences and distracter stories have to be
 Apart from the move to \ac{VR} peripherals and the new audio assets the visuals will probably be the biggest deviation from the original software. Since the 2D presentation of the \ac{LiSN} software wouldn't be sensible here, a 3D environment has to be added.
 \newline
 \newline
-Considering that the target participants of this project are children the visual presentation is of great importance. If the training game isn't engaging, there is a high risk of participants not complying with the required training schedule due to the repetitive nature of the sessions\footnote{This issue was already brought up by Cameron and Dillon in the conclusion of \cite{LiSN-B}}.
+Considering that the target participants of this project are children the visual presentation is of great importance. If the game isn't engaging, there is a high risk of participants not complying with the required training schedule due to the repetitive nature of the sessions\footnote{This issue was already brought up by Cameron and Dillon in the conclusion of \cite{LiSN-B}}.
 \newline
 \newline
 The novelty of \ac{VR} in general might already be helpful in mitigating this problem, but it should still be considered during development. Additionally \ac{VR} applications require special care when it comes the orientation and sense of space within the 3D environment, otherwise there is a risk of players feeling disorientated.
@@ -405,39 +390,7 @@ The novelty of \ac{VR} in general might already be helpful in mitigating this pr
 Due to the limited resources in this development, the usage of 3rd-party assets will most likely be inevitable. To still be able to freely distribute the project the license requirement for all non-proprietary assets has to be considered.
 
 
-\paragraph{Matching visuals to audio} Since in the original context neither reflections nor reverberation was included, it shouldn't be added in the re-modelling as well. This adds some conditions to the selection of the 3D environment. A big empty room, would suggest the occurrence of reverb and echo and should therefore be avoided. Ideally an outside location should be selected, where a free-field sound propagation would be natural. Another important point would be the visual representation of the speakers. Since it might be distracting to here a voice from a given direction without being able to associated the sound to any object in the world, the addition of \textit{avatars} for the speakers should be considered.
-
-
-%\paragraph{Avatars} Another important part is the graphical representation of the audio sources. Since we have the visual component given through the \ac{VR} headset, the sound should not simply come from an invisible sources, but have a origin which the user can identify through the graphics. This however includes another challenge. Of course it would be possible to create humanoid avatars with complex animations - including lip syncing - to convey that the object is indeed active and not just a passive talking rock. However this would take a huge amount of effort to pull of. Instead a different path will be used here, which is also pretty common in budget oriented game design (e.g. indie games). Through abstract avatars and simple animations/movements it is possible to convince the user, that the object is alive and active, while at the same time requiring a lot less effort to pull of.
-
-
-%\subsubsection{Audio Sources}
-%Within the level both interactive and regular audio sources are implemented. All of them use 3D rendering, so that the preceived sound changes based on the position of the player to the object, emitting the sound. The advantage of adding interactive sound sources is that,...
-
-% Tatsächliche Testumgebung mit Datenerfassung
-% 4 Optionen: 0/90 deb, same/different voice
-% 4 Listen, zufällige Sätze, 4 Rate Optionen
-% Audio parameter (SNR zwischen Talker/Distractor)
-% Welche Daten werden erfasst: Totals, Hits, Misses, List, Group (?)
-% Wie/Wann wird zwischen Wordgruppen gewechselt?
-%\subsection{Training-Game}
-%\label{sec:training_game}
-
-
-%\subsubsection{Audio files}
-%Target sentences are constructed in a way that the co-articulation in between the sentences of a list is similar enough the allow randomly scrambling up sentences will maintaining a natural sounding result.
-
-%\subsubsection{Game loop}
-%Continuous distracter stories creating a noise with similar characteristics as the target sentences.
-%\newline
-%\newline
-%Both the target sentences and the distracter stories shall be omitted by actual objects within the game world. This association between audio and visual representation shall create further immersion (FIND REFERENCE!).
-%\newline
-%\newline
-%Whenever a target sentence was played, four word options will be displayed. (IMAGES OR WORDS?). When the correct result is picked, the selected option turns green and a celebratory sound is played. Otherwise if an incorrect option is selected, it is marked red and a failure sound is played. Alternatively an  \dq uncertain\dq{} option is presented.
-%\newline
-%\newline
-%SNR: For every correct guess, the SNR is decreased by 2.5 dB. For every incorrect guess, SNR is increased by 1.5 dB. At uncertain at first the same sentence is repeated with 1.5 dB higher SNR. At a second consecutive \textit{uncertain} a new sentence will be played, with again increased SNR.
+\paragraph{Matching visuals to audio} Since in the original context neither reflections nor reverberation was included, it shouldn't be added in the re-modelling as well. This adds some conditions to the selection of the 3D environment. A big empty room, would suggest the occurrence of reverberation and echo and should therefore be avoided. Ideally an outside location should be selected, where a free-field sound propagation would be natural. Another important point would be the visual representation of the speakers. Since it might be distracting to here a voice from a given direction without being able to associated the sound to any object in the world, the addition of \textit{avatars} for the speakers should be considered.
 
 
 \section{Concept}
@@ -449,6 +402,7 @@ The biggest part will be achieving flexibility in the projects structure, to all
 
 
 \subsection{Training Game}
+\label{sec:concept_tg}
 This section will focus on the aspects that are specific to the actual training game. This includes some pre-considerations on how the general setup should look like and what practices can be used to maintain a certain level of adjustability from the start. Of course it is to be expected, that some of the ideas described here won't be implemented exactly.
 
 \subsubsection{Audio Sources}
@@ -464,9 +418,7 @@ Inside the training game there will be two possible setup option for the audio s
 \label{fig:setups}
 \vspace{3mm}
 \end{figure}
-\newline
-%\vspace{8cm}
-\newline
+
 
 \subsubsection{Word databases}
 Even though the initial scope of the application shall only feature a single word list from the original paper (Appendix A \cite{LiSN-A}), the implementation should be flexible enough to support different word databases. This is particularly important when considering the option to port the application to different languages. To further elaborate on how this should be done, List 1 from the original paper will be used as an example.  Within table \ref{tab:list1} all highlighted words are can be used as an \textit{option} to question the user.
@@ -546,28 +498,71 @@ Another important part would be to allow for differentiation between regular par
 \paragraph{In-app visualization} Finally to application shall give any user an option to keep track of their progress. This will be realized through a separate screen, which features a simple graph plotting the \ac{SRT} values of the amount of traning sessions done as well as additional space to show e.g. the current average \ac{SRT} over all sessions.
 
 
-\subsection{User interface}
-\label{sec:ui-concept}
-Based on the previously described parts of the application, a general setup for the required \ac{UI} options can be defined. At first it is important, that all \ac{UI} elements can easily be selected while using \ac{VR} peripherals. This could for example be achieved by setting an appropriate minimal size for all text that displayed. Since a lot of this 
+% Describe all scenes/screens that are required.
+% Login
+% User Creation
+% Main Menu
+% Training Game
+% Progress
+\subsection{Application overview}
+Based on the given requirements and established conceptual ideas a basic description of the application can be created. At first the project can be divided into 4 main functional blocks:
+\begin{enumerate}
+\item User Login \& Creation
+\item Main Menu
+\item Training Game
+\item Progress Screen
+\end{enumerate}
+All of these parts can be imagined as separate states with can be entered or left based on a set of conditions (e.g. Leaving the progress screen by hitting the \textit{ESC} key). This is visualized in figure \ref{fig:screens}:\vspace{5mm}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{screens2.png}
+\caption{Screens}
+\label{fig:screens}
+\vspace{3mm}
+\end{figure}
 \newline
-\newline
-Apart from this general consideration, a brief overview of all major \ac{UI} elements shall be given
+After this brief overview the contents of each functional block shall be discussed further.
 
+\paragraph{User Login \& Creation} This has to be the first part to be loaded upon the start of the application. From here on the user can either login into an existing account or create a new one. The \acs{UI} format should be presented in a common form like shown in figure \ref{fig:userlogin}.
+\begin{figure}[h!]
+	\hspace{0.05\textwidth}
+    \subfigure[Login]{\includegraphics[width=0.45\textwidth]{UserLoginB.png}}
+    %\hspace{0.2\textwidth}
+    \subfigure[Creation]{\includegraphics[width=0.45\textwidth]{UserCreationB.png}}
+    %\hspace{0.1\textwidth}
+\caption{Login \& User Creation}
+\label{fig:userlogin}
+\vspace{3mm}
+\end{figure}
 
-\paragraph{Main Menu} The \textit{Main Menu} only requires button to access different screens (e.g. \textit{Training Game} or \textit{Progress}).
-
-\paragraph{Login} This requires of course text fields which can be used to type down both the username and password. Additionally a \textit{Submit} and a \textit{Create new user} button are necessary.
-
-\paragraph{User Creation} This can basically be the same as the \textit{Login Screen}, with the addition that the user has to select a group (control or regular) to be associated with the account.
-
-\paragraph{Progress} As already described, the \textit{Progress} screen shall display a combination of different information. As interactive object a \textit{Return} button has to be added, to allow the user to return to the \textit{Main Menu}.
-
+\paragraph{Main Menu} The main menu in this case is rather simple since it only has to offer the selection between transitioning into the \textit{Training Game} or showing the \textit{Progress Screen}. 
 \vspace{5mm}
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\textwidth]{screens2.png}
-caption{Screens}
-\label{fig:screens}
+\includegraphics[width=0.6\textwidth]{MainMenu.png}
+\caption{Main Menu}
+\label{fig:mainmenu}
+\vspace{3mm}
+\end{figure}
+
+
+
+\paragraph{Training Game} Since the \textit{Training Game} has already been discussed in section \ref{sec:concept_tg}, only the \acs{UI} elements within this scene will be addressed here. These consist of the already mentioned \textbf{4 word options} and the \textbf{Unsure} button, which are shown after the end of each sentence. Since the \textit{Training Game} will be set in a 3D environment, the \acs{UI} elements shall be included into the scene, instead of using a separate screen.
+\vspace{5mm}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{TrainingGame.png}
+\caption{Training Game UI}
+\label{fig:mainmenu}
+\vspace{3mm}
+\end{figure}
+
+\paragraph{Progress} The progress screen shall feature a graphical representation of the \ac{SRT} values achieved by the user of the amount of sessions done. Additionally other data like the current average \ac{SRT} or the total number of sessions done can be featured as well.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{Progress.png}
+\caption{Progress}
+\label{fig:progress}
 \vspace{3mm}
 \end{figure}
 
@@ -588,7 +583,8 @@ Within part A of this research project, a concept as well as the main set of req
 \begin{acronym}[SEVENLTH]
  \acro{ASHA}{American Speech-Language-Hearing Association}
  \acro{CAPD}{Central Auditory Processing Disorder}
- \acro{GUI}{Graphical User Interface}
+ \acro{DSP}{Digital Signal Processing}
+% \acro{GUI}{Graphical User Interface}
  \acro{HRTF}{Head Related Transfer Function}
  \acro{IDE}{Integrated Development Environment}
  \acro{LiSN}{Listening in Spatialized Noise \& Learn}
@@ -598,6 +594,7 @@ Within part A of this research project, a concept as well as the main set of req
  \acro{SNR}{Signal to Noise Ratio}
  \acro{SPD}{Spatial Processing Disorder}
  \acro{SRT}{Speech Reception Threshold}
+ \acro{TTS}{Text To Speech}
  \acro{UI}{User Interface}
  \acro{VAE}{Virtual Acoustic Environments}
  \acro{VR}{Virtual Reality}
@@ -616,7 +613,7 @@ Within part A of this research project, a concept as well as the main set of req
 \bibitem{LiSN-B}{\textit{Efficacy of the LiSN \& Learn auditory training software: randomized
 blinded controlled study}, Sharon Cameron, Helen Glyde and Harvey Dillon, Date: October 2015, \url{https://www.researchgate.net/publication/276222698_Efficacy_of_the_LiSN_Learn_auditory_training_software_Randomized_blinded_control_study}}
 %\bibitem{LiSN-C}{\textit{Correlating performance on the Listening in Spatialized Noise – Sentences Test (LiSN-S) with the Listening in Spatialized Noise – Universal Test (LiSN-U)}, Kiri Mealingsa, Sharon Cameron and Harvey Dillon, Published: April 2020, Date: 2019}
-\bibitem{CP}{The cocktail-party problem revisited: early processing and selection of multi-talker speech, Adelbert W. Bronkhosrt, Date: April 2015, \url{https://www.researchgate.net/publication/274397643_The_cocktail-party_problem_revisited_early_processing_and_selection_of_multi-talker_speech}}
+\bibitem{CP}{The cocktail-party problem revisited: early processing and selection of multi-talker speech, Adelbert W. Bronkhorst, Date: April 2015, \url{https://www.researchgate.net/publication/274397643_The_cocktail-party_problem_revisited_early_processing_and_selection_of_multi-talker_speech}}
 \bibitem{HA-SRT}{\textit{Listening through hearing aids affects spatial perception and speech intelligibility in normal-hearing listeners}, Jens Cubick, Jörg M Buchholz, Virginia Best, Mathieu Lavandier, Torsten Dau, Date: 2016, \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6246072/}}
 %\bibitem{test}{test \href{https://www.google.com/}{This link is colored blue.}}
 % Add Unity and Oculus references...

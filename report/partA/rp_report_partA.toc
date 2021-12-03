@@ -13,33 +13,32 @@
 \contentsline {paragraph}{Development tools}{6}{section*.29}%
 \contentsline {subsection}{\numberline {4.2}Unity overview}{6}{subsection.32}%
 \contentsline {paragraph}{Oculus SDK}{6}{section*.34}%
-\contentsline {subsection}{\numberline {4.3}Orientation on LiSN \& Learn software}{7}{subsection.35}%
-\contentsline {paragraph}{Game loop}{7}{section*.36}%
-\contentsline {paragraph}{Scenarios}{7}{section*.37}%
-\contentsline {paragraph}{Unsure}{7}{section*.43}%
+\contentsline {subsection}{\numberline {4.3}Orientation on LiSN \& Learn software}{7}{subsection.36}%
+\contentsline {paragraph}{Game loop}{7}{section*.37}%
+\contentsline {paragraph}{Scenarios}{7}{section*.38}%
 \contentsline {paragraph}{Adaptive SNR}{7}{section*.44}%
 \contentsline {paragraph}{Practice mode}{7}{section*.45}%
 \contentsline {paragraph}{Rewards}{7}{section*.47}%
-\contentsline {paragraph}{Sound feedback}{8}{section*.48}%
-\contentsline {paragraph}{Attention sound}{8}{section*.49}%
-\contentsline {paragraph}{Playback delays}{8}{section*.50}%
-\contentsline {paragraph}{Audio parameters}{8}{section*.51}%
-\contentsline {subsection}{\numberline {4.4}Visuals}{8}{subsection.52}%
-\contentsline {paragraph}{Matching visuals to audio}{8}{section*.54}%
-\contentsline {section}{\numberline {5}Concept}{8}{section.55}%
-\contentsline {subsection}{\numberline {5.1}Training Game}{9}{subsection.56}%
-\contentsline {subsubsection}{\numberline {5.1.1}Audio Sources}{9}{subsubsection.57}%
-\contentsline {subsubsection}{\numberline {5.1.2}Word databases}{9}{subsubsection.62}%
-\contentsline {subsection}{\numberline {5.2}Asset management}{10}{subsection.64}%
-\contentsline {subsection}{\numberline {5.3}Progress tracking}{11}{subsection.65}%
-\contentsline {paragraph}{User System}{11}{section*.66}%
-\contentsline {paragraph}{Progress export}{11}{section*.67}%
-\contentsline {paragraph}{In-app visualization}{12}{section*.68}%
-\contentsline {subsection}{\numberline {5.4}User interface}{12}{subsection.69}%
-\contentsline {paragraph}{Main Menu}{12}{section*.71}%
-\contentsline {paragraph}{Login}{12}{section*.72}%
-\contentsline {paragraph}{User Creation}{12}{section*.73}%
-\contentsline {paragraph}{Progress}{12}{section*.74}%
-\contentsline {section}{\numberline {6}Conclusion}{13}{section.76}%
-\contentsline {section}{List of Figures}{15}{section*.78}%
-\contentsline {section}{Sources}{15}{section*.78}%
+\contentsline {paragraph}{Attention sound}{7}{section*.48}%
+\contentsline {paragraph}{Playback delays}{8}{section*.49}%
+\contentsline {paragraph}{Audio parameters}{8}{section*.50}%
+\contentsline {subsection}{\numberline {4.4}Speech stimuli}{8}{subsection.51}%
+\contentsline {subsection}{\numberline {4.5}Visuals}{8}{subsection.53}%
+\contentsline {paragraph}{Matching visuals to audio}{8}{section*.55}%
+\contentsline {section}{\numberline {5}Concept}{9}{section.56}%
+\contentsline {subsection}{\numberline {5.1}Training Game}{9}{subsection.57}%
+\contentsline {subsubsection}{\numberline {5.1.1}Audio Sources}{9}{subsubsection.58}%
+\contentsline {subsubsection}{\numberline {5.1.2}Word databases}{10}{subsubsection.63}%
+\contentsline {subsection}{\numberline {5.2}Asset management}{10}{subsection.65}%
+\contentsline {subsection}{\numberline {5.3}Progress tracking}{11}{subsection.66}%
+\contentsline {paragraph}{User System}{11}{section*.67}%
+\contentsline {paragraph}{Progress export}{12}{section*.68}%
+\contentsline {paragraph}{In-app visualization}{12}{section*.69}%
+\contentsline {subsection}{\numberline {5.4}Application overview}{12}{subsection.70}%
+\contentsline {paragraph}{User Login \& Creation}{13}{section*.76}%
+\contentsline {paragraph}{Main Menu}{13}{section*.80}%
+\contentsline {paragraph}{Training Game}{13}{section*.82}%
+\contentsline {paragraph}{Progress}{13}{section*.84}%
+\contentsline {section}{\numberline {6}Conclusion}{14}{section.86}%
+\contentsline {section}{List of Figures}{16}{section*.88}%
+\contentsline {section}{Sources}{16}{section*.88}%
