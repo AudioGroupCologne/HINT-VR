@@ -18,10 +18,17 @@ public class wordSelectionScript : MonoBehaviour
     [SerializeField] Button[] wordBtns;
     [SerializeField] Button unsureBtn;
     [SerializeField] Button continueBtn;
-    [SerializeField] TrainingGameManager masterScript;
 
-    [SerializeField] int wordOptions = 4;
     [SerializeField] float nextDelay = 1.5f;
+
+    public delegate void OnHit();
+    public OnHit onHitCallback = delegate { Debug.Log("No onHit delegate set!"); };
+    public delegate void OnMiss();
+    public OnHit onMissCallback = delegate { Debug.Log("No onMiss delegate set!"); };
+    public delegate void OnUnsure();
+    public OnHit onUnsureCallback = delegate { Debug.Log("No onUnsure delegate set!"); };
+    public delegate void OnContinue();
+    public OnHit onContinueCallback = delegate { Debug.Log("No onContinue delegate set!"); };
 
     // words to be written onto UI
     private string[] words;
@@ -37,25 +44,48 @@ public class wordSelectionScript : MonoBehaviour
         wordSelectionUI.SetActive(false);
     }
 
+    // keyboard controls
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            ButtonHander(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            ButtonHander(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            ButtonHander(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            ButtonHander(3);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            UnsureButtonHanlder();
+        }
+        if (continueBtn.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Return))
+        {
+            ContinueButtonHandler();
+        }
+    }
+
     public void startWordSelection(string[] randomWords, Sprite[] randomIcons)
     {
         selectionMade = false;
         wordSelectionUI.SetActive(true);
         words = randomWords;
         icons = randomIcons;
-        mapWordsToUI();
-
-        /*
-        Debug.Log("Select first button");
-        wordBtns[0].Select();
-        wordBtns[0].OnSelect(null);
-        */
+        mapWordsToUI(randomWords.Length);
     }
 
-    void mapWordsToUI()
+    void mapWordsToUI(int num_words)
     {
         // get random poosition for correct Btn
-        correctBtn = Random.Range(0, wordOptions - 1);
+        correctBtn = Random.Range(0, num_words - 1);
 
         // first assign correct word
         wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
@@ -64,7 +94,7 @@ public class wordSelectionScript : MonoBehaviour
         int k = 0;
 
         // assign remaining words
-        for (int i = 1; i < wordOptions; i++)
+        for (int i = 1; i < num_words; i++)
         {
             // skip the correct Button
             if (k == correctBtn)
@@ -84,17 +114,17 @@ public class wordSelectionScript : MonoBehaviour
 
         if (correctBtn == btn_ix)
         {
-            masterScript.OnHit();
+            onHitCallback();
             wordBtns[btn_ix].GetComponent<Image>().color = Color.green;
         }
         else
         {
-            masterScript.OnMiss();
+            onMissCallback();
             wordBtns[btn_ix].GetComponent<Image>().color = Color.red;
         }
 
         selectionMade = true;
-        StartCoroutine(showNextWait(nextDelay));
+        StartCoroutine(showContinueWait(nextDelay));
 
 
     }
@@ -104,20 +134,26 @@ public class wordSelectionScript : MonoBehaviour
         if (selectionMade)
             return;
 
-        masterScript.OnUnsure();
+        //masterScript.OnUnsure();
+        onUnsureCallback();
 
         // show 'continue' button
         continueBtn.gameObject.SetActive(true);
 
     }
 
-    private IEnumerator showNextWait(float delay)
+    public void ContinueButtonHandler()
     {
-        yield return new WaitForSeconds(delay);
-        showNextButton();
+        onContinueCallback();
     }
 
-    private void showNextButton()
+    private IEnumerator showContinueWait(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        showContinueButton();
+    }
+
+    private void showContinueButton()
     {
 
         for (int i = 0; i < wordBtns.Length; i++)

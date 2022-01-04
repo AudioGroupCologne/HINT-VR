@@ -12,6 +12,20 @@ public class MainMenu : MonoBehaviour
     // this class holds all options to be performed from the main menu
     // each public function is a 'OnClick' button callback
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            LoadTrainingGame(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ShowPlayerProgress();
+        }
+    }
+
+
+    // the case of entering the MainMenu without being logged in does no longer exists! default error!
     public void StartTrainingGame()
     {
         if(!UserManagement.selfReference.LoggedIn())
@@ -23,6 +37,8 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
+            Debug.Log("Already logged in. Remove other case");
+            // already loggeg in
             LoadTrainingGame(true);
         }
 
@@ -54,10 +70,12 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    /*
     public void ShowSettings()
     {
         menu.ShowSettingsMenu();
     }
+    */
 
     public void LoadPlayerProgress(bool success)
     {

@@ -5,8 +5,6 @@ class Sentence
 {
     // holds the number of words within a sentence
     private int numWords;
-
-    private int num_selectableWords = 3;
     // holds the index of each word from the library (lisnDatabase)
     public int[] libIndex;
     // holds each word of a sentence as a string
@@ -14,16 +12,18 @@ class Sentence
     // holds each word of a sentrence as AudioClip
     public AudioClip[] audio;
 
-    private int[] seletableWords;
+    private int[] selectableWords;
 
     // create data structe of sentence
-    public Sentence(int len)
+    public Sentence(int len, int[] selectables)
     {
         numWords = len;
         libIndex = new int[len];
         words = new string[len];
-        seletableWords = new int[num_selectableWords];
         audio = new AudioClip[len];
+        //selectableWords = new int[selectables.Length];
+        selectableWords = selectables;
+        
     }
 
     // fill data fields with actual data, based on audioFiles
@@ -32,7 +32,6 @@ class Sentence
 
         libIndex = data.getSentence();
         audio = data.getSentenceAudio(libIndex);
-        data.getSelectableGroups(out seletableWords);
 
         for (int i = 0; i < numWords; i++)
         {
@@ -66,18 +65,19 @@ class Sentence
 
     public string getSelectableWordString(int index)
     {
-        if (index > num_selectableWords)
+        if (index > selectableWords.Length)
             return null;
 
-        return words[seletableWords[index]];
+        return words[selectableWords[index]];
     }
 
+    // get the actual libIndex from a selectable group (e.g. selectableWords: 1,3,5 and index = 1 then selectableWords[index] = 3)
     public int getSelectableWordIndex(int index)
     {
-        if (index > num_selectableWords)
+        if (index > selectableWords.Length)
             return -1;
 
-        return libIndex[seletableWords[index]];
+        return libIndex[selectableWords[index]];
     }
 }
 

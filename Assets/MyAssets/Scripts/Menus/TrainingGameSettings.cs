@@ -5,31 +5,59 @@ using UnityEngine.SceneManagement;
 
 public class TrainingGameSettings : MonoBehaviour
 {
-    [SerializeField] TrainingGameManager master;
-    [SerializeField] LevelObjectManager levelObjects;
     [SerializeField] GameObject settings;
 
-    private void Start()
+    public delegate void OnVoiceSelection(int voice);
+    public OnVoiceSelection voiceCallback = delegate { Debug.Log("No voiceSelection delegate set!"); };
+
+
+    // Mainly for debugging purposes
+    void Update()
     {
-        settings.SetActive(true);
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log("Selected Harold");
+            VoiceSelection(0);
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Debug.Log("Selected Katy");
+            VoiceSelection(1);
+        }
+
     }
 
-    public void VoiceSelection(int index)
+
+    // Button callback function: Harold "male" (0), Katy "female" (1)
+    public void VoiceSelection(int voice)
     {
-        Debug.Log("Add option to load mutliple voices...");
 
-        SetupSelection(UserManagement.selfReference.getUserGroup());
+        //SetupSelection(UserManagement.selfReference.getUserGroup());
 
+        // hide settings UI
         settings.SetActive(false);
 
-        master.OnStart(1, index);
+        // replace master reference by callback!!! (delegate)
+        // start training game
+        //master.OnStart(voice);
+        voiceCallback(voice);
 
     }
 
+    public void TrainingGameSettingsQuitBtn()
+    {
+        SceneManager.LoadSceneAsync("VRMenuScene");
+    }
+
+
+    // DEPRECATED: Old option to allow for non-spatialized control group
+    /*
     void SetupSelection(int index)
     {
 
-        switch(index)
+        Debug.Log("Setup index is deprecated!!!");
+
+        switch (index)
         {
             case 1:
                 // Setup A: same direction (control group)
@@ -49,11 +77,9 @@ public class TrainingGameSettings : MonoBehaviour
         levelObjects.showLevelObjects(true);
         
     }
+    */
 
-    public void TrainingGameSettingsQuitBtn()
-    {
-        SceneManager.LoadSceneAsync("VRMenuScene");
-    }
+
 
 
 }

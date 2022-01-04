@@ -8,13 +8,13 @@ public class LevelObjectManager : MonoBehaviour
     [SerializeField] GameObject PlayerCamera;
 
     [SerializeField] GameObject TalkerObj;
-    [SerializeField] GameObject DistractorObj;
+    [SerializeField] GameObject DistractorLeftObj;
+    [SerializeField] GameObject DistractorRightObj;
     [SerializeField] GameObject generalUI;
 
     [SerializeField] Vector3 talkerPos;
-    [SerializeField] Vector3 distractorPos1;
-    [SerializeField] Vector3 distractorPos2;
-    [SerializeField] Vector3 distractorPos3;
+    [SerializeField] Vector3 distractorPos_left;
+    [SerializeField] Vector3 distractorPos_right;
 
     [SerializeField] Vector3 relativeUIPosition;
 
@@ -22,11 +22,12 @@ public class LevelObjectManager : MonoBehaviour
     void Start()
     {
         // hide LevelObjects by default
-        showLevelObjects(false);
+        // ### DEBUG
+        // showLevelObjects(false);
         generalUI.transform.position = PlayerCamera.transform.position + relativeUIPosition;
     }
 
-    public void setLevelObjectPositions(int selector)
+    public void setLevelObjectPositions()
     {
         // set position of TalkerObj based on MainCameras position
         TalkerObj.transform.position = PlayerCamera.transform.position + talkerPos;
@@ -37,23 +38,15 @@ public class LevelObjectManager : MonoBehaviour
         // apply rotation to object
         TalkerObj.transform.rotation = Quaternion.Euler(rot);
 
-        switch (selector)
-        {
-            case 0:
-                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos1;
-                break;
-            case 1:
-                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos2;
-                break;
-            case 2:
-                DistractorObj.transform.position = PlayerCamera.transform.position + distractorPos3;
-                break;
-        }
+        DistractorLeftObj.transform.position = PlayerCamera.transform.position + distractorPos_left;
+        DistractorRightObj.transform.position = PlayerCamera.transform.position + distractorPos_right;
     }
 
     public void showLevelObjects(bool show)
     {
+        Debug.Log("LevelObjects: " + show);
         TalkerObj.SetActive(show);
-        DistractorObj.SetActive(show);
+        DistractorLeftObj.SetActive(show);
+        DistractorRightObj.SetActive(show);
     }
 }

@@ -1131,18 +1131,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 693839027}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &397422792 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
-    type: 3}
-  m_PrefabInstance: {fileID: 693839027}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &413849163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 242637441}
   password: {fileID: 124570171}
-  submit: {fileID: 397422792}
+  onPasswordEnteredBtn: {fileID: 0}
+  additionalBtns: []
 --- !u!1001 &484332438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2869,6 +2858,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 4167766169678821420, guid: f1e20038fd08a8c47b7fecf201497a98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -3656,7 +3650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Main: {fileID: 714454940}
-  Settings: {fileID: 1267887666}
   Progress: {fileID: 470680079}
   UserSelection: {fileID: 1839709783}
   UserCreation: {fileID: 477160024}
@@ -4407,7 +4400,7 @@ PrefabInstance:
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -4676,6 +4669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 1291247842}
   password: {fileID: 2070503339}
+  userCreation: {fileID: 0}
 --- !u!114 &1839709786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4690,7 +4684,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 1291247842}
   password: {fileID: 2070503339}
-  submit: {fileID: 1909576445}
+  onPasswordEnteredBtn: {fileID: 0}
+  additionalBtns: []
 --- !u!1 &1858077970
 GameObject:
   m_ObjectHideFlags: 0
@@ -5172,18 +5167,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2091490356}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1909576445 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
-    type: 3}
-  m_PrefabInstance: {fileID: 2091490356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1923529286 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,

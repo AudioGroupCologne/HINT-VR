@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -213,6 +213,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1580289240}
     m_Modifications:
+    - target: {fileID: 2313282409574995334, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_text
+      value: Username
+      objectReference: {fileID: 0}
     - target: {fileID: 2313282409753017370, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -322,6 +327,86 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Username
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_SelectionColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_SelectionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_SelectionColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_SelectionColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
         type: 3}

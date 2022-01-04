@@ -8,14 +8,13 @@ public class AudioManager : MonoBehaviour
     // This class shall control both the distracter and talker 'AudioSource' used within 'TrainingGame'
     // (maybe make this more flexible in a later iteration, e.g. supporting more Sources events etc.)
 
-    // Reference to master script. Required for callback handling
-    TrainingGameManager master;
     // AudioMixer of current scene. Used for adaptive level management (based on hits/misses)
     [SerializeField] AudioMixer mixer;
     // AudioSources used wihtin the project
     [SerializeField] AudioSource player;
     [SerializeField] AudioSource talker;
-    [SerializeField] AudioSource distracter;
+    [SerializeField] AudioSource distracter_left;
+    [SerializeField] AudioSource distracter_right;
     // delay before target (Talker) audio starts (see LiSN paper)
     [SerializeField] float startDelay;
     // time after which distracter (Story) audio stops, after target sentence has been played
@@ -37,6 +36,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] float min_vol_dB = -40;
     [SerializeField] float max_vol_dB = 20;
 
+    public delegate void OnPlayingDone();
+    public OnPlayingDone onPlayingDoneCallback = delegate { Debug.Log("No OnPlayingDone delegate set!"); };
+
+
 
     public int talkerVol = 0;
     public int distracterVol = 1;
@@ -44,12 +47,13 @@ public class AudioManager : MonoBehaviour
 
     private bool distracterPaused = false;
 
+    // DEPRECATED: Allowed to apply master audio setting based on userVolume value
+    /*
     private void Start()
     {
-        master = GetComponent<TrainingGameManager>();
-        changeLevel(2, UserManagement.selfReference.getUserVolume());
+        //changeLevel(2, UserManagement.selfReference.getUserVolume());
     }
-
+    */
 
     // change level of selected AudioSource
     public void changeLevel(int src, float deltaVolume_db)
@@ -117,7 +121,6 @@ public class AudioManager : MonoBehaviour
         if (length == 0)
             return null;
 
-
         AudioClip result = AudioClip.Create("Combine", length, clips[0].channels, clips[0].frequency, false);
         result.SetData(data, 0);
 
@@ -141,9 +144,10 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public void setDistracterSequence(AudioClip story)
+    public void setDistracterSequences(AudioClip story_l, AudioClip story_r)
     {
-        distracter.clip = story;
+        distracter_left.clip = story_l;
+        distracter_right.clip = story_r;
         distracterPaused = false;
     }
 
@@ -158,11 +162,13 @@ public class AudioManager : MonoBehaviour
         // immediately start playing distracter
         if (distracterPaused)
         {
-            distracter.UnPause();
+            distracter_left.UnPause();
+            distracter_right.UnPause();
         }
         else
         {
-            distracter.Play();
+            distracter_left.Play();
+            distracter_right.Play();
         }
 
         talker.PlayDelayed(startDelay);
@@ -173,12 +179,14 @@ public class AudioManager : MonoBehaviour
     private IEnumerator AudioIsPlaying(float audioCycle)
     {
         yield return new WaitForSeconds(audioCycle);
-        Debug.Log("StopPlaying");
-        distracter.Pause();
+
+        // stop disctracters
+        distracter_left.Pause();
+        distracter_right.Pause();
         distracterPaused = true;
 
-        // notify master about end of iteration
-        master.OnPlayingDone();
+        // trigger 'playingDoneCallback' (TrainingGameManager)
+        onPlayingDoneCallback();
     }
 
     // play both of these through a separate audio source (non-directional and unaffected by adaptive AudioMixing)
@@ -202,21 +210,5 @@ public class AudioManager : MonoBehaviour
         // wait until OnHit is done!
         player.PlayOneShot(reward);
     }
-
-
-    //// Seperate spawning talker/distractor from the whole Audio/word selection stuff...
-    ///
-    // for now: same as different voice due to lack of assets...
-    public void loadSameVoice()
-    {
-
-    }
-
-    public void loadDifferentVoice()
-    {
-
-    }
-
-
 
 }

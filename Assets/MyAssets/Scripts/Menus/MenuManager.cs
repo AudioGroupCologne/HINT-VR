@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public GameObject Main;
-    public GameObject Settings;
+    //public GameObject Settings;
     public GameObject Progress;
     public GameObject UserSelection;
     public GameObject UserCreation;
@@ -27,20 +27,17 @@ public class MenuManager : MonoBehaviour
                 ShowMainMenu();
             }
         }
-
-        if(OVRInput.GetDown(OVRInput.Button.One))
-        {
-            Debug.Log("One down");
-        }
     }
 
+    
     public void ShowSettingsMenu()
     {
         // Set SettingsMenu active
-        Settings.SetActive(true);
+        //Settings.SetActive(true);
         // Set MainMenu inactive
         Main.SetActive(false);
     }
+    
 
     public void ShowMainMenu()
     {
@@ -48,7 +45,7 @@ public class MenuManager : MonoBehaviour
         Main.SetActive(true);
 
         // Set all other screens inactive
-        Settings.SetActive(false);
+        //Settings.SetActive(false);
         Progress.SetActive(false);
         UserSelection.SetActive(false);
         UserCreation.SetActive(false);
