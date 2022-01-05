@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class wordSelectionScript : MonoBehaviour
+public class WordSelectionManager : MonoBehaviour
 {
 
     /**
@@ -14,7 +14,6 @@ public class wordSelectionScript : MonoBehaviour
      */
 
     [SerializeField] GameObject wordSelectionUI;
-    [SerializeField] Image[] btnIcons;
     [SerializeField] Button[] wordBtns;
     [SerializeField] Button unsureBtn;
     [SerializeField] Button continueBtn;
@@ -84,12 +83,13 @@ public class wordSelectionScript : MonoBehaviour
 
     void mapWordsToUI(int num_words)
     {
-        // get random poosition for correct Btn
+        // get random position for correct Btn
         correctBtn = Random.Range(0, num_words - 1);
 
         // first assign correct word
         wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
-        btnIcons[correctBtn].sprite = icons[0];
+        // button with icon is a prefab, therefore the child index (1) is known!
+        wordBtns[correctBtn].transform.GetChild(1).GetComponent<Image>().sprite = icons[0];
 
         int k = 0;
 
@@ -102,7 +102,8 @@ public class wordSelectionScript : MonoBehaviour
                 k++;
             }
             wordBtns[k].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[i];
-            btnIcons[k].sprite = icons[i];
+            // button with icon is a prefab, therefore the child index (1) is known!
+            wordBtns[k].transform.GetChild(1).GetComponent<Image>().sprite = icons[i];
             k++;
         }
     }
@@ -134,7 +135,6 @@ public class wordSelectionScript : MonoBehaviour
         if (selectionMade)
             return;
 
-        //masterScript.OnUnsure();
         onUnsureCallback();
 
         // show 'continue' button

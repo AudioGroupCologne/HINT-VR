@@ -11,10 +11,17 @@ public class SceneManagement : MonoBehaviour
         // unload all Scenes except preload
         for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
         {
-            if (SceneManager.GetSceneByBuildIndex(i).isLoaded)
+            if (SceneManager.GetSceneByBuildIndex(i).isLoaded && SceneManager.GetSceneByBuildIndex(i).name != "VRLogin")
             {
+                Debug.Log("Unload scene: " + i);
                 SceneManager.UnloadSceneAsync(i);
             }
         }
+
+        if(!SceneManager.GetSceneByName("VRLogin").isLoaded)
+        {
+            SceneManager.LoadSceneAsync("VRLogin");
+        }
+        
     }
 }

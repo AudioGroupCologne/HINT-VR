@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour
+public class TrainingGameAudioManager : MonoBehaviour
 {
     // This class shall control both the distracter and talker 'AudioSource' used within 'TrainingGame'
     // (maybe make this more flexible in a later iteration, e.g. supporting more Sources events etc.)
 
     // AudioMixer of current scene. Used for adaptive level management (based on hits/misses)
     [SerializeField] AudioMixer mixer;
+    // To change parameters of an audio mixer 'exposed parameters' have to be created. Since there is no API to get them from the AudioMixer itself, hand them over through this way
+    [SerializeField] string masterChannel;
+    [SerializeField] string talkerChannel;
+    [SerializeField] string distracterChannel;
     // AudioSources used wihtin the project
     [SerializeField] AudioSource player;
     [SerializeField] AudioSource talker;
@@ -39,12 +43,6 @@ public class AudioManager : MonoBehaviour
     public delegate void OnPlayingDone();
     public OnPlayingDone onPlayingDoneCallback = delegate { Debug.Log("No OnPlayingDone delegate set!"); };
 
-
-
-    public int talkerVol = 0;
-    public int distracterVol = 1;
-    private string[] channels = {"TalkerVol", "DistVol", "MasterVol" };
-
     private bool distracterPaused = false;
 
     // DEPRECATED: Allowed to apply master audio setting based on userVolume value
@@ -56,13 +54,13 @@ public class AudioManager : MonoBehaviour
     */
 
     // change level of selected AudioSource
-    public void changeLevel(int src, float deltaVolume_db)
+    void changeVolume(string channel, float deltaVolume_db)
     {
 
         float volume;
 
         // get volume in dB from talker
-        mixer.GetFloat(channels[src], out volume);
+        mixer.GetFloat(channel, out volume);
         // increase/decrease by dVol
         volume += deltaVolume_db;
 
@@ -76,16 +74,47 @@ public class AudioManager : MonoBehaviour
         Debug.Log("Volume: " + volume + " dB");
 
         // write updated volume level to 'AudioMixer'
-        mixer.SetFloat(channels[src], volume);
+        mixer.SetFloat(channel, volume);
 
     }
 
-    public float getLevel(int src)
+
+    public void changeMasterVolume(float deltaVolume_db)
+    {
+        changeVolume(masterChannel, deltaVolume_db);
+    }
+
+    public void changeTalkerVolume(float deltaVolume_db)
+    {
+        changeVolume(talkerChannel, deltaVolume_db);
+    }
+
+    public void changeDistracterVolume(float deltaVolume_db)
+    {
+        changeVolume(distracterChannel, deltaVolume_db);
+    }
+
+    float getVolume(string channel)
     {
         float volume;
-        mixer.GetFloat(channels[src], out volume);
+        mixer.GetFloat(channel, out volume);
         return volume;
-        
+
+    }
+
+    public float getMasterVolume()
+    {
+        return getVolume(masterChannel);
+    }
+
+    public float getTalkerVolume()
+    {
+        return getVolume(talkerChannel);
+    }
+
+    public float getDistracterVolume()
+    {
+        return getVolume(distracterChannel);
     }
 
 
@@ -146,6 +175,7 @@ public class AudioManager : MonoBehaviour
 
     public void setDistracterSequences(AudioClip story_l, AudioClip story_r)
     {
+        Debug.Log("Set seq");
         distracter_left.clip = story_l;
         distracter_right.clip = story_r;
         distracterPaused = false;

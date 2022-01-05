@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/MyAssets/Scenes/_preloadVR.unity
     guid: 3b1fd0016513778449d9300f42c95828
   - enabled: 1
+    path: Assets/MyAssets/Scenes/VRLogin.unity
+    guid: e302d8138deb04b47ab883fc1994c613
+  - enabled: 1
     path: Assets/MyAssets/Scenes/VRMenuScene.unity
     guid: 714cb87e6a86a0f4db2b1c1bcfb99ef6
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/TrainingScene.unity
+    guid: ed949b8449d45f944ad070943f6891e8
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,
       type: 2}

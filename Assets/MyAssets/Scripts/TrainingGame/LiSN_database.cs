@@ -5,17 +5,23 @@ using UnityEngine;
 public class LiSN_database
 {
     /*
-     * There are 3 word lists given in the LiSN paper:
-     * -> each lists constructs sentences with a fixed length of 6 words ('length')
-     * -> each word (except 'the') has 9 different options ('options'
+     * This class loads the audio and image assets for the training game from Unity's Resource system.
      * 
-     * This class shall construct a database, which is able to load any of the 3 lists and offers an interface for the other components to access the audio files and associated strings.
-    */
-
-    /*
-    private int length = 5;
-    private const int options = 9;
-    private const int selections = 3;
+     * The strings for the entries are taken from the filenames of the audio assets.
+     * 
+     * 
+     * The word structure of a sentences has to be consistent: e.g. subject verb adjective object.
+     * The words of a sentence (e.g. subjects) have to be located in an individual folder, named after their position in the sentence: subject: 00, verb: 01, adjectvie: 02, object: 03
+     * 
+     * The database differentiates between 'selectable' and non-'selectable' groups.
+     * Only 'selectable' groups will be part of the questions in the game (for example: only subjects or objects shall be asked).
+     * The group index is used to determine, which entries are 'selectable': e.g. subject & object: _selectables = {0,3}
+     * 
+     * Icons only have to be provided for 'selectable' groups.
+     * The folder names of the icons has to match those of the audio clips: e.g. subject: icons/00, object: icons/03
+     * 
+     * Apart from just storing data, this class also holds several utility functions, like creating random selections, which are needed for the training game.
+     * 
     */
 
     private int length;
@@ -320,140 +326,5 @@ public class LiSN_database
         o_words = outStrings;
         o_icons = outSprites;
     }
-
-    /*
-    // basic constructor, determining the list the shall be used
-    public LiSN_database(int list, int voice)
-    {
-        clips = new List<AudioClip[]>();
-        icons = new List<Sprite[]>();
-        words = new List<string[]>();
-        selectableGroup = new int[selections];
-
-
-        switch (list)
-        {
-            case 1:
-                length = 5;
-                load_resources_list1(voice);
-                break;
-            // other lists have yet to be included
-            default:
-                load_resources_list1(voice);
-                break;
-
-        }
-    }
-
-    // use this as an example of how not to do it
-    private void load_resources_list1(int voiceSelection)
-    {
-
-        selectableGroups[0] = 0; // subject
-        selectableGroups[1] = 2; // count
-        selectableGroups[2] = 4; // obeject
-        load_audioclips(voiceSelection);
-        load_icons();
-        create_words();
-    }
-
-    private void create_words()
-    {
-        string[] tmp1 = new string[options];
-        string[] tmp2 = new string[options];
-        string[] tmp3 = new string[options];
-
-        // ToDo: IMPROVE THIS!
-        for (int j = 0; j < options; j++)
-        {
-            tmp1[j] = clips[selectableGroups[0]][j].ToString().Split(' ')[0];
-            tmp2[j] = clips[selectableGroups[1]][j].ToString().Split(' ')[0];
-            tmp3[j] = clips[selectableGroups[2]][j].ToString().Split(' ')[0];
-        }
-        //words.Add(clips[selectableGroups[0]][j].ToString().Split(' ')[0]);
-        words.Add(tmp1);
-        words.Add(tmp2);
-        words.Add(tmp3);
-
-    }
-
-    private void load_audioclips(int voiceSelection)
-    {
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/subjects"));
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/verbs"));
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/numbers"));
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/adjectives"));
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/objects"));
-
-        for (int i = 0; i < length; i++)
-        {
-            if (clips[i].Length != options)
-            {
-                Debug.LogError("Loading audio clips failed: " + i + " len: " + clips[i].Length);
-            }
-        }
-
-    }
-
-    private void load_icons()
-    {
-        icons.Add(Resources.LoadAll<Sprite>("icons/list_1/subjects"));
-        icons.Add(Resources.LoadAll<Sprite>("icons/list_1/count"));
-        icons.Add(Resources.LoadAll<Sprite>("icons/list_1/objects"));
-
-        for (int i = 0; i < selectableGroups.Length; i ++)
-        {
-            if (icons[i].Length != options)
-            {
-                Debug.LogError("Loading icons failed: " + i + " len: " + icons[i].Length);
-            }
-        }
-    }
-
-    public LiSN_database(string _audioPath, string _iconPath, int _length, int _options, int[] _selectables)
-    {
-        clips = new List<AudioClip[]>();
-        icons = new List<Sprite[]>();
-        words = new List<string[]>();
-
-        selectableGroup = _selectables;
-
-        var audioDir =  new DirectoryInfo(_audioPath);
-        var fileInfo = audioDir.GetFiles();
-
-        string[] files = Directory.GetFiles(_audioPath);
-        string[] dirs = Directory.GetDirectories(_audioPath);
-        foreach (string file in files)
-        {
-            //Do work on the files here
-            Debug.Log(file);
-        }
-        foreach (string dir in dirs)
-        {
-            //Do work on the files here
-            Debug.Log(dir);
-        }
-
-    }
-
-    private void asset_loader(string path)
-    {
-
-        clips.Add(Resources.LoadAll<AudioClip>(path));
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/verbs"));
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/numbers"));
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/adjectives"));
-        clips.Add(Resources.LoadAll<AudioClip>("audio/rec_list_1/objects"));
-
-        for (int i = 0; i < length; i++)
-        {
-            if (clips[i].Length != options)
-            {
-                Debug.LogError("Loading audio clips failed: " + i + " len: " + clips[i].Length);
-            }
-        }
-
-    }
-    */
 
 }

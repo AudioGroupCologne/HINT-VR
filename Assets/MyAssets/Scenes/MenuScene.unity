@@ -957,6 +957,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume: {fileID: 1049779451}
   mixer: {fileID: 24100000, guid: 71a768edbca59a5489350524443deff8, type: 2}
+  playerSource: {fileID: 0}
+  onVolumeChanged: {fileID: 0}
 --- !u!1 &329645687
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &329645688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1431,7 +1433,6 @@ MonoBehaviour:
   Progress: {fileID: 1340092123}
   UserSelection: {fileID: 1967606854}
   UserCreation: {fileID: 1051190571}
-  OVRRig: {fileID: 1828032517}
 --- !u!1 &494828442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,18 +2420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &938587247 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
-    type: 3}
-  m_PrefabInstance: {fileID: 1316310730}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1049779451 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7921483683447861062, guid: 0b59ff308f3c2be41abdc66cff9921bc,
@@ -2514,7 +2503,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 1145558825}
   password: {fileID: 1804109679}
-  submit: {fileID: 0}
+  onPasswordEnteredBtn: {fileID: 0}
+  additionalBtns: []
 --- !u!224 &1132323152 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
@@ -5085,6 +5075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 1985043732}
   password: {fileID: 938052542}
+  userCreation: {fileID: 0}
 --- !u!114 &1967606857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5099,7 +5090,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 1985043732}
   password: {fileID: 938052542}
-  submit: {fileID: 938587247}
+  onPasswordEnteredBtn: {fileID: 0}
+  additionalBtns: []
 --- !u!224 &1985043731 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2313282409753017370, guid: c30ce86ea12f1bb4fab8dc258247b6e8,

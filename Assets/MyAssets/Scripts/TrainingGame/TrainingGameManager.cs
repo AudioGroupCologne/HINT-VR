@@ -7,8 +7,14 @@ using UnityEditor;
 public partial class TrainingGameManager : MonoBehaviour
 {
 
-    AudioManager audioManager;
-    TrainingGameSettings settings;
+    [SerializeField] TrainingGameAudioManager audioManager;
+    [SerializeField] TrainingGameSettings settingsManager;
+    [SerializeField] LevelObjectManager levelManager;
+    [SerializeField] WordSelectionManager selectionManager;
+    [SerializeField] ResultManager resultManager;
+    [SerializeField] RewardManager rewardManager;
+    
+    //TrainingGameSettings settings;
     // number of sentences (excluding practice rounds and repetitions) to be played within a session
     [SerializeField] int gameLength;
     // min number of practice rounds to be played (stops @ first mistake after a correct answer)
@@ -20,25 +26,19 @@ public partial class TrainingGameManager : MonoBehaviour
     [SerializeField] float onMiss_SNR = 2.5f;
     [SerializeField] float onUnsure_SNR = 1.5f;
 
-    // other components (maybe refactor this a bit) ### get through child relation instead of SerializedReference!
-    //[SerializeField] TrainingGameSettings settings;
-    [SerializeField] LevelObjectManager levelManager;
-    [SerializeField] wordSelectionScript wordSel;
-    [SerializeField] ResultManager resultManager;
-    [SerializeField] RewardManager rewardManager;
-
 
     // there can only be one wordList (even only one voice)
     [SerializeField] string male_targetAudioPath;
     [SerializeField] string female_targetAudioPath;
-    [SerializeField] AudioClip distracterStory_male_left;
-    [SerializeField] AudioClip distracterStory_male_right;
-    [SerializeField] AudioClip distracterStory_female_left;
-    [SerializeField] AudioClip distracterStory_female_right;
     [SerializeField] string iconsPath;
     [SerializeField] int targetWordGroups;
     [SerializeField] int[] targetSelectables;
 
+    // maybe move them to AudioManager?
+    [SerializeField] AudioClip distracterStory_male_left;
+    [SerializeField] AudioClip distracterStory_male_right;
+    [SerializeField] AudioClip distracterStory_female_left;
+    [SerializeField] AudioClip distracterStory_female_right;
 
     // set result, reward etc managers as private variables through getcomponentincildren
     private Sentence sent;
@@ -69,27 +69,14 @@ public partial class TrainingGameManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Set callbacks!");
-        settings = GetComponentInChildren<TrainingGameSettings>();
+        settingsManager.voiceCallback = OnStart;
+        settingsManager.gameObject.SetActive(true);
 
-        if(gameObject.GetComponentInChildren<TrainingGameSettings>() == null)
-        {
-            Debug.Log("component not found 1");
-        }
-
-        if (GetComponentInChildren<TrainingGameSettings>() == null)
-        {
-            Debug.Log("component not found 2");
-        }
-
-        settings.voiceCallback = OnStart;
-        settings.gameObject.SetActive(true);
-
-        wordSel.onHitCallback = OnHit;
-        wordSel.onMissCallback = OnMiss;
-        wordSel.onUnsureCallback = OnUnsure;
-        wordSel.onContinueCallback = OnContinue;
-
+        selectionManager.onHitCallback = OnHit;
+        selectionManager.onMissCallback = OnMiss;
+        selectionManager.onUnsureCallback = OnUnsure;
+        selectionManager.onContinueCallback = OnContinue;
+        
         audioManager.onPlayingDoneCallback = OnPlayingDone;
     }
 
@@ -98,13 +85,13 @@ public partial class TrainingGameManager : MonoBehaviour
     {
 
         Debug.Log("Start Training Game");
-        audioManager = GetComponent<AudioManager>();
 
         // create LiSN_database object
         // voices: male (0), female (1)
         if(voice == 0)
         {
             lisnData = new LiSN_database(male_targetAudioPath, iconsPath, targetWordGroups, targetSelectables);
+            Debug.Log("attempt to set dist");
             audioManager.setDistracterSequences(distracterStory_male_left, distracterStory_male_right);
         }
         else
@@ -120,14 +107,11 @@ public partial class TrainingGameManager : MonoBehaviour
         SNR_values = new float[gameLength];
 
         // make sure to disable UI at load.
-        wordSel.showWordSelectionUI(false);
+        selectionManager.showWordSelectionUI(false);
 
         // place and show level objects
         levelManager.setLevelObjectPositions();
         levelManager.showLevelObjects(true);
-
-        // show settings menu
-        //settings.gameObject.SetActive(true);
 
         // generate a new sentence
         sent.createSentence(lisnData);
@@ -169,7 +153,7 @@ public partial class TrainingGameManager : MonoBehaviour
 
         if (repeatSentence)
         {
-            wordSel.showWordSelectionUI(true);
+            selectionManager.showWordSelectionUI(true);
             Debug.Log("Repeat sentence...");
             return;
         }
@@ -182,7 +166,7 @@ public partial class TrainingGameManager : MonoBehaviour
 
         if (!practiceMode)
         {
-            SNR_values[roundsPlayed-1] = audioManager.getLevel(audioManager.talkerVol);
+            SNR_values[roundsPlayed - 1] = audioManager.getTalkerVolume();
             Debug.Log("Stored SNR: " + SNR_values[roundsPlayed-1] + " round: " + roundsPlayed);
         }
 
@@ -190,7 +174,7 @@ public partial class TrainingGameManager : MonoBehaviour
         lisnData.getSelectableWords(randGroup, selectionOptions, sent.getSelectableWordIndex(randGroup), out words, out icons);
 
         // show wordSelection UI elements
-        wordSel.startWordSelection(words, icons);
+        selectionManager.startWordSelection(words, icons);
 
     }
 
@@ -207,12 +191,12 @@ public partial class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeLevel(audioManager.talkerVol, -3.0f);
+            audioManager.changeTalkerVolume(-3.0f);
             return;
         }
 
         // decrease SNR by reducing talker volume by -1.5 dB
-        audioManager.changeLevel(audioManager.talkerVol, onHit_SNR);
+        audioManager.changeTalkerVolume(onHit_SNR);
 
         hits++;
         rewardCount++;
@@ -241,7 +225,7 @@ public partial class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeLevel(audioManager.talkerVol, -3.0f);
+            audioManager.changeTalkerVolume(-3.0f);
             if (practiceRounds >= min_practiceRounds)
             {
                 Debug.Log("Leave practive mode");
@@ -254,7 +238,7 @@ public partial class TrainingGameManager : MonoBehaviour
         misses++;
 
         // improve SNR by increasing talker volume by 2.5 dB
-        audioManager.changeLevel(audioManager.talkerVol, onMiss_SNR);
+        audioManager.changeTalkerVolume(onMiss_SNR);
 
         rewardCount = 0;
 
@@ -266,7 +250,7 @@ public partial class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeLevel(audioManager.talkerVol, -3.0f);
+            audioManager.changeTalkerVolume(-3.0f);
             if (practiceRounds >= min_practiceRounds)
             {
                 Debug.Log("Leave practive mode");
@@ -274,10 +258,10 @@ public partial class TrainingGameManager : MonoBehaviour
             }
             return;
         }
-  
+
 
         // improve SNR by increasing talker volume by 1.5 dB
-        audioManager.changeLevel(audioManager.talkerVol, onUnsure_SNR);
+        audioManager.changeTalkerVolume(onUnsure_SNR);
         
 
         if(!repeatSentence)
@@ -289,7 +273,7 @@ public partial class TrainingGameManager : MonoBehaviour
             audioManager.startPlaying();
 
             // hide wordSelection UI elements
-            wordSel.showWordSelectionUI(false);
+            selectionManager.showWordSelectionUI(false);
         }
         else
         {
@@ -304,7 +288,7 @@ public partial class TrainingGameManager : MonoBehaviour
         //wordSel.reset_buttons_colors();
 
         // hide wordSelection UI elements
-        wordSel.showWordSelectionUI(false);
+        selectionManager.showWordSelectionUI(false);
 
         if (roundsPlayed >= gameLength)
         {
