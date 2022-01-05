@@ -18,17 +18,23 @@ public class LevelObjectManager : MonoBehaviour
 
     [SerializeField] Vector3 relativeUIPosition;
 
+    private bool objectsVisible = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        // hide LevelObjects by default
-        // ### DEBUG
-        // showLevelObjects(false);
         generalUI.transform.position = PlayerCamera.transform.position + relativeUIPosition;
     }
 
     public void setLevelObjectPositions()
     {
+        // avoid collisions when shifting the transform
+        if(objectsVisible)
+        {
+            showLevelObjects(false);
+        }
+        
+
         // set position of TalkerObj based on MainCameras position
         TalkerObj.transform.position = PlayerCamera.transform.position + talkerPos;
         // get rotation of camera
@@ -40,11 +46,19 @@ public class LevelObjectManager : MonoBehaviour
 
         DistractorLeftObj.transform.position = PlayerCamera.transform.position + distractorPos_left;
         DistractorRightObj.transform.position = PlayerCamera.transform.position + distractorPos_right;
+
+        // go back to previous state
+        if(objectsVisible)
+        {
+            showLevelObjects(true);
+        }
+        
     }
 
     public void showLevelObjects(bool show)
     {
         Debug.Log("LevelObjects: " + show);
+        objectsVisible = show;
         TalkerObj.SetActive(show);
         DistractorLeftObj.SetActive(show);
         DistractorRightObj.SetActive(show);

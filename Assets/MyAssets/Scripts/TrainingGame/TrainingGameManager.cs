@@ -78,6 +78,10 @@ public partial class TrainingGameManager : MonoBehaviour
         selectionManager.onContinueCallback = OnContinue;
         
         audioManager.onPlayingDoneCallback = OnPlayingDone;
+
+        // place and show level objects
+        levelManager.setLevelObjectPositions();
+        levelManager.showLevelObjects(true);
     }
 
 
@@ -108,10 +112,6 @@ public partial class TrainingGameManager : MonoBehaviour
 
         // make sure to disable UI at load.
         selectionManager.showWordSelectionUI(false);
-
-        // place and show level objects
-        levelManager.setLevelObjectPositions();
-        levelManager.showLevelObjects(true);
 
         // generate a new sentence
         sent.createSentence(lisnData);
@@ -225,7 +225,7 @@ public partial class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeTalkerVolume(-3.0f);
+            //audioManager.changeTalkerVolume(-3.0f);
             if (practiceRounds >= min_practiceRounds)
             {
                 Debug.Log("Leave practive mode");
@@ -250,7 +250,7 @@ public partial class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeTalkerVolume(-3.0f);
+            //audioManager.changeTalkerVolume(-3.0f);
             if (practiceRounds >= min_practiceRounds)
             {
                 Debug.Log("Leave practive mode");

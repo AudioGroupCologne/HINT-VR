@@ -7,7 +7,7 @@ public class LiSN_database
     /*
      * This class loads the audio and image assets for the training game from Unity's Resource system.
      * 
-     * The strings for the entries are taken from the filenames of the audio assets.
+     * The strings for the entries are taken from the filenames of the audio assets!
      * 
      * 
      * The word structure of a sentences has to be consistent: e.g. subject verb adjective object.
