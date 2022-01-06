@@ -25,13 +25,22 @@ public class InputTab : MonoBehaviour
             staticOptions++;
             Debug.Log("InputTab: onPassword Btn set! " + options);
         }
+
+        // short delay makes highlight on selection visible
+        StartCoroutine(InitialSelect());
+    }
+
+    private IEnumerator InitialSelect( )
+    {
+        yield return new WaitForSeconds(0.1f);
+
         username.Select();
         Debug.Log("Select username field");
         selectedField = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
