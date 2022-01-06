@@ -19,7 +19,6 @@ public static class jsonFiles
     }
     
 
-
     public static void loadUserData(out List<userData> data)
     {
         Debug.Log("Load JSON");

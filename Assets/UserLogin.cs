@@ -12,7 +12,12 @@ public class UserLogin : MonoBehaviour
         creation.SetActive(false);
         login.SetActive(true);
         login.GetComponent<UserSelection>().loginCallback = loadMainMenu;
-        creation.GetComponentInChildren<UserCreation>().GetComponent<UserCreation>().createCallback = loadMainMenu;
+        login.GetComponent<UserSelection>().newUserCallback = showCreationScreen;
+        creation.GetComponent<UserCreation>().createCallback = loadMainMenu;
+        creation.GetComponent<UserCreation>().returnCallback = showLoginScreen;
+        //creation.GetComponentInChildren<UserCreation>().GetComponent<UserCreation>().createCallback = loadMainMenu;
+        //creation.GetComponentInChildren<UserCreation>().GetComponent<UserCreation>().returnCallback = showLoginScreen;
+
     }
 
     private void loadMainMenu(bool success)
@@ -22,5 +27,17 @@ public class UserLogin : MonoBehaviour
             SceneManager.LoadSceneAsync("VRMenuScene");
         }
         
+    }
+
+    private void showLoginScreen()
+    {
+        creation.SetActive(false);
+        login.SetActive(true);
+    }
+
+    private void showCreationScreen()
+    {
+        creation.SetActive(true);
+        login.SetActive(false);
     }
 }

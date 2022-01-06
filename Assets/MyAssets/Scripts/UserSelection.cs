@@ -10,6 +10,9 @@ public class UserSelection : MonoBehaviour
     public delegate void OnLoginEvent(bool success);
     public OnLoginEvent loginCallback = delegate { Debug.Log("No Login delegate set!"); };
 
+    public delegate void OnNewUserEvent();
+    public OnNewUserEvent newUserCallback = delegate { Debug.Log("No newUser delegate set!"); };
+
     UserManagement userManager;
     [SerializeField] TMPro.TMP_InputField username;
     [SerializeField] TMPro.TMP_InputField password;
@@ -39,8 +42,7 @@ public class UserSelection : MonoBehaviour
 
     public void OnCreateUser()
     {
-        userCreation.SetActive(true);
-        gameObject.SetActive(false);
+        newUserCallback();
     }
 
     // Delegate wrapper

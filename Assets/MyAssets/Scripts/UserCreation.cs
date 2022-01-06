@@ -11,6 +11,9 @@ public class UserCreation : MonoBehaviour
     public delegate void OnCreateEvent(bool success);
     public OnCreateEvent createCallback = delegate { Debug.Log("No create delegate set!"); };
 
+    public delegate void OnReturnEvent();
+    public OnReturnEvent returnCallback = delegate { Debug.Log("No return delegate set!"); };
+
     public void OnCreateUser(int _group)
     {
         if (username.text.Length == 0 || password.text.Length == 0)
@@ -29,5 +32,10 @@ public class UserCreation : MonoBehaviour
 
         createCallback(true);
 
+    }
+
+    public void OnReturn()
+    {
+        returnCallback();
     }
 }
