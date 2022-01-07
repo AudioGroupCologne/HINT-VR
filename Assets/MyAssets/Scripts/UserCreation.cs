@@ -7,6 +7,7 @@ public class UserCreation : MonoBehaviour
 
     [SerializeField] TMPro.TMP_InputField username;
     [SerializeField] TMPro.TMP_InputField password;
+    [SerializeField] GameObject userCreationFailedText;
 
     public delegate void OnCreateEvent(bool success);
     public OnCreateEvent createCallback = delegate { Debug.Log("No create delegate set!"); };
@@ -25,17 +26,20 @@ public class UserCreation : MonoBehaviour
         // check if username already exists
         if (!UserManagement.selfReference.addUser(username.text, password.text, _group))
         {
-            Debug.LogError("Username already exists");
+            Debug.Log("Username already exists");
+            userCreationFailedText.SetActive(true);
             createCallback(false);
             return;
         }
 
+        userCreationFailedText.SetActive(false);
         createCallback(true);
 
     }
 
     public void OnReturn()
     {
+        userCreationFailedText.SetActive(false);
         returnCallback();
     }
 }

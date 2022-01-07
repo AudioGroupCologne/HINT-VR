@@ -15,8 +15,6 @@ public class UserLogin : MonoBehaviour
         login.GetComponent<UserSelection>().newUserCallback = showCreationScreen;
         creation.GetComponent<UserCreation>().createCallback = loadMainMenu;
         creation.GetComponent<UserCreation>().returnCallback = showLoginScreen;
-        //creation.GetComponentInChildren<UserCreation>().GetComponent<UserCreation>().createCallback = loadMainMenu;
-        //creation.GetComponentInChildren<UserCreation>().GetComponent<UserCreation>().returnCallback = showLoginScreen;
 
     }
 

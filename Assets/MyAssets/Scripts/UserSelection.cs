@@ -16,7 +16,7 @@ public class UserSelection : MonoBehaviour
     UserManagement userManager;
     [SerializeField] TMPro.TMP_InputField username;
     [SerializeField] TMPro.TMP_InputField password;
-    [SerializeField] GameObject userCreation;
+    [SerializeField] GameObject loginFailedText;
 
     private void Start()
     {
@@ -42,6 +42,7 @@ public class UserSelection : MonoBehaviour
 
     public void OnCreateUser()
     {
+        loginFailedText.SetActive(false);
         newUserCallback();
     }
 
@@ -56,6 +57,7 @@ public class UserSelection : MonoBehaviour
     {
         Debug.Log("Login failed");
         loginCallback(false);
+        loginFailedText.SetActive(true);
     }
 
 }
