@@ -12,13 +12,14 @@ public class CharacterSkinController : MonoBehaviour
     public Color[] eyeColors;
     public enum EyePosition { normal, happy, angry, dead}
     public EyePosition eyeState;
+    public int colorSel;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         characterMaterials = GetComponentsInChildren<Renderer>();
-        
+        ChangeMaterialSettings(colorSel);
     }
 
     // Update is called once per frame

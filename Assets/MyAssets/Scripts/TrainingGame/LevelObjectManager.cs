@@ -34,7 +34,6 @@ public class LevelObjectManager : MonoBehaviour
             showLevelObjects(false);
         }
         
-
         // set position of TalkerObj based on MainCameras position
         TalkerObj.transform.position = PlayerCamera.transform.position + talkerPos;
         // get rotation of camera
@@ -43,6 +42,10 @@ public class LevelObjectManager : MonoBehaviour
         rot = new Vector3(rot.x, rot.y + 180, rot.z);
         // apply rotation to object
         TalkerObj.transform.rotation = Quaternion.Euler(rot);
+        rot = new Vector3(rot.x, rot.y + 90, rot.z);
+        DistractorRightObj.transform.rotation = Quaternion.Euler(rot);
+        rot = new Vector3(rot.x, rot.y + 180, rot.z);
+        DistractorLeftObj.transform.rotation = Quaternion.Euler(rot);
 
         DistractorLeftObj.transform.position = PlayerCamera.transform.position + distractorPos_left;
         DistractorRightObj.transform.position = PlayerCamera.transform.position + distractorPos_right;
