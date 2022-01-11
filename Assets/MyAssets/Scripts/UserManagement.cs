@@ -14,6 +14,11 @@ public class UserManagement : MonoBehaviour
 
     private void Start()
     {
+        if(selfReference != null)
+        {
+            Debug.LogError("UserManagement dublication!");
+        }
+
         selfReference = this;
 
         userList = new List<userData>();

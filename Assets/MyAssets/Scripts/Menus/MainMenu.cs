@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            LoadTrainingGame(true);
+            StartTrainingGame();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -25,67 +25,27 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    // the case of entering the MainMenu without being logged in does no longer exists! default error!
     public void StartTrainingGame()
     {
         if(!UserManagement.selfReference.LoggedIn())
         {
-            menu.ShowUserSelection();
-            menu.UserSelection.GetComponent<UserSelection>().loginCallback = LoadTrainingGame;
-            // userCreation shall always use the same callback action as login
-            menu.UserCreation.GetComponent<UserCreation>().createCallback = LoadTrainingGame;
-        }
-        else
-        {
-            Debug.Log("Already logged in. Remove other case");
-            // already loggeg in
-            LoadTrainingGame(true);
-        }
-
-    }
-
-    public void LoadTrainingGame(bool success)
-    {
-        Debug.Log("Enter callback");
-        if(success)
-        {
-            SceneManager.LoadSceneAsync("TrainingScene");
+            Debug.LogError("No user logged in");
             return;
         }
 
-        Debug.Log("Login Failed. Dont load Scene...");
+        SceneManager.LoadSceneAsync("TrainingScene");
+
     }
 
     public void ShowPlayerProgress()
     {
-        if(!UserManagement.selfReference.LoggedIn())
+        if (!UserManagement.selfReference.LoggedIn())
         {
-            menu.ShowUserSelection();
-            menu.UserSelection.GetComponent<UserSelection>().loginCallback = LoadPlayerProgress;
-            menu.UserCreation.GetComponent<UserCreation>().createCallback = LoadPlayerProgress;
-        }
-        else
-        {
-            LoadPlayerProgress(true);
-        }
-    }
-
-    /*
-    public void ShowSettings()
-    {
-        menu.ShowSettingsMenu();
-    }
-    */
-
-    public void LoadPlayerProgress(bool success)
-    {
-        if (success)
-        {
-            menu.ShowProgess();
+            Debug.LogError("No user logged in");
             return;
         }
 
-        Debug.Log("Login Failed. Dont show player progress...");
+        menu.ShowProgess();
     }
 
     public void QuitApp ()

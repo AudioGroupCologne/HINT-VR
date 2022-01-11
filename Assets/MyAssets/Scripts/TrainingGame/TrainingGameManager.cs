@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 
-public partial class TrainingGameManager : MonoBehaviour
+public class TrainingGameManager : MonoBehaviour
 {
 
     [SerializeField] TrainingGameAudioManager audioManager;
