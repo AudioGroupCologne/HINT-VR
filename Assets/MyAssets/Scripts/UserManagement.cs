@@ -16,7 +16,8 @@ public class UserManagement : MonoBehaviour
     {
         if(selfReference != null)
         {
-            Debug.LogError("UserManagement dublication!");
+            Debug.Log("UserManagement dublication!");
+            return;
         }
 
         selfReference = this;

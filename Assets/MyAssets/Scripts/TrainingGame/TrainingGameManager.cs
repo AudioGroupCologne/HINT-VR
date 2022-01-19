@@ -284,9 +284,6 @@ public class TrainingGameManager : MonoBehaviour
 
     public void OnContinue()
     {
-        // set buttons back to their default color
-        //wordSel.reset_buttons_colors();
-
         // hide wordSelection UI elements
         selectionManager.showWordSelectionUI(false);
 
