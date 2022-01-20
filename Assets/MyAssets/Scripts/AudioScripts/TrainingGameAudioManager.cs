@@ -179,6 +179,9 @@ public class TrainingGameAudioManager : MonoBehaviour
         distracter_left.clip = story_l;
         distracter_right.clip = story_r;
         distracterPaused = false;
+
+        distracter_left.loop = true;
+        distracter_right.loop = true;
     }
 
     public void startPlaying()
