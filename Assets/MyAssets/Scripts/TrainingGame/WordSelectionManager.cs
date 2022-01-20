@@ -72,16 +72,7 @@ public class WordSelectionManager : MonoBehaviour
         }
     }
 
-    public void startWordSelection(string[] randomWords, Sprite[] randomIcons)
-    {
-        selectionMade = false;
-        wordSelectionUI.SetActive(true);
-        words = randomWords;
-        icons = randomIcons;
-        mapWordsToUI(randomWords.Length);
-    }
-
-    void mapWordsToUI(int num_words)
+    private void mapWordsToUI(int num_words)
     {
         // get random position for correct Btn
         correctBtn = Random.Range(0, num_words - 1);
@@ -107,7 +98,37 @@ public class WordSelectionManager : MonoBehaviour
             k++;
         }
     }
+    private IEnumerator showContinueWait(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        showContinueButton();
+    }
 
+    private void showContinueButton()
+    {
+
+        for (int i = 0; i < wordBtns.Length; i++)
+        {
+            wordBtns[i].GetComponent<Image>().color = Color.white;
+            wordBtns[i].gameObject.SetActive(false);
+        }
+        unsureBtn.gameObject.SetActive(false);
+        continueBtn.gameObject.SetActive(true);
+        continueBtn.Select();
+    }
+
+
+    // offer strings and icons which shall be presented to the player
+    public void startWordSelection(string[] randomWords, Sprite[] randomIcons)
+    {
+        selectionMade = false;
+        wordSelectionUI.SetActive(true);
+        words = randomWords;
+        icons = randomIcons;
+        mapWordsToUI(randomWords.Length);
+    }
+
+    // callback method for all word selection buttons (to be assigned via inspector)
     public void ButtonHander(int btn_ix)
     {
         if (selectionMade)
@@ -142,25 +163,6 @@ public class WordSelectionManager : MonoBehaviour
     public void ContinueButtonHandler()
     {
         onContinueCallback();
-    }
-
-    private IEnumerator showContinueWait(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        showContinueButton();
-    }
-
-    private void showContinueButton()
-    {
-
-        for (int i = 0; i < wordBtns.Length; i++)
-        {
-            wordBtns[i].GetComponent<Image>().color = Color.white;
-            wordBtns[i].gameObject.SetActive(false);
-        }
-        unsureBtn.gameObject.SetActive(false);
-        continueBtn.gameObject.SetActive(true);
-        continueBtn.Select();
     }
 
     public void showWordSelectionUI(bool show)
