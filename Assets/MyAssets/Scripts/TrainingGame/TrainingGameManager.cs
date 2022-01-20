@@ -217,7 +217,6 @@ public class TrainingGameManager : MonoBehaviour
     // Increase SNR, play 'false' sound
     void OnMiss()
     {
-
         audioManager.playOnMiss();
 
         repeatSentence = false;
@@ -246,6 +245,9 @@ public class TrainingGameManager : MonoBehaviour
 
     void OnUnsure()
     {
+
+        audioManager.playOnUnsure();
+
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB

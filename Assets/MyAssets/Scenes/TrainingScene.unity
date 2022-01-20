@@ -495,6 +495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 20526287}
+  - component: {fileID: 20526288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -518,6 +519,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &20526288
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20526286}
+  m_Enabled: 1
 --- !u!1001 &28252227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18584,7 +18593,6 @@ GameObject:
   - component: {fileID: 1651911541}
   - component: {fileID: 1651911540}
   - component: {fileID: 1651911539}
-  - component: {fileID: 1651911538}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -18606,14 +18614,6 @@ Transform:
   m_Father: {fileID: 20526287}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1651911538
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651911536}
-  m_Enabled: 1
 --- !u!65 &1651911539
 BoxCollider:
   m_ObjectHideFlags: 0
