@@ -137,8 +137,9 @@ public class WordSelectionManager : MonoBehaviour
 
         onUnsureCallback();
 
+        StartCoroutine(showContinueWait(nextDelay));
         // show 'continue' button
-        continueBtn.gameObject.SetActive(true);
+        //continueBtn.gameObject.SetActive(true);
 
     }
 
