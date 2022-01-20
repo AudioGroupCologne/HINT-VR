@@ -31,17 +31,11 @@ public class TrainingGameSettings : MonoBehaviour
     // Button callback function: Harold "male" (0), Katy "female" (1)
     public void VoiceSelection(int voice)
     {
-
-        //SetupSelection(UserManagement.selfReference.getUserGroup());
-
         // hide settings UI
         settings.SetActive(false);
 
-        // replace master reference by callback!!! (delegate)
         // start training game
-        //master.OnStart(voice);
         voiceCallback(voice);
-
     }
 
     public void TrainingGameSettingsQuitBtn()
