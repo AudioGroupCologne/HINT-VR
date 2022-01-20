@@ -246,7 +246,6 @@ public class TrainingGameManager : MonoBehaviour
 
     void OnUnsure()
     {
-
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
@@ -256,12 +255,12 @@ public class TrainingGameManager : MonoBehaviour
                 Debug.Log("Leave practive mode");
                 practiceMode = false;
             }
-            return;
         }
-
-
-        // improve SNR by increasing talker volume by 1.5 dB
-        audioManager.changeTalkerVolume(onUnsure_SNR);
+        else
+        {
+            // improve SNR by increasing talker volume by 1.5 dB
+            audioManager.changeTalkerVolume(onUnsure_SNR);
+        }   
         
 
         if(!repeatSentence)

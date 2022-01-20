@@ -127,7 +127,6 @@ public class WordSelectionManager : MonoBehaviour
         selectionMade = true;
         StartCoroutine(showContinueWait(nextDelay));
 
-
     }
 
     public void UnsureButtonHanlder()
@@ -138,9 +137,6 @@ public class WordSelectionManager : MonoBehaviour
         onUnsureCallback();
 
         StartCoroutine(showContinueWait(nextDelay));
-        // show 'continue' button
-        //continueBtn.gameObject.SetActive(true);
-
     }
 
     public void ContinueButtonHandler()
@@ -176,8 +172,6 @@ public class WordSelectionManager : MonoBehaviour
             wordBtns[i].gameObject.SetActive(true);
         }
         unsureBtn.gameObject.SetActive(true);
-
-        wordBtns[0].Select();
     }
 
 }
