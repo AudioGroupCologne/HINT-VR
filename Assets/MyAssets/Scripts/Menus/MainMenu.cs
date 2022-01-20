@@ -7,18 +7,19 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    [SerializeField] MenuManager menu;
+    public delegate void OnProgressButton();
+    public OnProgressButton progressCallback = delegate { Debug.Log("No OnProgressButton delegate set!"); };
 
     // this class holds all options to be performed from the main menu
     // each public function is a 'OnClick' button callback
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
         {
             StartTrainingGame();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
         {
             ShowPlayerProgress();
         }
@@ -45,7 +46,7 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        menu.ShowProgess();
+        progressCallback();
     }
 
     public void QuitApp ()

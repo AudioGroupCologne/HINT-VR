@@ -1817,7 +1817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8b07b9b2458024799f0c7ca95aa31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 1428333996}
 --- !u!224 &714454943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2553,10 +2552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f205aa668f943f48b8810babd950ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Main: {fileID: 714454940}
-  Progress: {fileID: 470680079}
-  UserSelection: {fileID: 0}
-  UserCreation: {fileID: 0}
+  main: {fileID: 714454942}
+  progress: {fileID: 470680082}
 --- !u!4 &1428333997
 Transform:
   m_ObjectHideFlags: 0
@@ -2695,7 +2692,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1428333996}
+      objectReference: {fileID: 470680082}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2714,7 +2711,7 @@ PrefabInstance:
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMainMenu
+      value: OnReturnButton
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -2724,7 +2721,7 @@ PrefabInstance:
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuManager, Assembly-CSharp
+      value: ProgressScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}

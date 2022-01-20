@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowUserProgress : MonoBehaviour
+public class ProgressScreen : MonoBehaviour
 {
+
+    public delegate void OnReturn();
+    public OnReturn returnCallback = delegate { Debug.Log("No OnReturn delegate set!"); };
 
     [SerializeField] TMPro.TextMeshProUGUI TopText;
     [SerializeField] TMPro.TextMeshProUGUI gamesPlayed;
@@ -30,5 +33,10 @@ public class ShowUserProgress : MonoBehaviour
         rewards.text = "Rewards: " + _rewards.ToString();
 
         GetComponentInChildren<windowGraph>().SetProgressGraph(_snrValues);
+    }
+
+    public void OnReturnButton()
+    {
+        returnCallback();
     }
 }

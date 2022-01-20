@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public GameObject Main;
-    public GameObject Progress;
+
+    [SerializeField] MainMenu main;
+    [SerializeField] ProgressScreen progress;
 
     // Start is called before the first frame update
     void Start()
     {
+        main.progressCallback = ShowProgess;
+        progress.returnCallback = ShowMainMenu;
         ShowMainMenu();
     }
 
@@ -19,7 +22,7 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!Main.activeSelf)
+            if(!main.gameObject.activeSelf)
             {
                 ShowMainMenu();
             }
@@ -28,15 +31,15 @@ public class MenuManager : MonoBehaviour
 
     public void ShowMainMenu()
     {
-        Main.SetActive(true);
-        Progress.SetActive(false);
+        main.gameObject.SetActive(true);
+        progress.gameObject.SetActive(false);
 
     }
 
-    public void ShowProgess()
+    void ShowProgess()
     {
-        Main.SetActive(false);
-        Progress.SetActive(true);   
+        main.gameObject.SetActive(false);
+        progress.gameObject.SetActive(true);
     }
 
 }
