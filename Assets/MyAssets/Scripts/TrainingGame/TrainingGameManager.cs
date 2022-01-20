@@ -85,7 +85,7 @@ public class TrainingGameManager : MonoBehaviour
     }
 
 
-    public void OnStart(int voice)
+    void OnStart(int voice)
     {
 
         Debug.Log("Start Training Game");
@@ -123,7 +123,7 @@ public class TrainingGameManager : MonoBehaviour
         audioManager.startPlaying();
     }
 
-    private void OnSessionDone()
+    void OnSessionDone()
     {
         Debug.Log("Training session done!");
 
@@ -146,7 +146,7 @@ public class TrainingGameManager : MonoBehaviour
 
     /// Audio Manager Callbacks
     // when audio manager has finished playing, reset control variable
-    public void OnPlayingDone()
+    void OnPlayingDone()
     {
 
         Debug.Log("OnPlayingDone");
@@ -181,7 +181,7 @@ public class TrainingGameManager : MonoBehaviour
 
 
     /// Word Selection UI Callbacks
-    public void OnHit()
+    void OnHit()
     {
 
         audioManager.playOnHit();
@@ -215,7 +215,7 @@ public class TrainingGameManager : MonoBehaviour
 
     // Called when the player selected a false word option
     // Increase SNR, play 'false' sound
-    public void OnMiss()
+    void OnMiss()
     {
 
         audioManager.playOnMiss();
@@ -244,7 +244,7 @@ public class TrainingGameManager : MonoBehaviour
 
     }
 
-    public void OnUnsure()
+    void OnUnsure()
     {
 
         if (practiceMode)
@@ -282,7 +282,7 @@ public class TrainingGameManager : MonoBehaviour
 
     }
 
-    public void OnContinue()
+    void OnContinue()
     {
         // hide wordSelection UI elements
         selectionManager.showWordSelectionUI(false);
