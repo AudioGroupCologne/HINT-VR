@@ -16,29 +16,30 @@ public class TrainingGameManager : MonoBehaviour
     
     //TrainingGameSettings settings;
     // number of sentences (excluding practice rounds and repetitions) to be played within a session
-    [SerializeField] int gameLength;
+    [SerializeField] int gameLength = 40;
     // min number of practice rounds to be played (stops @ first mistake after a correct answer)
-    [SerializeField] int min_practiceRounds;
+    [SerializeField] int minPracticeRounds = 5;
     // number of consecutive correct answers to achieve a reward
-    [SerializeField] int rewardHits;
+    [SerializeField] int rewardHits = 5;
 
-    [SerializeField] float onHit_SNR = -1.5f;
-    [SerializeField] float onMiss_SNR = 2.5f;
-    [SerializeField] float onUnsure_SNR = 1.5f;
+    [SerializeField] float onHitSNR = -1.5f;
+    [SerializeField] float onMissSNR = 2.5f;
+    [SerializeField] float onUnsureSNR = 1.5f;
+    [SerializeField] float practiceSNR = -3.0f;
 
 
     // there can only be one wordList (even only one voice)
-    [SerializeField] string male_targetAudioPath;
-    [SerializeField] string female_targetAudioPath;
+    [SerializeField] string targetAudioPathMale;
+    [SerializeField] string targetAudioPathFemale;
     [SerializeField] string iconsPath;
     [SerializeField] int targetWordGroups;
     [SerializeField] int[] targetSelectables;
 
     // maybe move them to AudioManager?
-    [SerializeField] AudioClip distracterStory_male_left;
-    [SerializeField] AudioClip distracterStory_male_right;
-    [SerializeField] AudioClip distracterStory_female_left;
-    [SerializeField] AudioClip distracterStory_female_right;
+    [SerializeField] AudioClip distracterStoryMaleLeft;
+    [SerializeField] AudioClip distracterStoryMaleRight;
+    [SerializeField] AudioClip distracterStoryFemaleLeft;
+    [SerializeField] AudioClip distracterStoryFemaleRight;
 
     // set result, reward etc managers as private variables through getcomponentincildren
     private Sentence sent;
@@ -94,14 +95,14 @@ public class TrainingGameManager : MonoBehaviour
         // voices: male (0), female (1)
         if(voice == 0)
         {
-            lisnData = new LiSN_database(male_targetAudioPath, iconsPath, targetWordGroups, targetSelectables);
+            lisnData = new LiSN_database(targetAudioPathMale, iconsPath, targetWordGroups, targetSelectables);
             Debug.Log("attempt to set dist");
-            audioManager.setDistracterSequences(distracterStory_male_left, distracterStory_male_right);
+            audioManager.setDistracterSequences(distracterStoryMaleLeft, distracterStoryMaleRight);
         }
         else
         {
-            lisnData = new LiSN_database(female_targetAudioPath, iconsPath, targetWordGroups, targetSelectables);
-            audioManager.setDistracterSequences(distracterStory_female_left, distracterStory_female_right);
+            lisnData = new LiSN_database(targetAudioPathFemale, iconsPath, targetWordGroups, targetSelectables);
+            audioManager.setDistracterSequences(distracterStoryFemaleLeft, distracterStoryFemaleRight);
         }
         
 
@@ -191,12 +192,12 @@ public class TrainingGameManager : MonoBehaviour
         if (practiceMode)
         {
             // decrease SNR by reducing talker volume by 3.0 dB
-            audioManager.changeTalkerVolume(-3.0f);
+            audioManager.changeTalkerVolume(practiceSNR);
             return;
         }
 
         // decrease SNR by reducing talker volume by -1.5 dB
-        audioManager.changeTalkerVolume(onHit_SNR);
+        audioManager.changeTalkerVolume(onHitSNR);
 
         hits++;
         rewardCount++;
@@ -225,7 +226,7 @@ public class TrainingGameManager : MonoBehaviour
         {
             // decrease SNR by reducing talker volume by 3.0 dB
             //audioManager.changeTalkerVolume(-3.0f);
-            if (practiceRounds >= min_practiceRounds)
+            if (practiceRounds >= minPracticeRounds)
             {
                 Debug.Log("Leave practive mode");
                 practiceMode = false;
@@ -237,7 +238,7 @@ public class TrainingGameManager : MonoBehaviour
         misses++;
 
         // improve SNR by increasing talker volume by 2.5 dB
-        audioManager.changeTalkerVolume(onMiss_SNR);
+        audioManager.changeTalkerVolume(onMissSNR);
 
         rewardCount = 0;
 
@@ -252,7 +253,7 @@ public class TrainingGameManager : MonoBehaviour
         {
             // decrease SNR by reducing talker volume by 3.0 dB
             //audioManager.changeTalkerVolume(-3.0f);
-            if (practiceRounds >= min_practiceRounds)
+            if (practiceRounds >= minPracticeRounds)
             {
                 Debug.Log("Leave practive mode");
                 practiceMode = false;
@@ -261,7 +262,7 @@ public class TrainingGameManager : MonoBehaviour
         else
         {
             // improve SNR by increasing talker volume by 1.5 dB
-            audioManager.changeTalkerVolume(onUnsure_SNR);
+            audioManager.changeTalkerVolume(onUnsureSNR);
         }   
         
 
@@ -305,7 +306,7 @@ public class TrainingGameManager : MonoBehaviour
             if(practiceMode)
             {
                 practiceRounds++;
-                Debug.Log("Practice round: " + practiceRounds + " of " + min_practiceRounds + " (min)");
+                Debug.Log("Practice round: " + practiceRounds + " of " + minPracticeRounds + " (min)");
             }
             else
             {

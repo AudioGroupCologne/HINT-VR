@@ -45,7 +45,6 @@ public class LiSN_database
         length = _wordGroups;
         selectableGroups = _selectables;
         
-        // ToDo: search for an option to determine the number of enumarated folders automatically
         // load audio clips from Resources
         for (int i = 0; i < _wordGroups; i++)
         {
@@ -71,6 +70,10 @@ public class LiSN_database
         }
 
         Debug.Log("Count: " + clips.Count + " Options: " + options);
+        if(options == 0)
+        {
+            Debug.LogError("Target audio assets could not be found!");
+        }
        
         // load icons from Resources and parse 'words'
         for(int i = 0; i < selectableGroups.Length; i++)

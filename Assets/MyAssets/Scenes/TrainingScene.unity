@@ -7412,7 +7412,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -17082,23 +17082,24 @@ MonoBehaviour:
   resultManager: {fileID: 679436614}
   rewardManager: {fileID: 1208634651}
   gameLength: 40
-  min_practiceRounds: 5
+  minPracticeRounds: 5
   rewardHits: 5
-  onHit_SNR: -1.5
-  onMiss_SNR: 2.5
-  onUnsure_SNR: 1.5
-  male_targetAudioPath: audio/list_1/voice_male/
-  female_targetAudioPath: audio/list_1/voice_female/
+  onHitSNR: -1.5
+  onMissSNR: 2.5
+  onUnsureSNR: 1.5
+  practiceSNR: -3
+  targetAudioPathMale: audio/list_1/voice_male/
+  targetAudioPathFemale: audio/list_1/voice_female/
   iconsPath: icons/list_1/
   targetWordGroups: 5
   targetSelectables: 000000000200000004000000
-  distracterStory_male_left: {fileID: 8300000, guid: fb96b54e48034a744b77c2df664e19bb,
+  distracterStoryMaleLeft: {fileID: 8300000, guid: fb96b54e48034a744b77c2df664e19bb,
     type: 3}
-  distracterStory_male_right: {fileID: 8300000, guid: 534840bda3b64e54a80d869d69b1f735,
+  distracterStoryMaleRight: {fileID: 8300000, guid: 534840bda3b64e54a80d869d69b1f735,
     type: 3}
-  distracterStory_female_left: {fileID: 8300000, guid: 99ddeb89b3c00714894019fc4c984191,
+  distracterStoryFemaleLeft: {fileID: 8300000, guid: 99ddeb89b3c00714894019fc4c984191,
     type: 3}
-  distracterStory_female_right: {fileID: 8300000, guid: b596c308fd7755d4db109263c1314998,
+  distracterStoryFemaleRight: {fileID: 8300000, guid: b596c308fd7755d4db109263c1314998,
     type: 3}
 --- !u!4 &1551984277
 Transform:
