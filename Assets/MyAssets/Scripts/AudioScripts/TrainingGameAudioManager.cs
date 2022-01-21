@@ -45,14 +45,6 @@ public class TrainingGameAudioManager : MonoBehaviour
 
     private bool distracterPaused = false;
 
-    // DEPRECATED: Allowed to apply master audio setting based on userVolume value
-    /*
-    private void Start()
-    {
-        //changeLevel(2, UserManagement.selfReference.getUserVolume());
-    }
-    */
-
     // change level of selected AudioSource
     void changeVolume(string channel, float deltaVolume_db)
     {
