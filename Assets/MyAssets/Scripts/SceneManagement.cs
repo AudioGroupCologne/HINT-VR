@@ -24,4 +24,16 @@ public class SceneManagement : MonoBehaviour
         }
         
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!SceneManager.GetSceneByName("VRMenuScene").isLoaded && !SceneManager.GetSceneByName("VRLogin").isLoaded)
+            {
+                Debug.Log("Quit to main menu");
+                SceneManager.LoadSceneAsync("VRMenuScene");
+            }
+        }
+    }
 }
