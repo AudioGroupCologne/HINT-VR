@@ -85,29 +85,34 @@ public class TrainingGameManager : MonoBehaviour
     }
 
 
-    void OnStart(int dist, int voice)
+    void OnStart(int targetVoice, int distVoice, int distSetting)
     {
 
         Debug.Log("Start Training Game");
 
         // create LiSN_database object
         // voices: male (0), female (1)
-        if(voice == 0)
+        if(targetVoice == 0)
         {
-            lisnData = new LiSN_database(targetAudioPathMale, iconsPath, targetWordGroups, targetSelectables);
-            Debug.Log("attempt to set dist");
-            audioManager.setDistracterSequences(distracterStoryMaleLeft, distracterStoryMaleRight);
+            lisnData = new LiSN_database(targetAudioPathMale, iconsPath, targetWordGroups, targetSelectables); 
         }
         else
         {
             lisnData = new LiSN_database(targetAudioPathFemale, iconsPath, targetWordGroups, targetSelectables);
-            audioManager.setDistracterSequences(distracterStoryFemaleLeft, distracterStoryFemaleRight);
         }
 
 
+        if(distVoice == 0)
+        {
+            audioManager.setDistracterSequences(distracterStoryMaleLeft, distracterStoryMaleRight);
+        }
+        else
+        {
+            audioManager.setDistracterSequences(distracterStoryFemaleLeft, distracterStoryFemaleRight);
+        }
 
         // place and show level objects
-        if(dist == 0)
+        if(distSetting == 0)
         {
             // randomly disable left or right distractor
             levelManager.setLevelObjectPositions(Random.Range(1, 2));

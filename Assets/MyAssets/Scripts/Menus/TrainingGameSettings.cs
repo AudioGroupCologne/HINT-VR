@@ -13,14 +13,16 @@ public class TrainingGameSettings : MonoBehaviour
     [SerializeField] GameObject distBtn1;
     [SerializeField] GameObject distBtn2;
 
-    public delegate void OnSettingsDone(int dist, int voice);
+    public delegate void OnSettingsDone(int targetVoice, int distVoice, int distSetting);
     public OnSettingsDone settingsDoneCallback = delegate { Debug.Log("No settingsDone delegate set!"); };
 
-    private int voiceSel = -1;
-    private int distSel = -1;
+    private int targetVoiceSel = -1;
+    private int distVoiceSel = -1;
+    private int distSetting = -1;
 
     void Start()
     {
+        topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Target Voice";
         distBtn1.SetActive(false);
         distBtn2.SetActive(false);
         voiceBtn1.SetActive(true);
@@ -30,62 +32,74 @@ public class TrainingGameSettings : MonoBehaviour
     // Mainly for debugging purposes
     void Update()
     {
-        if(voiceSel == -1)
+        if(targetVoiceSel == -1)
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                Debug.Log("Selected Harold");
-                VoiceSelection(0);
+                TargetVoiceSelection(0);
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                Debug.Log("Selected Katy");
-                VoiceSelection(1);
+                TargetVoiceSelection(1);
             }
         }
-
-        if (distSel == -1 && voiceSel != -1)
+        else if (distVoiceSel == -1)
+        {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                DistractorVoiceSelection(0);
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                DistractorVoiceSelection(1);
+            }
+        }
+        else if (distSetting == -1)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                Debug.Log("Selected Harold");
                 DistractorSelection(0);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                Debug.Log("Selected Katy");
                 DistractorSelection(1);
             }
         }
-
-
 
     }
 
 
     // Button callback function: Harold "male" (0), Katy "female" (1)
-    public void VoiceSelection(int voice)
+    public void TargetVoiceSelection(int voice)
     {
 
-        voiceSel = voice;
+        targetVoiceSel = voice;
+
+        topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Distractor Voice";
+    }
+
+    public void DistractorVoiceSelection(int voice)
+    {
+
+        distVoiceSel = voice;
 
         voiceBtn1.SetActive(false);
         voiceBtn2.SetActive(false);
         distBtn1.SetActive(true);
         distBtn2.SetActive(true);
 
-        topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Chose Distractor Setting";
+        topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Distractor Setting";
     }
 
     public void DistractorSelection(int dist)
     {
-        distSel = dist;
+        distSetting = dist;
 
         // hide settings UI
         settings.SetActive(false);
 
         // start training game
-        settingsDoneCallback(distSel, voiceSel);
+        settingsDoneCallback(targetVoiceSel, distVoiceSel, distSetting);
     }
 
     public void TrainingGameSettingsQuitBtn()
