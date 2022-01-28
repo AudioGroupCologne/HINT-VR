@@ -19,6 +19,8 @@ public class LevelObjectManager : MonoBehaviour
     [SerializeField] Vector3 relativeUIPosition;
 
     private bool objectsVisible = false;
+    // 0: show all objects (default), 1: show only left dist, 2: show only right dist
+    private int optionField = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +28,11 @@ public class LevelObjectManager : MonoBehaviour
         generalUI.transform.position = PlayerCamera.transform.position + relativeUIPosition;
     }
 
-    public void setLevelObjectPositions()
+    // ensure backwards compability through implementing 'option' as optional parameter
+    public void setLevelObjectPositions(int option = 0)
     {
+        optionField = option;
+
         // avoid collisions when shifting the transform
         if(objectsVisible)
         {
@@ -58,12 +63,33 @@ public class LevelObjectManager : MonoBehaviour
         
     }
 
+    /**
+    * option: 
+    * 0 -> show both distractors
+    * 1 -> show only left disctractor
+    * 2 -> show only right disctractor
+    */
     public void showLevelObjects(bool show)
     {
-        Debug.Log("LevelObjects: " + show);
         objectsVisible = show;
         TalkerObj.SetActive(show);
-        DistractorLeftObj.SetActive(show);
-        DistractorRightObj.SetActive(show);
+
+        switch(optionField)
+        {
+            case 0:
+                DistractorLeftObj.SetActive(show);
+                DistractorRightObj.SetActive(show);
+                break;
+
+            case 1:
+                DistractorLeftObj.SetActive(show);
+                DistractorRightObj.SetActive(false);
+                break;
+
+            case 2:
+                DistractorLeftObj.SetActive(false);
+                DistractorRightObj.SetActive(show);
+                break;
+        }
     }
 }

@@ -70,8 +70,11 @@ public class TrainingGameManager : MonoBehaviour
 
     void Start()
     {
-        settingsManager.voiceCallback = OnStart;
+        settingsManager.settingsDoneCallback = OnStart;
         settingsManager.gameObject.SetActive(true);
+
+        // must not be active before settings have been done!
+        selectionManager.gameObject.SetActive(false);
 
         selectionManager.onHitCallback = OnHit;
         selectionManager.onMissCallback = OnMiss;
@@ -79,14 +82,10 @@ public class TrainingGameManager : MonoBehaviour
         selectionManager.onContinueCallback = OnContinue;
         
         audioManager.onPlayingDoneCallback = OnPlayingDone;
-
-        // place and show level objects
-        levelManager.setLevelObjectPositions();
-        levelManager.showLevelObjects(true);
     }
 
 
-    void OnStart(int voice)
+    void OnStart(int dist, int voice)
     {
 
         Debug.Log("Start Training Game");
@@ -104,7 +103,22 @@ public class TrainingGameManager : MonoBehaviour
             lisnData = new LiSN_database(targetAudioPathFemale, iconsPath, targetWordGroups, targetSelectables);
             audioManager.setDistracterSequences(distracterStoryFemaleLeft, distracterStoryFemaleRight);
         }
-        
+
+
+
+        // place and show level objects
+        if(dist == 0)
+        {
+            // randomly disable left or right distractor
+            levelManager.setLevelObjectPositions(Random.Range(1, 2));
+        }
+        else
+        {
+            levelManager.setLevelObjectPositions();
+        }
+
+        levelManager.showLevelObjects(true);
+
 
         // create sentence object
         sent = new Sentence(lisnData.getSentenceLen(), targetSelectables);
@@ -122,6 +136,9 @@ public class TrainingGameManager : MonoBehaviour
 
         // start playing again
         audioManager.startPlaying();
+
+        // enable selectionManager
+        selectionManager.gameObject.SetActive(true);
     }
 
     void OnSessionDone()
