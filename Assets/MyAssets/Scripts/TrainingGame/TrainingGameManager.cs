@@ -54,7 +54,6 @@ public class TrainingGameManager : MonoBehaviour
     // keep track of practice rounds/sentences
     private int practiceRounds = 0;
 
-
     // keep track of rounds/sentences played within current session
     private int roundsPlayed = 0;
     // keep track of current consecutive hits
@@ -92,6 +91,9 @@ public class TrainingGameManager : MonoBehaviour
         Debug.Log("Start Training Game");
 
         Debug.Log("Settings: Target " + targetVoice + " Dist " + distVoice + " Setting " + distSetting);
+
+        // make sure that this component is disabled
+        settingsManager.gameObject.SetActive(false);
 
         // create LiSN_database object
         // voices: male (0), female (1)

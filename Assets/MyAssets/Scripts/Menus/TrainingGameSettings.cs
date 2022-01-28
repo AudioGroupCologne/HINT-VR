@@ -182,6 +182,7 @@ public class TrainingGameSettings : MonoBehaviour
 
         // start training game
         settingsDoneCallback(targetVoiceSel, distVoiceSel, distSetting);
+        settings.SetActive(false);
 
         // hide settings UI
         settings.SetActive(false);

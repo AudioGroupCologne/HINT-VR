@@ -77,6 +77,8 @@ public class WordSelectionManager : MonoBehaviour
         // get random position for correct Btn
         correctBtn = Random.Range(0, num_words - 1);
 
+        Debug.Log("Correct Word: " + words[0]);
+
         // first assign correct word
         wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
         // button with icon is a prefab, therefore the child index (1) is known!
