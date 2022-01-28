@@ -15209,6 +15209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244b092f432784e409a010dd8dfa49e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultVoice: 1
+  targetVoiceSelection: 0
+  distractorVoiceSelection: 1
+  distractorCountSelection: 1
   settings: {fileID: 54531102}
   topText: {fileID: 715343040}
   voiceBtn1: {fileID: 1439407233}

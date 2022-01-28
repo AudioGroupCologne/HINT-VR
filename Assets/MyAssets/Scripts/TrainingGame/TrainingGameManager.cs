@@ -72,6 +72,7 @@ public class TrainingGameManager : MonoBehaviour
     {
         settingsManager.settingsDoneCallback = OnStart;
         settingsManager.gameObject.SetActive(true);
+        settingsManager.Init();
 
         // must not be active before settings have been done!
         selectionManager.gameObject.SetActive(false);
@@ -89,6 +90,8 @@ public class TrainingGameManager : MonoBehaviour
     {
 
         Debug.Log("Start Training Game");
+
+        Debug.Log("Settings: Target " + targetVoice + " Dist " + distVoice + " Setting " + distSetting);
 
         // create LiSN_database object
         // voices: male (0), female (1)

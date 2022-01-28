@@ -6,6 +6,14 @@ using UnityEngine.UI;
 
 public class TrainingGameSettings : MonoBehaviour
 {
+
+    //[SerializeField] settingsLevel setLvl = settingsLevel.targetVoiceSelection;
+    [SerializeField] voiceSelection defaultVoice = voiceSelection.femaleVoice;
+
+    [SerializeField] bool targetVoiceSelection = true;
+    [SerializeField] bool distractorVoiceSelection = false;
+    [SerializeField] bool distractorCountSelection = false;
+
     [SerializeField] GameObject settings;
     [SerializeField] GameObject topText;
     [SerializeField] GameObject voiceBtn1;
@@ -13,61 +21,116 @@ public class TrainingGameSettings : MonoBehaviour
     [SerializeField] GameObject distBtn1;
     [SerializeField] GameObject distBtn2;
 
+    enum voiceSelection { maleVoice, femaleVoice};
+    enum distracterSetting { oneDistractor, twoDistractors};
+
+    
     public delegate void OnSettingsDone(int targetVoice, int distVoice, int distSetting);
     public OnSettingsDone settingsDoneCallback = delegate { Debug.Log("No settingsDone delegate set!"); };
 
-    private int targetVoiceSel = -1;
-    private int distVoiceSel = -1;
-    private int distSetting = -1;
+    // simple state variable, required for keyboard controls
+    private int settingsState = 0;
 
-    void Start()
+    private int targetVoiceSel;
+    private int distVoiceSel;
+    private int distSetting;
+
+    public void Init()
     {
-        topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Target Voice";
-        distBtn1.SetActive(false);
-        distBtn2.SetActive(false);
-        voiceBtn1.SetActive(true);
-        voiceBtn2.SetActive(true);
+        // set default values
+        targetVoiceSel = (int)defaultVoice;
+        distVoiceSel = (int)defaultVoice;
+        distSetting = (int)distracterSetting.twoDistractors;
+
+        if (targetVoiceSelection)
+        {
+            ShowSelection(0);
+        }
+        else if (distractorVoiceSelection)
+        {
+            ShowSelection(1);
+        }
+        else if (distractorCountSelection)
+        {
+            ShowSelection(3);
+        }
+        else
+        {
+            settingsDoneCallback(targetVoiceSel, distVoiceSel, distSetting);
+            settings.SetActive(false);
+        }
     }
 
     // Mainly for debugging purposes
     void Update()
     {
-        if(targetVoiceSel == -1)
+        switch(settingsState)
         {
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-                TargetVoiceSelection(0);
-            }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                TargetVoiceSelection(1);
-            }
+            case 0:
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    TargetVoiceSelection(0);
+                }
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    TargetVoiceSelection(1);
+                }
+                break;
+            case 1:
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    DistractorVoiceSelection(0);
+                }
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    DistractorVoiceSelection(1);
+                }
+                break;
+            case 2:
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    DistractorSelection(0);
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    DistractorSelection(1);
+                }
+                break;
         }
-        else if (distVoiceSel == -1)
-        {
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-                DistractorVoiceSelection(0);
-            }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                DistractorVoiceSelection(1);
-            }
-        }
-        else if (distSetting == -1)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                DistractorSelection(0);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                DistractorSelection(1);
-            }
-        }
-
     }
 
+    void ShowSelection(int index)
+    {
+        switch(index)
+        {
+            case 0:
+                // targetVoice
+                topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Target Voice";
+                distBtn1.SetActive(false);
+                distBtn2.SetActive(false);
+                voiceBtn1.SetActive(true);
+                voiceBtn2.SetActive(true);
+                break;
+            case 1:
+                // distractorVoice
+                topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Distractor Voice";
+                settingsState = 1;
+                distBtn1.SetActive(false);
+                distBtn2.SetActive(false);
+                voiceBtn1.SetActive(true);
+                voiceBtn2.SetActive(true);
+                break;
+            case 2:
+                // distractorSettings
+                topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Distractor Setting";
+                settingsState = 2;
+                distBtn1.SetActive(true);
+                distBtn2.SetActive(true);
+                voiceBtn1.SetActive(false);
+                voiceBtn2.SetActive(false);
+                break;
+        }
+    }
 
     // Button callback function: Harold "male" (0), Katy "female" (1)
     public void TargetVoiceSelection(int voice)
@@ -75,7 +138,22 @@ public class TrainingGameSettings : MonoBehaviour
 
         targetVoiceSel = voice;
 
-        topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Distractor Voice";
+        if(!distractorVoiceSelection && !distractorCountSelection)
+        {
+            settingsDoneCallback(targetVoiceSel, targetVoiceSel, (int)distracterSetting.twoDistractors);
+            settings.SetActive(false);
+            return;
+        }
+       
+        if(distractorVoiceSelection)
+        {
+            ShowSelection(1);
+        }
+        else if(distractorCountSelection)
+        {
+            ShowSelection(2);
+        }
+        
     }
 
     public void DistractorVoiceSelection(int voice)
@@ -88,18 +166,25 @@ public class TrainingGameSettings : MonoBehaviour
         distBtn1.SetActive(true);
         distBtn2.SetActive(true);
 
-        topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Distractor Setting";
+        if (!distractorCountSelection)
+        {
+            settingsDoneCallback(targetVoiceSel, targetVoiceSel, (int)distracterSetting.twoDistractors);
+            settings.SetActive(false);
+            return;
+        }
+
+        ShowSelection(2);
     }
 
     public void DistractorSelection(int dist)
     {
         distSetting = dist;
 
-        // hide settings UI
-        settings.SetActive(false);
-
         // start training game
         settingsDoneCallback(targetVoiceSel, distVoiceSel, distSetting);
+
+        // hide settings UI
+        settings.SetActive(false);
     }
 
     public void TrainingGameSettingsQuitBtn()
