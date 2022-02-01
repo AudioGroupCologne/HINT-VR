@@ -115,6 +115,8 @@ public class TrainingGameSettings : MonoBehaviour
                 // distractorVoice
                 topText.GetComponent<TMPro.TextMeshProUGUI>().text = "Choose Distractor Voice";
                 settingsState = 1;
+                voiceBtn1.SetActive(false);
+                voiceBtn2.SetActive(false);
                 distBtn1.SetActive(false);
                 distBtn2.SetActive(false);
                 voiceBtn1.SetActive(true);
@@ -176,11 +178,6 @@ public class TrainingGameSettings : MonoBehaviour
     {
 
         distVoiceSel = voice;
-
-        voiceBtn1.SetActive(false);
-        voiceBtn2.SetActive(false);
-        distBtn1.SetActive(true);
-        distBtn2.SetActive(true);
 
         if (!distractorCountSelection)
         {

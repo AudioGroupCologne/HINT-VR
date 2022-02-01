@@ -15211,8 +15211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultVoice: 1
   targetVoiceSelection: 1
-  distractorVoiceSelection: 0
-  distractorCountSelection: 0
+  distractorVoiceSelection: 1
+  distractorCountSelection: 1
   settings: {fileID: 54531102}
   topText: {fileID: 715343040}
   voiceBtn1: {fileID: 1439407233}
@@ -22959,7 +22959,7 @@ PrefabInstance:
     - target: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 300
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
@@ -23512,7 +23512,7 @@ PrefabInstance:
     - target: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 300
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
