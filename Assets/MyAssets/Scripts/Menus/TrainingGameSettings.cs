@@ -133,7 +133,23 @@ public class TrainingGameSettings : MonoBehaviour
     }
 
     // Button callback function: Harold "male" (0), Katy "female" (1)
-    public void TargetVoiceSelection(int voice)
+
+    public void VoiceSelectionCallback(int voice)
+    {
+        switch(settingsState)
+        {
+            case 0:
+                TargetVoiceSelection(voice);
+                break;
+            case 1:
+                DistractorVoiceSelection(voice);
+                break;
+            default:
+                Debug.LogError("Invalid VoiceSelection Event: " + settingsState);
+                break;
+        }
+    }
+    void TargetVoiceSelection(int voice)
     {
 
         targetVoiceSel = voice;
@@ -156,7 +172,7 @@ public class TrainingGameSettings : MonoBehaviour
         
     }
 
-    public void DistractorVoiceSelection(int voice)
+    void DistractorVoiceSelection(int voice)
     {
 
         distVoiceSel = voice;
