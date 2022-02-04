@@ -48,19 +48,19 @@ public class WordSelectionManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
         {
-            ButtonHander(0);
+            ButtonHandler(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
         {
-            ButtonHander(1);
+            ButtonHandler(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
         {
-            ButtonHander(2);
+            ButtonHandler(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
         {
-            ButtonHander(3);
+            ButtonHandler(3);
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -131,7 +131,7 @@ public class WordSelectionManager : MonoBehaviour
     }
 
     // callback method for all word selection buttons (to be assigned via inspector)
-    public void ButtonHander(int btn_ix)
+    public void ButtonHandler(int btn_ix)
     {
         if (selectionMade)
             return;

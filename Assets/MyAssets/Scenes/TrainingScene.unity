@@ -7693,7 +7693,7 @@ PrefabInstance:
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonHander
+      value: ButtonHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
@@ -19143,7 +19143,7 @@ PrefabInstance:
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonHander
+      value: ButtonHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
@@ -21009,7 +21009,7 @@ PrefabInstance:
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonHander
+      value: ButtonHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
@@ -21763,7 +21763,7 @@ PrefabInstance:
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonHander
+      value: ButtonHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
