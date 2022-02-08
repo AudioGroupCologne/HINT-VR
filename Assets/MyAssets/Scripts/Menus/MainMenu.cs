@@ -21,6 +21,10 @@ public class MainMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
         {
+            StartTestScene();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+        {
             ShowPlayerProgress();
         }
     }
@@ -36,6 +40,12 @@ public class MainMenu : MonoBehaviour
 
         SceneManager.LoadSceneAsync("TrainingScene");
 
+    }
+
+    // no login required?
+    public void StartTestScene()
+    {
+        SceneManager.LoadSceneAsync("TestScene");
     }
 
     public void ShowPlayerProgress()

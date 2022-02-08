@@ -4235,7 +4235,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1844397760}
+      objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -4916,9 +4916,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 395080889}
-  - component: {fileID: 395080890}
+  - component: {fileID: 395080891}
   m_Layer: 0
-  m_Name: TestGameManager
+  m_Name: TestSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4944,7 +4944,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &395080890
+--- !u!114 &395080891
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4953,35 +4953,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 395080888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c45a5589d4d6aa94c9809e7d75f42881, type: 3}
+  m_Script: {fileID: 11500000, guid: 6cd52dd057ddb4646880681ff69f1121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 893847216}
-  settingsManager: {fileID: 1844397760}
-  levelManager: {fileID: 1473686520}
+  audioManager: {fileID: 0}
+  settingsManager: {fileID: 0}
+  levelManager: {fileID: 0}
   selectionManager: {fileID: 0}
-  resultManager: {fileID: 444452706}
-  rewardManager: {fileID: 1981951788}
-  gameLength: 40
-  minPracticeRounds: 5
-  rewardHits: 5
-  onHitSNR: -1.5
-  onMissSNR: 2.5
-  onUnsureSNR: 1.5
+  testSNR: 1
   practiceSNR: -3
-  targetAudioPathMale: audio/list_1/voice_male/
-  targetAudioPathFemale: audio/list_1/voice_female/
-  iconsPath: icons/list_1/
-  targetWordGroups: 5
-  targetSelectables: 000000000200000004000000
-  distracterStoryMaleLeft: {fileID: 8300000, guid: fb96b54e48034a744b77c2df664e19bb,
-    type: 3}
-  distracterStoryMaleRight: {fileID: 8300000, guid: 534840bda3b64e54a80d869d69b1f735,
-    type: 3}
-  distracterStoryFemaleLeft: {fileID: 8300000, guid: 99ddeb89b3c00714894019fc4c984191,
-    type: 3}
-  distracterStoryFemaleRight: {fileID: 8300000, guid: b596c308fd7755d4db109263c1314998,
-    type: 3}
+  targetAudioPathMale: 
+  targetAudioPathFemale: 
+  femaleDistractor: []
+  maleDistractor: []
+  targetSentences: []
 --- !u!1001 &418007766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7723,7 +7708,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1844397760}
+      objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -7751,12 +7736,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca824ab4c81af024db55b1ea68c58adc, type: 3}
---- !u!1 &681664876 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8773774306695706489, guid: ca824ab4c81af024db55b1ea68c58adc,
-    type: 3}
-  m_PrefabInstance: {fileID: 681664875}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &681664877 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
@@ -10502,7 +10481,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1844397760}
+      objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821426, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -15781,7 +15760,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1844397760}
+      objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -15809,12 +15788,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca824ab4c81af024db55b1ea68c58adc, type: 3}
---- !u!1 &1428843774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8773774306695706489, guid: ca824ab4c81af024db55b1ea68c58adc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1428843773}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1428843775 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
@@ -20109,36 +20082,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1844397761}
-  - component: {fileID: 1844397760}
+  - component: {fileID: 1844397762}
   m_Layer: 0
-  m_Name: TrainingGameSettings
+  m_Name: TestSceneSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1844397760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844397759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244b092f432784e409a010dd8dfa49e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultVoice: 1
-  targetVoiceSelection: 1
-  distractorVoiceSelection: 1
-  distractorCountSelection: 1
-  settings: {fileID: 1972099239}
-  topText: {fileID: 1753249652}
-  voiceBtn1: {fileID: 1428843774}
-  voiceBtn2: {fileID: 681664876}
-  distBtn1: {fileID: 1964805088}
-  distBtn2: {fileID: 1993782717}
 --- !u!4 &1844397761
 Transform:
   m_ObjectHideFlags: 0
@@ -20153,6 +20104,23 @@ Transform:
   m_Father: {fileID: 395080889}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1844397762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844397759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93c9a54f563e5e49b2a995b6ffb65d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetVoice: 0
+  settings: {fileID: 0}
+  topText: {fileID: 0}
+  expBtn1: {fileID: 0}
+  expBtn2: {fileID: 0}
 --- !u!1001 &1873685260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22018,7 +21986,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1844397760}
+      objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -22046,12 +22014,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca824ab4c81af024db55b1ea68c58adc, type: 3}
---- !u!1 &1964805088 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8773774306695706489, guid: ca824ab4c81af024db55b1ea68c58adc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1964805087}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1964805089 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
@@ -22825,7 +22787,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1844397760}
+      objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -22858,12 +22820,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca824ab4c81af024db55b1ea68c58adc, type: 3}
---- !u!1 &1993782717 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8773774306695706489, guid: ca824ab4c81af024db55b1ea68c58adc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1993782716}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1993782718 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
