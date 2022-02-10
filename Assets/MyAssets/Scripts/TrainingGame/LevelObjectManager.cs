@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CustomTypes.TestSceneTypes;
 
 public class LevelObjectManager : MonoBehaviour
 {
     // the camare is used as an anchor, to allow for relative positioning
     [SerializeField] GameObject PlayerCamera;
 
-    [SerializeField] GameObject TalkerObj;
-    [SerializeField] GameObject DistractorLeftObj;
-    [SerializeField] GameObject DistractorRightObj;
+    [SerializeField] GameObject TargetObj;
+    [SerializeField] GameObject Distractor1Obj;
+    [SerializeField] GameObject Distractor2Obj;
     [SerializeField] GameObject generalUI;
 
-    [SerializeField] Vector3 talkerPos;
-    [SerializeField] Vector3 distractorPos_left;
-    [SerializeField] Vector3 distractorPos_right;
+    [SerializeField] Vector3 positionLeft;
+    [SerializeField] Vector3 positionRight;
+    [SerializeField] Vector3 positionFront;
+
 
     [SerializeField] Vector3 relativeUIPosition;
 
@@ -38,22 +40,28 @@ public class LevelObjectManager : MonoBehaviour
         {
             showLevelObjects(false);
         }
-        
+
         // set position of TalkerObj based on MainCameras position
-        TalkerObj.transform.position = PlayerCamera.transform.position + talkerPos;
+        TargetObj.transform.position = PlayerCamera.transform.position + positionFront;
+
         // get rotation of camera
         Vector3 rot = Quaternion.identity.eulerAngles;
+
         // turn by 180 degree (object shall face camera, not look into the same direction)
         rot = new Vector3(rot.x, rot.y + 180, rot.z);
-        // apply rotation to object
-        TalkerObj.transform.rotation = Quaternion.Euler(rot);
-        rot = new Vector3(rot.x, rot.y + 90, rot.z);
-        DistractorRightObj.transform.rotation = Quaternion.Euler(rot);
-        rot = new Vector3(rot.x, rot.y + 180, rot.z);
-        DistractorLeftObj.transform.rotation = Quaternion.Euler(rot);
 
-        DistractorLeftObj.transform.position = PlayerCamera.transform.position + distractorPos_left;
-        DistractorRightObj.transform.position = PlayerCamera.transform.position + distractorPos_right;
+        // apply rotation to object
+        TargetObj.transform.rotation = Quaternion.Euler(rot);
+
+        rot = new Vector3(rot.x, rot.y + 180, rot.z);
+        Distractor1Obj.transform.rotation = Quaternion.Euler(rot);
+
+        rot = new Vector3(rot.x, rot.y + 90, rot.z);
+        Distractor2Obj.transform.rotation = Quaternion.Euler(rot);
+
+
+        Distractor1Obj.transform.position = PlayerCamera.transform.position + positionLeft;
+        Distractor2Obj.transform.position = PlayerCamera.transform.position + positionRight;
 
         // go back to previous state
         if(objectsVisible)
@@ -61,6 +69,45 @@ public class LevelObjectManager : MonoBehaviour
             showLevelObjects(true);
         }
         
+    }
+
+    public void setLevelObjectPosition(levelObjects obj, levelPositions pos)
+    {
+
+        Vector3 tmp;
+
+        switch (pos)
+        {
+            case levelPositions.front:
+                tmp = positionFront;
+                break;
+            case levelPositions.left:
+                tmp = positionLeft;
+                break;
+            case levelPositions.right:
+                tmp = positionRight;
+                break;
+            default:
+                Debug.LogError("Invalid levelPostions selector: " + pos);
+                return;
+        }
+        
+
+        switch(obj)
+            {
+            case levelObjects.target:
+                TargetObj.transform.position = PlayerCamera.transform.position + tmp;
+                break;
+            case levelObjects.distractor1:
+                Distractor1Obj.transform.position = PlayerCamera.transform.position + tmp;
+                break;
+            case levelObjects.distractor2:
+                Distractor2Obj.transform.position = PlayerCamera.transform.position + tmp;
+                break;
+            default:
+                Debug.LogError("Invalid levelObject selector: " + obj);
+                return;
+        }
     }
 
     /**
@@ -72,23 +119,23 @@ public class LevelObjectManager : MonoBehaviour
     public void showLevelObjects(bool show)
     {
         objectsVisible = show;
-        TalkerObj.SetActive(show);
+        TargetObj.SetActive(show);
 
         switch(optionField)
         {
             case 0:
-                DistractorLeftObj.SetActive(show);
-                DistractorRightObj.SetActive(show);
+                Distractor1Obj.SetActive(show);
+                Distractor2Obj.SetActive(show);
                 break;
 
             case 1:
-                DistractorLeftObj.SetActive(show);
-                DistractorRightObj.SetActive(false);
+                Distractor1Obj.SetActive(show);
+                Distractor2Obj.SetActive(false);
                 break;
 
             case 2:
-                DistractorLeftObj.SetActive(false);
-                DistractorRightObj.SetActive(show);
+                Distractor1Obj.SetActive(false);
+                Distractor2Obj.SetActive(show);
                 break;
         }
     }
