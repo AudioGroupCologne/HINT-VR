@@ -47,5 +47,10 @@ public class UserFeedback : MonoBehaviour
         }
     }
 
+    public void ShowUserInterface(bool show)
+    {
+        gameObject.SetActive(show);
+    }
+
 
 }
