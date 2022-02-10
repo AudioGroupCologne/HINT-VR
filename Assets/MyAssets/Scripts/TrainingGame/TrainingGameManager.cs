@@ -7,7 +7,7 @@ using UnityEditor;
 public class TrainingGameManager : MonoBehaviour
 {
 
-    [SerializeField] TrainingGameAudioManager audioManager;
+    [SerializeField] CustomAudioManager audioManager;
     [SerializeField] TrainingGameSettings settingsManager;
     [SerializeField] LevelObjectManager levelManager;
     [SerializeField] WordSelectionManager selectionManager;
@@ -212,7 +212,8 @@ public class TrainingGameManager : MonoBehaviour
     void OnHit()
     {
 
-        audioManager.playOnHit();
+        //audioManager.playOnHit();
+        audioManager.playSoundEffect("onHit");
 
         repeatSentence = false;
 
@@ -233,7 +234,8 @@ public class TrainingGameManager : MonoBehaviour
         if (rewardCount >= rewardHits)
         {
             Debug.Log("Player Reward achieved!");
-            audioManager.playOnReward();
+            //audioManager.playOnReward();
+            audioManager.playSoundEffect("onReward");
             rewardManager.showReward(rewards++);
             // reset rewardCount
             rewardCount = 0;
@@ -245,7 +247,8 @@ public class TrainingGameManager : MonoBehaviour
     // Increase SNR, play 'false' sound
     void OnMiss()
     {
-        audioManager.playOnMiss();
+        //audioManager.playOnMiss();
+        audioManager.playSoundEffect("onMiss");
 
         repeatSentence = false;
 
@@ -274,7 +277,8 @@ public class TrainingGameManager : MonoBehaviour
     void OnUnsure()
     {
 
-        audioManager.playOnUnsure();
+        //audioManager.playOnUnsure();
+        audioManager.playSoundEffect("onUnsure");
 
         if (practiceMode)
         {

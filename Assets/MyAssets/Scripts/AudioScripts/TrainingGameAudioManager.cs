@@ -37,8 +37,8 @@ public class TrainingGameAudioManager : MonoBehaviour
     [SerializeField] bool playAttentionClip;
     
     // AudioMixer limitations
-    [SerializeField] float min_vol_dB = -40;
-    [SerializeField] float max_vol_dB = 20;
+    [SerializeField] readonly float min_vol_dB = -40;
+    [SerializeField] readonly float max_vol_dB = 20;
 
     public delegate void OnPlayingDone();
     public OnPlayingDone onPlayingDoneCallback = delegate { Debug.Log("No OnPlayingDone delegate set!"); };
@@ -164,6 +164,24 @@ public class TrainingGameAudioManager : MonoBehaviour
         }
         
     }
+
+    public void setTargetSentence(AudioClip sentence)
+    {
+        if (playAttentionClip)
+        {
+            AudioClip[] tmp = new AudioClip[2];
+            tmp[0] = attention;
+            tmp[1] = sentence;
+            talker.clip = Combine(tmp);
+        }
+        else
+        {
+            talker.clip = sentence;
+        }
+
+    }
+
+
 
     public void setDistracterSequences(AudioClip story_l, AudioClip story_r)
     {
