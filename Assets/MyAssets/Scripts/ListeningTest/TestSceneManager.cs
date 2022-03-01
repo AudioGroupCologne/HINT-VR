@@ -8,7 +8,7 @@ using CustomTypes.TestSceneTypes;
 public class TestSceneManager : MonoBehaviour
 {
 
-    [SerializeField] TrainingGameAudioManager audioManager;
+    [SerializeField] CustomAudioManager audioManager;
     [SerializeField] TestSceneSettings settingsManager;
     [SerializeField] LevelObjectManager levelManager;
     [SerializeField] UserFeedback selectionManager;
@@ -18,10 +18,16 @@ public class TestSceneManager : MonoBehaviour
     [SerializeField] readonly float practiceSNR = 2.0f;
 
 
-    [SerializeField] readonly string targetAudioPath;
+    // Pfade für target und dist audio angeben
+    // Audio manager lädt dann nach anfrage entsprechende files?
+
+    [SerializeField] string targetAudioPath;
 
 
-    [SerializeField] AudioClip[] femaleDistractor;
+    [SerializeField] AudioClip female1Distractor;
+    [SerializeField] AudioClip female2Distractor;
+    [SerializeField] AudioClip female3Distractor;
+
     [SerializeField] AudioClip[] maleDistractor;
     [SerializeField] AudioClip[] targetSentences;
 
@@ -103,8 +109,7 @@ public class TestSceneManager : MonoBehaviour
         switch(exp)
         {
             case experiments.experiment1:
-                activeExp = new experiment(EXP1PracticeConditions);
-                //experiment exp1 = new experiment(EXP1Conditions);
+                activeExp = new experiment(EXP1PracticeConditions, EXP1Conditions);
                 break;
             case experiments.experiment2:
                 activeExp = new experiment(EXP2Conditions);
@@ -114,7 +119,9 @@ public class TestSceneManager : MonoBehaviour
                 return;
         }
 
-        
+
+
+        ApplyTestConditions();
         
         levelManager.showLevelObjects(true);
 
@@ -163,15 +170,6 @@ public class TestSceneManager : MonoBehaviour
 
         // set voiceCondition
         
-    }
-
-    void SetTestCondiitons()
-    {
-        switch (1)
-        {
-            default:
-                break;
-        }
     }
 
 

@@ -4787,11 +4787,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd52dd057ddb4646880681ff69f1121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 893847217}
   settingsManager: {fileID: 1844397762}
   levelManager: {fileID: 1473686520}
   selectionManager: {fileID: 241924939}
-  femaleDistractor: []
+  targetAudioPath: audio/test/
+  female1Distractor: {fileID: 0}
+  female2Distractor: {fileID: 0}
+  female3Distractor: {fileID: 0}
   maleDistractor: []
   targetSentences: []
   EXP1PracticeConditions:

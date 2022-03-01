@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CustomTypes.TrainingGameTypes;
 using CustomTypes.TestSceneTypes;
 
 public class LevelObjectManager : MonoBehaviour
@@ -21,8 +22,8 @@ public class LevelObjectManager : MonoBehaviour
     [SerializeField] Vector3 relativeUIPosition;
 
     private bool objectsVisible = false;
-    // 0: show all objects (default), 1: show only left dist, 2: show only right dist
-    private int optionField = 0;
+    
+    private distractorSettings setup = distractorSettings.bothDist;
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +31,14 @@ public class LevelObjectManager : MonoBehaviour
         generalUI.transform.position = PlayerCamera.transform.position + relativeUIPosition;
     }
 
-    // ensure backwards compability through implementing 'option' as optional parameter
-    public void setLevelObjectPositions(int option = 0)
+    public void setDistractorSettings(distractorSettings setting)
     {
-        optionField = option;
+        setup = setting;
+    }
+
+    // ensure backwards compability through implementing 'option' as optional parameter
+    public void setLevelObjectPositions()
+    {
 
         // avoid collisions when shifting the transform
         if(objectsVisible)
@@ -110,31 +115,26 @@ public class LevelObjectManager : MonoBehaviour
         }
     }
 
-    /**
-    * option: 
-    * 0 -> show both distractors
-    * 1 -> show only left disctractor
-    * 2 -> show only right disctractor
-    */
+
     public void showLevelObjects(bool show)
     {
         objectsVisible = show;
         TargetObj.SetActive(show);
 
-        switch(optionField)
+        switch(setup)
         {
-            case 0:
-                Distractor1Obj.SetActive(show);
-                Distractor2Obj.SetActive(show);
-                break;
-
-            case 1:
+            case distractorSettings.dist1:
                 Distractor1Obj.SetActive(show);
                 Distractor2Obj.SetActive(false);
                 break;
 
-            case 2:
+            case distractorSettings.dist2:
                 Distractor1Obj.SetActive(false);
+                Distractor2Obj.SetActive(show);
+                break;
+
+            case distractorSettings.bothDist:
+                Distractor1Obj.SetActive(show);
                 Distractor2Obj.SetActive(show);
                 break;
         }

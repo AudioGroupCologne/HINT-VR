@@ -1,0 +1,104 @@
+CREATE: HL Simulation plugin created
+SET PARAMETER: Hearing loss of band 0 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 1 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 2 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 3 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 4 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 5 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 6 for Left ear set to 26.000000 dBHL
+SET PARAMETER: Hearing loss of band 7 for Left ear set to 31.000000 dBHL
+SET PARAMETER: Hearing loss of band 8 for Left ear set to 31.000000 dBHL
+SET PARAMETER: Hearing loss of band 0 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 1 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 2 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 3 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 4 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 5 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 6 for Right ear set to 26.000000 dBHL
+SET PARAMETER: Hearing loss of band 7 for Right ear set to 31.000000 dBHL
+SET PARAMETER: Hearing loss of band 8 for Right ear set to 31.000000 dBHL
+SET PARAMETER: Left ear hearing loss simulation switched ON
+SET PARAMETER: Right ear hearing loss simulation switched ON
+SET PARAMETER: Calibration (dBSPL for 0dBFS) set to: 90
+SET PARAMETER: Attack time (ms) for Left envelope detectors set to: 981
+SET PARAMETER: Release time (ms) for Left envelope detectors set to: 50
+SET PARAMETER: Attack time (ms) for Right envelope detectors set to: 999
+SET PARAMETER: Release time (ms) for Right envelope detectors set to: 50
+SET PARAMETER: Left ear multiband expander switched ON
+SET PARAMETER: Right ear multiband expander switched ON
+SET PARAMETER: Left ear temporal distortion simulation switched ON
+SET PARAMETER: Right ear temporal distortion simulation switched ON
+SET PARAMETER: Band upper limit (Hz) for Left temporal distortion simulator set to: 1600
+SET PARAMETER: Band upper limit (Hz) for Right temporal distortion simulator set to: 3200
+SET PARAMETER: Noise autocorrelation LPF cutoff (Hz) for Left temporal distortion simulator set to: 500
+SET PARAMETER: Noise autocorrelation LPF cutoff (Hz) for Right temporal Distortion simulator set to: 850
+SET PARAMETER: White noise power (ms) for Left temporal Distortion simulator set to: 0
+SET PARAMETER: White noise power (ms) for Right temporal distortion simulator set to: 0.8
+SET PARAMETER: Left-Right synchronicity for temporal distortion simulator set to: 0
+SET PARAMETER: Left-right ear synchronicity in temporal distortion simulator switched OFF
+SET PARAMETER: WARNING! PARAM_TA_AUTOCORR0_GET_LEFT is read only
+SET PARAMETER: WARNING! PARAM_TA_AUTOCORR1_GET_LEFT is read only
+SET PARAMETER: WARNING! PARAM_TA_AUTOCORR0_GET_RIGHT is read only
+SET PARAMETER: WARNING! PARAM_TA_AUTOCORR1_GET_RIGHT is read only
+SET PARAMETER: Frequency smearing in left ear switched ON
+SET PARAMETER: Frequency smearing in right ear switched ON
+SET PARAMETER: Downward smearing buffer size for left ear = 100
+SET PARAMETER: Downward smearing buffer size for right ear = 15
+SET PARAMETER: Upward smearing buffer size for left ear = 100
+SET PARAMETER: Upward smearing buffer size for right ear = 15
+SET PARAMETER: Downward smearing amount (in Hz) for left ear = 150
+SET PARAMETER: Downward smearing amount (in Hz) for right ear = 0
+SET PARAMETER: Upward smearing amount (in Hz) for left ear = 150
+SET PARAMETER: Upward smearing amount (in Hz) for right ear = 0
+CREATE: HL Simulation plugin created
+SET PARAMETER: Hearing loss of band 0 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 1 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 2 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 3 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 4 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 5 for Left ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 6 for Left ear set to 26.000000 dBHL
+SET PARAMETER: Hearing loss of band 7 for Left ear set to 31.000000 dBHL
+SET PARAMETER: Hearing loss of band 8 for Left ear set to 31.000000 dBHL
+SET PARAMETER: Hearing loss of band 0 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 1 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 2 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 3 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 4 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 5 for Right ear set to 21.000000 dBHL
+SET PARAMETER: Hearing loss of band 6 for Right ear set to 26.000000 dBHL
+SET PARAMETER: Hearing loss of band 7 for Right ear set to 31.000000 dBHL
+SET PARAMETER: Hearing loss of band 8 for Right ear set to 31.000000 dBHL
+SET PARAMETER: Left ear hearing loss simulation switched ON
+SET PARAMETER: Right ear hearing loss simulation switched ON
+SET PARAMETER: Calibration (dBSPL for 0dBFS) set to: 90
+SET PARAMETER: Attack time (ms) for Left envelope detectors set to: 981
+SET PARAMETER: Release time (ms) for Left envelope detectors set to: 50
+SET PARAMETER: Attack time (ms) for Right envelope detectors set to: 999
+SET PARAMETER: Release time (ms) for Right envelope detectors set to: 50
+SET PARAMETER: Left ear multiband expander switched ON
+SET PARAMETER: Right ear multiband expander switched ON
+SET PARAMETER: Left ear temporal distortion simulation switched ON
+SET PARAMETER: Right ear temporal distortion simulation switched ON
+SET PARAMETER: Band upper limit (Hz) for Left temporal distortion simulator set to: 1600
+SET PARAMETER: Band upper limit (Hz) for Right temporal distortion simulator set to: 3200
+SET PARAMETER: Noise autocorrelation LPF cutoff (Hz) for Left temporal distortion simulator set to: 500
+SET PARAMETER: Noise autocorrelation LPF cutoff (Hz) for Right temporal Distortion simulator set to: 850
+SET PARAMETER: White noise power (ms) for Left temporal Distortion simulator set to: 0
+SET PARAMETER: White noise power (ms) for Right temporal distortion simulator set to: 0.8
+SET PARAMETER: Left-Right synchronicity for temporal distortion simulator set to: 0
+SET PARAMETER: Left-right ear synchronicity in temporal distortion simulator switched OFF
+SET PARAMETER: WARNING! PARAM_TA_AUTOCORR0_GET_LEFT is read only
+SET PARAMETER: WARNING! PARAM_TA_AUTOCORR1_GET_LEFT is read only
+SET PARAMETER: WARNING! PARAM_TA_AUTOCORR0_GET_RIGHT is read only
+SET PARAMETER: WARNING! PARAM_TA_AUTOCORR1_GET_RIGHT is read only
+SET PARAMETER: Frequency smearing in left ear switched ON
+SET PARAMETER: Frequency smearing in right ear switched ON
+SET PARAMETER: Downward smearing buffer size for left ear = 100
+SET PARAMETER: Downward smearing buffer size for right ear = 15
+SET PARAMETER: Upward smearing buffer size for left ear = 100
+SET PARAMETER: Upward smearing buffer size for right ear = 15
+SET PARAMETER: Downward smearing amount (in Hz) for left ear = 150
+SET PARAMETER: Downward smearing amount (in Hz) for right ear = 0
+SET PARAMETER: Upward smearing amount (in Hz) for left ear = 150
+SET PARAMETER: Upward smearing amount (in Hz) for right ear = 0

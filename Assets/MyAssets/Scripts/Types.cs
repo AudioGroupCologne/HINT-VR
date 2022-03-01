@@ -24,7 +24,7 @@ namespace CustomTypes
 
     namespace TrainingGameTypes
     {
-        public enum testtype { test1, test2};
+        public enum distractorSettings { dist1, dist2, bothDist };
     }
 
 
@@ -49,10 +49,25 @@ namespace CustomTypes
         [Serializable]
         public class experiment
         {
+            bool practiceMode = false;
+            [SerializeField] List<testCondition> practice;
             [SerializeField] List<testCondition> conditions;
+            
 
             public experiment(List<testCondition> conds)
             {
+                conditions = new List<testCondition>();
+                conditions = conds;
+            }
+
+            public experiment(List<testCondition> practiceConds , List<testCondition> conds)
+            {
+
+                practice = new List<testCondition>();
+                practice = practiceConds;
+
+                practiceMode = true;
+
                 conditions = new List<testCondition>();
                 conditions = conds;
             }
@@ -75,6 +90,21 @@ namespace CustomTypes
                 }
 
                 return conditions[index];
+            }
+
+            public bool PracticeModeAvailable()
+            {
+                return practiceMode;
+            }
+
+            public testCondition GetPracticeConditions(int index)
+            {
+                if (index >= practice.Count)
+                {
+                    return null;
+                }
+
+                return practice[index];
             }
         }
 

@@ -227,6 +227,25 @@ public class CustomAudioManager : MonoBehaviour
         distractor2.loop = true;
     }
 
+    // Create a type that only holds audio objects... (dist1, dist2, target)
+    public void setDistractorAudio(levelObjects dist, AudioClip clip, bool looped)
+    {
+        switch(dist)
+        {
+            case levelObjects.distractor1:
+                distractor1.clip = clip;
+                distractor1.loop = looped;
+                break;
+            case levelObjects.distractor2:
+                distractor2.clip = clip;
+                distractor2.loop = looped;
+                break;
+            default:
+                Debug.LogWarning("Invalid distractor selection: " + dist);
+                return;
+        }
+    }
+
     public void startPlaying()
     {
         Debug.Log("StartPlaying");

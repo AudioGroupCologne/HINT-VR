@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+using CustomTypes.TrainingGameTypes;
 
 public class TrainingGameManager : MonoBehaviour
 {
@@ -119,14 +119,21 @@ public class TrainingGameManager : MonoBehaviour
         // place and show level objects
         if(distSetting == 0)
         {
-            // randomly disable left or right distractor
-            levelManager.setLevelObjectPositions(Random.Range(1, 2));
-        }
-        else
-        {
-            levelManager.setLevelObjectPositions();
+            // randomly disable distractor 1 or 2
+            if(Random.Range(1,2) == 1)
+            {
+                levelManager.setDistractorSettings(distractorSettings.dist1);
+            }
+            else
+            {
+                levelManager.setDistractorSettings(distractorSettings.dist2);
+            }
+            
         }
 
+
+        levelManager.setLevelObjectPositions();
+        
         levelManager.showLevelObjects(true);
 
 
