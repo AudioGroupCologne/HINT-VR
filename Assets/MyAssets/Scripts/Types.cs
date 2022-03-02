@@ -24,8 +24,17 @@ namespace CustomTypes
 
     namespace TrainingGameTypes
     {
-        public enum distractorSettings { dist1, dist2, bothDist };
+        // global! (used in Training and VRHINT)
+        public enum distractorSettings { noDist, dist1, dist2, bothDist };
     }
+
+    namespace VRHINTTypes
+    {
+        public enum hintConditions { quiet, noiseFront, noiseLeft, noiseRight };
+
+
+    }
+
 
 
     namespace TestSceneTypes
