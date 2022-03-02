@@ -21,6 +21,9 @@ public class LevelObjectManager : MonoBehaviour
 
     [SerializeField] Vector3 relativeUIPosition;
 
+    // simply make Dist2 optional???
+    //private LevelObjects objects;
+
     private bool objectsVisible = false;
     
     private distractorSettings setup = distractorSettings.bothDist;
@@ -125,17 +128,20 @@ public class LevelObjectManager : MonoBehaviour
         {
             case distractorSettings.dist1:
                 Distractor1Obj.SetActive(show);
-                Distractor2Obj.SetActive(false);
+                if(Distractor2Obj != null)
+                    Distractor2Obj.SetActive(false);
                 break;
 
             case distractorSettings.dist2:
                 Distractor1Obj.SetActive(false);
-                Distractor2Obj.SetActive(show);
+                if (Distractor2Obj != null)
+                    Distractor2Obj.SetActive(show);
                 break;
 
             case distractorSettings.bothDist:
                 Distractor1Obj.SetActive(show);
-                Distractor2Obj.SetActive(show);
+                if (Distractor2Obj != null)
+                    Distractor2Obj.SetActive(show);
                 break;
         }
     }

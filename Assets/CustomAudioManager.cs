@@ -258,12 +258,14 @@ public class CustomAudioManager : MonoBehaviour
         if (distractorPaused)
         {
             distractor1.UnPause();
-            distractor2.UnPause();
+            if (distractor2 != null)
+                distractor2.UnPause();
         }
         else
         {
             distractor1.Play();
-            distractor2.Play();
+            if(distractor2 != null)
+                distractor2.Play();
         }
 
         target.PlayDelayed(startDelay);
@@ -277,8 +279,11 @@ public class CustomAudioManager : MonoBehaviour
 
         // stop disctracters
         distractor1.Pause();
-        distractor2.Pause();
+        if (distractor2 != null)
+            distractor2.Pause();
+
         distractorPaused = true;
+        Debug.Log("Is playing lapsed");
 
         // trigger 'playingDoneCallback' (TrainingGameManager)
         onPlayingDoneCallback();
