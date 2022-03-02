@@ -6,9 +6,10 @@ using CustomTypes.VRHINTTypes;
 public class VRHINTManager : MonoBehaviour
 {
     [SerializeField] CustomAudioManager audioManager;
-    [SerializeField] TestSceneSettings settingsManager;
+    //[SerializeField] TestSceneSettings settingsManager;
     [SerializeField] LevelObjectManager levelManager;
-    [SerializeField] UserFeedback selectionManager;
+    [SerializeField] SentenceInput inputManager;
+    //[SerializeField] UserFeedback selectionManager;
 
     // the first 4 sentences are adjusted in 4 dB steps
     [SerializeField] readonly float initSNRStep = 4.0f;
@@ -53,12 +54,20 @@ public class VRHINTManager : MonoBehaviour
 
     void Start()
     {
+
+        OnStart();
+        inputManager.onInputCallback = onSubmission;
+        audioManager.onPlayingDoneCallback = OnPlayingDone;
+
+        return;
+
+
         //settingsManager.settingsDoneCallback = OnStart;
-        settingsManager.gameObject.SetActive(true);
-        settingsManager.Init();
+        //settingsManager.gameObject.SetActive(true);
+        //settingsManager.Init();
 
         // must not be active before settings have been done!
-        selectionManager.gameObject.SetActive(false);
+        //selectionManager.gameObject.SetActive(false);
 
         // ToDo: UI after sentence presentation?
         /*
@@ -66,7 +75,7 @@ public class VRHINTManager : MonoBehaviour
         selectionManager.onMediumCallback = OnMedium;
         selectionManager.onBadCallback = OnBad;
         */
-        audioManager.onPlayingDoneCallback = OnPlayingDone;
+        
     }
 
 
@@ -88,14 +97,38 @@ public class VRHINTManager : MonoBehaviour
         // hold HINT condition for each list
         conditions = new List<hintConditions>();
 
-        // hold order of sentence lists
-        sentenceLists = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10 };
+        // hold order of sentence lists for test procedure
+        sentenceLists = new List<int>();
+
+        // copy practiceLists into new list
+        List<int> tmp = new List<int>(practiceLists);
+
+        for (int i = 0; i < numLists; i++)
+        {
+            
+            // remove detected practiceLists content
+            for(int k = 0; k < tmp.Count; k++)
+            {
+                if (i == tmp[k])
+                {
+                    tmp.RemoveAt(k);
+                    i++;
+                }      
+            }
+
+            if(i < numLists)
+            {
+                sentenceLists.Add(i);
+                Debug.Log("Sentence entry: " + i);
+            }
+            
+        }
 
         // hold current sentence list (List allows simple removal of entries)
         testLists = new List<AudioClip>();
 
         // make sure to disable UI at load.
-        selectionManager.ShowUserInterface(false);
+        //selectionManager.ShowUserInterface(false);
 
         // randomly sort test conditions and sentence lists with no direct repetitions
         createCounterBalancedTest();
@@ -122,7 +155,7 @@ public class VRHINTManager : MonoBehaviour
         audioManager.startPlaying();
 
         // enable selectionManager
-        selectionManager.gameObject.SetActive(true);
+        //selectionManager.gameObject.SetActive(true);
     }
 
 
@@ -159,16 +192,20 @@ public class VRHINTManager : MonoBehaviour
             switch(tmp)
             {
                 case 0:
-                    conditions[i] = hintConditions.quiet;
+                    //conditions[i] = hintConditions.quiet;
+                    conditions.Add(hintConditions.quiet);
                     break;
                 case 1:
-                    conditions[i] = hintConditions.noiseFront;
+                    //conditions[i] = hintConditions.noiseFront;
+                    conditions.Add(hintConditions.noiseFront);
                     break;
                 case 2:
-                    conditions[i] = hintConditions.noiseLeft;
+                    //conditions[i] = hintConditions.noiseLeft;
+                    conditions.Add(hintConditions.noiseLeft);
                     break;
                 case 3:
-                    conditions[i] = hintConditions.noiseRight;
+                    //conditions[i] = hintConditions.noiseRight;
+                    conditions.Add(hintConditions.noiseRight);
                     break;
             }
             _tmp = tmp;
@@ -300,6 +337,7 @@ public class VRHINTManager : MonoBehaviour
     {
 
         Debug.Log("OnPlayingDone");
+        inputManager.ShowSentenceInput(true);
 
         /*
         if (!practiceMode)
@@ -344,16 +382,17 @@ public class VRHINTManager : MonoBehaviour
     }
 
     // enter sentences repetion as array of strings an let app compute errors
-    void onSubmission(string[] sentences)
+    void onSubmission(string sentence)
     {
-
+        Debug.Log("On submission: " + sentence);
+        inputManager.ShowSentenceInput(false);
     }
 
 
     void OnContinue()
     {
         // hide wordSelection UI elements
-        selectionManager.ShowUserInterface(false);
+        //selectionManager.ShowUserInterface(false);
         sentencesCounter++;
 
         // load new list
