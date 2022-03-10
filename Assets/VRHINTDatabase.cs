@@ -45,8 +45,8 @@ public class VRHINTDatabase : MonoBehaviour
                 Debug.LogError("Audio entries in list " + i + "don't match _listEntries: " + _listEntries + " loaded: " + sentenceAudio[i-1].Length);
             }
 
-            TextAsset text = Resources.Load(textPath) as TextAsset; // "audio/german-hint/01/list1"
-            string[] test = text.ToString().Replace('\r', ' ').Split('\n');
+            TextAsset text = Resources.Load(textPath) as TextAsset;
+            string[] test = text.ToString().Replace("\r", string.Empty).Split('\n');
             sentenceStrings.Add(test);
 
             if (listEntries != sentenceStrings[i - 1].Length)
@@ -68,32 +68,148 @@ public class VRHINTDatabase : MonoBehaviour
         }
     }
 
-    public AudioClip[] getList(int index)
+    public AudioClip[] getListAudio(int index)
     {
-        if(index >= sentenceAudio.Count)
+        if(index - 1 >= sentenceAudio.Count)
         {
-            Debug.LogWarning("Index exceeds list entries!");
+            Debug.LogWarning("Index exceeds list entries: " + index);
             return null;
         }
 
-        return sentenceAudio[index];
+        return sentenceAudio[index - 1];
     }
 
-    public AudioClip getSentence(int listIndex, int sentenceIndex)
+    public string[] getListStrings(int index)
     {
-        if (listIndex >= sentenceAudio.Count)
+        if (index - 1 >= sentenceStrings.Count)
         {
-            Debug.LogWarning("Index exceeds list entries!");
+            Debug.LogWarning("Index exceeds list entries: " + index);
             return null;
         }
 
-        if (sentenceIndex >= sentenceAudio[listIndex].Length)
+        return sentenceStrings[index - 1];
+    }
+
+    public AudioClip getSentenceAudio(int listIndex, int sentenceIndex)
+    {
+        if (listIndex - 1 >= sentenceAudio.Count)
         {
-            Debug.LogWarning("Index exceeds sentences entries!");
+            Debug.LogWarning("Index exceeds list entries: " + listIndex);
             return null;
         }
 
-        return sentenceAudio[listIndex][sentenceIndex];
+        if (sentenceIndex >= sentenceAudio[listIndex - 1].Length)
+        {
+            Debug.LogWarning("Index exceeds sentences entries: " + sentenceIndex);
+            return null;
+        }
+
+        return sentenceAudio[listIndex - 1][sentenceIndex];
+    }
+
+    public string getSentenceString(int listIndex, int sentenceIndex)
+    {
+        if (listIndex - 1 >= sentenceStrings.Count)
+        {
+            Debug.LogWarning("Index exceeds list entries: " + listIndex);
+            return null;
+        }
+
+        if (sentenceIndex >= sentenceStrings[listIndex - 1].Length)
+        {
+            Debug.LogWarning("Index exceeds sentences entries: " + sentenceIndex);
+            return null;
+        }
+
+        return sentenceStrings[listIndex - 1][sentenceIndex];
+    }
+
+    public string[] getSentenceWords(int listIndex, int sentenceIndex)
+    {
+        if (listIndex - 1 >= sentenceStrings.Count)
+        {
+            Debug.LogWarning("Index exceeds list entries: " + listIndex);
+            return null;
+        }
+
+        if (sentenceIndex >= sentenceStrings[listIndex - 1].Length)
+        {
+            Debug.LogWarning("Index exceeds sentences entries: " + sentenceIndex);
+            return null;
+        }
+
+        string tmp = sentenceStrings[listIndex - 1][sentenceIndex];
+        string[] ret = tmp.Split(' ');
+
+        return ret;
+        
+    }
+
+    public string[] getRandomWords(int count, string exclude, bool capital)
+    {
+
+        int cnt = 0;
+        string[] tmp = new string[count];
+        bool match = false;
+        
+
+        while(cnt < count)
+        {
+            // randomly select a sentence from any list
+            string randomSentence = sentenceStrings[Random.Range(0, numLists)][Random.Range(0, listEntries)];
+            // split sentence into separate words
+            string[] ret = randomSentence.Split(' ');
+            // get a single random word
+            string randomWord = ret[Random.Range(0, ret.Length)];
+            Debug.Log("RandomWord: " + randomWord);
+
+            // call continue if anything does not match
+            if(capital && !isCapital(randomWord))
+            {
+                continue;
+            }
+            if (!capital && isCapital(randomWord))
+            {
+                continue;
+            }
+
+            // exclude correct word
+            if (randomWord == exclude)
+                continue;
+
+            // make sure there are no repetitions
+            foreach(string word in tmp)
+            {
+                if (word == randomWord)
+                {
+                    match = true;
+                    break;
+                }
+            }
+
+            if (match)
+            {
+                match = false;
+                continue;
+            }
+                
+
+            // word is accepted
+            tmp[cnt++] = randomWord;
+
+        }
+
+        return tmp;
+
+    }
+
+
+    public bool isCapital(string word)
+    {
+        if (word[0] >= 'A' && word[0] <= 'Z')
+            return true;
+
+        return false;
     }
 
 }

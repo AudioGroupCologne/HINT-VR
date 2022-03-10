@@ -9,6 +9,7 @@ public class VRHINTManager : MonoBehaviour
     //[SerializeField] TestSceneSettings settingsManager;
     [SerializeField] LevelObjectManager levelManager;
     [SerializeField] SentenceInput inputManager;
+    [SerializeField] FeedbackManager feedbackManager;
     //[SerializeField] UserFeedback selectionManager;
 
     // the first 4 sentences are adjusted in 4 dB steps
@@ -23,12 +24,17 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] int numLists = 12;
     [SerializeField] int numSentences = 20;
     [SerializeField] int numTestLists = 10;
+    [SerializeField] int wordOptions = 5;
    
     [SerializeField] AudioClip noise;
 
-    [SerializeField] int[] practiceLists = { 11, 12 };
-    [SerializeField] hintConditions[] practiceConditions = { hintConditions.noiseFront, hintConditions.noiseRight };
-  
+    [SerializeField] int[] practiceLists = { 12 };
+    [SerializeField] int practiceRounds = 5;
+    [SerializeField] hintConditions[] practiceConditions = { hintConditions.noiseRight };
+
+
+    [SerializeField] API_3DTI_HA hearingAids;
+    [SerializeField] API_3DTI_HL hearingLoss;
 
     /// Control variables
     // start each session with practice mode
@@ -39,43 +45,37 @@ public class VRHINTManager : MonoBehaviour
     // SNR ratio stored for each round (average over whole session will be used)
     private List<float> eSRT;
     private List<hintConditions> conditions;
+
+
+    // order of all lists for the test (counter balance stuff)
     private List<int> sentenceLists;
 
-    private AudioClip[] currentSentences;
-    private List<AudioClip> testLists;
+
+    // create an List on indices of all sentences of the current list
+    // after each round the index of the current sentence is deleted
+    // randomly pick an entry from the remaining indices and get AudioClips/Strings that way
+    private List<int> listIndices;
+
+
 
 
     private hintConditions currentCondition;
     private int currentSentenceIndex;
     private int currentListIndex;
 
-    // how many sentences have been played in current list
-    private int sentencesCounter = 0;
+    private string[] currentSentence;
+    private int sentenceLength;
+    private int wordCounter = 0;
 
     void Start()
     {
 
-        OnStart();
         inputManager.onInputCallback = onSubmission;
         audioManager.onPlayingDoneCallback = OnPlayingDone;
+        feedbackManager.onWordGuessCallback = onWordGuess;
 
-        return;
-
-
-        //settingsManager.settingsDoneCallback = OnStart;
-        //settingsManager.gameObject.SetActive(true);
-        //settingsManager.Init();
-
-        // must not be active before settings have been done!
-        //selectionManager.gameObject.SetActive(false);
-
-        // ToDo: UI after sentence presentation?
-        /*
-        selectionManager.onGoodCallback = OnGood;
-        selectionManager.onMediumCallback = OnMedium;
-        selectionManager.onBadCallback = OnBad;
-        */
-        
+        OnStart();
+       
     }
 
 
@@ -84,6 +84,9 @@ public class VRHINTManager : MonoBehaviour
     {
 
         Debug.Log("Start VR HINT procedure");
+
+        hearingAids.EnableHAInBothEars(false);
+        hearingLoss.EnableHearingLossInBothEars(false);
 
         // create database to hold target sentence lists
         database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
@@ -99,6 +102,9 @@ public class VRHINTManager : MonoBehaviour
 
         // hold order of sentence lists for test procedure
         sentenceLists = new List<int>();
+
+        // hold indices of sentences from currentList
+        listIndices = new List<int>();
 
         // copy practiceLists into new list
         List<int> tmp = new List<int>(practiceLists);
@@ -124,11 +130,7 @@ public class VRHINTManager : MonoBehaviour
             
         }
 
-        // hold current sentence list (List allows simple removal of entries)
-        testLists = new List<AudioClip>();
-
-        // make sure to disable UI at load.
-        //selectionManager.ShowUserInterface(false);
+        feedbackManager.showFeedbackUI(false);
 
         // randomly sort test conditions and sentence lists with no direct repetitions
         createCounterBalancedTest();
@@ -137,25 +139,24 @@ public class VRHINTManager : MonoBehaviour
 
         // keep track of current assets
         currentListIndex = practiceLists[0];
-        currentListIndex = practiceLists[0];
         currentCondition = practiceConditions[0];
 
-        //currentSentences = database.getList(practiceLists[0]);
+  
+        listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));
 
-        testLists.AddRange(database.getList(practiceLists[0]));
+        currentSentenceIndex = Random.Range(0, listIndices.Count);
 
-        currentSentenceIndex = Random.Range(0, testLists.Count);
-        
+        Debug.Log("Sentence " + currentSentenceIndex + ": " + database.getSentenceString(currentListIndex, currentSentenceIndex));
+
+
         // move new sentence audio to audioManager
-        audioManager.setTargetSentence(testLists[currentSentenceIndex]);
+        audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         ApplyTestConditions();
 
         // start playing again
         audioManager.startPlaying();
 
-        // enable selectionManager
-        //selectionManager.gameObject.SetActive(true);
     }
 
 
@@ -327,7 +328,6 @@ public class VRHINTManager : MonoBehaviour
 
         levelManager.showLevelObjects(true);
         
-
     }
 
 
@@ -337,7 +337,20 @@ public class VRHINTManager : MonoBehaviour
     {
 
         Debug.Log("OnPlayingDone");
-        inputManager.ShowSentenceInput(true);
+        currentSentence = database.getSentenceWords(currentListIndex, currentSentenceIndex);
+        sentenceLength = currentSentence.Length;
+        string[] rand = database.getRandomWords(wordOptions - 1, currentSentence[0], database.isCapital(currentSentence[0]));
+
+        string[] test = new string[wordOptions];
+        test[0] = currentSentence[0];
+        rand.CopyTo(test, 1);
+
+
+        feedbackManager.showFeedbackUI(true);
+        feedbackManager.assignWordsToButtons(test);
+
+
+        //inputManager.ShowSentenceInput(true);
 
         /*
         if (!practiceMode)
@@ -351,6 +364,39 @@ public class VRHINTManager : MonoBehaviour
         */
         // show wordSelection UI elements
         //selectionManager.startWordSelection(words, icons);
+
+    }
+
+    void onWordGuess(bool correct)
+    {
+        wordCounter++;
+
+        if(correct)
+        {
+            Debug.Log("Hit");
+        }
+        else
+        {
+            Debug.Log("Miss");
+        }
+
+
+        
+        if(wordCounter >= sentenceLength)
+        {
+            wordCounter = 0;
+            OnContinue();
+        }
+        else
+        {
+            // get new random selection
+            string[] rand = database.getRandomWords(wordOptions - 1, currentSentence[wordCounter], database.isCapital(currentSentence[wordCounter]));
+
+            string[] test = new string[wordOptions];
+            test[0] = currentSentence[wordCounter];
+            rand.CopyTo(test, 1);
+            feedbackManager.assignWordsToButtons(test);
+        }
 
     }
 
@@ -386,37 +432,36 @@ public class VRHINTManager : MonoBehaviour
     {
         Debug.Log("On submission: " + sentence);
         inputManager.ShowSentenceInput(false);
+
+        string sent = database.getSentenceString(currentListIndex, currentSentenceIndex);
+        Debug.Log("Sent: " + sent);
+        int comp = sent.CompareTo(sentence);
+
+        Debug.Log("Compare: " + comp);
+
+        OnContinue();
     }
 
 
     void OnContinue()
     {
-        // hide wordSelection UI elements
-        //selectionManager.ShowUserInterface(false);
-        sentencesCounter++;
+        feedbackManager.showFeedbackUI(false);
 
-        // load new list
-        if(sentencesCounter >= 20)
+        listIndices.RemoveAt(currentSentenceIndex);
+
+        if(listIndices.Count == 0)
         {
             OnListDone();
-        }
-
-        /*
-        if (roundsPlayed >= gameLength)
-        {
-            OnSessionDone();
             return;
         }
-        */
-
-        // remove last played sentence from list
-        testLists.RemoveAt(currentSentenceIndex);
 
         // randomly select next sentence (repetition impossibile due to removal of already played sentences)
-        currentSentenceIndex = Random.Range(0, testLists.Count);
+        currentSentenceIndex = Random.Range(0, listIndices.Count);
+        Debug.Log("Sentences remaining: " + listIndices.Count);
+        Debug.Log("Sentence " + currentSentenceIndex + ": " + database.getSentenceString(currentListIndex, currentSentenceIndex));
 
         // move new sentence audio to audioManager
-        audioManager.setTargetSentence(testLists[currentSentenceIndex]);
+        audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // start playing again
         audioManager.startPlaying();
@@ -425,9 +470,9 @@ public class VRHINTManager : MonoBehaviour
 
     void OnListDone()
     {
-        if(testLists.Count > 0)
+        if(listIndices.Count > 0)
         {
-            Debug.LogWarning("testList is not empty: " + testLists.Count);
+            Debug.LogWarning("testList is not empty: " + listIndices.Count);
         }
 
         if(practiceMode)
@@ -443,17 +488,11 @@ public class VRHINTManager : MonoBehaviour
             currentCondition = hintConditions.quiet;
         }
 
-        // reset sentecesCounter
-        sentencesCounter = 0;
-
         // copy new AudioClips into local testList
-        testLists.AddRange(database.getList(currentListIndex));
-
+        //audioClips.AddRange(database.getListAudio(currentListIndex));
+        listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));
         
-
-        currentSentenceIndex = Random.Range(0, testLists.Count);
-
-
+        currentSentenceIndex = Random.Range(0, listIndices.Count);
 
     }
 }
