@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CustomTypes;
 using CustomTypes.VRHINTTypes;
 
 public class VRHINTManager : MonoBehaviour
@@ -140,6 +141,7 @@ public class VRHINTManager : MonoBehaviour
         // keep track of current assets
         currentListIndex = practiceLists[0];
         currentCondition = practiceConditions[0];
+        Debug.Log("currentCondition: " + currentCondition);
 
   
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));
@@ -300,32 +302,31 @@ public class VRHINTManager : MonoBehaviour
     private void ApplyTestConditions()
     {
         // target is always at front position
-        levelManager.setLevelObjectPosition(CustomTypes.TestSceneTypes.levelObjects.target, CustomTypes.TestSceneTypes.levelPositions.front);
+        levelManager.angularPosition(levelObjects.target, 0, 10);
 
         // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
-        levelManager.setDistractorSettings(CustomTypes.TrainingGameTypes.distractorSettings.dist1);
+        levelManager.setDistractorSettings(distractorSettings.dist1);
 
         switch (currentCondition)
         {
             case hintConditions.quiet:
-                levelManager.setDistractorSettings(CustomTypes.TrainingGameTypes.distractorSettings.noDist);
+                levelManager.setDistractorSettings(distractorSettings.noDist);
                 break;
             case hintConditions.noiseFront:
-                levelManager.setLevelObjectPosition(CustomTypes.TestSceneTypes.levelObjects.target, CustomTypes.TestSceneTypes.levelPositions.front);
-                levelManager.setLevelObjectPosition(CustomTypes.TestSceneTypes.levelObjects.distractor1, CustomTypes.TestSceneTypes.levelPositions.front);
-                
+                levelManager.angularPosition(levelObjects.distractor1, 5, 10);
+                levelManager.angularPosition(levelObjects.distractor1, -5, 10);
                 break;
             case hintConditions.noiseLeft:
-                levelManager.setLevelObjectPosition(CustomTypes.TestSceneTypes.levelObjects.distractor1, CustomTypes.TestSceneTypes.levelPositions.left);
+                levelManager.angularPosition(levelObjects.distractor1, 90, 10);
                 break;
             case hintConditions.noiseRight:
-                levelManager.setLevelObjectPosition(CustomTypes.TestSceneTypes.levelObjects.distractor1, CustomTypes.TestSceneTypes.levelPositions.right);
+                levelManager.angularPosition(levelObjects.distractor1, 270, 10);
                 break;
             default:
                 Debug.LogError("Invalid locationCondition: " + currentCondition);
                 break;
         }
-
+        
         levelManager.showLevelObjects(true);
         
     }
@@ -449,6 +450,17 @@ public class VRHINTManager : MonoBehaviour
 
         listIndices.RemoveAt(currentSentenceIndex);
 
+        if(practiceMode)
+        {
+            if (practiceRounds-- == 0)
+            {
+                Debug.Log("Leaving practice mode");
+                practiceMode = false;
+                OnListDone();
+            }
+                
+        }
+
         if(listIndices.Count == 0)
         {
             OnListDone();
@@ -488,10 +500,7 @@ public class VRHINTManager : MonoBehaviour
             currentCondition = hintConditions.quiet;
         }
 
-        // copy new AudioClips into local testList
-        //audioClips.AddRange(database.getListAudio(currentListIndex));
-        listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));
-        
+        listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));        
         currentSentenceIndex = Random.Range(0, listIndices.Count);
 
     }

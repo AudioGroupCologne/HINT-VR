@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CustomTypes.TrainingGameTypes;
-using CustomTypes.TestSceneTypes;
+
+using CustomTypes;
+
 
 public class LevelObjectManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class LevelObjectManager : MonoBehaviour
 
 
     [SerializeField] Vector3 relativeUIPosition;
+
 
     // simply make Dist2 optional???
     //private LevelObjects objects;
@@ -79,6 +81,31 @@ public class LevelObjectManager : MonoBehaviour
         
     }
 
+    public void angularPosition(levelObjects obj, float _angle, float _distance)
+    {
+        Vector3 tmp = Quaternion.AngleAxis(_angle, Vector3.up) * (PlayerCamera.transform.forward * _distance);
+
+        switch (obj)
+        {
+            case levelObjects.target:
+                TargetObj.transform.position = PlayerCamera.transform.position + tmp;
+                TargetObj.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up);
+                break;
+            case levelObjects.distractor1:
+                Distractor1Obj.transform.position = PlayerCamera.transform.position + tmp;
+                Distractor1Obj.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up) * Quaternion.Euler(0, _angle, 0);
+                break;
+            case levelObjects.distractor2:
+                Distractor2Obj.transform.position = PlayerCamera.transform.position + tmp;
+                Distractor2Obj.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up);
+                break;
+            default:
+                Debug.LogError("Invalid levelObject selector: " + obj);
+                return;
+        }
+        
+    }
+
     public void setLevelObjectPosition(levelObjects obj, levelPositions pos)
     {
 
@@ -100,7 +127,7 @@ public class LevelObjectManager : MonoBehaviour
                 return;
         }
         
-
+        // refactor this to angle and distance instead of coordinates
         switch(obj)
             {
             case levelObjects.target:

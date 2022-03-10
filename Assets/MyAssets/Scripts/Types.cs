@@ -8,6 +8,11 @@ namespace CustomTypes
 {
 
     public enum audioChannels{ master, target, distractor, player };
+    public enum levelObjects { target, distractor1, distractor2, userInterface };
+    public enum levelPositions { front, left, right };
+
+    public enum distractorSettings { noDist, dist1, dist2, bothDist };
+
 
     public class soundEffectEntry
     {
@@ -25,7 +30,7 @@ namespace CustomTypes
     namespace TrainingGameTypes
     {
         // global! (used in Training and VRHINT)
-        public enum distractorSettings { noDist, dist1, dist2, bothDist };
+        
     }
 
     namespace VRHINTTypes
@@ -121,9 +126,5 @@ namespace CustomTypes
         public enum experiments { experiment1, experiment2 };
         public enum voiceConditions { sameVoice, differentFemaleVoices, differentMaleVoices };
         public enum locationConditions { sameLocation, differentLocations };
-
-        public enum levelObjects { target, distractor1, distractor2, userInterface};
-
-        public enum levelPositions { front, left, right};
     }
 }

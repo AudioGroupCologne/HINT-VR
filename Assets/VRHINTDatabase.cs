@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 
 public class VRHINTDatabase : MonoBehaviour
 {
@@ -192,7 +191,11 @@ public class VRHINTDatabase : MonoBehaviour
                 match = false;
                 continue;
             }
-                
+               
+            // don't allow 'Die', 'Er' etc as options for 'Krankenwagen'... (maybe amp this up to strlen +-3 or something...)
+            if(exclude.Length > 3 && randomWord.Length <= 3)
+                continue;
+
 
             // word is accepted
             tmp[cnt++] = randomWord;
