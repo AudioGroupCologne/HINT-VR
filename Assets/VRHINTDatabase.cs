@@ -53,7 +53,7 @@ public class VRHINTDatabase : MonoBehaviour
                 Debug.LogError("String entries in list "+ i + "don't match _listEntries: " + _listEntries +" loaded: " + sentenceStrings[i - 1].Length);
             }
 
-            Debug.Log("List " + i + ": Audio: " + sentenceAudio[i - 1].Length + " Strings: " + sentenceStrings[i - 1].Length);
+            //Debug.Log("List " + i + ": Audio: " + sentenceAudio[i - 1].Length + " Strings: " + sentenceStrings[i - 1].Length);
 
         }
 
@@ -144,13 +144,12 @@ public class VRHINTDatabase : MonoBehaviour
         
     }
 
-    public string[] getRandomWords(int count, string exclude, bool capital)
+    public string[] getRandomWords(int count, string exclude, bool capital, bool sentenceStart)
     {
 
         int cnt = 0;
         string[] tmp = new string[count];
-        bool match = false;
-        
+        bool match = false;       
 
         while(cnt < count)
         {
@@ -158,9 +157,17 @@ public class VRHINTDatabase : MonoBehaviour
             string randomSentence = sentenceStrings[Random.Range(0, numLists)][Random.Range(0, listEntries)];
             // split sentence into separate words
             string[] ret = randomSentence.Split(' ');
-            // get a single random word
-            string randomWord = ret[Random.Range(0, ret.Length)];
-            Debug.Log("RandomWord: " + randomWord);
+            string randomWord;
+
+            if(sentenceStart)
+            {
+                randomWord = ret[0];
+            }
+            else
+            {
+                randomWord = ret[Random.Range(1, ret.Length)];
+            }
+            //Debug.Log("RandomWord: " + randomWord);
 
             // call continue if anything does not match
             if(capital && !isCapital(randomWord))
@@ -196,6 +203,7 @@ public class VRHINTDatabase : MonoBehaviour
             if(exclude.Length > 3 && randomWord.Length <= 3)
                 continue;
 
+            // only use sentence beginnings if 'exclude' is a sentence beginning & vice-versa (improve capital separation)
 
             // word is accepted
             tmp[cnt++] = randomWord;
