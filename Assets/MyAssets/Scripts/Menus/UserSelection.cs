@@ -13,6 +13,9 @@ public class UserSelection : MonoBehaviour
     public delegate void OnNewUserEvent();
     public OnNewUserEvent newUserCallback = delegate { Debug.Log("No newUser delegate set!"); };
 
+    public delegate void OnTestUserEvent();
+    public OnTestUserEvent testUserCallback = delegate { Debug.Log("No testUser delegate set!"); };
+
     UserManagement userManager;
     [SerializeField] TMPro.TMP_InputField username;
     [SerializeField] TMPro.TMP_InputField password;
@@ -44,6 +47,12 @@ public class UserSelection : MonoBehaviour
     {
         loginFailedText.SetActive(false);
         newUserCallback();
+    }
+
+    public void OnTestUser()
+    {
+        loginFailedText.SetActive(false);
+        testUserCallback();
     }
 
     // Delegate wrapper

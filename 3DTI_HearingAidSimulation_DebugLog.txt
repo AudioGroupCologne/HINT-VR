@@ -1698,3 +1698,7 @@ SET PARAMETER: HIgh tone band Left set to (dB) 0
 SET PARAMETER: Low tone band Right set to (dB) 0
 SET PARAMETER: Mid tone band Right set to (dB) 0
 SET PARAMETER: High tone band Right set to (dB) 0
+SET PARAMETER: Left HA switched Off
+SET PARAMETER: Right HA switched Off
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On

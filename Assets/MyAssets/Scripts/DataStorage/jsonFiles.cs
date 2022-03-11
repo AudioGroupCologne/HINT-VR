@@ -50,4 +50,46 @@ public static class jsonFiles
         return true;
     }
 
+    public static void saveTestUserData(List<testUserData> data)
+    {
+        Debug.Log("Save JSON");
+        string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
+        string targetPath = Application.persistentDataPath + "/testUserData.json";
+
+        File.WriteAllText(targetPath, jsonData);
+    }
+
+
+    public static void loadTestUserData(out List<testUserData> data)
+    {
+        Debug.Log("Load JSON");
+        string targetPath = Application.persistentDataPath + "/testUserData.json";
+
+        if (!File.Exists(targetPath))
+        {
+            Debug.Log("File not found");
+            data = null;
+            return;
+        }
+        string readData = File.ReadAllText(targetPath);
+
+        data = JsonConvert.DeserializeObject<List<testUserData>>(readData);
+    }
+
+    public static bool testUserDataAvalable()
+    {
+        Debug.Log("Check JSON");
+        string targetPath = Application.persistentDataPath + "/testUserData.json";
+
+        if (!File.Exists(targetPath))
+        {
+            Debug.Log("File not found");
+
+            return false;
+        }
+
+        return true;
+    }
+
+
 }
