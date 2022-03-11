@@ -250,7 +250,6 @@ public class CustomAudioManager : MonoBehaviour
     {
         Debug.Log("StartPlaying");
 
-
         // whole duration of a single iteration
         float waitDuration = startDelay + target.clip.length + endDelay;
 
@@ -258,8 +257,23 @@ public class CustomAudioManager : MonoBehaviour
         if (distractorPaused)
         {
             distractor1.UnPause();
+            if (!distractor1.isPlaying)
+            {
+                Debug.Log("Dist1 could not be unpaused");
+                distractor1.Play();
+            }
+
+
             if (distractor2 != null)
+            {
                 distractor2.UnPause();
+                if (!distractor2.isPlaying)
+                {
+                    Debug.Log("Dist2 could not be unpaused");
+                    distractor2.Play();
+                }
+
+            }
         }
         else
         {
