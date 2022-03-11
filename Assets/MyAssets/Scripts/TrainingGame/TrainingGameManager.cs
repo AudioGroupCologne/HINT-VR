@@ -83,6 +83,8 @@ public class TrainingGameManager : MonoBehaviour
         selectionManager.onContinueCallback = OnContinue;
         
         audioManager.onPlayingDoneCallback = OnPlayingDone;
+
+        levelManager.angularPosition(levelObjects.userInterface, 0, 10);
     }
 
 

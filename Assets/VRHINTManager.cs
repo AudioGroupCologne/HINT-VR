@@ -24,14 +24,14 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] string targetAudioPath = "audio/german-hint/";
     [SerializeField] int numLists = 12;
     [SerializeField] int numSentences = 20;
-    [SerializeField] int numTestLists = 10;
+    [SerializeField] int numTestLists = 5;
     [SerializeField] int wordOptions = 5;
    
     [SerializeField] AudioClip noise;
 
-    [SerializeField] int[] practiceLists = { 12 };
+    [SerializeField] int practiceList =  12;
     [SerializeField] int practiceRounds = 5;
-    [SerializeField] hintConditions[] practiceConditions = { hintConditions.noiseRight };
+    [SerializeField] hintConditions practiceCondition =  hintConditions.noiseRight;
 
 
     [SerializeField] API_3DTI_HA hearingAids;
@@ -41,7 +41,7 @@ public class VRHINTManager : MonoBehaviour
     // start each session with practice mode
     private bool practiceMode = true;
 
-
+    private int listCounter = 0;
     private List<float[]> SNRdata;
     // SNR ratio stored for each round (average over whole session will be used)
     private List<float> eSRT;
@@ -49,7 +49,7 @@ public class VRHINTManager : MonoBehaviour
 
 
     // order of all lists for the test (counter balance stuff)
-    private List<int> sentenceLists;
+    private List<int> listOrder;
 
 
     // create an List on indices of all sentences of the current list
@@ -67,11 +67,12 @@ public class VRHINTManager : MonoBehaviour
     private string[] currentSentence;
     private int sentenceLength;
     private int wordCounter = 0;
+    private int sentenceHits = 0;
+    //private int sentenceMisses;
+    private List<float> hitQuote;
 
     void Start()
     {
-
-        inputManager.onInputCallback = onSubmission;
         audioManager.onPlayingDoneCallback = OnPlayingDone;
         feedbackManager.onWordGuessCallback = onWordGuess;
 
@@ -98,21 +99,23 @@ public class VRHINTManager : MonoBehaviour
         // hold SRT values for each list 
         eSRT = new List<float>();
 
+        // hold hit/miss relation for each sentence (e.g. 5 hits, 1 miss on 6 word sentence: 5/6 hitQuote)
+        hitQuote = new List<float>();
+
         // hold HINT condition for each list
         conditions = new List<hintConditions>();
 
         // hold order of sentence lists for test procedure
-        sentenceLists = new List<int>();
+        listOrder = new List<int>();
 
         // hold indices of sentences from currentList
         listIndices = new List<int>();
 
         // copy practiceLists into new list
-        List<int> tmp = new List<int>(practiceLists);
+        List<int> tmp = new List<int>(practiceList);
 
-        for (int i = 0; i < numLists; i++)
-        {
-            
+        for (int i = 1; i <= numLists; i++)
+        {            
             // remove detected practiceLists content
             for(int k = 0; k < tmp.Count; k++)
             {
@@ -125,8 +128,8 @@ public class VRHINTManager : MonoBehaviour
 
             if(i < numLists)
             {
-                sentenceLists.Add(i);
-                Debug.Log("Sentence entry: " + i);
+                listOrder.Add(i);
+                //Debug.Log("Sentence entry: " + i);
             }
             
         }
@@ -139,20 +142,27 @@ public class VRHINTManager : MonoBehaviour
         practiceMode = true;
 
         // keep track of current assets
-        currentListIndex = practiceLists[0];
-        currentCondition = practiceConditions[0];
-        Debug.Log("currentCondition: " + currentCondition);
+        currentListIndex = practiceList;
+        currentCondition = practiceCondition;
 
   
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));
 
         currentSentenceIndex = Random.Range(0, listIndices.Count);
-
         Debug.Log("Sentence " + currentSentenceIndex + ": " + database.getSentenceString(currentListIndex, currentSentenceIndex));
 
 
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+
+        // target & UI are always at front position
+        levelManager.angularPosition(levelObjects.target, 0, 10);
+        levelManager.angularPosition(levelObjects.userInterface, 0, 12);
+
+        // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
+        levelManager.setDistractorSettings(distractorSettings.dist1);
+
+        audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
 
         ApplyTestConditions();
 
@@ -215,14 +225,14 @@ public class VRHINTManager : MonoBehaviour
         }
         
         // randomize oder of sentence lists
-        int n = sentenceLists.Count;
+        int n = listOrder.Count;
         while (n > 1)
         {
             n--;
             int k = rng.Next(n + 1);
-            int value = sentenceLists[k];
-            sentenceLists[k] = sentenceLists[n];
-            sentenceLists[n] = value;
+            int value = listOrder[k];
+            listOrder[k] = listOrder[n];
+            listOrder[n] = value;
         }
 
     }
@@ -301,11 +311,8 @@ public class VRHINTManager : MonoBehaviour
 
     private void ApplyTestConditions()
     {
-        // target is always at front position
-        levelManager.angularPosition(levelObjects.target, 0, 10);
 
-        // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
-        levelManager.setDistractorSettings(distractorSettings.dist1);
+        levelManager.showLevelObjects(false);
 
         switch (currentCondition)
         {
@@ -317,10 +324,10 @@ public class VRHINTManager : MonoBehaviour
                 levelManager.angularPosition(levelObjects.distractor1, -5, 10);
                 break;
             case hintConditions.noiseLeft:
-                levelManager.angularPosition(levelObjects.distractor1, 90, 10);
+                levelManager.angularPosition(levelObjects.distractor1, 270, 10);
                 break;
             case hintConditions.noiseRight:
-                levelManager.angularPosition(levelObjects.distractor1, 270, 10);
+                levelManager.angularPosition(levelObjects.distractor1, 90, 10);
                 break;
             default:
                 Debug.LogError("Invalid locationCondition: " + currentCondition);
@@ -340,7 +347,8 @@ public class VRHINTManager : MonoBehaviour
         Debug.Log("OnPlayingDone");
         currentSentence = database.getSentenceWords(currentListIndex, currentSentenceIndex);
         sentenceLength = currentSentence.Length;
-        string[] rand = database.getRandomWords(wordOptions - 1, currentSentence[0], database.isCapital(currentSentence[0]));
+        // always start with the first word of the sentence, so set sentenceStart as true
+        string[] rand = database.getRandomWords(wordOptions - 1, currentSentence[0], database.isCapital(currentSentence[0]), true);
 
         string[] test = new string[wordOptions];
         test[0] = currentSentence[0];
@@ -350,22 +358,6 @@ public class VRHINTManager : MonoBehaviour
         feedbackManager.showFeedbackUI(true);
         feedbackManager.assignWordsToButtons(test);
 
-
-        //inputManager.ShowSentenceInput(true);
-
-        /*
-        if (!practiceMode)
-        {
-            SNR_values[roundsPlayed - 1] = audioManager.getTalkerVolume();
-            Debug.Log("Stored SNR: " + SNR_values[roundsPlayed - 1] + " round: " + roundsPlayed);
-        }
-
-        Debug.Log("randGroup: " + randGroup);
-        lisnData.getSelectableWords(randGroup, selectionOptions, sent.getSelectableWordIndex(randGroup), out words, out icons);
-        */
-        // show wordSelection UI elements
-        //selectionManager.startWordSelection(words, icons);
-
     }
 
     void onWordGuess(bool correct)
@@ -374,24 +366,29 @@ public class VRHINTManager : MonoBehaviour
 
         if(correct)
         {
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
+            sentenceHits++;
         }
         else
         {
-            Debug.Log("Miss");
+            //Debug.Log("Miss");
+            //sentenceMisses++;
         }
 
 
         
         if(wordCounter >= sentenceLength)
         {
+            hitQuote.Add(sentenceHits / sentenceLength);
+            Debug.Log("Hit quote: " + (sentenceHits / sentenceLength));
             wordCounter = 0;
+            sentenceHits = 0;
             OnContinue();
         }
         else
         {
             // get new random selection
-            string[] rand = database.getRandomWords(wordOptions - 1, currentSentence[wordCounter], database.isCapital(currentSentence[wordCounter]));
+            string[] rand = database.getRandomWords(wordOptions - 1, currentSentence[wordCounter], database.isCapital(currentSentence[wordCounter]), false);
 
             string[] test = new string[wordOptions];
             test[0] = currentSentence[wordCounter];
@@ -422,41 +419,21 @@ public class VRHINTManager : MonoBehaviour
 
     }
 
-    // enter how many words have been repeated correclty
-    void onSubmission(int correctWords)
-    {
-
-    }
-
-    // enter sentences repetion as array of strings an let app compute errors
-    void onSubmission(string sentence)
-    {
-        Debug.Log("On submission: " + sentence);
-        inputManager.ShowSentenceInput(false);
-
-        string sent = database.getSentenceString(currentListIndex, currentSentenceIndex);
-        Debug.Log("Sent: " + sent);
-        int comp = sent.CompareTo(sentence);
-
-        Debug.Log("Compare: " + comp);
-
-        OnContinue();
-    }
 
 
     void OnContinue()
     {
         feedbackManager.showFeedbackUI(false);
 
-        listIndices.RemoveAt(currentSentenceIndex);
+        listIndices.Remove(currentSentenceIndex);
 
         if(practiceMode)
         {
             if (practiceRounds-- == 0)
             {
                 Debug.Log("Leaving practice mode");
-                practiceMode = false;
                 OnListDone();
+                return;
             }
                 
         }
@@ -468,7 +445,7 @@ public class VRHINTManager : MonoBehaviour
         }
 
         // randomly select next sentence (repetition impossibile due to removal of already played sentences)
-        currentSentenceIndex = Random.Range(0, listIndices.Count);
+        currentSentenceIndex = listIndices[Random.Range(0, listIndices.Count)];
         Debug.Log("Sentences remaining: " + listIndices.Count);
         Debug.Log("Sentence " + currentSentenceIndex + ": " + database.getSentenceString(currentListIndex, currentSentenceIndex));
 
@@ -482,26 +459,43 @@ public class VRHINTManager : MonoBehaviour
 
     void OnListDone()
     {
-        if(listIndices.Count > 0)
+        Debug.Log("On List Done!");
+
+        if(listIndices.Count > 0 && !practiceMode)
         {
             Debug.LogWarning("testList is not empty: " + listIndices.Count);
         }
 
         if(practiceMode)
         {
-            // ToDo: make this work with variable number of practice lists!
-            currentListIndex = practiceLists[1];
-            currentCondition = practiceConditions[1];
+            practiceMode = false;
+            listIndices.Clear();
         }
-        else
+
+        if(listCounter >= numTestLists)
         {
-            // ToDo: make sure that each condition is used at least twice (don't know what should happen then...)
-            // randomly select next test condition
-            currentCondition = hintConditions.quiet;
+            OnSessionDone();
+            return;
         }
+
+
+        currentCondition = conditions[listCounter];
+        currentListIndex = listOrder[listCounter];
+        Debug.Log("New condition: " + currentCondition + " new List: " + currentListIndex);
+
+        listCounter++;
 
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));        
         currentSentenceIndex = Random.Range(0, listIndices.Count);
+
+        ApplyTestConditions();
+
+        // move new sentence audio to audioManager
+        audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+        //audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
+
+        // start playing again
+        audioManager.startPlaying();
 
     }
 }

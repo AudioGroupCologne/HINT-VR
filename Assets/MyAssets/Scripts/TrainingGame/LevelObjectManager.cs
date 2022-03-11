@@ -18,23 +18,13 @@ public class LevelObjectManager : MonoBehaviour
     [SerializeField] Vector3 positionLeft;
     [SerializeField] Vector3 positionRight;
     [SerializeField] Vector3 positionFront;
-
-
     [SerializeField] Vector3 relativeUIPosition;
 
-
-    // simply make Dist2 optional???
-    //private LevelObjects objects;
 
     private bool objectsVisible = false;
     
     private distractorSettings setup = distractorSettings.bothDist;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        generalUI.transform.position = PlayerCamera.transform.position + relativeUIPosition;
-    }
 
     public void setDistractorSettings(distractorSettings setting)
     {
@@ -98,6 +88,10 @@ public class LevelObjectManager : MonoBehaviour
             case levelObjects.distractor2:
                 Distractor2Obj.transform.position = PlayerCamera.transform.position + tmp;
                 Distractor2Obj.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up);
+                break;
+            case levelObjects.userInterface:
+                generalUI.transform.position = PlayerCamera.transform.position + tmp;
+                generalUI.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up) * Quaternion.Euler(0, 180, 0); ;
                 break;
             default:
                 Debug.LogError("Invalid levelObject selector: " + obj);
