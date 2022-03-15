@@ -71,9 +71,10 @@ public class LevelObjectManager : MonoBehaviour
         
     }
 
-    public void angularPosition(levelObjects obj, float _angle, float _distance)
+    public void angularPosition(levelObjects obj, float _angle, float _distance, float _height = 0)
     {
         Vector3 tmp = Quaternion.AngleAxis(_angle, Vector3.up) * (PlayerCamera.transform.forward * _distance);
+        tmp.y += _height;
 
         switch (obj)
         {
