@@ -101,6 +101,10 @@ public class VRHINTManager : MonoBehaviour
 
         // hold every SNR datapoint that goes into SRT calculation
         SNR = new List<float>[numTestLists];
+        for(int i = 0; i < numTestLists; i++)
+        {
+            SNR[i] = new List<float>();
+        }
 
         // hold SRT values for each list 
         eSRT = new List<float>();
@@ -163,7 +167,7 @@ public class VRHINTManager : MonoBehaviour
 
         // target & UI are always at front position
         levelManager.angularPosition(levelObjects.target, 0, 10);
-        levelManager.angularPosition(levelObjects.userInterface, 0, 12);
+        levelManager.angularPosition(levelObjects.userInterface, 0, 9, 2);
 
         // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
         levelManager.setDistractorSettings(distractorSettings.dist1);
