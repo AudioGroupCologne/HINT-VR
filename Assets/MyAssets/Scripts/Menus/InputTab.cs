@@ -56,8 +56,7 @@ void Update()
         {
             switch(selectedField)
             {
-                case 0:
-                    break;
+                case 0:                    
                 case 1:
                 case 2:
                     if(onPasswordEnteredBtn != null)
@@ -86,7 +85,10 @@ void Update()
                 username.Select();
                 break;
             case 1:
-                password.Select();
+                if(password != null)
+                {
+                    password.Select();
+                }
                 break;
             case 2:
                 if(onPasswordEnteredBtn != null)

@@ -2451,7 +2451,7 @@ PrefabInstance:
     - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
         type: 3}
       propertyPath: m_OnSelect.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
         type: 3}
@@ -2462,7 +2462,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1867478135}
+      objectReference: {fileID: 0}
     - target: {fileID: 2313282409753017373, guid: c30ce86ea12f1bb4fab8dc258247b6e8,
         type: 3}
       propertyPath: m_OnSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -3259,8 +3259,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867478133}
-  - component: {fileID: 1867478135}
   - component: {fileID: 1867478134}
+  - component: {fileID: 1867478135}
   m_Layer: 5
   m_Name: TestUser
   m_TagString: Untagged
@@ -3315,14 +3315,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1867478132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8b1e2afb52d1174688302bd774239e6, type: 3}
+  m_Script: {fileID: 11500000, guid: db2b25d5cd0f46040b2f55c6a60749d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: {fileID: 1619983600}
-  password: {fileID: 0}
-  onPasswordEnteredBtn: {fileID: 1813117268}
-  additionalBtns:
+  inputFields:
+  - {fileID: 1619983600}
+  enableOnReturn: 01
+  buttons:
   - {fileID: 1780704001}
+  onReturn: {fileID: 1813117268}
 --- !u!1001 &1903240966
 PrefabInstance:
   m_ObjectHideFlags: 0
