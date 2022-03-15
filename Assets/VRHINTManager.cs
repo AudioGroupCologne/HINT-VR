@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using CustomTypes;
 using CustomTypes.VRHINTTypes;
 
@@ -124,6 +126,29 @@ public class VRHINTManager : MonoBehaviour
         // copy practiceLists into new list
         List<int> tmp = new List<int>(practiceList);
 
+        int cnt = 0;
+
+        while(cnt < numTestLists)
+        {
+            int randList = Random.Range(1, numLists);
+
+            // exclude practiceList
+            if (randList == practiceList)
+                continue;
+
+            // exclude previously selected lists
+            for(int i = 0; i < cnt; i++)
+            {
+                if (randList == listOrder[i])
+                    continue;
+            }
+
+            listOrder.Add(randList);
+            cnt++;
+
+        }
+
+        /*
         for (int i = 1; i <= numLists; i++)
         {            
             // remove detected practiceLists content
@@ -139,10 +164,10 @@ public class VRHINTManager : MonoBehaviour
             if(i < numLists)
             {
                 listOrder.Add(i);
-                //Debug.Log("Sentence entry: " + i);
             }
             
         }
+        */
 
         feedbackManager.showFeedbackUI(false);
 
@@ -262,8 +287,8 @@ public class VRHINTManager : MonoBehaviour
                 levelManager.setDistractorSettings(distractorSettings.noDist);
                 break;
             case hintConditions.noiseFront:
-                levelManager.angularPosition(levelObjects.distractor1, 0, 10); // 5
-                levelManager.angularPosition(levelObjects.distractor1, 0, 10); // -5
+                levelManager.angularPosition(levelObjects.distractor1, 0, 10);
+                levelManager.angularPosition(levelObjects.distractor1, 0, 10);
                 break;
             case hintConditions.noiseLeft:
                 levelManager.angularPosition(levelObjects.distractor1, 270, 10);
@@ -313,7 +338,7 @@ public class VRHINTManager : MonoBehaviour
         
         if(wordCounter >= sentenceLength)
         {
-            float _hitQuote = sentenceHits / sentenceLength;
+            float _hitQuote = ((float)sentenceHits / (float)sentenceLength);
             Debug.Log("Hit quote: " + _hitQuote);
 
             // first four sentences
@@ -367,6 +392,8 @@ public class VRHINTManager : MonoBehaviour
         Debug.Log("VRHINT procedure done!");
 
         UserManagement.selfReference.addTestResults(listOrder, conditions, hitQuote, hitQuote);
+
+        SceneManager.LoadSceneAsync("VRMenuScene");
 
     }
 
@@ -436,7 +463,7 @@ public class VRHINTManager : MonoBehaviour
             eSRT.Add(_SRT);
         }
 
-        if(listCounter >= numTestLists)
+        if(listCounter >= numTestLists - 1)
         {
             OnSessionDone();
             return;

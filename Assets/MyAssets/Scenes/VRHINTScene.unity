@@ -4721,7 +4721,7 @@ MonoBehaviour:
   targetAudioPath: audio/german-hint/
   numLists: 12
   numSentences: 20
-  numTestLists: 3
+  numTestLists: 2
   wordOptions: 5
   noise: {fileID: 8300000, guid: b6c114205b16c0f43a6a121ce321c2cf, type: 3}
   practiceList: 12
@@ -24818,9 +24818,9 @@ MonoBehaviour:
   ILDNearFieldFileName44: Data/HighQuality/ILD/NearFieldCompensation_ILD_44100.3dti-ild.bytes
   ILDNearFieldFileName48: Data/HighQuality/ILD/NearFieldCompensation_ILD_48000.3dti-ild.bytes
   ILDNearFieldFileName96: Data/HighQuality/ILD/NearFieldCompensation_ILD_96000.3dti-ild.bytes
-  ILDHighPerformanceFileName44: Assets/3DTuneIn/Resources/Data/HighPerformance/ILD/HRTF_ILD_44100.3dti-ild.bytes
-  ILDHighPerformanceFileName48: Assets/3DTuneIn/Resources/Data/HighPerformance/ILD/HRTF_ILD_48000.3dti-ild.bytes
-  ILDHighPerformanceFileName96: Assets/3DTuneIn/Resources/Data/HighPerformance/ILD/HRTF_ILD_96000.3dti-ild.bytes
+  ILDHighPerformanceFileName44: 
+  ILDHighPerformanceFileName48: 
+  ILDHighPerformanceFileName96: 
   customITDEnabled: 0
   listenerHeadRadius: 0.0875
   spatializationMode: 0
