@@ -85,7 +85,7 @@ public class UserManagement : MonoBehaviour
         return true;
     }
 
-    public void addTestUserResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT)
+    public void addTestUserResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote)
     {
         if (activeUser < 0)
         {
@@ -93,8 +93,8 @@ public class UserManagement : MonoBehaviour
             return;
         }
 
-        testUserList[activeUser].addTestResults(_listOrder, _condOrder, _listSRT);
-        Debug.Log("Set SNR and rewards to user: " + testUserList[activeUser].getUserName());
+        testUserList[activeUser].addTestResults(_listOrder, _condOrder, _listSRT, _hitQuote);
+        Debug.Log("Set data to testUser: " + testUserList[activeUser].getUserName());
 
         // save updated userList to JSON
         jsonFiles.saveTestUserData(testUserList);

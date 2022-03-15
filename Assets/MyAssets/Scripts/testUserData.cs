@@ -15,7 +15,8 @@ public class testUserData
     [JsonProperty] List<hintConditions> conditionsOrder;
     // SRT for each test list
     [JsonProperty] List<float> listSRT;
-
+    // hit quote for each sentence
+    [JsonProperty] List<float> hitQuote;
 
     // user constructor
     public testUserData(string _name)
@@ -25,7 +26,7 @@ public class testUserData
         listOrder = new List<int>();
         conditionsOrder = new List<hintConditions>();
         listSRT = new List<float>();
-
+        hitQuote = new List<float>();
     }
 
 
@@ -39,22 +40,24 @@ public class testUserData
         Debug.Log("Name: " + userID);
     }
 
-    public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT)
+    public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote)
     {
 
         listOrder = _listOrder;
         conditionsOrder = _condOrder;
         listSRT = _listSRT;
+        hitQuote = _hitQuote;
 
     }
 
     
-    public void getData(out string _uname, out List<int> _listOrder, out List<hintConditions> _condOrder, out List<float> _listSRT)
+    public void getData(out string _uname, out List<int> _listOrder, out List<hintConditions> _condOrder, out List<float> _listSRT, out List<float> _hitQuote)
     {
         _uname = userID;
         _listOrder = listOrder;
         _condOrder = conditionsOrder;
         _listSRT = listSRT;
+        _hitQuote = hitQuote;
     }
 
 }

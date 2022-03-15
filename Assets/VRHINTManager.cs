@@ -42,9 +42,15 @@ public class VRHINTManager : MonoBehaviour
     private bool practiceMode = true;
 
     private int listCounter = 0;
-    private List<float[]> SNRdata;
-    // SNR ratio stored for each round (average over whole session will be used)
+
+    // SNR data for each sentence
+    //private List<List<float>> SNR;
+    private List<float>[] SNR;
+
+    // estimated SRT for each list
     private List<float> eSRT;
+
+    // noise conditions for each list
     private List<hintConditions> conditions;
 
 
@@ -57,7 +63,8 @@ public class VRHINTManager : MonoBehaviour
     // randomly pick an entry from the remaining indices and get AudioClips/Strings that way
     private List<int> listIndices;
 
-
+    //private int sentenceMisses;
+    private List<float> hitQuote;
 
 
     private hintConditions currentCondition;
@@ -68,8 +75,7 @@ public class VRHINTManager : MonoBehaviour
     private int sentenceLength;
     private int wordCounter = 0;
     private int sentenceHits = 0;
-    //private int sentenceMisses;
-    private List<float> hitQuote;
+
 
     void Start()
     {
@@ -94,7 +100,7 @@ public class VRHINTManager : MonoBehaviour
         database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
 
         // hold every SNR datapoint that goes into SRT calculation
-        SNRdata = new List<float[]>();
+        SNR = new List<float>[numTestLists];
 
         // hold SRT values for each list 
         eSRT = new List<float>();
@@ -205,19 +211,15 @@ public class VRHINTManager : MonoBehaviour
             switch(tmp)
             {
                 case 0:
-                    //conditions[i] = hintConditions.quiet;
                     conditions.Add(hintConditions.quiet);
                     break;
                 case 1:
-                    //conditions[i] = hintConditions.noiseFront;
                     conditions.Add(hintConditions.noiseFront);
                     break;
                 case 2:
-                    //conditions[i] = hintConditions.noiseLeft;
                     conditions.Add(hintConditions.noiseLeft);
                     break;
                 case 3:
-                    //conditions[i] = hintConditions.noiseRight;
                     conditions.Add(hintConditions.noiseRight);
                     break;
             }
@@ -320,8 +322,8 @@ public class VRHINTManager : MonoBehaviour
                 levelManager.setDistractorSettings(distractorSettings.noDist);
                 break;
             case hintConditions.noiseFront:
-                levelManager.angularPosition(levelObjects.distractor1, 5, 10);
-                levelManager.angularPosition(levelObjects.distractor1, -5, 10);
+                levelManager.angularPosition(levelObjects.distractor1, 0, 10); // 5
+                levelManager.angularPosition(levelObjects.distractor1, 0, 10); // -5
                 break;
             case hintConditions.noiseLeft:
                 levelManager.angularPosition(levelObjects.distractor1, 270, 10);
@@ -366,21 +368,42 @@ public class VRHINTManager : MonoBehaviour
 
         if(correct)
         {
-            //Debug.Log("Hit");
             sentenceHits++;
         }
-        else
-        {
-            //Debug.Log("Miss");
-            //sentenceMisses++;
-        }
-
-
         
         if(wordCounter >= sentenceLength)
         {
-            hitQuote.Add(sentenceHits / sentenceLength);
-            Debug.Log("Hit quote: " + (sentenceHits / sentenceLength));
+            float _hitQuote = sentenceHits / sentenceLength;
+            Debug.Log("Hit quote: " + _hitQuote);
+
+            // first four sentences
+            if (listIndices.Count > 16)
+            {
+                if (_hitQuote < 0.5f)
+                {
+                    audioManager.changeTalkerVolume(initSNRStep);
+                }
+                else
+                {
+                    audioManager.changeTalkerVolume(-initSNRStep);
+                }
+            }
+            else
+            {
+                // store current SNR data point
+                SNR[listCounter].Add(audioManager.getTalkerVolume());
+
+                hitQuote.Add(_hitQuote);
+                if (_hitQuote < 0.5f)
+                {
+                    audioManager.changeTalkerVolume(adaptiveSNRStep);
+                }
+                else
+                {
+                    audioManager.changeTalkerVolume(-adaptiveSNRStep);
+                }
+            }          
+            
             wordCounter = 0;
             sentenceHits = 0;
             OnContinue();
@@ -403,19 +426,7 @@ public class VRHINTManager : MonoBehaviour
     {
         Debug.Log("VRHINT procedure done!");
 
-        // calculate average SNR of the session
-        /*
-        float average_SNR = 0;
-        for (int i = 0; i < roundsPlayed; i++)
-        {
-            average_SNR += SNR_values[i];
-        }
-        average_SNR /= roundsPlayed;
-        */
-        // set current session data onto result UI
-        //resultManager.setTrainingGameResults(average_SNR, 0, hits, misses, roundsPlayed);
-        // store session data in userManagement
-        //UserManagement.selfReference.addUserResults(average_SNR, 0);
+        UserManagement.selfReference.addTestUserResults(listOrder, conditions, hitQuote, hitQuote);
 
     }
 
@@ -437,6 +448,7 @@ public class VRHINTManager : MonoBehaviour
             }
                 
         }
+
 
         if(listIndices.Count == 0)
         {
@@ -471,6 +483,18 @@ public class VRHINTManager : MonoBehaviour
             practiceMode = false;
             listIndices.Clear();
         }
+        else
+        {
+            // calculate average SRT
+            float _SRT = 0.0f;
+            for(int i = 0; i < SNR[listCounter].Count; i++)
+            {
+                _SRT += SNR[listCounter][i]; 
+            }
+            _SRT /= SNR[listCounter].Count;
+            Debug.Log("List eSRT: " + _SRT);
+            eSRT.Add(_SRT);
+        }
 
         if(listCounter >= numTestLists)
         {
@@ -492,7 +516,6 @@ public class VRHINTManager : MonoBehaviour
 
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
-        //audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
 
         // start playing again
         audioManager.startPlaying();
