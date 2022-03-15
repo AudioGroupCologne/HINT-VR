@@ -4718,6 +4718,9 @@ MonoBehaviour:
   levelManager: {fileID: 1473686520}
   inputManager: {fileID: 241924938}
   feedbackManager: {fileID: 1746294878}
+  objectDistance: 10
+  interfaceDistance: 9
+  interFaceHeight: 2
   targetAudioPath: audio/german-hint/
   numLists: 12
   numSentences: 20
@@ -9807,10 +9810,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcee3e0e469056f4792e70832ed18067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 71a768edbca59a5489350524443deff8, type: 2}
+  mixer: {fileID: 24100000, guid: 02d04237d0308a14ea0c3b720849faae, type: 2}
   masterChannel: MasterVol
-  targetChannel: TalkerVol
-  distractorChannel: DistracterVol
+  targetChannel: TargetVolume
+  distractorChannel: DistVolume
   playerChannel: PlayerVol
   player: {fileID: 0}
   target: {fileID: 1565638252}

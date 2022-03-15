@@ -9,11 +9,10 @@ using CustomTypes.VRHINTTypes;
 public class VRHINTManager : MonoBehaviour
 {
     [SerializeField] CustomAudioManager audioManager;
-    //[SerializeField] TestSceneSettings settingsManager;
     [SerializeField] LevelObjectManager levelManager;
     [SerializeField] SentenceInput inputManager;
     [SerializeField] FeedbackManager feedbackManager;
-    //[SerializeField] UserFeedback selectionManager;
+    
 
     // the first 4 sentences are adjusted in 4 dB steps
     [SerializeField] readonly float initSNRStep = 4.0f;
@@ -22,6 +21,10 @@ public class VRHINTManager : MonoBehaviour
     
     // database object (loads target sentences from resource system)
     private VRHINTDatabase database;
+
+    [SerializeField] float objectDistance = 10.0f;
+    [SerializeField] float interfaceDistance = 9.0f;
+    [SerializeField] float interFaceHeight = 2.0f;
 
     [SerializeField] string targetAudioPath = "audio/german-hint/";
     [SerializeField] int numLists = 12;
@@ -191,8 +194,8 @@ public class VRHINTManager : MonoBehaviour
         audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // target & UI are always at front position
-        levelManager.angularPosition(levelObjects.target, 0, 10);
-        levelManager.angularPosition(levelObjects.userInterface, 0, 9, 2);
+        levelManager.angularPosition(levelObjects.target, 0, objectDistance);
+        levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interFaceHeight);
 
         // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
         levelManager.setDistractorSettings(distractorSettings.dist1);
@@ -287,14 +290,14 @@ public class VRHINTManager : MonoBehaviour
                 levelManager.setDistractorSettings(distractorSettings.noDist);
                 break;
             case hintConditions.noiseFront:
-                levelManager.angularPosition(levelObjects.distractor1, 0, 10);
-                levelManager.angularPosition(levelObjects.distractor1, 0, 10);
+                levelManager.angularPosition(levelObjects.distractor1, 0, objectDistance);
+                levelManager.angularPosition(levelObjects.distractor1, 0, objectDistance);
                 break;
             case hintConditions.noiseLeft:
-                levelManager.angularPosition(levelObjects.distractor1, 270, 10);
+                levelManager.angularPosition(levelObjects.distractor1, 270, objectDistance);
                 break;
             case hintConditions.noiseRight:
-                levelManager.angularPosition(levelObjects.distractor1, 90, 10);
+                levelManager.angularPosition(levelObjects.distractor1, 90, objectDistance);
                 break;
             default:
                 Debug.LogError("Invalid locationCondition: " + currentCondition);

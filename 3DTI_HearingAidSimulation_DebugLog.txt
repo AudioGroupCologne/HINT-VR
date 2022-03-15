@@ -2345,3 +2345,327 @@ SET PARAMETER: Left HA switched Off
 SET PARAMETER: Right HA switched Off
 SET PARAMETER: Left HA switched On
 SET PARAMETER: Right HA switched On
+SET PARAMETER: Left HA switched Off
+SET PARAMETER: Right HA switched Off
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On
+SET PARAMETER: Left HA switched Off
+SET PARAMETER: Right HA switched Off
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On
+SET PARAMETER: Left HA switched Off
+SET PARAMETER: Right HA switched Off
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On
+CREATE: HA Simulation plugin created
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On
+SET PARAMETER: Left volume set to (dB): 0
+SET PARAMETER: Right volume set to (dB): 0
+SET PARAMETER: Low pass filter cutoff frequency set to: 16000
+SET PARAMETER: High pass filter cutoff frequency set to: 63
+SET PARAMETER: Levels interpolation in dynamic equalizer set to On
+SET PARAMETER: First threshold for Left channel = -80
+SET PARAMETER: Second threshold for Left channel = -80
+SET PARAMETER: Third threshold for Left channel = -80
+SET PARAMETER: First threshold for Right channel = -80
+SET PARAMETER: Second threshold for Right channel = -80
+SET PARAMETER: Third threshold for Right channel = -80
+SET PARAMETER: Gain for Level 0, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 6, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 6, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 6, Right channel = 0
+SET PARAMETER: Attack/Release time for Left channel = 82
+SET PARAMETER: Attack/Release time for Right channel = 303
+SET PARAMETER: Quantization Before EQ is On
+SET PARAMETER: Quantization After EQ is On
+SET PARAMETER: Quantization number of bits = 11
+SET PARAMETER: Compression amount for Left channel = 100
+SET PARAMETER: Compression amount for Right channel = 100
+SET PARAMETER: Limiter switched ON
+SET PARAMETER: WARNING! PARAM_LIMIT_GET_COMPRESSION is read only
+SET PARAMETER: Normalization in Left ear switched On
+SET PARAMETER: Normalization in Left ear set to level: 3.73
+SET PARAMETER: WARNING! PARAM_NORMALIZATION_LEFT_GET is read only
+SET PARAMETER: Normalization in Right ear switched On
+SET PARAMETER: Normalization in Right ear set to level: 1.5
+SET PARAMETER: WARNING! PARAM_NORMALIZATION_RIGHT_GET is read only
+SET PARAMETER: Low tone band Left set to (dB) 0
+SET PARAMETER: Mid tone band Left set to (dB) 0
+SET PARAMETER: HIgh tone band Left set to (dB) 0
+SET PARAMETER: Low tone band Right set to (dB) 0
+SET PARAMETER: Mid tone band Right set to (dB) 0
+SET PARAMETER: High tone band Right set to (dB) 0
+CREATE: HA Simulation plugin created
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On
+SET PARAMETER: Left volume set to (dB): 0
+SET PARAMETER: Right volume set to (dB): 0
+SET PARAMETER: Low pass filter cutoff frequency set to: 16000
+SET PARAMETER: High pass filter cutoff frequency set to: 63
+SET PARAMETER: Levels interpolation in dynamic equalizer set to On
+SET PARAMETER: First threshold for Left channel = -80
+SET PARAMETER: Second threshold for Left channel = -80
+SET PARAMETER: Third threshold for Left channel = -80
+SET PARAMETER: First threshold for Right channel = -80
+SET PARAMETER: Second threshold for Right channel = -80
+SET PARAMETER: Third threshold for Right channel = -80
+SET PARAMETER: Gain for Level 0, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 6, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 6, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 6, Right channel = 0
+SET PARAMETER: Attack/Release time for Left channel = 82
+SET PARAMETER: Attack/Release time for Right channel = 303
+SET PARAMETER: Quantization Before EQ is On
+SET PARAMETER: Quantization After EQ is On
+SET PARAMETER: Quantization number of bits = 11
+SET PARAMETER: Compression amount for Left channel = 100
+SET PARAMETER: Compression amount for Right channel = 100
+SET PARAMETER: Limiter switched ON
+SET PARAMETER: WARNING! PARAM_LIMIT_GET_COMPRESSION is read only
+SET PARAMETER: Normalization in Left ear switched On
+SET PARAMETER: Normalization in Left ear set to level: 3.73
+SET PARAMETER: WARNING! PARAM_NORMALIZATION_LEFT_GET is read only
+SET PARAMETER: Normalization in Right ear switched On
+SET PARAMETER: Normalization in Right ear set to level: 1.5
+SET PARAMETER: WARNING! PARAM_NORMALIZATION_RIGHT_GET is read only
+SET PARAMETER: Low tone band Left set to (dB) 0
+SET PARAMETER: Mid tone band Left set to (dB) 0
+SET PARAMETER: HIgh tone band Left set to (dB) 0
+SET PARAMETER: Low tone band Right set to (dB) 0
+SET PARAMETER: Mid tone band Right set to (dB) 0
+SET PARAMETER: High tone band Right set to (dB) 0
+CREATE: HA Simulation plugin created
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On
+SET PARAMETER: Left volume set to (dB): 0
+SET PARAMETER: Right volume set to (dB): 0
+SET PARAMETER: Low pass filter cutoff frequency set to: 16000
+SET PARAMETER: High pass filter cutoff frequency set to: 63
+SET PARAMETER: Levels interpolation in dynamic equalizer set to On
+SET PARAMETER: First threshold for Left channel = -80
+SET PARAMETER: Second threshold for Left channel = -80
+SET PARAMETER: Third threshold for Left channel = -80
+SET PARAMETER: First threshold for Right channel = -80
+SET PARAMETER: Second threshold for Right channel = -80
+SET PARAMETER: Third threshold for Right channel = -80
+SET PARAMETER: Gain for Level 0, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 6, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 6, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 6, Right channel = 0
+SET PARAMETER: Attack/Release time for Left channel = 82
+SET PARAMETER: Attack/Release time for Right channel = 303
+SET PARAMETER: Quantization Before EQ is On
+SET PARAMETER: Quantization After EQ is On
+SET PARAMETER: Quantization number of bits = 11
+SET PARAMETER: Compression amount for Left channel = 100
+SET PARAMETER: Compression amount for Right channel = 100
+SET PARAMETER: Limiter switched ON
+SET PARAMETER: WARNING! PARAM_LIMIT_GET_COMPRESSION is read only
+SET PARAMETER: Normalization in Left ear switched On
+SET PARAMETER: Normalization in Left ear set to level: 3.73
+SET PARAMETER: WARNING! PARAM_NORMALIZATION_LEFT_GET is read only
+SET PARAMETER: Normalization in Right ear switched On
+SET PARAMETER: Normalization in Right ear set to level: 1.5
+SET PARAMETER: WARNING! PARAM_NORMALIZATION_RIGHT_GET is read only
+SET PARAMETER: Low tone band Left set to (dB) 0
+SET PARAMETER: Mid tone band Left set to (dB) 0
+SET PARAMETER: HIgh tone band Left set to (dB) 0
+SET PARAMETER: Low tone band Right set to (dB) 0
+SET PARAMETER: Mid tone band Right set to (dB) 0
+SET PARAMETER: High tone band Right set to (dB) 0
+CREATE: HA Simulation plugin created
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On
+SET PARAMETER: Left volume set to (dB): 0
+SET PARAMETER: Right volume set to (dB): 0
+SET PARAMETER: Low pass filter cutoff frequency set to: 16000
+SET PARAMETER: High pass filter cutoff frequency set to: 63
+SET PARAMETER: Levels interpolation in dynamic equalizer set to On
+SET PARAMETER: First threshold for Left channel = -80
+SET PARAMETER: Second threshold for Left channel = -80
+SET PARAMETER: Third threshold for Left channel = -80
+SET PARAMETER: First threshold for Right channel = -80
+SET PARAMETER: Second threshold for Right channel = -80
+SET PARAMETER: Third threshold for Right channel = -80
+SET PARAMETER: Gain for Level 0, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 1, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 0, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 1, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 2, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 3, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 4, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 5, Left channel = 0
+SET PARAMETER: Gain for Level 2, Band 6, Left channel = 0
+SET PARAMETER: Gain for Level 0, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 0, Band 6, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 1, Band 6, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 0, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 1, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 2, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 3, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 4, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 5, Right channel = 0
+SET PARAMETER: Gain for Level 2, Band 6, Right channel = 0
+SET PARAMETER: Attack/Release time for Left channel = 82
+SET PARAMETER: Attack/Release time for Right channel = 303
+SET PARAMETER: Quantization Before EQ is On
+SET PARAMETER: Quantization After EQ is On
+SET PARAMETER: Quantization number of bits = 11
+SET PARAMETER: Compression amount for Left channel = 100
+SET PARAMETER: Compression amount for Right channel = 100
+SET PARAMETER: Limiter switched ON
+SET PARAMETER: WARNING! PARAM_LIMIT_GET_COMPRESSION is read only
+SET PARAMETER: Normalization in Left ear switched On
+SET PARAMETER: Normalization in Left ear set to level: 3.73
+SET PARAMETER: WARNING! PARAM_NORMALIZATION_LEFT_GET is read only
+SET PARAMETER: Normalization in Right ear switched On
+SET PARAMETER: Normalization in Right ear set to level: 1.5
+SET PARAMETER: WARNING! PARAM_NORMALIZATION_RIGHT_GET is read only
+SET PARAMETER: Low tone band Left set to (dB) 0
+SET PARAMETER: Mid tone band Left set to (dB) 0
+SET PARAMETER: HIgh tone band Left set to (dB) 0
+SET PARAMETER: Low tone band Right set to (dB) 0
+SET PARAMETER: Mid tone band Right set to (dB) 0
+SET PARAMETER: High tone band Right set to (dB) 0
+SET PARAMETER: Left HA switched Off
+SET PARAMETER: Right HA switched Off
+SET PARAMETER: Left HA switched On
+SET PARAMETER: Right HA switched On
