@@ -24,7 +24,7 @@ public class VRHINTManager : MonoBehaviour
 
     [SerializeField] float objectDistance = 10.0f;
     [SerializeField] float interfaceDistance = 9.0f;
-    [SerializeField] float interFaceHeight = 2.0f;
+    [SerializeField] float interfaceHeight = 2.0f;
 
     [SerializeField] string targetAudioPath = "audio/german-hint/";
     [SerializeField] int numLists = 12;
@@ -195,7 +195,7 @@ public class VRHINTManager : MonoBehaviour
 
         // target & UI are always at front position
         levelManager.angularPosition(levelObjects.target, 0, objectDistance);
-        levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interFaceHeight);
+        levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
 
         // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
         levelManager.setDistractorSettings(distractorSettings.dist1);
@@ -466,7 +466,7 @@ public class VRHINTManager : MonoBehaviour
             eSRT.Add(_SRT);
         }
 
-        if(listCounter >= numTestLists - 1)
+        if(listCounter >= numTestLists)
         {
             OnSessionDone();
             return;

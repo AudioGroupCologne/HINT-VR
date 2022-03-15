@@ -4720,11 +4720,11 @@ MonoBehaviour:
   feedbackManager: {fileID: 1746294878}
   objectDistance: 10
   interfaceDistance: 9
-  interFaceHeight: 2
+  interfaceHeight: 2
   targetAudioPath: audio/german-hint/
   numLists: 12
   numSentences: 20
-  numTestLists: 2
+  numTestLists: 1
   wordOptions: 5
   noise: {fileID: 8300000, guid: b6c114205b16c0f43a6a121ce321c2cf, type: 3}
   practiceList: 12
