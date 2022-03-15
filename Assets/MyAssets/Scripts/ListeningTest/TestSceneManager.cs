@@ -15,8 +15,8 @@ public class TestSceneManager : MonoBehaviour
     [SerializeField] UserFeedback selectionManager;
 
 
-    [SerializeField] readonly float testSNR = 1.0f;
-    [SerializeField] readonly float practiceSNR = 2.0f;
+    //[SerializeField] readonly float testSNR = 1.0f;
+    //[SerializeField] readonly float practiceSNR = 2.0f;
 
 
     // Pfade für target und dist audio angeben
@@ -34,8 +34,8 @@ public class TestSceneManager : MonoBehaviour
 
 
     // a min. of practice rounds have to be done. Continued until first upwards reversal?
-    [SerializeField] readonly int minPracticeRounds = 5;
-    [SerializeField] readonly int practiceReversals = 2;
+    //[SerializeField] readonly int minPracticeRounds = 5;
+    //[SerializeField] readonly int practiceReversals = 2;
 
     private enum testState { practice, init, preTest, test};
     private testState t_state = testState.practice;
@@ -43,16 +43,16 @@ public class TestSceneManager : MonoBehaviour
     private TestSceneData database;
 
     // how often shall SNR be changed on reaching "good" or "bad"
-    private readonly int totalReversals = 6;
+    //private readonly int totalReversals = 6;
     // how many reversals shall be used for SRT calculation
-    private readonly int srtReversals = 4;
+    //private readonly int srtReversals = 4;
 
     private int round = 0;
     private int currentCondition = 0;
 
     /// Control variables
     // start each session with practice mode
-    private bool practiceMode = true;
+    //private bool practiceMode = true;
 
 
     // export this to a different file, header, static class, whatever
