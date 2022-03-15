@@ -177,7 +177,7 @@ public class TrainingGameManager : MonoBehaviour
         // show result UI
         resultManager.showResults();
         // store session data in userManagement
-        UserManagement.selfReference.addUserResults(average_SNR, rewards);
+        UserManagement.selfReference.addTrainingProgress(average_SNR, rewards);
 
     }
 

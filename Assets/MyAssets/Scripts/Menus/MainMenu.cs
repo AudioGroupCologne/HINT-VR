@@ -42,10 +42,15 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    // no login required?
     public void StartTestScene()
     {
-        SceneManager.LoadSceneAsync("TestScene");
+        if (!UserManagement.selfReference.LoggedIn())
+        {
+            Debug.LogError("No user logged in");
+            return;
+        }
+
+        SceneManager.LoadSceneAsync("VRHINTScene");
     }
 
     public void ShowPlayerProgress()

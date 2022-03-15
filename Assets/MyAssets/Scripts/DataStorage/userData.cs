@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
+using CustomTypes.VRHINTTypes;
+
 public class userData
 {
     // login data
@@ -14,13 +16,11 @@ public class userData
     [JsonProperty] int group = 0;
     [JsonProperty] float masterVolume = 0;
 
-    // player progress
-    [JsonProperty] int gamesPlayed = 0;
-    [JsonProperty] int rewardsGained = 0;
-    [JsonProperty] float currentSNR = 0;
 
-    [JsonProperty] List<float> gamesSNR;
-    [JsonProperty] List<int> gamesRewards;
+    [JsonProperty] TrainingData trainingData;
+    [JsonProperty] TestData testData;
+
+
 
     // user constructor
     public userData(string _name, string _pw, int _group)
@@ -29,13 +29,13 @@ public class userData
         password = _pw;
         group = _group;
 
-        gamesSNR = new List<float>();
-        gamesRewards = new List<int>();
+        trainingData = new TrainingData();
+        testData = new TestData();
     }
 
     public bool checkPassword(string _pw)
     {
-        if(password == _pw)
+        if (password == _pw)
         {
             return true;
         }
@@ -52,9 +52,9 @@ public class userData
     {
         Debug.Log("Name: " + username);
         Debug.Log("Group: " + group);
-        Debug.Log("gamesPlayed: " + gamesPlayed);
-        Debug.Log("Average SNR: " + currentSNR);
-        Debug.Log("rewardsGained: " + rewardsGained);
+        Debug.Log("gamesPlayed: " + trainingData.getGamesPlayed());
+        Debug.Log("Average SNR: " + trainingData.getCurrentSNR());
+        Debug.Log("rewardsGained: " + trainingData.getRewardsGained());
     }
 
     public void setGroup(char _group)
@@ -77,32 +77,121 @@ public class userData
         return masterVolume;
     }
 
-    public void addResult(float snr, int reward)
+    public void addTrainingProgress(float SNR, int rewards)
     {
-
-        gamesPlayed++;
-        rewardsGained += reward;
-
-        gamesSNR.Add(snr);
-        gamesRewards.Add(reward);
-
-        currentSNR = 0;
-        for (int i = 0; i < gamesSNR.Count; i++)
-        {
-            currentSNR += gamesSNR[i];
-        }
-        currentSNR /= gamesSNR.Count;
-        
+        trainingData.addData(SNR, rewards);
     }
 
-    public void getData(out string _uname, out int _games, out int _rewards, out float _averageSNR, out List<float> _snrValues)
+    public void getTrainingData(out string _uname, out int _games, out int _rewards, out float _averageSNR, out List<float> _snrValues)
     {
         _uname = username;
-        _games = gamesPlayed;
-        _rewards = rewardsGained;
-        _averageSNR = currentSNR;
-        _snrValues = gamesSNR;
+        trainingData.getData(out _games, out _rewards, out _averageSNR, out _snrValues);
     }
 
+    public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote)
+    {
+        testData.addTestResults(_listOrder, _condOrder, _listSRT, _hitQuote);
+    }
+
+
+    public class TrainingData
+        {
+        // player progress
+        [JsonProperty] int gamesPlayed = 0;
+        [JsonProperty] int rewardsGained = 0;
+        [JsonProperty] float currentSNR = 0;
+
+        [JsonProperty] List<float> gamesSNR;
+        [JsonProperty] List<int> gamesRewards;
+
+        public TrainingData()
+        {
+            gamesSNR = new List<float>();
+            gamesRewards = new List<int>();
+        }
+
+        public void addData(float snr, int reward)
+        {
+
+            gamesPlayed++;
+            rewardsGained += reward;
+
+            gamesSNR.Add(snr);
+            gamesRewards.Add(reward);
+
+            currentSNR = 0;
+            for (int i = 0; i < gamesSNR.Count; i++)
+            {
+                currentSNR += gamesSNR[i];
+            }
+            currentSNR /= gamesSNR.Count;
+
+        }
+
+        public void getData(out int _games, out int _rewards, out float _averageSNR, out List<float> _snrValues)
+        {
+            _games = gamesPlayed;
+            _rewards = rewardsGained;
+            _averageSNR = currentSNR;
+            _snrValues = gamesSNR;
+        }
+
+        public int getGamesPlayed()
+        {
+            return gamesPlayed;
+        }
+
+        public int getRewardsGained()
+        {
+            return rewardsGained;
+        }
+
+        public float getCurrentSNR()
+        {
+            return currentSNR;
+        }
+    }
+
+
+    public class TestData
+    {
+        // order of sentence lists of test procedure
+        [JsonProperty] List<int> listOrder;
+        // order of conditions
+        [JsonProperty] List<hintConditions> conditionsOrder;
+        // SRT for each test list
+        [JsonProperty] List<float> listSRT;
+        // hit quote for each sentence
+        [JsonProperty] List<float> hitQuote;
+
+        // user constructor
+        public TestData()
+        {
+            listOrder = new List<int>();
+            conditionsOrder = new List<hintConditions>();
+            listSRT = new List<float>();
+            hitQuote = new List<float>();
+        }
+
+        public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote)
+        {
+
+            listOrder = _listOrder;
+            conditionsOrder = _condOrder;
+            listSRT = _listSRT;
+            hitQuote = _hitQuote;
+
+        }
+
+
+        public void getData(out List<int> _listOrder, out List<hintConditions> _condOrder, out List<float> _listSRT, out List<float> _hitQuote)
+        {
+            _listOrder = listOrder;
+            _condOrder = conditionsOrder;
+            _listSRT = listSRT;
+            _hitQuote = hitQuote;
+        }
+
+    }
 
 }

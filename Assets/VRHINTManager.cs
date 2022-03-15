@@ -178,6 +178,14 @@ public class VRHINTManager : MonoBehaviour
     }
 
 
+    // assign order of lists and conditions based on userID through a latin square system
+    // store the general order in a separate file
+    private void importCounterBalancedTestSetup()
+    {
+
+    }
+
+
     /**
      * Idea: assign pattern of test conditions like: Q, NF, NL, NR, NF, Q, NR, ...
      * - make sure no conditions are directly repeated
@@ -238,78 +246,6 @@ public class VRHINTManager : MonoBehaviour
         }
 
     }
-
-    /*
-    static void LatinSquare(int n)
-    {
-        if (n <= 0)
-        {
-            return;
-        }
-
-        // var latin = new Matrix();
-        List<List<int>> latin = List<List<int>>();
-
-        for (int i = 0; i < n; i++)
-        {
-            List<int> temp = new List<int>();
-            for (int j = 0; j < n; j++)
-            {
-                temp.Add(j);
-            }
-            latin.Add(temp);
-        }
-        // first row
-        latin[0].Shuffle();
-
-        // middle row(s)
-        for (int i = 1; i < n - 1; i++)
-        {
-            bool shuffled = false;
-
-            while (!shuffled)
-            {
-                latin[i].Shuffle();
-                for (int k = 0; k < i; k++)
-                {
-                    for (int j = 0; j < n; j++)
-                    {
-                        if (latin[k][j] == latin[i][j])
-                        {
-                            goto shuffling;
-                        }
-                    }
-                }
-                shuffled = true;
-
-            shuffling: { }
-            }
-        }
-
-        // last row
-        for (int j = 0; j < n; j++)
-        {
-            List<bool> used = new List<bool>();
-            for (int i = 0; i < n; i++)
-            {
-                used.Add(false);
-            }
-
-            for (int i = 0; i < n - 1; i++)
-            {
-                used[latin[i][j]] = true;
-            }
-            for (int k = 0; k < n; k++)
-            {
-                if (!used[k])
-                {
-                    latin[n - 1][j] = k;
-                    break;
-                }
-            }
-        }
-    }
-    */
 
     private void ApplyTestConditions()
     {
@@ -426,7 +362,7 @@ public class VRHINTManager : MonoBehaviour
     {
         Debug.Log("VRHINT procedure done!");
 
-        UserManagement.selfReference.addTestUserResults(listOrder, conditions, hitQuote, hitQuote);
+        UserManagement.selfReference.addTestResults(listOrder, conditions, hitQuote, hitQuote);
 
     }
 

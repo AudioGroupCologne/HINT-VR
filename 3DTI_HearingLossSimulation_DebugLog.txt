@@ -1482,3 +1482,7 @@ SET PARAMETER: Downward smearing amount (in Hz) for left ear = 150
 SET PARAMETER: Downward smearing amount (in Hz) for right ear = 0
 SET PARAMETER: Upward smearing amount (in Hz) for left ear = 150
 SET PARAMETER: Upward smearing amount (in Hz) for right ear = 0
+SET PARAMETER: Left ear hearing loss simulation switched OFF
+SET PARAMETER: Right ear hearing loss simulation switched OFF
+SET PARAMETER: Left ear hearing loss simulation switched ON
+SET PARAMETER: Right ear hearing loss simulation switched ON

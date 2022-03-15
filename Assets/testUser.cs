@@ -21,6 +21,7 @@ public class testUser : MonoBehaviour
             return;
         }
 
+        /*
         // check if username already exists
         if (!UserManagement.selfReference.addTestUser(username.text))
         {
@@ -28,7 +29,8 @@ public class testUser : MonoBehaviour
             testUserFailedText.SetActive(true);
             return;
         }
-
+        */
+        
         testUserFailedText.SetActive(false);
         testUserCallback();
 

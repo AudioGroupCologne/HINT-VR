@@ -3320,7 +3320,7 @@ PrefabInstance:
     - target: {fileID: 4167766169762905923, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_text
-      value: Progress
+      value: Training Progress
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169762905981, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -3484,7 +3484,7 @@ PrefabInstance:
     - target: {fileID: 4167766169762905923, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_text
-      value: Test Scene
+      value: VR HINT
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169762905923, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
