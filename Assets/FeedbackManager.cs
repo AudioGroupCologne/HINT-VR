@@ -26,7 +26,7 @@ public class FeedbackManager : MonoBehaviour
         // get random position for correct Btn
         correctBtn = Random.Range(0, words.Length - 1);
 
-        Debug.Log("Correct Word: " + words[0]);
+        //Debug.Log("Correct Word: " + words[0]);
 
         // first assign correct word
         wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];

@@ -1994,3 +1994,15 @@ SET PARAMETER: Left ear hearing loss simulation switched OFF
 SET PARAMETER: Right ear hearing loss simulation switched OFF
 SET PARAMETER: Left ear hearing loss simulation switched ON
 SET PARAMETER: Right ear hearing loss simulation switched ON
+SET PARAMETER: Left ear hearing loss simulation switched OFF
+SET PARAMETER: Right ear hearing loss simulation switched OFF
+SET PARAMETER: Left ear hearing loss simulation switched ON
+SET PARAMETER: Right ear hearing loss simulation switched ON
+SET PARAMETER: Left ear hearing loss simulation switched OFF
+SET PARAMETER: Right ear hearing loss simulation switched OFF
+SET PARAMETER: Left ear hearing loss simulation switched ON
+SET PARAMETER: Right ear hearing loss simulation switched ON
+SET PARAMETER: Left ear hearing loss simulation switched OFF
+SET PARAMETER: Right ear hearing loss simulation switched OFF
+SET PARAMETER: Left ear hearing loss simulation switched ON
+SET PARAMETER: Right ear hearing loss simulation switched ON

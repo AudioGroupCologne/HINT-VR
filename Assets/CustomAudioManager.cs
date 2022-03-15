@@ -111,7 +111,7 @@ public class CustomAudioManager : MonoBehaviour
 
     public void changeTalkerVolume(float deltaVolume_db)
     {
-        Debug.Log("Change TalkerVolume by: " + deltaVolume_db);
+        Debug.Log("Change TalkerVolume by: " + deltaVolume_db + " dB");
         changeVolume(targetChannel, deltaVolume_db);
     }
 
