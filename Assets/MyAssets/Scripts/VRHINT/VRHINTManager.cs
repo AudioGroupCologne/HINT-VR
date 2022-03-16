@@ -10,9 +10,8 @@ public class VRHINTManager : MonoBehaviour
 {
     [SerializeField] CustomAudioManager audioManager;
     [SerializeField] LevelObjectManager levelManager;
-    [SerializeField] SentenceInput inputManager;
     [SerializeField] FeedbackManager feedbackManager;
-    
+    [SerializeField] VRHINTSettings settingsManager;
 
     // the first 4 sentences are adjusted in 4 dB steps
     [SerializeField] readonly float initSNRStep = 4.0f;
@@ -38,15 +37,13 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] int practiceRounds = 5;
     [SerializeField] hintConditions practiceCondition =  hintConditions.noiseRight;
 
-
-    [SerializeField] API_3DTI_HA hearingAids;
-    [SerializeField] API_3DTI_HL hearingLoss;
-
     /// Control variables
     // start each session with practice mode
     private bool practiceMode = true;
 
     private int listCounter = 0;
+
+    private feedbackSettings feedbackSystem;
 
     // SNR data for each sentence
     //private List<List<float>> SNR;
@@ -84,22 +81,28 @@ public class VRHINTManager : MonoBehaviour
 
     void Start()
     {
-        audioManager.onPlayingDoneCallback = OnPlayingDone;
-        feedbackManager.onWordGuessCallback = onWordGuess;
 
-        OnStart();
+        audioManager.onPlayingDoneCallback = OnPlayingDone;
+
+        feedbackManager.onWordGuessCallback = onWordGuess;
+        feedbackManager.onClassicFeedback = onClassicFeedback;
+        feedbackManager.onComprehensionCallback = onComprehensionFeedback;
+
+        levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
+
+        settingsManager.OnSettingsDoneCallback = OnStart;
+        settingsManager.ShowSettings(true);
        
     }
 
 
     // no setup on VRHINT test always starts in the same manner
-    void OnStart()
+    void OnStart(feedbackSettings settings)
     {
 
         Debug.Log("Start VR HINT procedure");
 
-        hearingAids.EnableHAInBothEars(false);
-        hearingLoss.EnableHearingLossInBothEars(false);
+        feedbackSystem = settings;
 
         // create database to hold target sentence lists
         database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
@@ -151,28 +154,7 @@ public class VRHINTManager : MonoBehaviour
 
         }
 
-        /*
-        for (int i = 1; i <= numLists; i++)
-        {            
-            // remove detected practiceLists content
-            for(int k = 0; k < tmp.Count; k++)
-            {
-                if (i == tmp[k])
-                {
-                    tmp.RemoveAt(k);
-                    i++;
-                }      
-            }
-
-            if(i < numLists)
-            {
-                listOrder.Add(i);
-            }
-            
-        }
-        */
-
-        feedbackManager.showFeedbackUI(false);
+        feedbackManager.showFeedbackSystem(feedbackSystem, false);
 
         // randomly sort test conditions and sentence lists with no direct repetitions
         createCounterBalancedTest();
@@ -195,7 +177,7 @@ public class VRHINTManager : MonoBehaviour
 
         // target & UI are always at front position
         levelManager.angularPosition(levelObjects.target, 0, objectDistance);
-        levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
+
 
         // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
         levelManager.setDistractorSettings(distractorSettings.dist1);
@@ -324,9 +306,21 @@ public class VRHINTManager : MonoBehaviour
         test[0] = currentSentence[0];
         rand.CopyTo(test, 1);
 
+        switch(feedbackSystem)
+        {
+            case feedbackSettings.classic:
+                // visualize correct sentence
+                break;
+            case feedbackSettings.wordSelection:
+                feedbackManager.assignWordsToButtons(test);
+                break;
+            case feedbackSettings.comprehensionLevel:
+                feedbackManager.setSentenceLength(currentSentence.Length);
+                break;
+        }
 
-        feedbackManager.showFeedbackUI(true);
-        feedbackManager.assignWordsToButtons(test);
+        feedbackManager.showFeedbackSystem(feedbackSystem, true);
+
 
     }
 
@@ -344,33 +338,7 @@ public class VRHINTManager : MonoBehaviour
             float _hitQuote = ((float)sentenceHits / (float)sentenceLength);
             Debug.Log("Hit quote: " + _hitQuote);
 
-            // first four sentences
-            if (listIndices.Count > 16)
-            {
-                if (_hitQuote < 0.5f)
-                {
-                    audioManager.changeTalkerVolume(initSNRStep);
-                }
-                else
-                {
-                    audioManager.changeTalkerVolume(-initSNRStep);
-                }
-            }
-            else
-            {
-                // store current SNR data point
-                SNR[listCounter].Add(audioManager.getTalkerVolume());
-
-                hitQuote.Add(_hitQuote);
-                if (_hitQuote < 0.5f)
-                {
-                    audioManager.changeTalkerVolume(adaptiveSNRStep);
-                }
-                else
-                {
-                    audioManager.changeTalkerVolume(-adaptiveSNRStep);
-                }
-            }          
+            changeTargetVolume(_hitQuote);       
             
             wordCounter = 0;
             sentenceHits = 0;
@@ -389,6 +357,59 @@ public class VRHINTManager : MonoBehaviour
 
     }
 
+    void onComprehensionFeedback(comprehension reply)
+    {
+        switch(reply)
+        {
+            case comprehension.good:
+                changeTargetVolume(1.0f);
+                break;
+            case comprehension.bad:
+                changeTargetVolume(0.0f);
+                break;
+        }
+
+        OnContinue();
+    }
+
+    void onClassicFeedback(int correctWords)
+    {
+        float _hitQuote = ((float)correctWords / (float)sentenceLength);
+        changeTargetVolume(_hitQuote);
+        OnContinue();
+    }
+
+    void changeTargetVolume(float _hitQuote)
+    {
+        if (listIndices.Count > 16)
+        {
+            if (_hitQuote < 0.5f)
+            {
+                audioManager.changeTalkerVolume(initSNRStep);
+            }
+            else
+            {
+                audioManager.changeTalkerVolume(-initSNRStep);
+            }
+        }
+        else
+        {
+            // store current SNR data point
+            SNR[listCounter].Add(audioManager.getTalkerVolume());
+            // store current hitQuote data point
+            hitQuote.Add(_hitQuote);
+
+            if (_hitQuote < 0.5f)
+            {
+                audioManager.changeTalkerVolume(adaptiveSNRStep);
+            }
+            else
+            {
+                audioManager.changeTalkerVolume(-adaptiveSNRStep);
+            }
+        }
+    }
+
 
     void OnSessionDone()
     {
@@ -401,10 +422,9 @@ public class VRHINTManager : MonoBehaviour
     }
 
 
-
     void OnContinue()
     {
-        feedbackManager.showFeedbackUI(false);
+        feedbackManager.showFeedbackSystem(feedbackSystem, false);
 
         listIndices.Remove(currentSentenceIndex);
 
@@ -448,7 +468,11 @@ public class VRHINTManager : MonoBehaviour
             Debug.LogWarning("testList is not empty: " + listIndices.Count);
         }
 
-        if(practiceMode)
+        currentCondition = conditions[listCounter];
+        currentListIndex = listOrder[listCounter];
+        Debug.Log("New condition: " + currentCondition + " new List: " + currentListIndex);
+
+        if (practiceMode)
         {
             practiceMode = false;
             listIndices.Clear();
@@ -457,27 +481,25 @@ public class VRHINTManager : MonoBehaviour
         {
             // calculate average SRT
             float _SRT = 0.0f;
-            for(int i = 0; i < SNR[listCounter].Count; i++)
+            for (int i = 0; i < SNR[listCounter].Count; i++)
             {
-                _SRT += SNR[listCounter][i]; 
+                _SRT += SNR[listCounter][i];
             }
             _SRT /= SNR[listCounter].Count;
             Debug.Log("List eSRT: " + _SRT);
             eSRT.Add(_SRT);
+
+            listCounter++;
+
         }
 
-        if(listCounter >= numTestLists)
+        if (listCounter >= numTestLists)
         {
             OnSessionDone();
             return;
         }
 
 
-        currentCondition = conditions[listCounter];
-        currentListIndex = listOrder[listCounter];
-        Debug.Log("New condition: " + currentCondition + " new List: " + currentListIndex);
-
-        listCounter++;
 
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));        
         currentSentenceIndex = Random.Range(0, listIndices.Count);
