@@ -15,6 +15,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -4357549682745957326}
+  - {fileID: 3699926548296653324}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -67,6 +68,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 6550880152137454630}
+  - {fileID: 8318908270315252634}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -148,11 +150,30 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: e98a8fea32388a448bec3bf6d68fb035
   m_FloatValues:
+    6f794060f3c193c46b7ba84ce8a37409: 1
     1146a743a5e71a94a97b503e9b9ced6e: -5
     124ae1f3b55ddb646ace04f5d8190d1b: -4.9356413
+    eb9a46947c0f3964ca5c8fa4cf3d3eca: 1
     2b0a5866e4c619f4eb34e387df087e02: -5
+    e0a6fb0c8ba9d5f4f997c65fce736b97: 0
     a2d8bb9e2946b994d911926b2228d5b8: 0
   m_TransitionOverrides: {}
+--- !u!244 &3699926548296653324
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 01cf923a432f83f46926617cd77f0806
+  m_EffectName: Steam Audio Mixer Return
+  m_MixLevel: 7a802f6aa22c3144eab7c3d1b99ada3b
+  m_Parameters:
+  - m_ParameterName: Binaural
+    m_GUID: eb9a46947c0f3964ca5c8fa4cf3d3eca
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &6550880152137454630
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -178,6 +199,22 @@ AudioMixerEffectController:
   m_EffectName: Attenuation
   m_MixLevel: 3a12514b2c2704f40bff7817aa2f3eb1
   m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &8318908270315252634
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 1cedbe74f2a0d4e4b84fd9d7add824fe
+  m_EffectName: Steam Audio Mixer Return
+  m_MixLevel: 8f7d93d19180d1442aff948fd12ea374
+  m_Parameters:
+  - m_ParameterName: Binaural
+    m_GUID: 6f794060f3c193c46b7ba84ce8a37409
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
