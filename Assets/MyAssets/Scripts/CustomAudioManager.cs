@@ -103,6 +103,38 @@ public class CustomAudioManager : MonoBehaviour
 
     }
 
+    public void setChannelVolume(audioChannels channel, float level_db)
+    {
+        switch (channel)
+        {
+            case audioChannels.master:
+                setVolume(masterChannel, level_db);
+                break;
+            case audioChannels.target:
+                setVolume(targetChannel, level_db);
+                break;
+            case audioChannels.distractor:
+                setVolume(distractorChannel, level_db);
+                break;
+            case audioChannels.player:
+                setVolume(playerChannel, level_db);
+                break;
+        }
+    }
+
+    void setVolume(string channel, float level_db)
+    {
+        // apply limits to volume
+        if (level_db < min_vol_dB)
+            level_db = min_vol_dB;
+        else if (level_db > max_vol_dB)
+            level_db = max_vol_dB;
+
+        Debug.Log("Volume: " + level_db + " dB");
+
+        // write updated volume level to 'AudioMixer'
+        mixer.SetFloat(channel, level_db);
+    }
 
     public void changeMasterVolume(float deltaVolume_db)
     {

@@ -17,7 +17,11 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] readonly float initSNRStep = 4.0f;
     // the remaining 16 sentences are adjusted in 16 dB steps
     [SerializeField] readonly float adaptiveSNRStep = 2.0f;
-    
+    // initial level of Talker channel at the start of each list
+    [SerializeField] readonly float targetStartLevel = -15.0f;
+    // fixed level of dist channel (has to be calibrated!)
+    [SerializeField] readonly float distractorLevel = -5.0f;
+
     // database object (loads target sentences from resource system)
     private VRHINTDatabase database;
 
@@ -106,8 +110,6 @@ public class VRHINTManager : MonoBehaviour
             // set Player as parent
             Listener.transform.parent = Player.transform;
         }
-        
-        
         
         // place userInterface in correct position for setting selection
         levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
@@ -208,6 +210,11 @@ public class VRHINTManager : MonoBehaviour
         audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
 
         ApplyTestConditions();
+
+        // set target channel to initial level
+        audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
+        // ensure that dist channel is set to correct level
+        audioManager.setChannelVolume(audioChannels.distractor, distractorLevel);
 
         // start playing again
         audioManager.startPlaying();
@@ -534,6 +541,9 @@ public class VRHINTManager : MonoBehaviour
 
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+
+        // set target channel to initial level
+        audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
 
         // start playing again
         audioManager.startPlaying();
