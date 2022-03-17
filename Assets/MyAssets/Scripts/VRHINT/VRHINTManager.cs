@@ -89,9 +89,25 @@ public class VRHINTManager : MonoBehaviour
         settingsManager.OnSettingsDoneCallback = OnStart;
 
         GameObject Listener = GameObject.Find("Listener");
+        
 
         // set listener to same position as camera
-        levelManager.setGameObjectToLevelObject(Listener, levelObjects.camera);       
+        levelManager.setGameObjectToLevelObject(Listener, levelObjects.camera);
+
+        if (Listener.GetComponent<SteamAudioHRTF>().getHeadMovementEnabled())
+        {
+            GameObject Camera = GameObject.Find("CenterEyeAnchor");
+            // set OVR as parent
+            Listener.transform.parent = Camera.transform;
+        }
+        else
+        {
+            GameObject Player = GameObject.Find("Player");
+            // set Player as parent
+            Listener.transform.parent = Player.transform;
+        }
+        
+        
         
         // place userInterface in correct position for setting selection
         levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);

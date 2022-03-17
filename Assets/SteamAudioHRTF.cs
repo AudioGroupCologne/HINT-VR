@@ -7,6 +7,7 @@ public class SteamAudioHRTF : MonoBehaviour
 
     // go to Steam Audio -> Settings to find the names of all available HRTF sets
     [SerializeField] string HRTF = "default";
+    [SerializeField] bool enableHeadMovements = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,11 @@ public class SteamAudioHRTF : MonoBehaviour
         {
             Debug.LogError("Didn't found SteamAudioManager object!");
         }
+    }
+
+    public bool getHeadMovementEnabled()
+    {
+        return enableHeadMovements;
     }
 
 }

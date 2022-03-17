@@ -4153,7 +4153,6 @@ MonoBehaviour:
   levelManager: {fileID: 1473686520}
   feedbackManager: {fileID: 1746294878}
   settingsManager: {fileID: 388537961}
-  HRTF: HRIR_CIRC360
   objectDistance: 10
   interfaceDistance: 9
   interfaceHeight: 2
@@ -10168,6 +10167,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1028558552}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1028558554 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8303898658398932469, guid: 92ed3b8ffe986b4459518078ee5b2389,
+    type: 3}
+  m_PrefabInstance: {fileID: 1028558552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1045033824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12355,7 +12360,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1028558554}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
