@@ -8,7 +8,7 @@ namespace CustomTypes
 {
 
     public enum audioChannels{ master, target, distractor, player };
-    public enum levelObjects { target, distractor1, distractor2, userInterface };
+    public enum levelObjects { target, distractor1, distractor2, userInterface, camera };
     public enum levelPositions { front, left, right };
 
     public enum distractorSettings { noDist, dist1, dist2, bothDist };

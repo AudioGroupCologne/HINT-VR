@@ -13,8 +13,6 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] FeedbackManager feedbackManager;
     [SerializeField] VRHINTSettings settingsManager;
 
-    [SerializeField] string HRTF = "default";
-
     // the first 4 sentences are adjusted in 4 dB steps
     [SerializeField] readonly float initSNRStep = 4.0f;
     // the remaining 16 sentences are adjusted in 16 dB steps
@@ -83,37 +81,23 @@ public class VRHINTManager : MonoBehaviour
 
     void Start()
     {
-
+        // set delegates
         audioManager.onPlayingDoneCallback = OnPlayingDone;
-
         feedbackManager.onWordGuessCallback = onWordGuess;
         feedbackManager.onClassicFeedback = onClassicFeedback;
         feedbackManager.onComprehensionCallback = onComprehensionFeedback;
+        settingsManager.OnSettingsDoneCallback = OnStart;
 
+        GameObject Listener = GameObject.Find("Listener");
+
+        // set listener to same position as camera
+        levelManager.setGameObjectToLevelObject(Listener, levelObjects.camera);       
+        
+        // place userInterface in correct position for setting selection
         levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
 
-        settingsManager.OnSettingsDoneCallback = OnStart;
+        // show settings screen
         settingsManager.ShowSettings(true);
-
-
-        // HRTF setting
-        GameObject SteamAudioManager = GameObject.Find("Steam Audio Manager");
-        if (SteamAudioManager != null)
-        {   
-            string[] hrtfs = SteamAudioManager.GetComponent<SteamAudio.SteamAudioManager>().hrtfNames;
-            for(int i = 0; i < hrtfs.Length; i++)
-            {
-                if(HRTF == hrtfs[i])
-                {
-                    Debug.Log("Set currentHRTF to " + hrtfs[i]);
-                    SteamAudioManager.GetComponent<SteamAudio.SteamAudioManager>().currentHRTF = i;
-                }
-            } 
-        }
-        else
-        {
-            Debug.LogError("Didn't found SteamAudioManager object!");
-        }
 
     }
 

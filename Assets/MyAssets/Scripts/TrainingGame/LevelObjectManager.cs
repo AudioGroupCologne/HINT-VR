@@ -14,6 +14,7 @@ public class LevelObjectManager : MonoBehaviour
     [SerializeField] GameObject Distractor1Obj;
     [SerializeField] GameObject Distractor2Obj;
     [SerializeField] GameObject generalUI;
+    
 
     [SerializeField] Vector3 positionLeft;
     [SerializeField] Vector3 positionRight;
@@ -71,6 +72,7 @@ public class LevelObjectManager : MonoBehaviour
         
     }
 
+    // Set position relative to camera
     public void angularPosition(levelObjects obj, float _angle, float _distance, float _height = 0)
     {
         Vector3 tmp = Quaternion.AngleAxis(_angle, Vector3.up) * (PlayerCamera.transform.forward * _distance);
@@ -92,13 +94,49 @@ public class LevelObjectManager : MonoBehaviour
                 break;
             case levelObjects.userInterface:
                 generalUI.transform.position = PlayerCamera.transform.position + tmp;
-                generalUI.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up) * Quaternion.Euler(0, 180, 0); ;
+                generalUI.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up) * Quaternion.Euler(0, 180, 0);
                 break;
             default:
                 Debug.LogError("Invalid levelObject selector: " + obj);
                 return;
         }
         
+    }
+
+    public void setGameObjectToPosition(GameObject obj, Vector3 position, Quaternion rotation)
+    {
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+    }
+
+    public void setGameObjectToLevelObject(GameObject obj, levelObjects levelObj)
+    {
+        switch (levelObj)
+        {
+            case levelObjects.target:
+                obj.transform.position = TargetObj.transform.position;
+                obj.transform.rotation = Quaternion.LookRotation(TargetObj.transform.forward, TargetObj.transform.up);
+                break;
+            case levelObjects.distractor1:
+                obj.transform.position = Distractor1Obj.transform.position;
+                obj.transform.rotation = Quaternion.LookRotation(Distractor1Obj.transform.forward, Distractor1Obj.transform.up);
+                break;
+            case levelObjects.distractor2:
+                obj.transform.position = Distractor2Obj.transform.position;
+                obj.transform.rotation = Quaternion.LookRotation(Distractor2Obj.transform.forward, Distractor2Obj.transform.up);
+                break;
+            case levelObjects.userInterface:
+                obj.transform.position = generalUI.transform.position;
+                obj.transform.rotation = Quaternion.LookRotation(generalUI.transform.forward, generalUI.transform.up);
+                break;
+            case levelObjects.camera:
+                obj.transform.position = PlayerCamera.transform.position;
+                obj.transform.rotation = Quaternion.LookRotation(PlayerCamera.transform.forward, PlayerCamera.transform.up);
+                break;
+            default:
+                Debug.LogError("Invalid levelObject selector: " + obj);
+                return;
+        }
     }
 
     public void setLevelObjectPosition(levelObjects obj, levelPositions pos)
