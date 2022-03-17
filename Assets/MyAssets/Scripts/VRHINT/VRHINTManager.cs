@@ -13,6 +13,8 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] FeedbackManager feedbackManager;
     [SerializeField] VRHINTSettings settingsManager;
 
+    [SerializeField] string HRTF = "default";
+
     // the first 4 sentences are adjusted in 4 dB steps
     [SerializeField] readonly float initSNRStep = 4.0f;
     // the remaining 16 sentences are adjusted in 16 dB steps
@@ -92,7 +94,27 @@ public class VRHINTManager : MonoBehaviour
 
         settingsManager.OnSettingsDoneCallback = OnStart;
         settingsManager.ShowSettings(true);
-       
+
+
+        // HRTF setting
+        GameObject SteamAudioManager = GameObject.Find("Steam Audio Manager");
+        if (SteamAudioManager != null)
+        {   
+            string[] hrtfs = SteamAudioManager.GetComponent<SteamAudio.SteamAudioManager>().hrtfNames;
+            for(int i = 0; i < hrtfs.Length; i++)
+            {
+                if(HRTF == hrtfs[i])
+                {
+                    Debug.Log("Set currentHRTF to " + hrtfs[i]);
+                    SteamAudioManager.GetComponent<SteamAudio.SteamAudioManager>().currentHRTF = i;
+                }
+            } 
+        }
+        else
+        {
+            Debug.LogError("Didn't found SteamAudioManager object!");
+        }
+
     }
 
 

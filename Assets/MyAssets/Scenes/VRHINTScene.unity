@@ -4153,6 +4153,7 @@ MonoBehaviour:
   levelManager: {fileID: 1473686520}
   feedbackManager: {fileID: 1746294878}
   settingsManager: {fileID: 388537961}
+  HRTF: HRIR_CIRC360
   objectDistance: 10
   interfaceDistance: 9
   interfaceHeight: 2
