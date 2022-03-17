@@ -124,6 +124,7 @@ public class VRHINTManager : MonoBehaviour
 
         Debug.Log("Start VR HINT procedure");
 
+
         feedbackSystem = settings;
 
         // create database to hold target sentence lists
@@ -437,7 +438,10 @@ public class VRHINTManager : MonoBehaviour
     {
         Debug.Log("VRHINT procedure done!");
 
-        UserManagement.selfReference.addTestResults(listOrder, conditions, hitQuote, hitQuote);
+        UserManagement.selfReference.addTestResults(listOrder, conditions, eSRT, hitQuote, feedbackSystem);
+        GameObject Listener = GameObject.Find("Listener");
+        Listener.transform.parent = null;
+        DontDestroyOnLoad(Listener);
 
         SceneManager.LoadSceneAsync("VRMenuScene");
 

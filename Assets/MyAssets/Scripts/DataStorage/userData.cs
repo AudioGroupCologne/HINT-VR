@@ -18,7 +18,7 @@ public class userData
 
 
     [JsonProperty] TrainingData trainingData;
-    [JsonProperty] TestData testData;
+    [JsonProperty] List<TestData> testData;
 
 
 
@@ -30,7 +30,7 @@ public class userData
         group = _group;
 
         trainingData = new TrainingData();
-        testData = new TestData();
+        testData = new List<TestData>();
     }
 
     public bool checkPassword(string _pw)
@@ -88,9 +88,11 @@ public class userData
         trainingData.getData(out _games, out _rewards, out _averageSNR, out _snrValues);
     }
 
-    public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote)
+    public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote, feedbackSettings _system)
     {
-        testData.addTestResults(_listOrder, _condOrder, _listSRT, _hitQuote);
+        TestData tmp = new TestData();
+        tmp.addTestResults(_listOrder, _condOrder, _listSRT, _hitQuote, _system);
+        testData.Add(tmp);
     }
 
 
@@ -164,6 +166,11 @@ public class userData
         // hit quote for each sentence
         [JsonProperty] List<float> hitQuote;
 
+        [JsonProperty] System.DateTime testTime;
+        [JsonProperty] System.DateTime testDate;
+        [JsonProperty] feedbackSettings feedbackSystem;
+
+
         // user constructor
         public TestData()
         {
@@ -173,13 +180,16 @@ public class userData
             hitQuote = new List<float>();
         }
 
-        public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote)
+        public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote, feedbackSettings _system)
         {
 
             listOrder = _listOrder;
             conditionsOrder = _condOrder;
             listSRT = _listSRT;
             hitQuote = _hitQuote;
+            feedbackSystem = _system;
+            testTime = System.DateTime.Now;
+            testDate = System.DateTime.Today;
 
         }
 

@@ -68,7 +68,7 @@ public class UserManagement : MonoBehaviour
 
     }
 
-    public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote)
+    public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote, feedbackSettings _system)
     {
         if (activeUser < 0)
         {
@@ -76,7 +76,7 @@ public class UserManagement : MonoBehaviour
             return;
         }
 
-        userList[activeUser].addTestResults(_listOrder, _condOrder, _listSRT, _hitQuote);
+        userList[activeUser].addTestResults(_listOrder, _condOrder, _listSRT, _hitQuote, _system);
         Debug.Log("Added TestResults to user: " + userList[activeUser].getUserName());
 
         // save updated userList to JSON
