@@ -11,6 +11,8 @@ public class FeedbackManager : MonoBehaviour
     [SerializeField] GameObject wordSelectionUI;
     [SerializeField] GameObject classicUI;
     [SerializeField] GameObject comprehensionUI;
+    [SerializeField] GameObject fourWayComprehensionUI;
+    [SerializeField] bool useFourWayComprehension = false;
 
     public delegate void OnWordGuess(bool correct);
     public OnWordGuess onWordGuessCallback = delegate { Debug.Log("No onWordGuess delegate set!"); };
@@ -18,7 +20,7 @@ public class FeedbackManager : MonoBehaviour
     public delegate void OnClassicFeedback(int numHits);
     public OnClassicFeedback onClassicFeedback = delegate { Debug.Log("No onClassicFeedback delegate set!"); };
 
-    public delegate void OnComprehension(comprehension reply);
+    public delegate void OnComprehension(float rate);
     public OnComprehension onComprehensionCallback = delegate { Debug.Log("No onWordGuess delegate set!"); };
 
     int correctBtn;
@@ -29,6 +31,7 @@ public class FeedbackManager : MonoBehaviour
         wordSelectionUI.SetActive(false);
         classicUI.SetActive(false);
         comprehensionUI.SetActive(false);
+        fourWayComprehensionUI.SetActive(false);
     }
 
     void Update()
@@ -104,11 +107,30 @@ public class FeedbackManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                comprehensionHandler(comprehension.good);
+                comprehensionHandler(1.0f);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                comprehensionHandler(comprehension.bad);
+                comprehensionHandler(0.0f);
+            }
+        }
+        else if (fourWayComprehensionUI.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                comprehensionHandler(1.0f);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                comprehensionHandler(0.75f);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                comprehensionHandler(0.25f);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                comprehensionHandler(0.0f);
             }
         }
 
@@ -155,21 +177,9 @@ public class FeedbackManager : MonoBehaviour
         onWordGuessCallback(index == correctBtn);
     }
 
-    public void comprehensionHandler(comprehension reply)
+    public void comprehensionHandler(float rate)
     {
-        onComprehensionCallback(reply);
-    }
-
-    public void testHandler(bool understood)
-    {
-        if(understood)
-        {
-            onComprehensionCallback(comprehension.good);
-        }
-        else
-        {
-            onComprehensionCallback(comprehension.bad);
-        }
+        onComprehensionCallback(rate);
     }
 
     public void classicHandler(int correctWords)
@@ -193,7 +203,14 @@ public class FeedbackManager : MonoBehaviour
                 wordSelectionUI.SetActive(show);
                 break;
             case feedbackSettings.comprehensionLevel:
-                comprehensionUI.SetActive(show);
+                if (useFourWayComprehension)
+                {
+                    fourWayComprehensionUI.SetActive(true);
+                }
+                else
+                {
+                    comprehensionUI.SetActive(show);
+                }
                 break;
             default:
                 Debug.LogError("Invalid feedback system: " + setting);

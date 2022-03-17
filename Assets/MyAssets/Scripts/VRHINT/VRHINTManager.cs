@@ -368,7 +368,7 @@ public class VRHINTManager : MonoBehaviour
             float _hitQuote = ((float)sentenceHits / (float)sentenceLength);
             Debug.Log("Hit quote: " + _hitQuote);
 
-            changeTargetVolume(_hitQuote);       
+            feedbackHelper(_hitQuote);       
             
             wordCounter = 0;
             sentenceHits = 0;
@@ -387,17 +387,10 @@ public class VRHINTManager : MonoBehaviour
 
     }
 
-    void onComprehensionFeedback(comprehension reply)
+    void onComprehensionFeedback(float rate)
     {
-        switch(reply)
-        {
-            case comprehension.good:
-                changeTargetVolume(1.0f);
-                break;
-            case comprehension.bad:
-                changeTargetVolume(0.0f);
-                break;
-        }
+
+        feedbackHelper(rate);
 
         OnContinue();
     }
@@ -405,11 +398,12 @@ public class VRHINTManager : MonoBehaviour
     void onClassicFeedback(int correctWords)
     {
         float _hitQuote = ((float)correctWords / (float)sentenceLength);
-        changeTargetVolume(_hitQuote);
+        feedbackHelper(_hitQuote);
         OnContinue();
     }
 
-    void changeTargetVolume(float _hitQuote)
+    // store _hitQuote data, store current SNR, change SNR (if sentence[4...20]
+    void feedbackHelper(float _hitQuote)
     {
         if (listIndices.Count > 16)
         {
