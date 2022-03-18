@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using CustomTypes;
 
@@ -85,6 +86,14 @@ public class DemoSettings : MonoBehaviour
     public void ToggleDistMove()
     {
         onToggleDistMoveCallback(distMove.isOn);
+    }
+
+    public void Quit()
+    {
+        GameObject Listener = GameObject.Find("Listener");
+        Listener.transform.parent = null;
+        DontDestroyOnLoad(Listener);
+        SceneManager.LoadSceneAsync("VRMenuScene");
     }
 
     public void ShowDemoSettings(bool show)

@@ -17,7 +17,14 @@ public class DemoSceneManager : MonoBehaviour
 
     [SerializeField] float objectDistance = 10.0f;
     [SerializeField] float interfaceDistance = 9.0f;
-    [SerializeField] float interfaceHeight = 2.0f;
+    [SerializeField] float interfaceHeight = 2.5f;
+
+    [SerializeField] string targetAudioPath = "audio/german-hint/";
+    [SerializeField] int numLists = 12;
+    [SerializeField] int numSentences = 20;
+
+    private VRHINTDatabase database;
+
 
     void Start()
     {
@@ -27,6 +34,9 @@ public class DemoSceneManager : MonoBehaviour
         settingsManager.onToggleTargetCallback = OnToggleTargetAudio;
         settingsManager.onToggleDistCallback = OnToggleDistAudio;
         settingsManager.onToggleDistMoveCallback = OnToggleDistMove;
+
+        // create database to hold target sentence lists
+        database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
 
         GameObject Listener = GameObject.Find("Listener");
 
@@ -56,22 +66,13 @@ public class DemoSceneManager : MonoBehaviour
         levelManager.showLevelObject(levelObjects.target, true);
         levelManager.showLevelObject(levelObjects.distractor1, true);
 
-        audioManager.setTargetSentence(target);
+        //audioManager.setTargetSentence(target);
         audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
-        
 
-        // show settings screen
-        //settingsManager.ShowSettings(true);
+        AudioClip comb = audioManager.Combine(database.getListAudio(1));
+        audioManager.setTargetSentence(comb);
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 
     void OnPlayingDone()
     {

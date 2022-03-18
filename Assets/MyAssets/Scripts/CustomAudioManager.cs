@@ -178,7 +178,7 @@ public class CustomAudioManager : MonoBehaviour
 
     // Create a single AudioClip from an array of clips
     // REMARK: This only works if all clips have the same number of channels and the same sampling frequency
-    static AudioClip Combine(params AudioClip[] clips)
+    public AudioClip Combine(params AudioClip[] clips)
     {
         if (clips == null || clips.Length == 0)
             return null;
