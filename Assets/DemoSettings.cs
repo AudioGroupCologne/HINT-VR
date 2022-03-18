@@ -11,6 +11,7 @@ public class DemoSettings : MonoBehaviour
     [SerializeField] GameObject settings;
     [SerializeField] Toggle targetAudio;
     [SerializeField] Toggle distAudio;
+    [SerializeField] Toggle distMove;
 
     public delegate void OnDistPosition(levelPositions pos);
     public OnDistPosition onDistPositionCallback = delegate { Debug.Log("No onDistPosition delegate set!"); };
@@ -18,12 +19,8 @@ public class DemoSettings : MonoBehaviour
     public delegate void OnToggleAudio(bool enabled);
     public OnToggleAudio onToggleTargetCallback = delegate { Debug.Log("No onToggleTarget delegate set!"); };
     public OnToggleAudio onToggleDistCallback = delegate { Debug.Log("No onToggleDist delegate set!"); };
+    public OnToggleAudio onToggleDistMoveCallback = delegate { Debug.Log("No onToggleDistMove delegate set!"); };
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -38,6 +35,10 @@ public class DemoSettings : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             distAudio.isOn = !distAudio.isOn;
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            distMove.isOn = !distMove.isOn;
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -75,9 +76,15 @@ public class DemoSettings : MonoBehaviour
         
     }
 
-    public void ToggleDisttAudio()
+    public void ToggleDistAudio()
     {
+        Debug.Log("ToggleDistAudio: " + distAudio.isOn);
         onToggleDistCallback(distAudio.isOn);
+    }
+
+    public void ToggleDistMove()
+    {
+        onToggleDistMoveCallback(distMove.isOn);
     }
 
     public void ShowDemoSettings(bool show)

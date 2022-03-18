@@ -10,6 +10,7 @@ public class DemoSceneManager : MonoBehaviour
     [SerializeField] CustomAudioManager audioManager;
     [SerializeField] LevelObjectManager levelManager;
     [SerializeField] DemoSettings settingsManager;
+    [SerializeField] CircMovement distMover;
 
     [SerializeField] AudioClip target;
     [SerializeField] AudioClip noise;
@@ -25,9 +26,9 @@ public class DemoSceneManager : MonoBehaviour
         settingsManager.onDistPositionCallback = OnSetDistLocation;
         settingsManager.onToggleTargetCallback = OnToggleTargetAudio;
         settingsManager.onToggleDistCallback = OnToggleDistAudio;
+        settingsManager.onToggleDistMoveCallback = OnToggleDistMove;
 
         GameObject Listener = GameObject.Find("Listener");
-
 
         // set listener to same position as camera
         levelManager.setGameObjectToLevelObject(Listener, levelObjects.camera);
@@ -44,6 +45,8 @@ public class DemoSceneManager : MonoBehaviour
             // set Player as parent
             Listener.transform.parent = Player.transform;
         }
+
+        distMover.SetMovementParameters(Listener.transform.position, objectDistance);
 
         // place userInterface in correct position for setting selection
         levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
@@ -102,5 +105,10 @@ public class DemoSceneManager : MonoBehaviour
     void OnToggleDistAudio(bool enabled)
     {
         audioManager.toggleAudioSource(levelObjects.distractor1, enabled);
+    }
+
+    void OnToggleDistMove(bool enabled)
+    {
+        distMover.ToggleMovement(enabled);
     }
 }
