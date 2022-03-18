@@ -13,14 +13,13 @@ public class VRHINTDatabase : MonoBehaviour
     // hold the number of sentences in each lists
     int listEntries;
     
-
- 
+    
     public VRHINTDatabase(string _targetAudioPath, int _numLists, int _listEntries)
     {
         sentenceAudio = new List<AudioClip[]>();
         sentenceStrings = new List<string[]>();
-        string subPath = _targetAudioPath;
-        string textPath = _targetAudioPath;
+        string subPath;
+        string textPath;
         numLists = _numLists;
         listEntries = _listEntries;
 
@@ -52,9 +51,6 @@ public class VRHINTDatabase : MonoBehaviour
             {
                 Debug.LogError("String entries in list "+ i + "don't match _listEntries: " + _listEntries +" loaded: " + sentenceStrings[i - 1].Length);
             }
-
-            //Debug.Log("List " + i + ": Audio: " + sentenceAudio[i - 1].Length + " Strings: " + sentenceStrings[i - 1].Length);
-
         }
 
         if(sentenceAudio.Count != numLists)

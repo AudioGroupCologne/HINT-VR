@@ -92,6 +92,7 @@ public class VRHINTManager : MonoBehaviour
         feedbackManager.onComprehensionCallback = onComprehensionFeedback;
         settingsManager.OnSettingsDoneCallback = OnStart;
 
+        /*
         GameObject Listener = GameObject.Find("Listener");
         
 
@@ -110,7 +111,7 @@ public class VRHINTManager : MonoBehaviour
             // set Player as parent
             Listener.transform.parent = Player.transform;
         }
-        
+        */
         // place userInterface in correct position for setting selection
         levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
 

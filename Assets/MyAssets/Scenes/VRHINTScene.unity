@@ -4578,7 +4578,7 @@ MonoBehaviour:
   numSentences: 20
   numTestLists: 1
   wordOptions: 5
-  noise: {fileID: 8300000, guid: 8f92be06619fab444a5c0c0136c5c474, type: 3}
+  noise: {fileID: 8300000, guid: b6c114205b16c0f43a6a121ce321c2cf, type: 3}
   practiceList: 12
   practiceRounds: 3
   practiceCondition: 3
@@ -6982,14 +6982,13 @@ PrefabInstance:
     - target: {fileID: 8773774306695706468, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706468, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d24bc5a27241c2e41927b0f3f4ffa092,
-        type: 3}
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8773774306695706470, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_Pivot.x
@@ -7099,16 +7098,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 388537961}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: VoiceSelectionCallback
+      value: ButtonHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TrainingGameSettings, Assembly-CSharp
+      value: VRHINTSettings, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
@@ -8784,7 +8783,7 @@ AudioSource:
   m_GameObject: {fileID: 830390435}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -8558297043848001660, guid: 71a768edbca59a5489350524443deff8,
+  OutputAudioMixerGroup: {fileID: 4165628128360387010, guid: 02d04237d0308a14ea0c3b720849faae,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -8792,7 +8791,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 1
+  Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
@@ -8884,74 +8883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c3684b22f00604a97bb68037fcf4cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directBinaural: 1
-  interpolation: 0
-  distanceAttenuation: 0
-  distanceAttenuationInput: 0
-  distanceAttenuationValue: 1
-  airAbsorption: 0
-  airAbsorptionInput: 0
-  airAbsorptionLow: 1
-  airAbsorptionMid: 1
-  airAbsorptionHigh: 1
-  directivity: 0
-  directivityInput: 0
-  dipoleWeight: 0
-  dipolePower: 0
-  directivityValue: 1
-  occlusion: 0
-  occlusionInput: 0
-  occlusionType: 0
-  occlusionRadius: 1
-  occlusionSamples: 16
-  occlusionValue: 1
-  transmission: 0
-  transmissionType: 0
-  transmissionInput: 0
-  transmissionLow: 1
-  transmissionMid: 1
-  transmissionHigh: 1
-  directMixLevel: 1
-  reflections: 0
-  reflectionsType: 0
-  useDistanceCurveForReflections: 0
-  currentBakedSource: {fileID: 0}
-  reverbTimeLow: 0
-  reverbTimeMid: 0
-  reverbTimeHigh: 0
-  hybridReverbEQLow: 1
-  hybridReverbEQMid: 1
-  hybridReverbEQHigh: 1
-  hybridReverbDelay: 0
-  applyHRTFToReflections: 0
-  reflectionsMixLevel: 1
-  pathing: 0
-  pathingProbeBatch: {fileID: 0}
-  pathValidation: 1
-  findAlternatePaths: 1
-  pathingEQ:
-  - 1
-  - 1
-  - 1
-  pathingSH:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  applyHRTFToPathing: 0
-  pathingMixLevel: 1
 --- !u!1001 &852988110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9703,10 +9634,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcee3e0e469056f4792e70832ed18067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 71a768edbca59a5489350524443deff8, type: 2}
+  mixer: {fileID: 24100000, guid: 02d04237d0308a14ea0c3b720849faae, type: 2}
   masterChannel: MasterVol
-  targetChannel: TalkerVol
-  distractorChannel: DistracterVol
+  targetChannel: TargetVol
+  distractorChannel: DistVol
   playerChannel: PlayerVol
   player: {fileID: 0}
   target: {fileID: 1565638252}
@@ -10931,7 +10862,7 @@ PrefabInstance:
     - target: {fileID: 8303898658398932470, guid: 92ed3b8ffe986b4459518078ee5b2389,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92ed3b8ffe986b4459518078ee5b2389, type: 3}
@@ -17031,7 +16962,7 @@ AudioSource:
   m_GameObject: {fileID: 1565638250}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -350709709009436195, guid: 71a768edbca59a5489350524443deff8,
+  OutputAudioMixerGroup: {fileID: 8056091433195457708, guid: 02d04237d0308a14ea0c3b720849faae,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
@@ -17039,7 +16970,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 1
+  Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
@@ -17131,74 +17062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c3684b22f00604a97bb68037fcf4cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directBinaural: 1
-  interpolation: 0
-  distanceAttenuation: 0
-  distanceAttenuationInput: 0
-  distanceAttenuationValue: 1
-  airAbsorption: 0
-  airAbsorptionInput: 0
-  airAbsorptionLow: 1
-  airAbsorptionMid: 1
-  airAbsorptionHigh: 1
-  directivity: 0
-  directivityInput: 0
-  dipoleWeight: 0
-  dipolePower: 0
-  directivityValue: 1
-  occlusion: 0
-  occlusionInput: 0
-  occlusionType: 0
-  occlusionRadius: 1
-  occlusionSamples: 16
-  occlusionValue: 1
-  transmission: 0
-  transmissionType: 0
-  transmissionInput: 0
-  transmissionLow: 1
-  transmissionMid: 1
-  transmissionHigh: 1
-  directMixLevel: 1
-  reflections: 0
-  reflectionsType: 0
-  useDistanceCurveForReflections: 0
-  currentBakedSource: {fileID: 0}
-  reverbTimeLow: 0
-  reverbTimeMid: 0
-  reverbTimeHigh: 0
-  hybridReverbEQLow: 1
-  hybridReverbEQMid: 1
-  hybridReverbEQHigh: 1
-  hybridReverbDelay: 0
-  applyHRTFToReflections: 0
-  reflectionsMixLevel: 1
-  pathing: 0
-  pathingProbeBatch: {fileID: 0}
-  pathValidation: 1
-  findAlternatePaths: 1
-  pathingEQ:
-  - 1
-  - 1
-  - 1
-  pathingSH:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  applyHRTFToPathing: 0
-  pathingMixLevel: 1
 --- !u!1001 &1589622840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19203,7 +19066,7 @@ MonoBehaviour:
   classicUI: {fileID: 194484166}
   comprehensionUI: {fileID: 1453734971}
   fourWayComprehensionUI: {fileID: 636232479}
-  useFourWayComprehension: 0
+  useFourWayComprehension: 1
 --- !u!1001 &1747165740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21849,16 +21712,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 388537961}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DistractorSelection
+      value: ButtonHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TrainingGameSettings, Assembly-CSharp
+      value: VRHINTSettings, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706489, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
@@ -22752,21 +22620,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 388537961}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DistractorSelection
+      value: ButtonHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TrainingGameSettings, Assembly-CSharp
+      value: VRHINTSettings, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706471, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8773774306695706489, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}

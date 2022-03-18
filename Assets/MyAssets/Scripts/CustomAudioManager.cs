@@ -59,6 +59,7 @@ public class CustomAudioManager : MonoBehaviour
     {
         lib = GetComponent<SoundLibrary>();
     }
+
     void changeVolume(audioChannels channel, float deltaVolume_db)
     {
         switch(channel)

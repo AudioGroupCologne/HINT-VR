@@ -38,6 +38,7 @@ public class DemoSceneManager : MonoBehaviour
         // create database to hold target sentence lists
         database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
 
+        /*
         GameObject Listener = GameObject.Find("Listener");
 
         // set listener to same position as camera
@@ -55,8 +56,9 @@ public class DemoSceneManager : MonoBehaviour
             // set Player as parent
             Listener.transform.parent = Player.transform;
         }
-
-        distMover.SetMovementParameters(Listener.transform.position, objectDistance);
+        */
+        GameObject Camera = GameObject.Find("CenterEyeAnchor");
+        distMover.SetMovementParameters(Camera.transform.position, objectDistance);
 
         // place userInterface in correct position for setting selection
         levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);

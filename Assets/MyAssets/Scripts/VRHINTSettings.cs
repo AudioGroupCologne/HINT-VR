@@ -26,23 +26,33 @@ public class VRHINTSettings : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            ButtonHandler(feedbackSettings.classic);
+            ButtonHandler(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            ButtonHandler(feedbackSettings.wordSelection);
+            ButtonHandler(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            ButtonHandler(feedbackSettings.comprehensionLevel);
+            ButtonHandler(3);
         }
     }
 
 
-    public void ButtonHandler(feedbackSettings setting)
+    public void ButtonHandler(int setting)
     {
-
-        OnSettingsDoneCallback(setting);
+        switch(setting)
+        {
+            case 1:
+                OnSettingsDoneCallback(feedbackSettings.classic);
+                break;
+            case 2:
+                OnSettingsDoneCallback(feedbackSettings.wordSelection);
+                break;
+            case 3:
+                OnSettingsDoneCallback(feedbackSettings.comprehensionLevel);
+                break;
+        }
         ShowSettings(false);
     }
 
