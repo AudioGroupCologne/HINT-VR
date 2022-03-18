@@ -25,7 +25,15 @@ public class MainMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
         {
+            StartDemoScene();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+        {
             ShowPlayerProgress();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            QuitApp();
         }
     }
 
@@ -52,6 +60,18 @@ public class MainMenu : MonoBehaviour
 
         SceneManager.LoadSceneAsync("VRHINTScene");
     }
+
+    public void StartDemoScene()
+    {
+        if (!UserManagement.selfReference.LoggedIn())
+        {
+            Debug.LogError("No user logged in");
+            return;
+        }
+
+        SceneManager.LoadSceneAsync("DemoAndCalibration");
+    }
+
 
     public void ShowPlayerProgress()
     {

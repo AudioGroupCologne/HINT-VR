@@ -329,28 +329,32 @@ public class VRHINTManager : MonoBehaviour
         Debug.Log("OnPlayingDone");
         currentSentence = database.getSentenceWords(currentListIndex, currentSentenceIndex);
         sentenceLength = currentSentence.Length;
-        // always start with the first word of the sentence, so set sentenceStart as true
-        string[] rand = database.getRandomWords(wordOptions - 1, currentSentence[0], database.isCapital(currentSentence[0]), true);
 
-        string[] test = new string[wordOptions];
-        test[0] = currentSentence[0];
-        rand.CopyTo(test, 1);
 
         switch(feedbackSystem)
         {
             case feedbackSettings.classic:
-                // visualize correct sentence
+                // visualize correct sentence to experimenter
+                // sanity check: numHits <= sentenceLength
+                feedbackManager.setSentenceLength(sentenceLength);
                 break;
             case feedbackSettings.wordSelection:
-                feedbackManager.assignWordsToButtons(test);
+                // always start with the first word of the sentence, so set sentenceStart as true
+                string[] rand = database.getRandomWords(wordOptions - 1, currentSentence[0], database.isCapital(currentSentence[0]), true);
+                // allocate memory for full word selection
+                string[] wordSelection = new string[wordOptions];
+                // store correct word at index 0
+                wordSelection[0] = currentSentence[0];
+                // copy remaining strings into array
+                rand.CopyTo(wordSelection, 1);
+                // map strings to UI
+                feedbackManager.assignWordsToButtons(wordSelection);
                 break;
             case feedbackSettings.comprehensionLevel:
-                feedbackManager.setSentenceLength(currentSentence.Length);
                 break;
         }
 
         feedbackManager.showFeedbackSystem(feedbackSystem, true);
-
 
     }
 

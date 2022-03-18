@@ -205,4 +205,23 @@ public class LevelObjectManager : MonoBehaviour
                 break;
         }
     }
+
+    public void showLevelObject(levelObjects obj, bool show)
+    {
+
+        switch (obj)
+        {
+            case levelObjects.target:
+                TargetObj.SetActive(show);
+                break;
+
+            case levelObjects.distractor1:
+                Distractor1Obj.SetActive(show);
+                break;
+
+            case levelObjects.distractor2:
+                Distractor2Obj.SetActive(show);
+                break;
+        }
+    }
 }

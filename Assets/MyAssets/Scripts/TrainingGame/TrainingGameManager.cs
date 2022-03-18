@@ -74,6 +74,25 @@ public class TrainingGameManager : MonoBehaviour
         settingsManager.gameObject.SetActive(true);
         settingsManager.Init();
 
+        GameObject Listener = GameObject.Find("Listener");
+
+
+        // set listener to same position as camera
+        levelManager.setGameObjectToLevelObject(Listener, levelObjects.camera);
+
+        if (Listener.GetComponent<SteamAudioHRTF>().getHeadMovementEnabled())
+        {
+            GameObject Camera = GameObject.Find("CenterEyeAnchor");
+            // set OVR as parent
+            Listener.transform.parent = Camera.transform;
+        }
+        else
+        {
+            GameObject Player = GameObject.Find("Player");
+            // set Player as parent
+            Listener.transform.parent = Player.transform;
+        }
+
         // must not be active before settings have been done!
         selectionManager.gameObject.SetActive(false);
 

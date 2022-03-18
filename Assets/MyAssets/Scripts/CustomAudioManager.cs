@@ -348,4 +348,41 @@ public class CustomAudioManager : MonoBehaviour
 
         player.PlayOneShot(tmp);
     }
+
+    public void toggleAudioSource(levelObjects obj, bool start)
+    {
+        switch(obj)
+        {
+            case levelObjects.target:
+                if (start)
+                {
+                    target.Play();
+                }
+                else
+                {
+                    target.Stop();
+                }
+                break;
+            case levelObjects.distractor1:
+                if (start)
+                {
+                    distractor1.Play();
+                }
+                else
+                {
+                    distractor1.Stop();
+                }
+                break;
+            case levelObjects.distractor2:
+                if (start)
+                {
+                    distractor2.Play();
+                }
+                else
+                {
+                    distractor2.Stop();
+                }
+                break;
+        }
+    }
 }
