@@ -22,6 +22,9 @@ public class DemoSettings : MonoBehaviour
     public OnToggleAudio onToggleDistCallback = delegate { Debug.Log("No onToggleDist delegate set!"); };
     public OnToggleAudio onToggleDistMoveCallback = delegate { Debug.Log("No onToggleDistMove delegate set!"); };
 
+    public delegate void OnChangeVolume(float value);
+    public OnChangeVolume onDistVolumeChange = delegate { Debug.Log("No onDistVolumeChange delegate set!"); };
+    public OnChangeVolume onTargetVolumeChange = delegate { Debug.Log("No onTargetVolumeChange delegate set!"); };
 
     // Update is called once per frame
     void Update()
@@ -52,6 +55,22 @@ public class DemoSettings : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             DistPositions(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ChangeDistVolume(2.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ChangeDistVolume(-2.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ChangeTargetVolume(2.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ChangeTargetVolume(-2.0f);
         }
     }
 
@@ -88,12 +107,14 @@ public class DemoSettings : MonoBehaviour
         onToggleDistMoveCallback(distMove.isOn);
     }
 
-    public void Quit()
+    public void ChangeDistVolume(float val)
     {
-        GameObject Listener = GameObject.Find("Listener");
-        Listener.transform.parent = null;
-        DontDestroyOnLoad(Listener);
-        SceneManager.LoadSceneAsync("VRMenuScene");
+        onDistVolumeChange(val);
+    }
+
+    public void ChangeTargetVolume(float val)
+    {
+        onTargetVolumeChange(val);
     }
 
     public void ShowDemoSettings(bool show)
@@ -101,5 +122,12 @@ public class DemoSettings : MonoBehaviour
         settings.SetActive(show);
     }
 
+    public void Quit()
+    {
+        GameObject Listener = GameObject.Find("Listener");
+        Listener.transform.parent = null;
+        DontDestroyOnLoad(Listener);
+        SceneManager.LoadSceneAsync("VRMenuScene");
+    }
 
 }

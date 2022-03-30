@@ -4578,7 +4578,7 @@ MonoBehaviour:
   numSentences: 20
   numTestLists: 1
   wordOptions: 5
-  noise: {fileID: 8300000, guid: b6c114205b16c0f43a6a121ce321c2cf, type: 3}
+  noise: {fileID: 8300000, guid: 8f92be06619fab444a5c0c0136c5c474, type: 3}
   practiceList: 12
   practiceRounds: 3
   practiceCondition: 3
@@ -8783,7 +8783,7 @@ AudioSource:
   m_GameObject: {fileID: 830390435}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 4165628128360387010, guid: 02d04237d0308a14ea0c3b720849faae,
+  OutputAudioMixerGroup: {fileID: -5626853901063440771, guid: 02d04237d0308a14ea0c3b720849faae,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -16962,7 +16962,7 @@ AudioSource:
   m_GameObject: {fileID: 1565638250}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 8056091433195457708, guid: 02d04237d0308a14ea0c3b720849faae,
+  OutputAudioMixerGroup: {fileID: -5121501836087504052, guid: 02d04237d0308a14ea0c3b720849faae,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
@@ -23726,6 +23726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118704650}
+  - component: {fileID: 2118704649}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -23733,6 +23734,57 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2118704649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118704648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0b0b66fe32e6446a7e3cb6e903d1b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spatializereCoreMixer: {fileID: 0}
+  spatializerParameters:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  - 0.0875
+  - 1
+  - 0
+  - -1
+  - -6
+  - 343
+  - 15
+  - 15
+  - 0
+  - 0
+  - 1
+  - 15
+  - 0
+  - 1
+  highQualityHRTFPaths:
+  - 
+  - Data/HighQuality/HRTF/HRIR_L2702_3DTI_Binary_48000Hz.bytes
+  - 
+  highQualityILDPaths:
+  - 
+  - Data/HighQuality/ILD/NearFieldCompensation_ILD_48000.3dti-ild.bytes
+  - 
+  highPerformanceILDPaths:
+  - Data/HighPerformance/ILD/HRTF_ILD_44100.3dti-ild.bytes
+  - Data/HighPerformance/ILD/HRTF_ILD_48000.3dti-ild.bytes
+  - Data/HighPerformance/ILD/HRTF_ILD_96000.3dti-ild.bytes
+  reverbBRIRPaths:
+  - 
+  - 
+  - 
 --- !u!4 &2118704650
 Transform:
   m_ObjectHideFlags: 0

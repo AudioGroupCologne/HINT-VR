@@ -34,29 +34,12 @@ public class DemoSceneManager : MonoBehaviour
         settingsManager.onToggleTargetCallback = OnToggleTargetAudio;
         settingsManager.onToggleDistCallback = OnToggleDistAudio;
         settingsManager.onToggleDistMoveCallback = OnToggleDistMove;
+        settingsManager.onDistVolumeChange = OnDistVolumeChange;
+        settingsManager.onTargetVolumeChange = OnTargetVolumeChange;
 
         // create database to hold target sentence lists
         database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
 
-        /*
-        GameObject Listener = GameObject.Find("Listener");
-
-        // set listener to same position as camera
-        levelManager.setGameObjectToLevelObject(Listener, levelObjects.camera);
-
-        if (Listener.GetComponent<SteamAudioHRTF>().getHeadMovementEnabled())
-        {
-            GameObject Camera = GameObject.Find("CenterEyeAnchor");
-            // set OVR as parent
-            Listener.transform.parent = Camera.transform;
-        }
-        else
-        {
-            GameObject Player = GameObject.Find("Player");
-            // set Player as parent
-            Listener.transform.parent = Player.transform;
-        }
-        */
         GameObject Camera = GameObject.Find("CenterEyeAnchor");
         distMover.SetMovementParameters(Camera.transform.position, objectDistance);
 
@@ -113,5 +96,15 @@ public class DemoSceneManager : MonoBehaviour
     void OnToggleDistMove(bool enabled)
     {
         distMover.ToggleMovement(enabled);
+    }
+
+    public void OnDistVolumeChange(float value)
+    {
+        audioManager.changeDistractorVolume(value);
+    }
+
+    public void OnTargetVolumeChange(float value)
+    {
+        audioManager.changeTalkerVolume(value);
     }
 }
