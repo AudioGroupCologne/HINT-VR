@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VRHINTDatabase : MonoBehaviour
+public class VRHINTDatabase
 {
     // hold the target sentences audio clips as list of AudioClips
     List<AudioClip[]> sentenceAudio;
