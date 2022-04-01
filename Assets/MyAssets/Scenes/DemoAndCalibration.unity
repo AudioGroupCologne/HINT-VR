@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2266,12 +2266,12 @@ PrefabInstance:
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 57
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -106
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -2601,7 +2601,7 @@ PrefabInstance:
     - target: {fileID: 4321066155032933592, guid: b0ff6bb1ce9f5934ebe929a3118949fd,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4321066155032933592, guid: b0ff6bb1ce9f5934ebe929a3118949fd,
         type: 3}
@@ -4310,8 +4310,7 @@ MonoBehaviour:
   levelManager: {fileID: 1473686520}
   settingsManager: {fileID: 1827100047}
   distMover: {fileID: 1125346824}
-  target: {fileID: 8300000, guid: 99ddeb89b3c00714894019fc4c984191, type: 3}
-  noise: {fileID: 8300000, guid: 8f92be06619fab444a5c0c0136c5c474, type: 3}
+  noise: {fileID: 8300000, guid: 71806b29ee2f8364ea56587de3095687, type: 3}
   objectDistance: 10
   interfaceDistance: 9
   interfaceHeight: 2
@@ -8356,7 +8355,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
+  Spatialize: 1
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
@@ -9480,7 +9479,7 @@ PrefabInstance:
     - target: {fileID: 4321066155032933592, guid: b0ff6bb1ce9f5934ebe929a3118949fd,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 200
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4321066155032933592, guid: b0ff6bb1ce9f5934ebe929a3118949fd,
         type: 3}
@@ -15195,7 +15194,7 @@ PrefabInstance:
     - target: {fileID: 4321066155032933592, guid: b0ff6bb1ce9f5934ebe929a3118949fd,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4321066155032933592, guid: b0ff6bb1ce9f5934ebe929a3118949fd,
         type: 3}
@@ -15746,12 +15745,12 @@ PrefabInstance:
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -481
+      value: -475
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -211
+      value: -210
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -16224,7 +16223,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
+  Spatialize: 1
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
@@ -16960,12 +16959,12 @@ PrefabInstance:
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 52
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -204
+      value: -210
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -18204,7 +18203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1753249653
 MonoBehaviour:
   m_ObjectHideFlags: 0

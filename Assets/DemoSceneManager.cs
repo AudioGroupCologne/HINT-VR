@@ -12,7 +12,6 @@ public class DemoSceneManager : MonoBehaviour
     [SerializeField] DemoSettings settingsManager;
     [SerializeField] CircMovement distMover;
 
-    [SerializeField] AudioClip target;
     [SerializeField] AudioClip noise;
 
     [SerializeField] float objectDistance = 10.0f;
