@@ -1,0 +1,4 @@
+quiet,noiseFront,noiseRight,noiseLeft
+noiseFront,noiseLeft,quiet,noiseRight
+noiseLeft,noiseRight,noiseFront,quiet
+noiseRight,quiet,noiseLeft,noiseFront

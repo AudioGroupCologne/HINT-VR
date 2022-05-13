@@ -4563,7 +4563,7 @@ MonoBehaviour:
   targetAudioPath: audio/german-hint/
   numLists: 12
   numSentences: 20
-  numTestLists: 1
+  numTestLists: 5
   wordOptions: 5
   noise: {fileID: 8300000, guid: 71806b29ee2f8364ea56587de3095687, type: 3}
   practiceList: 12

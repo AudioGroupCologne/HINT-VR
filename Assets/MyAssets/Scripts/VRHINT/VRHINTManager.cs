@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using CustomTypes;
 using CustomTypes.VRHINTTypes;
 
+
 public class VRHINTManager : MonoBehaviour
 {
     [SerializeField] CustomAudioManager audioManager;
@@ -135,35 +136,10 @@ public class VRHINTManager : MonoBehaviour
         // hold indices of sentences from currentList
         listIndices = new List<int>();
 
-        // copy practiceLists into new list
-        List<int> tmp = new List<int>(practiceList);
-
-        int cnt = 0;
-
-        while(cnt < numTestLists)
-        {
-            int randList = Random.Range(1, numLists);
-
-            // exclude practiceList
-            if (randList == practiceList)
-                continue;
-
-            // exclude previously selected lists
-            for(int i = 0; i < cnt; i++)
-            {
-                if (randList == listOrder[i])
-                    continue;
-            }
-
-            listOrder.Add(randList);
-            cnt++;
-
-        }
-
         feedbackManager.showFeedbackSystem(feedbackSystem, false);
 
         // randomly sort test conditions and sentence lists with no direct repetitions
-        createCounterBalancedTest();
+        importCounterBalancedTestSetup();
 
         practiceMode = true;
 
@@ -189,7 +165,7 @@ public class VRHINTManager : MonoBehaviour
         levelManager.setDistractorSettings(distractorSettings.dist1);
 
         audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
-
+         
         ApplyTestConditions();
 
         // set target channel to initial level
@@ -208,69 +184,71 @@ public class VRHINTManager : MonoBehaviour
     private void importCounterBalancedTestSetup()
     {
 
-    }
+        int userIndex = 7;
+
+        List<string[]> lqConditions = new List<string[]>();
+        List<int[]> lqLists = new List<int[]>();
+
+        TextAsset lqConditionsRaw = Resources.Load("others/lqConditions") as TextAsset;
+        string[] lqConditionsSplit = lqConditionsRaw.ToString().Replace("\r", string.Empty).Split('\n');
 
 
-    /**
-     * Idea: assign pattern of test conditions like: Q, NF, NL, NR, NF, Q, NR, ...
-     * - make sure no conditions are directly repeated
-     * - make sure that each condition is assigned at least twice
-     * - 
-     **/
-    // Latin Squares: each entry only once per row and col...
-    // - this was used to determine List order across subjects... so yeah no idea
-    /**
-     * Q F R L
-     * F R L Q
-     * L Q F R
-     * R L Q F
-     */
-    private void createCounterBalancedTest()
-    {
 
-        int tmp = 0;
-        int _tmp = 0;
-        System.Random rng = new System.Random();
+        for (int i = 0; i < lqConditionsSplit.Length; i++)
+        {
+            if(lqConditionsSplit[i].Length > 1)
+            {
+                lqConditions.Add(lqConditionsSplit[i].Split(','));
+            }   
+        }
 
+        int overhang = 0;
         for (int i = 0; i < numTestLists; i++)
         {
-            // make sure that there are no direct repetitions
-            while(tmp == _tmp)
+            if(i > 0 && i % lqConditions[0].Length == 0)
             {
-                tmp = Random.Range(0, 3);
+                overhang++;
             }
 
-            // map int to enum
-            switch(tmp)
+            switch (lqConditions[(userIndex + overhang) % lqConditions.Count][i - (overhang * lqConditions[0].Length)])
             {
-                case 0:
-                    conditions.Add(hintConditions.quiet);
-                    break;
-                case 1:
+                case "noiseFront":
                     conditions.Add(hintConditions.noiseFront);
                     break;
-                case 2:
+                case "noiseLeft":
                     conditions.Add(hintConditions.noiseLeft);
                     break;
-                case 3:
+                case "noiseRight":
                     conditions.Add(hintConditions.noiseRight);
                     break;
+                case "quiet":
+                    conditions.Add(hintConditions.quiet);
+                    break;
+                default:
+                    Debug.LogError("Unrecognized condition: " + lqConditions[userIndex % lqConditions.Count][i]);
+                    break;
             }
-            _tmp = tmp;
-        }
-        
-        // randomize oder of sentence lists
-        int n = listOrder.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = rng.Next(n + 1);
-            int value = listOrder[k];
-            listOrder[k] = listOrder[n];
-            listOrder[n] = value;
         }
 
+
+        TextAsset lqListsRaw = Resources.Load("others/lqLists") as TextAsset;
+        string[] lqListsSplit = lqListsRaw.ToString().Replace("\r", string.Empty).Split('\n');
+        for (int i = 0; i < lqListsSplit.Length; i++)
+        {
+            if (lqListsSplit[i].Length > 1)
+            {
+                lqLists.Add(System.Array.ConvertAll(lqListsSplit[i].Split(','), int.Parse));
+            }
+        }
+        int[] tmp = new int[numTestLists];
+        System.Array.Copy(lqLists[userIndex % lqLists.Count], tmp, numTestLists);
+        //listOrder.AddRange((lqLists[userIndex % lqLists.Count]));
+        listOrder.AddRange(tmp);
+
+        Debug.Log("Loaded lqParameters");
+
     }
+
 
     private void ApplyTestConditions()
     {
