@@ -242,7 +242,6 @@ public class VRHINTManager : MonoBehaviour
         }
         int[] tmp = new int[numTestLists];
         System.Array.Copy(lqLists[userIndex % lqLists.Count], tmp, numTestLists);
-        //listOrder.AddRange((lqLists[userIndex % lqLists.Count]));
         listOrder.AddRange(tmp);
 
         Debug.Log("Loaded lqParameters");

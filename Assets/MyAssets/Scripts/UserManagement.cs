@@ -12,6 +12,7 @@ public class UserManagement : MonoBehaviour
     private int activeUser = -1;
 
     private List<userData> userList;
+    private int numTests = 0;
 
     private void Start()
     {
@@ -31,6 +32,25 @@ public class UserManagement : MonoBehaviour
             jsonFiles.loadUserData(out userList);
             Debug.Log(userList.Count + " users loaded");
         }
+
+
+        string targetPath = Application.persistentDataPath + "/testResults";
+        DirectoryInfo resultDir = new DirectoryInfo(targetPath);
+        FileInfo[] fis = resultDir.GetFiles();
+
+        foreach (FileInfo fi in fis)
+        {
+            if (fi.Extension.Contains("json"))
+                numTests++;
+        }
+
+        Debug.Log("Found " + numTests + " results");
+        
+    }
+
+    public int getNumTests()
+    {
+        return numTests;
     }
 
     public bool addUser(string name, string password, int group)
@@ -81,6 +101,7 @@ public class UserManagement : MonoBehaviour
 
         // save updated userList to JSON
         jsonFiles.saveUserData(userList);
+
     }
 
     public void changeUserVolume(float masterVol)

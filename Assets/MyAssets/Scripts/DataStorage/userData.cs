@@ -93,6 +93,11 @@ public class userData
         TestData tmp = new TestData();
         tmp.addTestResults(_listOrder, _condOrder, _listSRT, _hitQuote, _system);
         testData.Add(tmp);
+
+        int userIndex = UserManagement.selfReference.getNumTests();
+
+        singeTestResult newTest = new singeTestResult(userIndex, tmp);
+        jsonFiles.saveIndividualTestResult(newTest, userIndex);
     }
 
 
@@ -180,6 +185,17 @@ public class userData
             hitQuote = new List<float>();
         }
 
+        public TestData(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote, feedbackSettings _system)
+        {
+            listOrder = new List<int>();
+            conditionsOrder = new List<hintConditions>();
+            listSRT = new List<float>();
+            hitQuote = new List<float>();
+            testTime = System.DateTime.Now;
+            testDate = System.DateTime.Today;
+            addTestResults(_listOrder, _condOrder, _listSRT, _hitQuote, _system);
+        }
+
         public void addTestResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote, feedbackSettings _system)
         {
 
@@ -202,6 +218,24 @@ public class userData
             _hitQuote = hitQuote;
         }
 
+    }
+
+    public class singeTestResult
+    {
+        [JsonProperty] int userIndex;
+        [JsonProperty] TestData data;
+
+        public singeTestResult(int _userIndex, List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRT, List<float> _hitQuote, feedbackSettings _system)
+        {
+            userIndex = _userIndex;
+            data = new TestData(_listOrder, _condOrder, _listSRT, _hitQuote, _system);
+        }
+
+        public singeTestResult(int _userIndex, TestData _data)
+        {
+            userIndex = _userIndex;
+            data = _data;
+        }
     }
 
 }

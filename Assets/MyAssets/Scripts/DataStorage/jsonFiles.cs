@@ -55,7 +55,14 @@ public static class jsonFiles
         Debug.Log("Save JSON");
         string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
         string targetPath = Application.persistentDataPath + "/testUserData.json";
+        File.WriteAllText(targetPath, jsonData);
+    }
 
+    public static void saveIndividualTestResult(userData.singeTestResult data, int userIndex)
+    {
+        Debug.Log("Save individual test results to JSON");
+        string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
+        string targetPath = Application.persistentDataPath + "/testResutls/" + userIndex +  "-testUserData.json";
         File.WriteAllText(targetPath, jsonData);
     }
 
