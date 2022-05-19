@@ -184,7 +184,7 @@ public class VRHINTManager : MonoBehaviour
     private void importCounterBalancedTestSetup()
     {
 
-        int userIndex = 7;
+        int userIndex = UserManagement.selfReference.getNumTests();
 
         List<string[]> lqConditions = new List<string[]>();
         List<int[]> lqLists = new List<int[]>();

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using CustomTypes.VRHINTTypes;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class UserManagement : MonoBehaviour
 {
@@ -33,7 +32,12 @@ public class UserManagement : MonoBehaviour
             Debug.Log(userList.Count + " users loaded");
         }
 
+        getNumTests();
+       
+    }
 
+    public int getNumTests()
+    {
         string targetPath = Application.persistentDataPath + "/testResults";
         DirectoryInfo resultDir = new DirectoryInfo(targetPath);
         FileInfo[] fis = resultDir.GetFiles();
@@ -45,11 +49,6 @@ public class UserManagement : MonoBehaviour
         }
 
         Debug.Log("Found " + numTests + " results");
-        
-    }
-
-    public int getNumTests()
-    {
         return numTests;
     }
 
