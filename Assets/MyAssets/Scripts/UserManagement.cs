@@ -40,6 +40,14 @@ public class UserManagement : MonoBehaviour
     {
         string targetPath = Application.persistentDataPath + "/testResults";
         DirectoryInfo resultDir = new DirectoryInfo(targetPath);
+
+        if (!resultDir.Exists)
+        {
+            Directory.CreateDirectory(targetPath);
+            Debug.Log("Created testResults directory, since it did not exist yet!");
+            return 0;
+        }   
+
         FileInfo[] fis = resultDir.GetFiles();
 
         foreach (FileInfo fi in fis)
