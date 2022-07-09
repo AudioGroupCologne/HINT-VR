@@ -47,7 +47,7 @@ public class CustomAudioManager : MonoBehaviour
     [SerializeField] bool playAttentionClip;
 
     // AudioMixer limitations
-    [SerializeField] readonly float min_vol_dB = -40;
+    [SerializeField] readonly float min_vol_dB = -70;
     [SerializeField] readonly float max_vol_dB = 20;
 
     public delegate void OnPlayingDone();
