@@ -23701,10 +23701,10 @@ MonoBehaviour:
   spatializereCoreMixer: {fileID: 0}
   spatializerParameters:
   - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 0
+  - 0
+  - 0
+  - 2
   - 0
   - 0
   - 0.0875
@@ -23727,12 +23727,12 @@ MonoBehaviour:
   - 
   highQualityILDPaths:
   - 
-  - Data/HighQuality/ILD/NearFieldCompensation_ILD_48000.3dti-ild.bytes
+  - 
   - 
   highPerformanceILDPaths:
-  - Data/HighPerformance/ILD/HRTF_ILD_44100.3dti-ild.bytes
-  - Data/HighPerformance/ILD/HRTF_ILD_48000.3dti-ild.bytes
-  - Data/HighPerformance/ILD/HRTF_ILD_96000.3dti-ild.bytes
+  - 
+  - 
+  - 
   reverbBRIRPaths:
   - 
   - 
