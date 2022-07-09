@@ -37,9 +37,11 @@ namespace CustomTypes
     {
         public enum hintConditions { quiet, noiseFront, noiseLeft, noiseRight };
 
-        public enum feedbackSettings { classic, wordSelection, comprehensionLevel};
+        public enum feedbackSettings { classic, wordSelection, comprehensionLevel };
 
-        public enum comprehension { good, bad};
+        public enum comprehension { good, bad };
+
+        public enum testOrder {first, second};
     }
 
 

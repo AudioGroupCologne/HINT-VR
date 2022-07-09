@@ -85,6 +85,8 @@ public class VRHINTManager : MonoBehaviour
     private int sentenceHits = 0;
     private int practiceCounter = 0;
 
+    private testOrder order = 0;
+
 
     void Start()
     {
@@ -94,6 +96,7 @@ public class VRHINTManager : MonoBehaviour
         feedbackManager.onClassicFeedback = onClassicFeedback;
         feedbackManager.onComprehensionCallback = onComprehensionFeedback;
         settingsManager.OnSettingsDoneCallback = OnStart;
+        settingsManager.OnTestOrderCallback = SetTestOrder;
 
         // place userInterface in correct position for setting selection
         levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
@@ -101,6 +104,15 @@ public class VRHINTManager : MonoBehaviour
         // show settings screen
         settingsManager.ShowSettings(true);
 
+    }
+
+    /**
+     * Determines whether this is the first or second test for the participant.
+     * This affects the test conditions the are applied based on the userIndex and the LatinSquares List and Condition order.
+     */
+    void SetTestOrder(testOrder _order)
+    {
+        order = _order;
     }
 
 
@@ -206,6 +218,7 @@ public class VRHINTManager : MonoBehaviour
         }
 
         int overhang = 0;
+        Debug.Log("Condition order: ");
         for (int i = 0; i < numTestLists; i++)
         {
             if(i > 0 && i % lqConditions[0].Length == 0)
@@ -231,11 +244,13 @@ public class VRHINTManager : MonoBehaviour
                     Debug.LogError("Unrecognized condition: " + lqConditions[userIndex % lqConditions.Count][i]);
                     break;
             }
+            Debug.Log(conditions[i]);
         }
 
 
         TextAsset lqListsRaw = Resources.Load("others/lqLists") as TextAsset;
         string[] lqListsSplit = lqListsRaw.ToString().Replace("\r", string.Empty).Split('\n');
+
         for (int i = 0; i < lqListsSplit.Length; i++)
         {
             if (lqListsSplit[i].Length > 1)
@@ -244,11 +259,23 @@ public class VRHINTManager : MonoBehaviour
             }
         }
         int[] tmp = new int[numTestLists];
-        System.Array.Copy(lqLists[userIndex % lqLists.Count], tmp, numTestLists);
+        //System.Array.Copy(lqLists[userIndex % lqLists.Count], tmp, numTestLists);
+
+        // Warning: This does only work with numTestLists <= 5!!!
+        Debug.Log("List order: ");
+        for(int i = 0; i < numTestLists; i++)
+        {
+            if(order == testOrder.first)
+            {
+                tmp[i] = lqLists[userIndex % lqLists.Count][i];
+            }
+            else if(order == testOrder.second)
+            {
+                tmp[i] = lqLists[userIndex % lqLists.Count][i + numTestLists];
+            }
+            Debug.Log(tmp[i]);
+        }
         listOrder.AddRange(tmp);
-
-        Debug.Log("Loaded lqParameters");
-
     }
 
 

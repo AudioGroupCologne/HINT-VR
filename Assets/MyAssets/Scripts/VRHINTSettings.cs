@@ -11,6 +11,10 @@ public class VRHINTSettings : MonoBehaviour
     [SerializeField] GameObject settingsGroup1;
     [SerializeField] GameObject settingsGroup2;
 
+
+    public delegate void OnTestOrderSetting(testOrder order);
+    public OnTestOrderSetting OnTestOrderCallback = delegate { Debug.Log("No testOrder delegate set!"); };
+
     public delegate void OnSettingsDone(feedbackSettings setting);
     public OnSettingsDone OnSettingsDoneCallback = delegate { Debug.Log("No settingsDone delegate set!"); };
 
@@ -52,10 +56,10 @@ public class VRHINTSettings : MonoBehaviour
             switch (setting)
             {
                 case 1:
-                    Debug.Log("First test");
+                    OnTestOrderCallback(testOrder.first);
                     break;
                 case 2:
-                    Debug.Log("Second test");
+                    OnTestOrderCallback(testOrder.second);
                     break;
                 default:
                     Debug.Log("Invalid selection!");

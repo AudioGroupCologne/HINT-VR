@@ -331,7 +331,7 @@ public class CustomAudioManager : MonoBehaviour
             distractor2.Pause();
 
         distractorPaused = true;
-        Debug.Log("Is playing lapsed");
+        //Debug.Log("Is playing lapsed");
 
         // trigger 'playingDoneCallback' (TrainingGameManager)
         onPlayingDoneCallback();
