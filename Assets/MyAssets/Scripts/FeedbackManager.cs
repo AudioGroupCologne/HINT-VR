@@ -145,8 +145,8 @@ public class FeedbackManager : MonoBehaviour
             Debug.LogWarning("Strings does not match number of buttons: " + words.Length);
         }
 
-        // get random position for correct Btn
-        correctBtn = Random.Range(0, words.Length - 1);
+        // get random position for correct Btn (max is exclusive so omit -1)
+        correctBtn = Random.Range(0, words.Length);
 
         // first assign correct word
         wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
