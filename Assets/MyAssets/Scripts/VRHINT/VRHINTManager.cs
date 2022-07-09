@@ -13,6 +13,7 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] LevelObjectManager levelManager;
     [SerializeField] FeedbackManager feedbackManager;
     [SerializeField] VRHINTSettings settingsManager;
+    [SerializeField] OverviewManager overviewManager;
 
     // the first 4 sentences are adjusted in 4 dB steps
     [SerializeField] readonly float initSNRStep = 4.0f;
@@ -39,7 +40,7 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] AudioClip noise;
 
     [SerializeField] int practiceList =  12;
-    [SerializeField] int practiceRounds = 5;
+    [SerializeField] int numPracticeRounds = 5;
     [SerializeField] hintConditions practiceCondition =  hintConditions.noiseRight;
 
     /// Control variables
@@ -82,6 +83,7 @@ public class VRHINTManager : MonoBehaviour
     private int sentenceLength;
     private int wordCounter = 0;
     private int sentenceHits = 0;
+    private int practiceCounter = 0;
 
 
     void Start()
@@ -142,11 +144,12 @@ public class VRHINTManager : MonoBehaviour
         importCounterBalancedTestSetup();
 
         practiceMode = true;
+        overviewManager.ShowOverview(true);
+        overviewManager.ShowPractice(true);
 
         // keep track of current assets
         currentListIndex = practiceList;
         currentCondition = practiceCondition;
-
   
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));
 
@@ -351,9 +354,7 @@ public class VRHINTManager : MonoBehaviour
 
     void onComprehensionFeedback(float rate)
     {
-
         feedbackHelper(rate);
-
         OnContinue();
     }
 
@@ -419,9 +420,10 @@ public class VRHINTManager : MonoBehaviour
 
         if(practiceMode)
         {
-            if (practiceRounds-- == 0)
+            if (practiceCounter++ >= numPracticeRounds)
             {
                 Debug.Log("Leaving practice mode");
+                overviewManager.ShowPractice(false);
                 OnListDone();
                 return;
             }
@@ -439,6 +441,22 @@ public class VRHINTManager : MonoBehaviour
         currentSentenceIndex = listIndices[Random.Range(0, listIndices.Count)];
         Debug.Log("Sentences remaining: " + listIndices.Count);
         Debug.Log("Sentence " + currentSentenceIndex + ": " + database.getSentenceString(currentListIndex, currentSentenceIndex));
+
+        // update Overview labels
+        if(practiceMode)
+        {
+            overviewManager.SetRounds(practiceCounter + 1, numPracticeRounds);
+            overviewManager.SetLists(1, 1);
+        }
+        else
+        {
+            overviewManager.SetRounds(numSentences - listIndices.Count, numSentences);
+            overviewManager.SetLists(listCounter + 1, numTestLists);
+        }
+        
+        overviewManager.SetCond(currentCondition);
+        overviewManager.SetListIndex(currentListIndex);
+
 
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
