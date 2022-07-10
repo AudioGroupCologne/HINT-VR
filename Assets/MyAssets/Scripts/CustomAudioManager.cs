@@ -290,15 +290,17 @@ public class CustomAudioManager : MonoBehaviour
         // immediately start playing distracter
         if (distractorPaused)
         {
-            distractor1.UnPause();
-            if (!distractor1.isPlaying)
+            if (distractor1.gameObject.activeInHierarchy)
             {
-                Debug.Log("Dist1 could not be unpaused");
-                distractor1.Play();
+                distractor1.UnPause();
+                if (!distractor1.isPlaying)
+                {
+                    Debug.Log("Dist1 could not be unpaused");
+                    distractor1.Play();
+                }
             }
-
-
-            if (distractor2 != null)
+            
+            if (distractor2 != null && distractor2.gameObject.activeInHierarchy)
             {
                 distractor2.UnPause();
                 if (!distractor2.isPlaying)
