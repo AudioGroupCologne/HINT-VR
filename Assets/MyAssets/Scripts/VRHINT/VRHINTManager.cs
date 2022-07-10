@@ -451,8 +451,7 @@ public class VRHINTManager : MonoBehaviour
 
         if(practiceMode)
         {
-            Debug.Log("Pracitece round: " + practiceCounter);
-            if (practiceCounter++ >= numPracticeRounds)
+            if (++practiceCounter >= numPracticeRounds)
             {
                 Debug.Log("Leaving practice mode");
                 overviewManager.ShowPractice(false);
@@ -493,10 +492,6 @@ public class VRHINTManager : MonoBehaviour
             Debug.LogWarning("testList is not empty: " + listIndices.Count);
         }
 
-        currentCondition = conditions[listCounter];
-        currentListIndex = listOrder[listCounter];
-        Debug.Log("New condition: " + currentCondition + " new List: " + currentListIndex);
-
         if (practiceMode)
         {
             practiceMode = false;
@@ -518,13 +513,15 @@ public class VRHINTManager : MonoBehaviour
 
         }
 
+        currentCondition = conditions[listCounter];
+        currentListIndex = listOrder[listCounter];
+        Debug.Log("New condition: " + currentCondition + " new List: " + currentListIndex);
+
         if (listCounter >= numTestLists)
         {
             OnSessionDone();
             return;
         }
-
-
 
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));        
         currentSentenceIndex = Random.Range(0, listIndices.Count);
