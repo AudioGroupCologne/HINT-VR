@@ -296,12 +296,15 @@ public class VRHINTManager : MonoBehaviour
             case hintConditions.noiseFront:
                 levelManager.angularPosition(levelObjects.distractor1, 0, objectDistance);
                 levelManager.angularPosition(levelObjects.distractor1, 0, objectDistance);
+                levelManager.setDistractorSettings(distractorSettings.dist1);
                 break;
             case hintConditions.noiseLeft:
                 levelManager.angularPosition(levelObjects.distractor1, 270, objectDistance);
+                levelManager.setDistractorSettings(distractorSettings.dist1);
                 break;
             case hintConditions.noiseRight:
                 levelManager.angularPosition(levelObjects.distractor1, 90, objectDistance);
+                levelManager.setDistractorSettings(distractorSettings.dist1);
                 break;
             default:
                 Debug.LogError("Invalid locationCondition: " + currentCondition);
