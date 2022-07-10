@@ -205,7 +205,7 @@ public class FeedbackManager : MonoBehaviour
             case feedbackSettings.comprehensionLevel:
                 if (useFourWayComprehension)
                 {
-                    fourWayComprehensionUI.SetActive(true);
+                    fourWayComprehensionUI.SetActive(show);
                 }
                 else
                 {
