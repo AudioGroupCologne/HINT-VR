@@ -247,6 +247,8 @@ public class VRHINTManager : MonoBehaviour
             Debug.Log(conditions[i]);
         }
 
+        Debug.Log("Test Conditions = " + string.Join(" ", new List<hintConditions>(conditions).ConvertAll(i => i.ToString()).ToArray()));
+
 
         TextAsset lqListsRaw = Resources.Load("others/lqLists") as TextAsset;
         string[] lqListsSplit = lqListsRaw.ToString().Replace("\r", string.Empty).Split('\n');
@@ -259,11 +261,9 @@ public class VRHINTManager : MonoBehaviour
             }
         }
         int[] tmp = new int[numTestLists];
-        //System.Array.Copy(lqLists[userIndex % lqLists.Count], tmp, numTestLists);
 
         // Warning: This does only work with numTestLists <= 5!!!
-        Debug.Log("List order: ");
-        for(int i = 0; i < numTestLists; i++)
+        for (int i = 0; i < numTestLists; i++)
         {
             if(order == testOrder.first)
             {
@@ -273,8 +273,10 @@ public class VRHINTManager : MonoBehaviour
             {
                 tmp[i] = lqLists[userIndex % lqLists.Count][i + numTestLists];
             }
-            Debug.Log(tmp[i]);
         }
+
+        Debug.Log("Test Lists = " + string.Join(" ", new List<int>(tmp).ConvertAll(i => i.ToString()).ToArray()));
+
         listOrder.AddRange(tmp);
     }
 
