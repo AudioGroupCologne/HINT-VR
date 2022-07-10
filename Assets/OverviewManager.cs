@@ -17,7 +17,6 @@ public class OverviewManager : MonoBehaviour
 
     public void ShowPractice(bool show)
     {
-        Debug.Log("Show overview " + show);
         practice.gameObject.SetActive(show);
     }
 

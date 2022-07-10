@@ -183,6 +183,8 @@ public class VRHINTManager : MonoBehaviour
          
         ApplyTestConditions();
 
+        updateTestParameterOverview();
+
         // set target channel to initial level
         audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
         // ensure that dist channel is set to correct level
@@ -316,7 +318,7 @@ public class VRHINTManager : MonoBehaviour
     void OnPlayingDone()
     {
 
-        Debug.Log("OnPlayingDone");
+        //Debug.Log("OnPlayingDone");
         currentSentence = database.getSentenceWords(currentListIndex, currentSentenceIndex);
         sentenceLength = currentSentence.Length;
 
@@ -449,6 +451,7 @@ public class VRHINTManager : MonoBehaviour
 
         if(practiceMode)
         {
+            Debug.Log("Pracitece round: " + practiceCounter);
             if (practiceCounter++ >= numPracticeRounds)
             {
                 Debug.Log("Leaving practice mode");
@@ -471,21 +474,7 @@ public class VRHINTManager : MonoBehaviour
         Debug.Log("Sentences remaining: " + listIndices.Count);
         Debug.Log("Sentence " + currentSentenceIndex + ": " + database.getSentenceString(currentListIndex, currentSentenceIndex));
 
-        // update Overview labels
-        if(practiceMode)
-        {
-            overviewManager.SetRounds(practiceCounter + 1, numPracticeRounds);
-            overviewManager.SetLists(1, 1);
-        }
-        else
-        {
-            overviewManager.SetRounds(numSentences - listIndices.Count, numSentences);
-            overviewManager.SetLists(listCounter + 1, numTestLists);
-        }
-        
-        overviewManager.SetCond(currentCondition);
-        overviewManager.SetListIndex(currentListIndex);
-
+        updateTestParameterOverview();
 
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
@@ -542,6 +531,8 @@ public class VRHINTManager : MonoBehaviour
 
         ApplyTestConditions();
 
+        updateTestParameterOverview();
+
         // move new sentence audio to audioManager
         audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
@@ -552,4 +543,22 @@ public class VRHINTManager : MonoBehaviour
         audioManager.startPlaying();
 
     }
+
+    private void updateTestParameterOverview()
+    {
+        if (practiceMode)
+        {
+            overviewManager.SetRounds(practiceCounter + 1, numPracticeRounds);
+            overviewManager.SetLists(1, 1);
+        }
+        else
+        {
+            overviewManager.SetRounds(numSentences - listIndices.Count, numSentences);
+            overviewManager.SetLists(listCounter + 1, numTestLists);
+        }
+
+        overviewManager.SetCond(currentCondition);
+        overviewManager.SetListIndex(currentListIndex);
+    }
+
 }

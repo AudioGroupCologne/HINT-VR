@@ -131,7 +131,7 @@ public class CustomAudioManager : MonoBehaviour
         else if (level_db > max_vol_dB)
             level_db = max_vol_dB;
 
-        Debug.Log("Volume: " + level_db + " dB");
+        Debug.Log(channel + " level: " + level_db + " dB");
 
         // write updated volume level to 'AudioMixer'
         mixer.SetFloat(channel, level_db);
@@ -282,7 +282,7 @@ public class CustomAudioManager : MonoBehaviour
 
     public void startPlaying()
     {
-        Debug.Log("StartPlaying");
+        //Debug.Log("StartPlaying");
 
         // whole duration of a single iteration
         float waitDuration = startDelay + target.clip.length + endDelay;
