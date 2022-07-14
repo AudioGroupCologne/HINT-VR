@@ -33,7 +33,13 @@ public class VRHINTManager : MonoBehaviour
 
     [SerializeField] string targetAudioPath = "audio/german-hint/";
     [SerializeField] int numLists = 12;
+    // this determines the number of sentences within each list!
+    // If there is a mismatch between this and the actual number of files there will be errors during asset loading
     [SerializeField] int numSentences = 20;
+
+    // Number of sentences played from each list during test procedure (must be smaller than numSentences)
+    [SerializeField] int numTestSentences = 20;
+    // Number of lists used during test procedure (must be smaller than numLists)
     [SerializeField] int numTestLists = 5;
     [SerializeField] int wordOptions = 5;
    
@@ -166,7 +172,9 @@ public class VRHINTManager : MonoBehaviour
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));
 
         currentSentenceIndex = Random.Range(0, listIndices.Count);
-        Debug.Log("Sentence " + currentSentenceIndex + ": " + database.getSentenceString(currentListIndex, currentSentenceIndex));
+        string currSent = database.getSentenceString(currentListIndex, currentSentenceIndex);
+        int currSentLen = database.getSentenceWords(currentListIndex, currentSentenceIndex).Length;
+        Debug.Log("Sentence " + currentSentenceIndex + ": " + currSent + "(" + currSentLen + ")");
 
 
         // move new sentence audio to audioManager
@@ -320,18 +328,14 @@ public class VRHINTManager : MonoBehaviour
     // when audio manager has finished playing, reset control variable
     void OnPlayingDone()
     {
-
-        //Debug.Log("OnPlayingDone");
         currentSentence = database.getSentenceWords(currentListIndex, currentSentenceIndex);
-        sentenceLength = currentSentence.Length;
-
 
         switch(feedbackSystem)
         {
             case feedbackSettings.classic:
                 // visualize correct sentence to experimenter
                 // sanity check: numHits <= sentenceLength
-                feedbackManager.setSentenceLength(sentenceLength);
+                feedbackManager.setSentenceLength(currentSentence.Length);
                 break;
             case feedbackSettings.wordSelection:
                 // always start with the first word of the sentence, so set sentenceStart as true
@@ -464,8 +468,9 @@ public class VRHINTManager : MonoBehaviour
                 
         }
 
-
-        if(listIndices.Count == 0)
+        
+        //if(listIndices.Count == 0)
+        if(numSentences - listIndices.Count >= numTestSentences)
         {
             OnListDone();
             return;
@@ -473,8 +478,10 @@ public class VRHINTManager : MonoBehaviour
 
         // randomly select next sentence (repetition impossibile due to removal of already played sentences)
         currentSentenceIndex = listIndices[Random.Range(0, listIndices.Count)];
-        Debug.Log("Sentences remaining: " + listIndices.Count);
-        Debug.Log("Sentence " + currentSentenceIndex + ": " + database.getSentenceString(currentListIndex, currentSentenceIndex));
+        Debug.Log("Sentences remaining: " + (numTestSentences - (numSentences - listIndices.Count)));
+        string currSent = database.getSentenceString(currentListIndex, currentSentenceIndex);
+        int currSentLen = database.getSentenceWords(currentListIndex, currentSentenceIndex).Length;
+        Debug.Log("Sentence " + currentSentenceIndex + ": " + currSent + "(" + currSentLen + ")");
 
         updateTestParameterOverview();
 
@@ -492,7 +499,8 @@ public class VRHINTManager : MonoBehaviour
 
         if(listIndices.Count > 0 && !practiceMode)
         {
-            Debug.LogWarning("testList is not empty: " + listIndices.Count);
+            Debug.LogWarning("listIndices is not empty: " + listIndices.Count + ". Clearing up manually!");
+            listIndices.Clear();
         }
 
         if (practiceMode)
@@ -516,15 +524,15 @@ public class VRHINTManager : MonoBehaviour
 
         }
 
-        currentCondition = conditions[listCounter];
-        currentListIndex = listOrder[listCounter];
-        Debug.Log("New condition: " + currentCondition + " new List: " + currentListIndex);
-
         if (listCounter >= numTestLists)
         {
             OnSessionDone();
             return;
         }
+
+        currentCondition = conditions[listCounter];
+        currentListIndex = listOrder[listCounter];
+        Debug.Log("New condition: " + currentCondition + " new List: " + currentListIndex);
 
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));        
         currentSentenceIndex = Random.Range(0, listIndices.Count);
@@ -553,7 +561,7 @@ public class VRHINTManager : MonoBehaviour
         }
         else
         {
-            overviewManager.SetRounds(numSentences - listIndices.Count, numSentences);
+            overviewManager.SetRounds(numSentences - listIndices.Count, numTestSentences);
             overviewManager.SetLists(listCounter + 1, numTestLists);
         }
 
