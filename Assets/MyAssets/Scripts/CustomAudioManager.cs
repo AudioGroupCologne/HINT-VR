@@ -96,8 +96,7 @@ public class CustomAudioManager : MonoBehaviour
         else if (volume > max_vol_dB)
             volume = max_vol_dB;
 
-
-        Debug.Log("Volume: " + volume + " dB");
+        Debug.Log(channel + " level: " + volume + " dB" + " (change: " + deltaVolume_db + " dB)");
 
         // write updated volume level to 'AudioMixer'
         mixer.SetFloat(channel, volume);
@@ -144,7 +143,6 @@ public class CustomAudioManager : MonoBehaviour
 
     public void changeTalkerVolume(float deltaVolume_db)
     {
-        Debug.Log("Change TalkerVolume by: " + deltaVolume_db + " dB");
         changeVolume(targetChannel, deltaVolume_db);
     }
 
