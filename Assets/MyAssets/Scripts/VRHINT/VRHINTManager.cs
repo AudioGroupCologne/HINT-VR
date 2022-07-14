@@ -174,7 +174,7 @@ public class VRHINTManager : MonoBehaviour
         currentSentenceIndex = Random.Range(0, listIndices.Count);
         string currSent = database.getSentenceString(currentListIndex, currentSentenceIndex);
         int currSentLen = database.getSentenceWords(currentListIndex, currentSentenceIndex).Length;
-        Debug.Log("Sentence " + currentSentenceIndex + ": " + currSent + "(" + currSentLen + ")");
+        Debug.Log("Sentence " + currentSentenceIndex + ": " + currSent + " (" + currSentLen + ")");
 
 
         // move new sentence audio to audioManager
@@ -228,7 +228,6 @@ public class VRHINTManager : MonoBehaviour
         }
 
         int overhang = 0;
-        Debug.Log("Condition order: ");
         for (int i = 0; i < numTestLists; i++)
         {
             if(i > 0 && i % lqConditions[0].Length == 0)
@@ -254,7 +253,6 @@ public class VRHINTManager : MonoBehaviour
                     Debug.LogError("Unrecognized condition: " + lqConditions[userIndex % lqConditions.Count][i]);
                     break;
             }
-            Debug.Log(conditions[i]);
         }
 
         Debug.Log("Test Conditions = " + string.Join(" ", new List<hintConditions>(conditions).ConvertAll(i => i.ToString()).ToArray()));
@@ -464,7 +462,6 @@ public class VRHINTManager : MonoBehaviour
         }
 
         
-        //if(listIndices.Count == 0)
         if(numSentences - listIndices.Count >= numTestSentences)
         {
             OnListDone();
@@ -476,7 +473,7 @@ public class VRHINTManager : MonoBehaviour
         Debug.Log("Sentences remaining: " + (numTestSentences - (numSentences - listIndices.Count)));
         string currSent = database.getSentenceString(currentListIndex, currentSentenceIndex);
         int currSentLen = database.getSentenceWords(currentListIndex, currentSentenceIndex).Length;
-        Debug.Log("Sentence " + currentSentenceIndex + ": " + currSent + "(" + currSentLen + ")");
+        Debug.Log("Sentence " + currentSentenceIndex + ": " + currSent + " (" + currSentLen + ")");
 
         updateTestParameterOverview();
 
