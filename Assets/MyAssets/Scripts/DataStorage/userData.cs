@@ -166,6 +166,7 @@ public class userData
         [JsonProperty] List<int> listOrder;
         // order of conditions
         [JsonProperty] List<hintConditions> conditionsOrder;
+        //[JsonProperty] List<string> Condition;
         // SRT for each test list
         [JsonProperty] List<float> listSRT;
         // hit quote for each sentence
@@ -237,5 +238,89 @@ public class userData
             data = _data;
         }
     }
+
+}
+
+
+
+public class VRHintResults
+{
+    [JsonProperty] List<VRHintListResult> subResults;
+    [JsonProperty] string testSetup;
+
+    public void storeVRHintResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRTs, List<float>[] _listSNRs, List<float>[] _listHitQuotes, feedbackSettings _system)
+    {
+        VRHintResults resObj = new VRHintResults(_listOrder, _condOrder, _listSRTs, _listSNRs, _listHitQuotes, _system);
+
+
+    }
+
+
+
+    public VRHintResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRTs, List<float>[] _listSNRs, List<float>[] _listHitQuotes, feedbackSettings _setup)
+    {
+        subResults = new List<VRHintListResult>();
+
+        switch (_setup)
+        {
+            case feedbackSettings.classic:
+                testSetup = "classicVR";
+                break;
+            case feedbackSettings.comprehensionLevel:
+                testSetup = "subjective";
+                break;
+            case feedbackSettings.wordSelection:
+                testSetup = "wordSelection";
+                break;
+        }
+
+        for (int i = 0; i < _listOrder.Count; i++)
+        {
+            subResults.Add(new VRHintListResult(_listOrder[i], _condOrder[i], _listSRTs[i], _listSNRs[i], _listHitQuotes[i]));
+        }
+
+    }
+
+
+
+    public class VRHintListResult
+    {
+        [JsonProperty] int ListIndex;
+        [JsonProperty] System.DateTime time;
+        [JsonProperty] string condition;
+        
+        [JsonProperty] List<float> listSNRs;
+        [JsonProperty] List<float> listHitQuotes;
+        [JsonProperty] float ListAverageSNR;
+
+
+        public VRHintListResult(int _listIndex, hintConditions _condition, float _listSRT, List<float> _listSNRs, List<float> _hitQuotes)
+        {
+            ListIndex = _listIndex;
+            listSNRs = _listSNRs;
+            listHitQuotes = _hitQuotes;
+            time = System.DateTime.Now;
+
+            ListAverageSNR = _listSRT;
+            
+            switch (_condition)
+            {
+                case hintConditions.quiet:
+                    condition = "quiet";
+                    break;
+                case hintConditions.noiseFront:
+                    condition = "noiseFront";
+                    break;
+                case hintConditions.noiseLeft:
+                    condition = "noiseLeft";
+                    break;
+                case hintConditions.noiseRight:
+                    condition = "noiseRight";
+                    break;
+            }
+            
+        }
+    }
+
 
 }

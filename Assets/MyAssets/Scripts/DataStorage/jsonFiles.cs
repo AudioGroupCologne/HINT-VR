@@ -50,6 +50,14 @@ public static class jsonFiles
         return true;
     }
 
+    public static void saveVRHintResults(VRHintResults data, int userIndex)
+    {
+        Debug.Log("Save JSON");
+        string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
+        string targetPath = Application.persistentDataPath + "/testResults/" + userIndex + "-testUserData.json";
+        File.WriteAllText(targetPath, jsonData);
+    }
+
     public static void saveTestUserData(List<testUserData> data)
     {
         Debug.Log("Save JSON");

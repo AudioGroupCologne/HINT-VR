@@ -58,8 +58,9 @@ public class VRHINTManager : MonoBehaviour
     private feedbackSettings feedbackSystem;
 
     // SNR data for each sentence
-    //private List<List<float>> SNR;
     private List<float>[] SNR;
+    // hit quite for each sentence
+    private List<float>[] hitQuote;
 
     // estimated SRT for each list
     private List<float> eSRT;
@@ -76,9 +77,6 @@ public class VRHINTManager : MonoBehaviour
     // after each round the index of the current sentence is deleted
     // randomly pick an entry from the remaining indices and get AudioClips/Strings that way
     private List<int> listIndices;
-
-    //private int sentenceMisses;
-    private List<float> hitQuote;
 
 
     private hintConditions currentCondition;
@@ -141,11 +139,16 @@ public class VRHINTManager : MonoBehaviour
             SNR[i] = new List<float>();
         }
 
+        // hold hit/miss relation for each sentence (e.g. 5 hits, 1 miss on 6 word sentence: 5/6 hitQuote)
+        hitQuote = new List<float>[numTestLists];
+        for (int i = 0; i < numTestLists; i++)
+        {
+            hitQuote[i] = new List<float>();
+        }
+
+
         // hold SRT values for each list 
         eSRT = new List<float>();
-
-        // hold hit/miss relation for each sentence (e.g. 5 hits, 1 miss on 6 word sentence: 5/6 hitQuote)
-        hitQuote = new List<float>();
 
         // hold HINT condition for each list
         conditions = new List<hintConditions>();
@@ -420,7 +423,7 @@ public class VRHINTManager : MonoBehaviour
             // store current SNR data point
             SNR[listCounter].Add(audioManager.getTalkerVolume());
             // store current hitQuote data point
-            hitQuote.Add(_hitQuote);
+            hitQuote[listCounter].Add(_hitQuote);
 
             if (_hitQuote < 0.5f)
             {
@@ -437,7 +440,9 @@ public class VRHINTManager : MonoBehaviour
     void OnSessionDone()
     {
         Debug.Log("VRHINT procedure done!");
-        UserManagement.selfReference.addTestResults(listOrder, conditions, eSRT, hitQuote, feedbackSystem);     
+        //UserManagement.selfReference.addTestResults(listOrder, conditions, eSRT, hitQuote, feedbackSystem);
+        VRHintResults tmp = new VRHintResults(listOrder, conditions, eSRT, SNR, hitQuote, feedbackSystem);
+        jsonFiles.saveVRHintResults(tmp, UserManagement.selfReference.getNumTests());
         SceneManager.LoadSceneAsync("VRMenuScene");
 
     }
