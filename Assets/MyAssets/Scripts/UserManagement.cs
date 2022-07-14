@@ -11,7 +11,6 @@ public class UserManagement : MonoBehaviour
     private int activeUser = -1;
 
     private List<userData> userList;
-    private int numTests = 0;
 
     private void Start()
     {
@@ -40,6 +39,7 @@ public class UserManagement : MonoBehaviour
     {
         string targetPath = Application.persistentDataPath + "/testResults";
         DirectoryInfo resultDir = new DirectoryInfo(targetPath);
+        int numTests = 0;
 
         if (!resultDir.Exists)
         {
