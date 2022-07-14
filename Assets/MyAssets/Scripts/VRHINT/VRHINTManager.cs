@@ -439,12 +439,7 @@ public class VRHINTManager : MonoBehaviour
     void OnSessionDone()
     {
         Debug.Log("VRHINT procedure done!");
-
-        UserManagement.selfReference.addTestResults(listOrder, conditions, eSRT, hitQuote, feedbackSystem);
-        GameObject Listener = GameObject.Find("Listener");
-        Listener.transform.parent = null;
-        DontDestroyOnLoad(Listener);
-
+        UserManagement.selfReference.addTestResults(listOrder, conditions, eSRT, hitQuote, feedbackSystem);     
         SceneManager.LoadSceneAsync("VRMenuScene");
 
     }
