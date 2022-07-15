@@ -476,7 +476,7 @@ public class VRHINTManager : MonoBehaviour
 
         // randomly select next sentence (repetition impossibile due to removal of already played sentences)
         currentSentenceIndex = listIndices[Random.Range(0, listIndices.Count)];
-        Debug.Log("Sentences remaining: " + (numTestSentences - (numSentences - listIndices.Count)));
+        //Debug.Log("Sentences remaining: " + (numTestSentences - (numSentences - listIndices.Count)));
         string currSent = database.getSentenceString(currentListIndex, currentSentenceIndex);
         int currSentLen = database.getSentenceWords(currentListIndex, currentSentenceIndex).Length;
         Debug.Log("Sentence " + currentSentenceIndex + ": " + currSent + " (" + currSentLen + ")");

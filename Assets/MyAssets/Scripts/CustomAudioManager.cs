@@ -55,6 +55,9 @@ public class CustomAudioManager : MonoBehaviour
 
     private bool distractorPaused = false;
 
+    private float noiseLen = 0;
+    private float noiseIndex = 0;
+
     private void Start()
     {
         lib = GetComponent<SoundLibrary>();
@@ -278,6 +281,7 @@ public class CustomAudioManager : MonoBehaviour
         }
     }
 
+
     public void startPlaying()
     {
         //Debug.Log("StartPlaying");
@@ -285,12 +289,31 @@ public class CustomAudioManager : MonoBehaviour
         // whole duration of a single iteration
         float waitDuration = startDelay + target.clip.length + endDelay;
 
+        noiseIndex += waitDuration;
+        if(noiseLen == 0)
+        {
+            noiseLen = distractor1.clip.length;
+        }
+        
+
         // immediately start playing distracter
         if (distractorPaused)
         {
             if (distractor1.gameObject.activeInHierarchy)
             {
-                distractor1.UnPause();
+                if(noiseIndex >= noiseLen - 1.5f)
+                {
+                    Debug.LogWarning("Noise Overflow! Index: " + noiseIndex + " Len: " + noiseLen + " dur: " + waitDuration);
+                    //noiseIndex = noiseIndex - noiseLen;
+                    noiseIndex = 0;
+                    distractor1.Stop();
+                    distractor1.Play();
+                }
+                else
+                {
+                    distractor1.UnPause();
+                }
+
                 if (!distractor1.isPlaying)
                 {
                     Debug.Log("Dist1 could not be unpaused");
