@@ -84,7 +84,7 @@ public class VRHINTManager : MonoBehaviour
     private int currentListIndex;
 
     private string[] currentSentence;
-    private int sentenceLength;
+    private int sentenceLength = 0;
     private int wordCounter = 0;
     private int sentenceHits = 0;
     private int practiceCounter = 0;
@@ -330,13 +330,14 @@ public class VRHINTManager : MonoBehaviour
     void OnPlayingDone()
     {
         currentSentence = database.getSentenceWords(currentListIndex, currentSentenceIndex);
+        sentenceLength = currentSentence.Length;
 
         switch(feedbackSystem)
         {
             case feedbackSettings.classic:
                 // visualize correct sentence to experimenter
                 // sanity check: numHits <= sentenceLength
-                feedbackManager.setSentenceLength(currentSentence.Length);
+                feedbackManager.setSentenceLength(sentenceLength);
                 break;
             case feedbackSettings.wordSelection:
                 // always start with the first word of the sentence, so set sentenceStart as true
