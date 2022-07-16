@@ -50,11 +50,11 @@ public static class jsonFiles
         return true;
     }
 
-    public static void saveVRHintResults(VRHintResults data, int userIndex)
+    public static void saveVRHintResults(VRHintResults data, int userIndex, string userName)
     {
         Debug.Log("Save JSON");
         string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
-        string targetPath = Application.persistentDataPath + "/testResults/" + userIndex + "-testUserData.json";
+        string targetPath = Application.persistentDataPath + "/testResults/" + userIndex + "-" + userName + "--" + System.DateTime.Now.ToString("dd-MM-yy-hh-mm-ss") + ".json";
         File.WriteAllText(targetPath, jsonData);
     }
 

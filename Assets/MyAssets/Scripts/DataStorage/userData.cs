@@ -245,19 +245,11 @@ public class userData
 
 public class VRHintResults
 {
-    [JsonProperty] List<VRHintListResult> subResults;
     [JsonProperty] string testSetup;
+    [JsonProperty] int userIndex;
+    [JsonProperty] List<VRHintListResult> subResults;
 
-    public void storeVRHintResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRTs, List<float>[] _listSNRs, List<float>[] _listHitQuotes, feedbackSettings _system)
-    {
-        VRHintResults resObj = new VRHintResults(_listOrder, _condOrder, _listSRTs, _listSNRs, _listHitQuotes, _system);
-
-
-    }
-
-
-
-    public VRHintResults(List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRTs, List<float>[] _listSNRs, List<float>[] _listHitQuotes, feedbackSettings _setup)
+    public VRHintResults(feedbackSettings _setup, int userIndex, List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRTs, List<float>[] _listSNRs, List<float>[] _listHitQuotes)
     {
         subResults = new List<VRHintListResult>();
 
@@ -286,12 +278,14 @@ public class VRHintResults
     public class VRHintListResult
     {
         [JsonProperty] int ListIndex;
-        [JsonProperty] System.DateTime time;
+        //[JsonProperty] System.DateTime time;
+        [JsonProperty] string time;
         [JsonProperty] string condition;
         
         [JsonProperty] List<float> listSNRs;
         [JsonProperty] List<float> listHitQuotes;
         [JsonProperty] float ListAverageSNR;
+        
 
 
         public VRHintListResult(int _listIndex, hintConditions _condition, float _listSRT, List<float> _listSNRs, List<float> _hitQuotes)
@@ -299,7 +293,7 @@ public class VRHintResults
             ListIndex = _listIndex;
             listSNRs = _listSNRs;
             listHitQuotes = _hitQuotes;
-            time = System.DateTime.Now;
+            time = System.DateTime.Now.ToString("dd-MM-yy-hh-mm-ss"); ;
 
             ListAverageSNR = _listSRT;
             

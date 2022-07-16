@@ -126,6 +126,18 @@ public class UserManagement : MonoBehaviour
         jsonFiles.saveUserData(userList);
     }
 
+
+    public string getUserName()
+    {
+        if (activeUser < 0)
+        {
+            Debug.LogError("No user selected!");
+            return null;
+        }
+
+        return userList[activeUser].getUserName();
+    }
+
     public float getUserVolume()
     {
         if (activeUser < 0)

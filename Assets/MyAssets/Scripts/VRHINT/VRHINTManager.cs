@@ -78,6 +78,8 @@ public class VRHINTManager : MonoBehaviour
     // randomly pick an entry from the remaining indices and get AudioClips/Strings that way
     private List<int> listIndices;
 
+    private int userIndex = 0;
+
 
     private hintConditions currentCondition;
     private int currentSentenceIndex;
@@ -212,7 +214,7 @@ public class VRHINTManager : MonoBehaviour
     private void importCounterBalancedTestSetup()
     {
 
-        int userIndex = UserManagement.selfReference.getNumTests();
+        userIndex = UserManagement.selfReference.getNumTests();
 
         List<string[]> lqConditions = new List<string[]>();
         List<int[]> lqLists = new List<int[]>();
@@ -441,9 +443,8 @@ public class VRHINTManager : MonoBehaviour
     void OnSessionDone()
     {
         Debug.Log("VRHINT procedure done!");
-        //UserManagement.selfReference.addTestResults(listOrder, conditions, eSRT, hitQuote, feedbackSystem);
-        VRHintResults tmp = new VRHintResults(listOrder, conditions, eSRT, SNR, hitQuote, feedbackSystem);
-        jsonFiles.saveVRHintResults(tmp, UserManagement.selfReference.getNumTests());
+        VRHintResults tmp = new VRHintResults(feedbackSystem, userIndex, listOrder, conditions, eSRT, SNR, hitQuote);
+        jsonFiles.saveVRHintResults(tmp, UserManagement.selfReference.getNumTests(), UserManagement.selfReference.getUserName());
         SceneManager.LoadSceneAsync("VRMenuScene");
 
     }
