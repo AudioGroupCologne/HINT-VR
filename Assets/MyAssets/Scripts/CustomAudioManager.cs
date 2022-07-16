@@ -301,7 +301,7 @@ public class CustomAudioManager : MonoBehaviour
         {
             if (distractor1.gameObject.activeInHierarchy)
             {
-                if(noiseIndex >= noiseLen - 1.5f)
+                if(noiseIndex >= noiseLen - 2.0f)
                 {
                     Debug.LogWarning("Noise Overflow! Index: " + noiseIndex + " Len: " + noiseLen + " dur: " + waitDuration);
                     //noiseIndex = noiseIndex - noiseLen;
