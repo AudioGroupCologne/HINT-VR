@@ -4918,7 +4918,7 @@ MonoBehaviour:
   numTestSentences: 10
   numTestLists: 3
   wordOptions: 5
-  noise: {fileID: 8300000, guid: 71806b29ee2f8364ea56587de3095687, type: 3}
+  noise: {fileID: 8300000, guid: 1b9f3c66411798a45a13675844279f0c, type: 3}
   practiceList: 12
   numPracticeRounds: 5
   practiceCondition: 3
@@ -11115,7 +11115,7 @@ PrefabInstance:
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -287
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
