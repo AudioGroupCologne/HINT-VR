@@ -15,14 +15,17 @@ public class MainMenu : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
         {
             StartTrainingGame();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+        */
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))     // 2
         {
             StartTestScene();
         }
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
         {
             StartDemoScene();
@@ -31,7 +34,14 @@ public class MainMenu : MonoBehaviour
         {
             ShowPlayerProgress();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+        */
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))     
+        {
+            ChangeUser();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))  // 5
         {
             QuitApp();
         }
@@ -59,6 +69,11 @@ public class MainMenu : MonoBehaviour
         }
 
         SceneManager.LoadSceneAsync("VRHINTScene");
+    }
+
+    public void ChangeUser()
+    {
+        SceneManager.LoadSceneAsync("VRLogin");
     }
 
     public void StartDemoScene()
