@@ -20,9 +20,9 @@ public class VRHINTManager : MonoBehaviour
     // the remaining 16 sentences are adjusted in 16 dB steps
     [SerializeField] readonly float adaptiveSNRStep = 2.0f;
     // initial level of Talker channel at the start of each list
-    [SerializeField] readonly float targetStartLevel = -15.0f;
+    [SerializeField] readonly float targetStartLevel = 0.5f;
     // fixed level of dist channel (has to be calibrated!)
-    [SerializeField] readonly float distractorLevel = -5.0f;
+    [SerializeField] readonly float distractorLevel = 0.0f;
 
     // database object (loads target sentences from resource system)
     private VRHINTDatabase database;

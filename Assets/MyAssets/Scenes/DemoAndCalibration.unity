@@ -4311,7 +4311,7 @@ MonoBehaviour:
   settingsManager: {fileID: 1827100047}
   distMover: {fileID: 1125346824}
   noise: {fileID: 8300000, guid: 71806b29ee2f8364ea56587de3095687, type: 3}
-  objectDistance: 10
+  objectDistance: 12
   interfaceDistance: 9
   interfaceHeight: 2
   targetAudioPath: audio/german-hint/
