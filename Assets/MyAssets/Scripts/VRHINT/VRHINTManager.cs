@@ -233,6 +233,18 @@ public class VRHINTManager : MonoBehaviour
         }
 
         int overhang = 0;
+        int orderedUserIndex = 0;
+
+        if (order == testOrder.first)
+        {
+            orderedUserIndex = userIndex;
+        }
+        else if (order == testOrder.second)
+        {
+            orderedUserIndex = userIndex + 1;
+        }
+
+
         for (int i = 0; i < numTestLists; i++)
         {
             if(i > 0 && i % lqConditions[0].Length == 0)
@@ -240,7 +252,7 @@ public class VRHINTManager : MonoBehaviour
                 overhang++;
             }
 
-            switch (lqConditions[(userIndex + overhang) % lqConditions.Count][i - (overhang * lqConditions[0].Length)])
+            switch (lqConditions[(orderedUserIndex + overhang) % lqConditions.Count][i - (overhang * lqConditions[0].Length)])
             {
                 case "noiseFront":
                     conditions.Add(hintConditions.noiseFront);
@@ -255,7 +267,7 @@ public class VRHINTManager : MonoBehaviour
                     conditions.Add(hintConditions.quiet);
                     break;
                 default:
-                    Debug.LogError("Unrecognized condition: " + lqConditions[userIndex % lqConditions.Count][i]);
+                    Debug.LogError("Unrecognized condition: " + lqConditions[orderedUserIndex % lqConditions.Count][i]);
                     break;
             }
         }
