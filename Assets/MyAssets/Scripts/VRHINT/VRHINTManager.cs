@@ -23,6 +23,10 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] readonly float targetStartLevel = 0.5f;
     // fixed level of dist channel (has to be calibrated!)
     [SerializeField] readonly float distractorLevel = 0.0f;
+    // Noise condition have the same starting level for speech and noise
+    // For the quiet condition this won't make sense
+    // Instead set starting level to 25 dBA (65 dBA [calib] - 40 dB)
+    [SerializeField] readonly float quietStartingOffset = -40.0f;
 
     // database object (loads target sentences from resource system)
     private VRHINTDatabase database;
@@ -188,7 +192,6 @@ public class VRHINTManager : MonoBehaviour
         // target & UI are always at front position
         levelManager.angularPosition(levelObjects.target, 0, objectDistance);
 
-
         // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
         levelManager.setDistractorSettings(distractorSettings.dist1);
 
@@ -199,7 +202,15 @@ public class VRHINTManager : MonoBehaviour
         updateTestParameterOverview();
 
         // set target channel to initial level
-        audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
+        if (currentCondition == hintConditions.quiet)
+        {
+            audioManager.setChannelVolume(audioChannels.target, targetStartLevel + quietStartingOffset);
+        }
+        else
+        {
+            audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
+        }
+        
         // ensure that dist channel is set to correct level
         audioManager.setChannelVolume(audioChannels.distractor, distractorLevel);
 
@@ -556,8 +567,15 @@ public class VRHINTManager : MonoBehaviour
         audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // set target channel to initial level
-        audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
-
+        if(currentCondition == hintConditions.quiet)
+        {
+            audioManager.setChannelVolume(audioChannels.target, targetStartLevel + quietStartingOffset); 
+        }
+        else
+        {
+            audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
+        }
+        
         // start playing again
         audioManager.startPlaying();
 
