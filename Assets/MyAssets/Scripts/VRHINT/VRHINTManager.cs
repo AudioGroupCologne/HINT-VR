@@ -517,7 +517,7 @@ public class VRHINTManager : MonoBehaviour
 
     void OnListDone()
     {
-        Debug.Log("On List Done!");
+        //Debug.Log("On List Done!");
 
         if(listIndices.Count > 0 && !practiceMode)
         {

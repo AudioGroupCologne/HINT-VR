@@ -48,7 +48,7 @@ public class CustomAudioManager : MonoBehaviour
 
     // AudioMixer limitations
     [SerializeField] readonly float min_vol_dB = -70;
-    [SerializeField] readonly float max_vol_dB = 20;
+    [SerializeField] readonly float max_vol_dB = 10;
 
     public delegate void OnPlayingDone();
     public OnPlayingDone onPlayingDoneCallback = delegate { Debug.Log("No OnPlayingDone delegate set!"); };
@@ -303,7 +303,7 @@ public class CustomAudioManager : MonoBehaviour
             {
                 if(noiseIndex >= noiseLen - 2.0f)
                 {
-                    Debug.LogWarning("Noise Overflow! Index: " + noiseIndex + " Len: " + noiseLen + " dur: " + waitDuration);
+                    //Debug.LogWarning("Noise Overflow! Index: " + noiseIndex + " Len: " + noiseLen + " dur: " + waitDuration);
                     //noiseIndex = noiseIndex - noiseLen;
                     noiseIndex = 0;
                     distractor1.Stop();
