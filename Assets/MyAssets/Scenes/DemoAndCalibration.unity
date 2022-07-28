@@ -21899,10 +21899,10 @@ MonoBehaviour:
   spatializereCoreMixer: {fileID: 0}
   spatializerParameters:
   - 1
+  - 0
+  - 0
   - 1
-  - 1
-  - 1
-  - 1
+  - 2
   - 0
   - 0
   - 0.0875
@@ -21929,7 +21929,7 @@ MonoBehaviour:
   - 
   highPerformanceILDPaths:
   - 
-  - Data/HighPerformance/ILD/HRTF_ILD_48000.3dti-ild.bytes
+  - 
   - 
   reverbBRIRPaths:
   - 
