@@ -4920,7 +4920,7 @@ MonoBehaviour:
   wordOptions: 5
   noise: {fileID: 8300000, guid: 71806b29ee2f8364ea56587de3095687, type: 3}
   practiceList: 12
-  numPracticeRounds: 10
+  numPracticeRounds: 5
   practiceCondition: 2
 --- !u!1 &401114569
 GameObject:
@@ -4953,7 +4953,7 @@ RectTransform:
   - {fileID: 1964805089}
   - {fileID: 1993782718}
   m_Father: {fileID: 1972099240}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5500,7 +5500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &472018278
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11040,7 +11040,7 @@ PrefabInstance:
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4167766169678821427, guid: f1e20038fd08a8c47b7fecf201497a98,
         type: 3}
@@ -23161,6 +23161,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClassicBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 8773774306695706489, guid: ca824ab4c81af024db55b1ea68c58adc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8773774306779394070, guid: ca824ab4c81af024db55b1ea68c58adc,
         type: 3}
       propertyPath: m_text
@@ -23204,8 +23209,8 @@ RectTransform:
   - {fileID: 1388370601}
   - {fileID: 1753249655}
   - {fileID: 828244776}
-  - {fileID: 971275328}
   - {fileID: 401114570}
+  - {fileID: 971275328}
   m_Father: {fileID: 1173701635}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
