@@ -174,6 +174,9 @@ public class FeedbackManager : MonoBehaviour
 
     public void buttonHandler(int index)
     {
+        Debug.Log("Deselect button!");
+        GameObject myEventSystem = GameObject.Find("EventSystem");
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
         onWordGuessCallback(index == correctBtn);
     }
 
