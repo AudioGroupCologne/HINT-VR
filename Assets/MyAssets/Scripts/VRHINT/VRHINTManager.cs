@@ -474,7 +474,6 @@ public class VRHINTManager : MonoBehaviour
         VRHintResults tmp = new VRHintResults(feedbackSystem, userIndex, listOrder, conditions, eSRT, SNR, hitQuote, timestamps);
         jsonFiles.saveVRHintResults(tmp, UserManagement.selfReference.getNumTests(), UserManagement.selfReference.getUserName());
         SceneManager.LoadSceneAsync("VRMenuScene");
-
     }
 
 

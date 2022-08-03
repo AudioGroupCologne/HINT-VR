@@ -249,9 +249,10 @@ public class VRHintResults
     [JsonProperty] int userIndex;
     [JsonProperty] List<VRHintListResult> subResults;
 
-    public VRHintResults(feedbackSettings _setup, int userIndex, List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRTs, List<float>[] _listSNRs, List<float>[] _listHitQuotes, List<string> _time)
+    public VRHintResults(feedbackSettings _setup, int _userIndex, List<int> _listOrder, List<hintConditions> _condOrder, List<float> _listSRTs, List<float>[] _listSNRs, List<float>[] _listHitQuotes, List<string> _time)
     {
         subResults = new List<VRHintListResult>();
+        userIndex = _userIndex;
 
         switch (_setup)
         {
@@ -278,7 +279,6 @@ public class VRHintResults
     public class VRHintListResult
     {
         [JsonProperty] int ListIndex;
-        //[JsonProperty] System.DateTime time;
         [JsonProperty] string time;
         [JsonProperty] string condition;
         
