@@ -447,7 +447,7 @@ public class VRHINTManager : MonoBehaviour
         else
         {
             // store current SNR data point
-            SNR[listCounter].Add(audioManager.getTalkerVolume());
+            SNR[listCounter].Add(audioManager.getTalkerVolume() - targetStartLevel);
             // store current hitQuote data point
             hitQuote[listCounter].Add(_hitQuote);
 
