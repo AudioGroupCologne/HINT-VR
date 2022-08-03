@@ -54,7 +54,7 @@ public static class jsonFiles
     {
         Debug.Log("Save JSON");
         string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
-        string targetPath = Application.persistentDataPath + "/testResults/" + userIndex + "-" + userName + "--" + System.DateTime.Now.ToString("dd-MM-yy-hh-mm-ss") + ".json";
+        string targetPath = Application.persistentDataPath + "/testResults/" + userIndex + "-" + userName + "--" + System.DateTime.Now.ToString("dd-MM-yy-HH-mm-ss") + ".json";
         File.WriteAllText(targetPath, jsonData);
     }
 

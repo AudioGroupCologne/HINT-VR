@@ -69,6 +69,8 @@ public class VRHINTManager : MonoBehaviour
     // estimated SRT for each list
     private List<float> eSRT;
 
+    private List<string> timestamps;
+
     // noise conditions for each list
     private List<hintConditions> conditions;
 
@@ -466,7 +468,7 @@ public class VRHINTManager : MonoBehaviour
     void OnSessionDone()
     {
         Debug.Log("VRHINT procedure done!");
-        VRHintResults tmp = new VRHintResults(feedbackSystem, userIndex, listOrder, conditions, eSRT, SNR, hitQuote);
+        VRHintResults tmp = new VRHintResults(feedbackSystem, userIndex, listOrder, conditions, eSRT, SNR, hitQuote, timestamps);
         jsonFiles.saveVRHintResults(tmp, UserManagement.selfReference.getNumTests(), UserManagement.selfReference.getUserName());
         SceneManager.LoadSceneAsync("VRMenuScene");
 
@@ -517,8 +519,6 @@ public class VRHINTManager : MonoBehaviour
 
     void OnListDone()
     {
-        //Debug.Log("On List Done!");
-
         if(listIndices.Count > 0 && !practiceMode)
         {
             Debug.LogWarning("listIndices is not empty: " + listIndices.Count + ". Clearing up manually!");
@@ -541,6 +541,7 @@ public class VRHINTManager : MonoBehaviour
             _SRT /= SNR[listCounter].Count;
             Debug.Log("List eSRT: " + _SRT);
             eSRT.Add(_SRT);
+            timestamps.Add(System.DateTime.Now.ToString("dd-MM-yy-HH-mm-ss"));
 
             listCounter++;
 
