@@ -293,7 +293,7 @@ public class VRHintResults
             ListIndex = _listIndex;
             listSNRs = _listSNRs;
             listHitQuotes = _hitQuotes;
-            time = System.DateTime.Now.ToString("dd-MM-yy-hh-mm-ss"); ;
+            time = System.DateTime.Now.ToString("dd-MM-yy-HH-mm-ss"); ;
 
             ListAverageSNR = _listSRT;
             
