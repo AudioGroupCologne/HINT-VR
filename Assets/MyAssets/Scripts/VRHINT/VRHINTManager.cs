@@ -158,6 +158,9 @@ public class VRHINTManager : MonoBehaviour
         // hold SRT values for each list 
         eSRT = new List<float>();
 
+        // hold timestamps for each list
+        timestamps = new List<string>();
+
         // hold HINT condition for each list
         conditions = new List<hintConditions>();
 
@@ -485,7 +488,7 @@ public class VRHINTManager : MonoBehaviour
         {
             if (++practiceCounter >= numPracticeRounds)
             {
-                Debug.Log("Leaving practice mode");
+                //Debug.Log("Leaving practice mode");
                 overviewManager.ShowPractice(false);
                 OnListDone();
                 return;
@@ -505,7 +508,7 @@ public class VRHINTManager : MonoBehaviour
         //Debug.Log("Sentences remaining: " + (numTestSentences - (numSentences - listIndices.Count)));
         string currSent = database.getSentenceString(currentListIndex, currentSentenceIndex);
         int currSentLen = database.getSentenceWords(currentListIndex, currentSentenceIndex).Length;
-        Debug.Log("Sentence " + currentSentenceIndex + ": " + currSent + " (" + currSentLen + ")");
+        Debug.Log("Sentence " + (numSentences - listIndices.Count) + ": " + currSent + " (" + currSentLen + ")");
 
         updateTestParameterOverview();
 
