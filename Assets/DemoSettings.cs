@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using CustomTypes;
+using CustomTypes.VRHINTTypes;
 
 public class DemoSettings : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class DemoSettings : MonoBehaviour
     public delegate void OnChangeVolume(float value);
     public OnChangeVolume onDistVolumeChange = delegate { Debug.Log("No onDistVolumeChange delegate set!"); };
     public OnChangeVolume onTargetVolumeChange = delegate { Debug.Log("No onTargetVolumeChange delegate set!"); };
+
+    public delegate void OnStartTestMode(hintConditions cond);
+    public OnStartTestMode onStartTestMode = delegate { Debug.Log("No onStartTestMode delegate set!"); };
 
     // Update is called once per frame
     void Update()
@@ -72,6 +76,22 @@ public class DemoSettings : MonoBehaviour
         {
             ChangeTargetVolume(-2.0f);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            TestModeLeft();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            TestModeRight();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            TestModeFront();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            TestModeQuiet();
+        }
     }
 
     public void DistPositions(int button_ix)
@@ -110,6 +130,26 @@ public class DemoSettings : MonoBehaviour
     public void ChangeDistVolume(float val)
     {
         onDistVolumeChange(val);
+    }
+
+    public void TestModeLeft()
+    {
+        onStartTestMode(hintConditions.noiseLeft);
+    }
+
+    public void TestModeRight()
+    {
+        onStartTestMode(hintConditions.noiseRight);
+    }
+
+    public void TestModeFront()
+    {
+        onStartTestMode(hintConditions.noiseFront);
+    }
+
+    public void TestModeQuiet()
+    {
+        onStartTestMode(hintConditions.quiet);
     }
 
     public void ChangeTargetVolume(float val)

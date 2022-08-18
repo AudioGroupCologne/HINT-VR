@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using CustomTypes;
+using CustomTypes.VRHINTTypes;
 
 public class DemoSceneManager : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class DemoSceneManager : MonoBehaviour
     [SerializeField] int numSentences = 20;
 
     private VRHINTDatabase database;
+    private AudioClip[] testClips;
+    private AudioClip comb;
+    private int testCounter = 0;
 
 
     void Start()
@@ -35,6 +39,7 @@ public class DemoSceneManager : MonoBehaviour
         settingsManager.onToggleDistMoveCallback = OnToggleDistMove;
         settingsManager.onDistVolumeChange = OnDistVolumeChange;
         settingsManager.onTargetVolumeChange = OnTargetVolumeChange;
+        settingsManager.onStartTestMode = OnTestModeStart;
 
         // create database to hold target sentence lists
         database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
@@ -53,16 +58,35 @@ public class DemoSceneManager : MonoBehaviour
         //audioManager.setTargetSentence(target);
         audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
 
-        AudioClip comb = audioManager.Combine(database.getListAudio(1));
+        comb = audioManager.Combine(database.getListAudio(1));
+        testClips = new AudioClip[10];
+        System.Array.Copy(database.getListAudio(1), 0, testClips, 0, 10);
         audioManager.setTargetSentence(comb);
-
     }
 
     void OnPlayingDone()
     {
+        Debug.Log("TEST: OnPlayingDone " + testCounter);
+        if(++testCounter < 10)
+        {
+            audioManager.setTargetSentence(testClips[testCounter]);
+            //audioManager.changeTalkerVolume(-2.0f);
+            StartCoroutine(playNextTestSentence(0.2F));
+            //audioManager.startPlaying();
+        }
+        else
+        {
+            testCounter = 0;
+            audioManager.setChannelVolume(audioChannels.target, 0.5f);
+            levelManager.showLevelObject(levelObjects.distractor1, true);
+        }
+    }
 
-        Debug.Log("OnPlayingDone");
-
+    private IEnumerator playNextTestSentence(float wait)
+    {
+        yield return new WaitForSeconds(wait);
+        //audioManager.changeTalkerVolume(-2.0f);
+        audioManager.startPlaying();
     }
 
     void OnSetDistLocation(levelPositions pos)
@@ -84,6 +108,7 @@ public class DemoSceneManager : MonoBehaviour
 
     void OnToggleTargetAudio(bool enabled)
     {
+        audioManager.setTargetSentence(comb);
         audioManager.toggleAudioSource(levelObjects.target, enabled);
     }
 
@@ -105,5 +130,34 @@ public class DemoSceneManager : MonoBehaviour
     public void OnTargetVolumeChange(float value)
     {
         audioManager.changeTalkerVolume(value);
+    }
+
+    public void OnTestModeStart(hintConditions cond)
+    {
+
+        audioManager.setTargetSentence(testClips[0]);
+        audioManager.setChannelVolume(audioChannels.target, -19.5f);
+
+        switch (cond)
+        {
+            case hintConditions.noiseFront:
+                levelManager.angularPosition(levelObjects.distractor1, 0, objectDistance);
+                break;
+            case hintConditions.noiseLeft:
+                levelManager.angularPosition(levelObjects.distractor1, 270, objectDistance);
+                break;
+            case hintConditions.noiseRight:
+                levelManager.angularPosition(levelObjects.distractor1, 90, objectDistance);
+                break;
+            case hintConditions.quiet:
+                levelManager.showLevelObject(levelObjects.distractor1, false);
+                audioManager.toggleAudioSource(levelObjects.distractor1, false);
+                break;
+            default:
+                Debug.LogError("Invalid condition!");
+                return;
+        }
+
+        audioManager.startPlaying();
     }
 }
