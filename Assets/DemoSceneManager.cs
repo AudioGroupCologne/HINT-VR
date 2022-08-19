@@ -27,6 +27,7 @@ public class DemoSceneManager : MonoBehaviour
     private AudioClip[] testClips;
     private AudioClip comb;
     private int testCounter = 0;
+    private float speechOffset = -1.5f;
 
 
     void Start()
@@ -77,7 +78,7 @@ public class DemoSceneManager : MonoBehaviour
         else
         {
             testCounter = 0;
-            audioManager.setChannelVolume(audioChannels.target, 0.5f);
+            audioManager.setChannelVolume(audioChannels.target, speechOffset);
             levelManager.showLevelObject(levelObjects.distractor1, true);
         }
     }
@@ -136,7 +137,7 @@ public class DemoSceneManager : MonoBehaviour
     {
 
         audioManager.setTargetSentence(testClips[0]);
-        audioManager.setChannelVolume(audioChannels.target, -19.5f);
+        audioManager.setChannelVolume(audioChannels.target, speechOffset -50.0f);
 
         switch (cond)
         {
