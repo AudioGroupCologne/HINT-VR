@@ -63,6 +63,13 @@ public class DemoSceneManager : MonoBehaviour
         testClips = new AudioClip[10];
         System.Array.Copy(database.getListAudio(1), 0, testClips, 0, 10);
         audioManager.setTargetSentence(comb);
+
+        RenderSettings.ambientLight = Color.black;
+        Light[] ligths = FindObjectsOfType(typeof(Light)) as Light[];
+        foreach (Light ligth in ligths)
+        {
+            ligth.enabled = false;
+        }
     }
 
     void OnPlayingDone()

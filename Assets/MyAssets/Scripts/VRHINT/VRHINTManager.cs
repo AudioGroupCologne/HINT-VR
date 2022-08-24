@@ -20,7 +20,7 @@ public class VRHINTManager : MonoBehaviour
     // the remaining 16 sentences are adjusted in 16 dB steps
     [SerializeField] readonly float adaptiveSNRStep = 2.0f;
     // initial level of Talker channel at the start of each list
-    [SerializeField] readonly float targetStartLevel = -1.5f;
+    [SerializeField] readonly float targetStartLevel = 0.5f;  // -1.5f would be correct but we're not changing this!
     // fixed level of dist channel (has to be calibrated!)
     [SerializeField] readonly float distractorLevel = 0.0f;
     // Noise condition have the same starting level for speech and noise
@@ -52,6 +52,10 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] int practiceList =  12;
     [SerializeField] int numPracticeRounds = 5;
     [SerializeField] hintConditions practiceCondition =  hintConditions.noiseRight;
+
+    [SerializeField] GameObject darkRoom;
+    [SerializeField] GameObject environment;
+    [SerializeField] GameObject directionalLight;
 
     /// Control variables
     // start each session with practice mode
@@ -136,6 +140,15 @@ public class VRHINTManager : MonoBehaviour
 
 
         feedbackSystem = settings;
+
+        if(settings == feedbackSettings.classicDark)
+        {
+            darkRoom.SetActive(true);
+            environment.SetActive(false);
+            directionalLight.SetActive(false);
+            RenderSettings.ambientLight = Color.black;
+        }
+
 
         // create database to hold target sentence lists
         database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
@@ -365,6 +378,7 @@ public class VRHINTManager : MonoBehaviour
         switch(feedbackSystem)
         {
             case feedbackSettings.classic:
+            case feedbackSettings.classicDark:
                 // visualize correct sentence to experimenter
                 // sanity check: numHits <= sentenceLength
                 feedbackManager.setSentenceLength(sentenceLength);

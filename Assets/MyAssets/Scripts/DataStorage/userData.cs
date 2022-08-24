@@ -265,6 +265,9 @@ public class VRHintResults
             case feedbackSettings.wordSelection:
                 testSetup = "wordSelection";
                 break;
+            case feedbackSettings.classicDark:
+                testSetup = "classicDark";
+                break;
         }
 
         for (int i = 0; i < _listOrder.Count; i++)

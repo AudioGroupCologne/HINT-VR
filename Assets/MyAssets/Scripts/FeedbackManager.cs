@@ -199,6 +199,7 @@ public class FeedbackManager : MonoBehaviour
         switch(setting)
         {
             case feedbackSettings.classic:
+            case feedbackSettings.classicDark:
                 classicUI.SetActive(show);
                 break;
             case feedbackSettings.wordSelection:

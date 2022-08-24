@@ -83,7 +83,8 @@ public class VRHINTSettings : MonoBehaviour
                     OnSettingsDoneCallback(feedbackSettings.wordSelection);
                     break;
                 case 3:
-                    OnSettingsDoneCallback(feedbackSettings.comprehensionLevel);
+                    //OnSettingsDoneCallback(feedbackSettings.comprehensionLevel);
+                    OnSettingsDoneCallback(feedbackSettings.classicDark);
                     break;
                 default:
                     Debug.Log("Invalid selection!");
