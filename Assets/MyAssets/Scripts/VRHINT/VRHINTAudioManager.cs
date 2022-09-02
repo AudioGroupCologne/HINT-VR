@@ -39,38 +39,13 @@ public class VRHINTAudioManager : MonoBehaviour
     private float noiseLen = 0;
     private float noiseIndex = 0;
 
-
     /**
-     * Unity only offers access to AudioMixer control options via exposed parameters (string types).
-     * To avoid having to carry these strings through all components a simple enum is used for abstraction
-     * The AudioManager script has to know the correct strings for all exposed parameters and map them to the enum.
+     * Change level of audio channel by x dB
      */
-    private string getChannelString(audioChannels channel)
-    {
-        switch (channel)
-        {
-            case audioChannels.master:
-                return masterChannel;
-            case audioChannels.target:
-                return targetChannel;
-            case audioChannels.distractor:
-                return distractorChannel;
-                break;
-            case audioChannels.player:
-                return playerChannel;
-                break;
-            default:
-                Debug.LogWarning("Invalid channel selection!");
-                return null;
-        }
-    }
-
-
-    // change level of selected AudioSource
-    public void changeVolume(audioChannels channel, float deltaVolume_db)
+    public void ChangeChannelLevel(audioChannels channel, float deltaVolume_db)
     {
         float volume;
-        string chnStr = getChannelString(channel);
+        string chnStr = GetChannelString(channel);
         if(chnStr == null)
         {
             Debug.LogWarning("Channel not found!");
@@ -84,12 +59,15 @@ public class VRHINTAudioManager : MonoBehaviour
         volume += deltaVolume_db;
 
         Debug.Log("Set " + channel + " to: " + volume + " dB" + " (change: " + deltaVolume_db + " dB)");
-        setVolume(chnStr, volume);
+        SetLevel(chnStr, volume);
     }
 
-    public void setChannelVolume(audioChannels channel, float level_db)
+    /**
+     * Set level of  audio channel to x dB
+     */
+    public void SetChannelLevel(audioChannels channel, float level_db)
     {
-        string chnStr = getChannelString(channel);
+        string chnStr = GetChannelString(channel);
         if (chnStr == null)
         {
             Debug.LogWarning("Channel not found!");
@@ -97,67 +75,46 @@ public class VRHINTAudioManager : MonoBehaviour
         }
 
         Debug.Log("Set " + channel + " to: " + level_db + " dB");
-        setVolume(chnStr, level_db);   
+        SetLevel(chnStr, level_db);   
     }
 
-
-    public float getChannelLevel(audioChannels channel)
+    /**
+     * Get level from audio channel
+     */
+    public float GetChannelLevel(audioChannels channel)
     {
-        string chnStr = getChannelString(channel);
+        string chnStr = GetChannelString(channel);
         if (chnStr == null)
         {
             Debug.LogWarning("Channel not found!");
             return 0.0f;
         }
 
-        return getVolume(chnStr);
-    }
-
-    void setVolume(string channel, float level_db)
-    {
-        // apply limits to volume
-        if (level_db < min_vol_dB)
-        {
-            level_db = min_vol_dB;
-            Debug.LogWarning("Min Volume is reached: " + level_db);
-        }
-        else if (level_db > max_vol_dB)
-        {
-            level_db = max_vol_dB;
-            Debug.LogWarning("Max Volume is reached: " + level_db);
-        }
-
-        // write updated volume level to 'AudioMixer'
-        mixer.SetFloat(channel, level_db);
-    }
-
-    float getVolume(string channel)
-    {
-        float volume;
-        mixer.GetFloat(channel, out volume);
-        return volume;
-
+        return GetLevel(chnStr);
     }
 
 
     /**
      * Set AudioClip for target source
      */
-    public void setTargetAudio(AudioClip clip)
+    public void SetTargetAudio(AudioClip clip)
     {
         target.clip = clip;
     }
 
 
     // Create a type that only holds audio objects... (dist1, dist2, target)
-    public void setDistractorAudio(AudioClip clip, bool looped)
+    public void SetDistractorAudio(AudioClip clip, bool looped)
     {
         distractor.clip = clip;
         distractor.loop = looped;
     }
 
-
-    public void startPlaying()
+    /**
+     * Start playback of target audio with optional start and end delays
+     * Distractor is also triggered if the associated GameObject is active!
+     */
+    public void StartPlaying()
     {
         // whole duration of a single iteration
         float waitDuration = startDelay + target.clip.length + endDelay;
@@ -186,13 +143,75 @@ public class VRHINTAudioManager : MonoBehaviour
         StartCoroutine(AudioIsPlaying(waitDuration));
     }
 
+    /**
+     * Corountine to catch the end of the current target playback, pause the distractor and trigger the callback
+     */
     private IEnumerator AudioIsPlaying(float audioCycle)
     {
         yield return new WaitForSeconds(audioCycle);
 
-        // stop disctractor
         distractor.Pause();
 
         OnPlayingDoneCallback();
     }
+
+    /**
+    * Unity only offers access to AudioMixer control options via exposed parameters (string types).
+    * To avoid having to carry these strings through all components a simple enum is used for abstraction
+    * The AudioManager script has to know the correct strings for all exposed parameters and map them to the enum.
+    */
+    private string GetChannelString(audioChannels channel)
+    {
+        switch (channel)
+        {
+            case audioChannels.master:
+                return masterChannel;
+            case audioChannels.target:
+                return targetChannel;
+            case audioChannels.distractor:
+                return distractorChannel;
+                break;
+            case audioChannels.player:
+                return playerChannel;
+                break;
+            default:
+                Debug.LogWarning("Invalid channel selection!");
+                return null;
+        }
+    }
+
+    /**
+     * Write new level to AudioMixer using exposed parameters.
+     * Enforces min/max limits
+     */
+    private void SetLevel(string channel, float level_db)
+    {
+        // apply limits to volume
+        if (level_db < min_vol_dB)
+        {
+            level_db = min_vol_dB;
+            Debug.LogWarning("Min Volume is reached: " + level_db);
+        }
+        else if (level_db > max_vol_dB)
+        {
+            level_db = max_vol_dB;
+            Debug.LogWarning("Max Volume is reached: " + level_db);
+        }
+
+        // write updated volume level to 'AudioMixer'
+        mixer.SetFloat(channel, level_db);
+    }
+
+    /**
+     * Get level from AudioMixer using exposed parameters
+     */ 
+    private float GetLevel(string channel)
+    {
+        float volume;
+        mixer.GetFloat(channel, out volume);
+        return volume;
+
+    }
+
+
 }

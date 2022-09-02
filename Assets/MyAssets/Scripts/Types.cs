@@ -41,6 +41,9 @@ namespace CustomTypes
         public enum comprehension { good, bad };
 
         public enum testOrder {first, second};
+
+        public enum hintObjects { target, distractor, userInterface};
+
     }
 
 

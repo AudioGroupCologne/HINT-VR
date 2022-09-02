@@ -9,7 +9,7 @@ using CustomTypes.VRHINTTypes;
 public class VRHINTManager : MonoBehaviour
 {
     [SerializeField] VRHINTAudioManager audioManager;
-    [SerializeField] LevelObjectManager levelManager;
+    [SerializeField] VRHINTLevelObjectsManager levelManager;
     [SerializeField] FeedbackManager feedbackManager;
     [SerializeField] VRHINTSettings settingsManager;
     [SerializeField] OverviewManager overviewManager;
@@ -114,7 +114,7 @@ public class VRHINTManager : MonoBehaviour
         settingsManager.OnSettingsDoneCallback = OnStart;
 
         // place userInterface in correct position for setting selection
-        levelManager.AngularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
+        levelManager.AngularPosition(hintObjects.userInterface, 0, interfaceDistance, interfaceHeight);
 
         // show settings screen
         settingsManager.ShowSettings(true);
@@ -196,19 +196,20 @@ public class VRHINTManager : MonoBehaviour
 
         currentSentenceIndex = Random.Range(0, listIndices.Count);
         string currSent = database.getSentenceString(currentListIndex, currentSentenceIndex);
-        Debug.Log("Sentence " + sentenceCounter + ": " + currSent + " (" + currSent.Length + ")");
+        int currSentLen = database.getSentenceWords(currentListIndex, currentSentenceIndex).Length;
+        Debug.Log("Sentence " + sentenceCounter + ": " + currSent + " (" + currSentLen + ")");
 
 
         // move new sentence audio to audioManager
-        audioManager.setTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+        audioManager.SetTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // target & UI are always at front position
-        levelManager.AngularPosition(levelObjects.target, 0, objectDistance);
+        levelManager.AngularPosition(hintObjects.target, 0, objectDistance);
 
         // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
-        levelManager.setDistractorSettings(distractorSettings.dist1);
+        levelManager.ToggleDistractor(true);
 
-        audioManager.setDistractorAudio(noise, true);
+        audioManager.SetDistractorAudio(noise, true);
          
         ApplyTestConditions();
 
@@ -217,18 +218,18 @@ public class VRHINTManager : MonoBehaviour
         // set target channel to initial level
         if (currentCondition == hintConditions.quiet)
         {
-            audioManager.setChannelVolume(audioChannels.target, targetStartLevel + quietStartingOffset);
+            audioManager.SetChannelLevel(audioChannels.target, targetStartLevel + quietStartingOffset);
         }
         else
         {
-            audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
+            audioManager.SetChannelLevel(audioChannels.target, targetStartLevel);
         }
         
         // ensure that dist channel is set to correct level
-        audioManager.setChannelVolume(audioChannels.distractor, distractorLevel);
+        audioManager.SetChannelLevel(audioChannels.distractor, distractorLevel);
 
         // start playing again
-        audioManager.startPlaying();
+        audioManager.StartPlaying();
 
     }
 
@@ -328,16 +329,17 @@ public class VRHINTManager : MonoBehaviour
         // randomly select next sentence (repetition impossibile due to removal of already played sentences)
         currentSentenceIndex = listIndices[Random.Range(0, listIndices.Count)];
         string currSent = database.getSentenceString(currentListIndex, currentSentenceIndex);
-        Debug.Log("Sentence " + sentenceCounter + ": " + currSent + " (" + currSent.Length + ")");
+        int currSentLen = database.getSentenceWords(currentListIndex, currentSentenceIndex).Length;
+        Debug.Log("Sentence " + sentenceCounter + ": " + currSent + " (" + currSentLen + ")");
 
         // update UI
         UpdateTestParameterOverview();
 
         // move new sentence audio to audioManager
-        audioManager.setTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+        audioManager.SetTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // start playing again
-        audioManager.startPlaying();
+        audioManager.StartPlaying();
 
     }
 
@@ -386,20 +388,20 @@ public class VRHINTManager : MonoBehaviour
         UpdateTestParameterOverview();
 
         // move new sentence audio to audioManager
-        audioManager.setTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+        audioManager.SetTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // set target channel to initial level
         if(currentCondition == hintConditions.quiet)
         {
-            audioManager.setChannelVolume(audioChannels.target, targetStartLevel + quietStartingOffset); 
+            audioManager.SetChannelLevel(audioChannels.target, targetStartLevel + quietStartingOffset); 
         }
         else
         {
-            audioManager.setChannelVolume(audioChannels.target, targetStartLevel);
+            audioManager.SetChannelLevel(audioChannels.target, targetStartLevel);
         }
         
         // start playing again
-        audioManager.startPlaying();
+        audioManager.StartPlaying();
 
     }
 
@@ -552,25 +554,25 @@ public class VRHINTManager : MonoBehaviour
     private void ApplyTestConditions()
     {
         // disable all objects before relocation to avoid collisions
-        levelManager.showLevelObjects(false);
+        levelManager.ShowLevelObjects(false);
 
         // always show distractor object if hintCondition is not 'quiet'
-        levelManager.setDistractorSettings(distractorSettings.dist1);
+        levelManager.ToggleDistractor(true);
 
         switch (currentCondition)
         {
             case hintConditions.quiet:
                 // deactive distractor object
-                levelManager.setDistractorSettings(distractorSettings.noDist);
+                levelManager.ToggleDistractor(false);
                 break;
             case hintConditions.noiseFront:
-                levelManager.AngularPosition(levelObjects.distractor1, 0, objectDistance);
+                levelManager.AngularPosition(hintObjects.distractor, 0, objectDistance);
                 break;
             case hintConditions.noiseLeft:
-                levelManager.AngularPosition(levelObjects.distractor1, 270, objectDistance);
+                levelManager.AngularPosition(hintObjects.distractor, 270, objectDistance);
                 break;
             case hintConditions.noiseRight:
-                levelManager.AngularPosition(levelObjects.distractor1, 90, objectDistance);
+                levelManager.AngularPosition(hintObjects.distractor, 90, objectDistance);
                 break;
             default:
                 Debug.LogError("Invalid locationCondition: " + currentCondition);
@@ -578,7 +580,7 @@ public class VRHINTManager : MonoBehaviour
         }
 
         // re-active objects after movement
-        levelManager.showLevelObjects(true);
+        levelManager.ShowLevelObjects(true);
 
     }
 
@@ -593,27 +595,27 @@ public class VRHINTManager : MonoBehaviour
         {
             if (_hitQuote < decisionThreshold)
             {
-                audioManager.changeVolume(audioChannels.target, initSNRStep);
+                audioManager.ChangeChannelLevel(audioChannels.target, initSNRStep);
             }
             else
             {
-                audioManager.changeVolume(audioChannels.target, -initSNRStep);
+                audioManager.ChangeChannelLevel(audioChannels.target, -initSNRStep);
             }
         }
         else
         {
             // store current SNR data point
-            SNR[listCounter].Add(audioManager.getChannelLevel(audioChannels.target) - targetStartLevel);
+            SNR[listCounter].Add(audioManager.GetChannelLevel(audioChannels.target) - targetStartLevel);
             // store current hitQuote data point
             hitQuote[listCounter].Add(_hitQuote);
 
             if (_hitQuote < decisionThreshold)
             {
-                audioManager.changeVolume(audioChannels.target, adaptiveSNRStep);
+                audioManager.ChangeChannelLevel(audioChannels.target, adaptiveSNRStep);
             }
             else
             {
-                audioManager.changeVolume(audioChannels.target, -adaptiveSNRStep);
+                audioManager.ChangeChannelLevel(audioChannels.target, -adaptiveSNRStep);
             }
         }
     }

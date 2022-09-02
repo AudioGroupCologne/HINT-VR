@@ -5244,7 +5244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26001c36fc4390d4cb7f104d634d5686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 893847216}
   levelManager: {fileID: 1473686520}
   feedbackManager: {fileID: 1746294878}
   settingsManager: {fileID: 388537961}
@@ -17355,7 +17355,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1473686519}
   - component: {fileID: 1473686520}
-  - component: {fileID: 1473686521}
   m_Layer: 0
   m_Name: LevelObjectsManager
   m_TagString: Untagged
@@ -17386,36 +17385,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1473686518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6940115fe5e648341a7eb14e1a418c83, type: 3}
+  m_Script: {fileID: 11500000, guid: 02460531a0cdb90499898b71ec36dcff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 2118704648}
   TargetObj: {fileID: 2135347745}
-  Distractor1Obj: {fileID: 1125346822}
-  Distractor2Obj: {fileID: 0}
-  generalUI: {fileID: 2115213669}
-  positionLeft: {x: -8, y: 0.5, z: 0}
-  positionRight: {x: 8, y: 0.5, z: 0}
-  positionFront: {x: 0, y: 0.5, z: 9}
-  relativeUIPosition: {x: 0, y: 1.5, z: 6}
---- !u!114 &1473686521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1473686518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4511b330578356c48bac0972e116adc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 2135347745}
-  - {fileID: 1125346822}
-  positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  DistractorObj: {fileID: 1125346822}
+  uiObj: {fileID: 2115213669}
 --- !u!1001 &1480800839
 PrefabInstance:
   m_ObjectHideFlags: 0
