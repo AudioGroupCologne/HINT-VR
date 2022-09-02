@@ -5244,7 +5244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26001c36fc4390d4cb7f104d634d5686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 893847217}
+  audioManager: {fileID: 0}
   levelManager: {fileID: 1473686520}
   feedbackManager: {fileID: 1746294878}
   settingsManager: {fileID: 388537961}
@@ -10003,7 +10003,7 @@ GameObject:
   - component: {fileID: 830390436}
   - component: {fileID: 830390437}
   m_Layer: 0
-  m_Name: DistractorSource1
+  m_Name: DistractorSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10830,7 +10830,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 893847215}
-  - component: {fileID: 893847217}
   - component: {fileID: 893847216}
   m_Layer: 0
   m_Name: AudioManager
@@ -10862,28 +10861,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 893847214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7b72e146556ed40a4d892eb0622d15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundEffects:
-  - soundEffect: {fileID: 0}
-    tag: onHit
-  - soundEffect: {fileID: 0}
-    tag: onMiss
-  - soundEffect: {fileID: 0}
-    tag: onUnsure
-  - soundEffect: {fileID: 0}
-    tag: onReward
---- !u!114 &893847217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893847214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcee3e0e469056f4792e70832ed18067, type: 3}
+  m_Script: {fileID: 11500000, guid: 902d970cae242964ea12f646069a8a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 02d04237d0308a14ea0c3b720849faae, type: 2}
@@ -10893,12 +10871,9 @@ MonoBehaviour:
   playerChannel: PlayerVol
   player: {fileID: 0}
   target: {fileID: 1565638252}
-  distractor1: {fileID: 830390437}
-  distractor2: {fileID: 0}
+  distractor: {fileID: 830390437}
   startDelay: 0
   endDelay: 0
-  attention: {fileID: 0}
-  playAttentionClip: 0
 --- !u!1001 &895139000
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ using CustomTypes.VRHINTTypes;
 
 public class VRHINTManager : MonoBehaviour
 {
-    [SerializeField] CustomAudioManager audioManager;
+    [SerializeField] VRHINTAudioManager audioManager;
     [SerializeField] LevelObjectManager levelManager;
     [SerializeField] FeedbackManager feedbackManager;
     [SerializeField] VRHINTSettings settingsManager;
@@ -200,7 +200,7 @@ public class VRHINTManager : MonoBehaviour
 
 
         // move new sentence audio to audioManager
-        audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+        audioManager.setTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // target & UI are always at front position
         levelManager.AngularPosition(levelObjects.target, 0, objectDistance);
@@ -208,7 +208,7 @@ public class VRHINTManager : MonoBehaviour
         // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
         levelManager.setDistractorSettings(distractorSettings.dist1);
 
-        audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
+        audioManager.setDistractorAudio(noise, true);
          
         ApplyTestConditions();
 
@@ -334,7 +334,7 @@ public class VRHINTManager : MonoBehaviour
         UpdateTestParameterOverview();
 
         // move new sentence audio to audioManager
-        audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+        audioManager.setTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // start playing again
         audioManager.startPlaying();
@@ -386,7 +386,7 @@ public class VRHINTManager : MonoBehaviour
         UpdateTestParameterOverview();
 
         // move new sentence audio to audioManager
-        audioManager.setTargetSentence(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
+        audioManager.setTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // set target channel to initial level
         if(currentCondition == hintConditions.quiet)
@@ -593,27 +593,27 @@ public class VRHINTManager : MonoBehaviour
         {
             if (_hitQuote < decisionThreshold)
             {
-                audioManager.changeTalkerVolume(initSNRStep);
+                audioManager.changeVolume(audioChannels.target, initSNRStep);
             }
             else
             {
-                audioManager.changeTalkerVolume(-initSNRStep);
+                audioManager.changeVolume(audioChannels.target, -initSNRStep);
             }
         }
         else
         {
             // store current SNR data point
-            SNR[listCounter].Add(audioManager.getTalkerVolume() - targetStartLevel);
+            SNR[listCounter].Add(audioManager.getChannelLevel(audioChannels.target) - targetStartLevel);
             // store current hitQuote data point
             hitQuote[listCounter].Add(_hitQuote);
 
             if (_hitQuote < decisionThreshold)
             {
-                audioManager.changeTalkerVolume(adaptiveSNRStep);
+                audioManager.changeVolume(audioChannels.target, adaptiveSNRStep);
             }
             else
             {
-                audioManager.changeTalkerVolume(-adaptiveSNRStep);
+                audioManager.changeVolume(audioChannels.target, -adaptiveSNRStep);
             }
         }
     }
