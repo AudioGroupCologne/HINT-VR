@@ -101,9 +101,9 @@ public class TrainingGameManager : MonoBehaviour
         selectionManager.onUnsureCallback = OnUnsure;
         selectionManager.onContinueCallback = OnContinue;
         
-        audioManager.onPlayingDoneCallback = OnPlayingDone;
+        audioManager.OnPlayingDoneCallback = OnPlayingDone;
 
-        levelManager.angularPosition(levelObjects.userInterface, 0, 10);
+        levelManager.AngularPosition(levelObjects.userInterface, 0, 10);
     }
 
 

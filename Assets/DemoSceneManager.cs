@@ -33,7 +33,7 @@ public class DemoSceneManager : MonoBehaviour
     void Start()
     {
         // set delegates
-        audioManager.onPlayingDoneCallback = OnPlayingDone;
+        audioManager.OnPlayingDoneCallback = OnPlayingDone;
         settingsManager.onDistPositionCallback = OnSetDistLocation;
         settingsManager.onToggleTargetCallback = OnToggleTargetAudio;
         settingsManager.onToggleDistCallback = OnToggleDistAudio;
@@ -49,9 +49,9 @@ public class DemoSceneManager : MonoBehaviour
         distMover.SetMovementParameters(Camera.transform.position, objectDistance);
 
         // place userInterface in correct position for setting selection
-        levelManager.angularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
-        levelManager.angularPosition(levelObjects.target, 0, objectDistance);
-        levelManager.angularPosition(levelObjects.distractor1, 0, objectDistance);
+        levelManager.AngularPosition(levelObjects.userInterface, 0, interfaceDistance, interfaceHeight);
+        levelManager.AngularPosition(levelObjects.target, 0, objectDistance);
+        levelManager.AngularPosition(levelObjects.distractor1, 0, objectDistance);
 
         levelManager.showLevelObject(levelObjects.target, true);
         levelManager.showLevelObject(levelObjects.distractor1, true);
@@ -102,13 +102,13 @@ public class DemoSceneManager : MonoBehaviour
         switch(pos)
         {
             case levelPositions.front:
-                levelManager.angularPosition(levelObjects.distractor1, 0, objectDistance);
+                levelManager.AngularPosition(levelObjects.distractor1, 0, objectDistance);
                 break;
             case levelPositions.left:
-                levelManager.angularPosition(levelObjects.distractor1, 270, objectDistance);
+                levelManager.AngularPosition(levelObjects.distractor1, 270, objectDistance);
                 break;
             case levelPositions.right:
-                levelManager.angularPosition(levelObjects.distractor1, 90, objectDistance);
+                levelManager.AngularPosition(levelObjects.distractor1, 90, objectDistance);
                 break;
         }
         
@@ -149,13 +149,13 @@ public class DemoSceneManager : MonoBehaviour
         switch (cond)
         {
             case hintConditions.noiseFront:
-                levelManager.angularPosition(levelObjects.distractor1, 0, objectDistance);
+                levelManager.AngularPosition(levelObjects.distractor1, 0, objectDistance);
                 break;
             case hintConditions.noiseLeft:
-                levelManager.angularPosition(levelObjects.distractor1, 270, objectDistance);
+                levelManager.AngularPosition(levelObjects.distractor1, 270, objectDistance);
                 break;
             case hintConditions.noiseRight:
-                levelManager.angularPosition(levelObjects.distractor1, 90, objectDistance);
+                levelManager.AngularPosition(levelObjects.distractor1, 90, objectDistance);
                 break;
             case hintConditions.quiet:
                 levelManager.showLevelObject(levelObjects.distractor1, false);

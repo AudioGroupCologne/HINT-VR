@@ -12,13 +12,11 @@ public class VRHINTSettings : MonoBehaviour
     [SerializeField] GameObject settingsGroup2;
 
 
-    public delegate void OnTestOrderSetting(testOrder order);
-    public OnTestOrderSetting OnTestOrderCallback = delegate { Debug.Log("No testOrder delegate set!"); };
-
-    public delegate void OnSettingsDone(feedbackSettings setting);
-    public OnSettingsDone OnSettingsDoneCallback = delegate { Debug.Log("No settingsDone delegate set!"); };
+    public delegate void onSettingsDone(testOrder order, feedbackSettings setting);
+    public onSettingsDone OnSettingsDoneCallback = delegate { Debug.Log("No settingsDone delegate set!"); };
 
     private int settingState = 0;
+    private testOrder _order;
 
     // Start is called before the first frame update
     void Start()
@@ -56,10 +54,10 @@ public class VRHINTSettings : MonoBehaviour
             switch (setting)
             {
                 case 1:
-                    OnTestOrderCallback(testOrder.first);
+                    _order = testOrder.first;
                     break;
                 case 2:
-                    OnTestOrderCallback(testOrder.second);
+                    _order = testOrder.second;
                     break;
                 default:
                     Debug.Log("Invalid selection!");
@@ -77,14 +75,13 @@ public class VRHINTSettings : MonoBehaviour
             switch (setting)
             {
                 case 1:
-                    OnSettingsDoneCallback(feedbackSettings.classic);
+                    OnSettingsDoneCallback(_order, feedbackSettings.classic);
                     break;
                 case 2:
-                    OnSettingsDoneCallback(feedbackSettings.wordSelection);
+                    OnSettingsDoneCallback(_order, feedbackSettings.wordSelection);
                     break;
                 case 3:
-                    //OnSettingsDoneCallback(feedbackSettings.comprehensionLevel);
-                    OnSettingsDoneCallback(feedbackSettings.classicDark);
+                    OnSettingsDoneCallback(_order, feedbackSettings.classicDark);
                     break;
                 default:
                     Debug.Log("Invalid selection!");

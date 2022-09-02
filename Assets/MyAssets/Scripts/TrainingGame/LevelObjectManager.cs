@@ -73,7 +73,7 @@ public class LevelObjectManager : MonoBehaviour
     }
 
     // Set position relative to camera
-    public void angularPosition(levelObjects obj, float _angle, float _distance, float _height = 0)
+    public void AngularPosition(levelObjects obj, float _angle, float _distance, float _height = 0)
     {
         Vector3 tmp = Quaternion.AngleAxis(_angle, Vector3.up) * (PlayerCamera.transform.forward * _distance);
         tmp.y += _height;

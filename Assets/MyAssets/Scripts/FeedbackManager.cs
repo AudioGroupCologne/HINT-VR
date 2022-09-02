@@ -14,17 +14,15 @@ public class FeedbackManager : MonoBehaviour
     [SerializeField] GameObject fourWayComprehensionUI;
     [SerializeField] bool useFourWayComprehension = false;
 
-    public delegate void OnWordGuess(bool correct);
-    public OnWordGuess onWordGuessCallback = delegate { Debug.Log("No onWordGuess delegate set!"); };
-
-    public delegate void OnClassicFeedback(int numHits);
-    public OnClassicFeedback onClassicFeedback = delegate { Debug.Log("No onClassicFeedback delegate set!"); };
-
-    public delegate void OnComprehension(float rate);
-    public OnComprehension onComprehensionCallback = delegate { Debug.Log("No onWordGuess delegate set!"); };
+    public delegate void onFeedback(float hitQuote);
+    public onFeedback OnFeedback = delegate { Debug.Log("No OnFeedback delegate set!"); };
 
     int correctBtn;
     int sentenceLen;
+    // used keeping track of sentence words in wordSelection feedback
+    private int wordCounter = 0;
+    private int hitCounter = 0;
+    private List<string[]> words;
 
     void Start()
     {
@@ -34,29 +32,32 @@ public class FeedbackManager : MonoBehaviour
         fourWayComprehensionUI.SetActive(false);
     }
 
+    /**
+     * KeyBoard Controls for debugging
+     */
     void Update()
     {
         if (wordSelectionUI.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                buttonHandler(0);
+                wordSelectionHandler(0);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                buttonHandler(1);
+                wordSelectionHandler(1);
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                buttonHandler(2);
+                wordSelectionHandler(2);
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                buttonHandler(3);
+                wordSelectionHandler(3);
             }
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                buttonHandler(4);
+                wordSelectionHandler(4);
             }
 
         }
@@ -137,51 +138,23 @@ public class FeedbackManager : MonoBehaviour
 
     }
 
-    // new interface: string coorectWord, string[] randomSelection
-    public void assignWordsToButtons(string[] words)
-    {
-        if(words.Length != wordBtns.Length)
-        {
-            Debug.LogWarning("Strings does not match number of buttons: " + words.Length);
-        }
-
-        // get random position for correct Btn (max is exclusive so omit -1)
-        correctBtn = Random.Range(0, words.Length);
-
-        // first assign correct word
-        wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
-
-        int k = 0;
-
-        // assign remaining words
-        for (int i = 1; i < words.Length; i++)
-        {
-            // skip the correct Button
-            if (k == correctBtn)
-            {
-                k++;
-            }
-            wordBtns[k].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[i];
-            k++;
-        }
-    }
 
     public void setSentenceLength(int len)
     {
         sentenceLen = len;
-
     }
 
-    public void buttonHandler(int index)
+    public void wordSelectionHandler(int index)
     {
+        // deselect button
         GameObject myEventSystem = GameObject.Find("EventSystem");
         myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
-        onWordGuessCallback(index == correctBtn);
+        OnWordGuess(index == correctBtn);
     }
 
-    public void comprehensionHandler(float rate)
+    public void comprehensionHandler(float hitQuote)
     {
-        onComprehensionCallback(rate);
+        OnFeedback(hitQuote);
     }
 
     public void classicHandler(int correctWords)
@@ -191,7 +164,7 @@ public class FeedbackManager : MonoBehaviour
             Debug.LogWarning("Invalid entry. 'correctWords' " + correctWords + " > sentence length " + sentenceLen);
             return;
         }
-        onClassicFeedback(correctWords);
+        OnFeedback(correctWords / sentenceLen);
     }
 
     public void showFeedbackSystem(feedbackSettings setting, bool show)
@@ -218,6 +191,78 @@ public class FeedbackManager : MonoBehaviour
             default:
                 Debug.LogError("Invalid feedback system: " + setting);
                 return;
+        }
+    }
+
+
+    public void SetRandomWordProposals(List<string[]> _words )
+    {
+        // create storage for word proposals
+        words = new List<string[]>();
+
+        // reset variables
+        wordCounter = 0;
+        hitCounter = 0;
+
+        // set sentenceLen based on list entries in _words
+        sentenceLen = _words.Count;
+
+        for (int i = 0; i < sentenceLen; i++)
+        {
+            words.Add(_words[i]);
+        }
+
+        AssignWordsToButtons(words[wordCounter]);
+    }
+
+
+    private void OnWordGuess(bool correct)
+    {
+        wordCounter++;
+
+        if (correct)
+        {
+            hitCounter++;
+        }
+
+        if (wordCounter >= sentenceLen)
+        {
+            float _hitQuote = ((float)hitCounter / (float)sentenceLen);
+            OnFeedback(_hitQuote);
+        }
+        else
+        {
+            AssignWordsToButtons(words[wordCounter]);
+        }
+
+    }
+
+    // new interface: string correctWord, string[] randomSelection
+    private void AssignWordsToButtons(string[] words)
+    {
+        if (words.Length != wordBtns.Length)
+        {
+            Debug.LogWarning("Strings does not match number of buttons: " + words.Length);
+        }
+
+        // get random position for correct Btn (max is exclusive so omit -1)
+        correctBtn = Random.Range(0, words.Length);
+
+        // first assign correct word
+        wordBtns[correctBtn].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[0];
+
+        int k = 0;
+
+        // assign remaining words
+        for (int i = 1; i < words.Length; i++)
+        {
+            // skip the correct Button
+            if (k == correctBtn)
+            {
+                k++;
+            }
+            wordBtns[k].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = words[i];
+            k++;
         }
     }
 

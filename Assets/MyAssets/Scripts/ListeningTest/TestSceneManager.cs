@@ -99,7 +99,7 @@ public class TestSceneManager : MonoBehaviour
         selectionManager.onMediumCallback = OnMedium;
         selectionManager.onBadCallback = OnBad;
 
-        audioManager.onPlayingDoneCallback = OnPlayingDone;
+        audioManager.OnPlayingDoneCallback = OnPlayingDone;
     }
 
 

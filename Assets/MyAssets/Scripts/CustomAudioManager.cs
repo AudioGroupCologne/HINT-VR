@@ -50,8 +50,8 @@ public class CustomAudioManager : MonoBehaviour
     [SerializeField] readonly float min_vol_dB = -70;
     [SerializeField] readonly float max_vol_dB = 10;
 
-    public delegate void OnPlayingDone();
-    public OnPlayingDone onPlayingDoneCallback = delegate { Debug.Log("No OnPlayingDone delegate set!"); };
+    public delegate void onPlayingDone();
+    public onPlayingDone OnPlayingDoneCallback = delegate { Debug.Log("No OnPlayingDone delegate set!"); };
 
     private bool distractorPaused = false;
 
@@ -354,10 +354,8 @@ public class CustomAudioManager : MonoBehaviour
             distractor2.Pause();
 
         distractorPaused = true;
-        //Debug.Log("Is playing lapsed");
 
-        // trigger 'playingDoneCallback' (TrainingGameManager)
-        onPlayingDoneCallback();
+        OnPlayingDoneCallback();
     }
 
     // play both of these through a separate audio source (non-directional and unaffected by adaptive AudioMixing)
