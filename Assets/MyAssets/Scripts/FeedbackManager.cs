@@ -138,38 +138,12 @@ public class FeedbackManager : MonoBehaviour
 
     }
 
-
-    public void setSentenceLength(int len)
+    /**
+     * Toggle the UI for the selected feedback system
+     */
+    public void ShowFeedbackUI(feedbackSettings setting, bool show)
     {
-        sentenceLen = len;
-    }
-
-    public void wordSelectionHandler(int index)
-    {
-        // deselect button
-        GameObject myEventSystem = GameObject.Find("EventSystem");
-        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
-        OnWordGuess(index == correctBtn);
-    }
-
-    public void comprehensionHandler(float hitQuote)
-    {
-        OnFeedback(hitQuote);
-    }
-
-    public void classicHandler(int correctWords)
-    {
-        if(correctWords > sentenceLen)
-        {
-            Debug.LogWarning("Invalid entry. 'correctWords' " + correctWords + " > sentence length " + sentenceLen);
-            return;
-        }
-        OnFeedback(correctWords / sentenceLen);
-    }
-
-    public void showFeedbackSystem(feedbackSettings setting, bool show)
-    {
-        switch(setting)
+        switch (setting)
         {
             case feedbackSettings.classic:
             case feedbackSettings.classicDark:
@@ -194,8 +168,18 @@ public class FeedbackManager : MonoBehaviour
         }
     }
 
+    /**
+     * Set the length of the current target sentence (required for classic and classicDark)
+     */
+    public void SetSentenceLength(int len)
+    {
+        sentenceLen = len;
+    }
 
-    public void SetRandomWordProposals(List<string[]> _words )
+    /**
+     * Set the random words (required for the wordSelection)
+     */
+    public void SetRandomWordProposals(List<string[]> _words)
     {
         // create storage for word proposals
         words = new List<string[]>();
@@ -216,6 +200,32 @@ public class FeedbackManager : MonoBehaviour
     }
 
 
+    ///// Button handlers
+    public void wordSelectionHandler(int index)
+    {
+        // deselect button
+        GameObject myEventSystem = GameObject.Find("EventSystem");
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+        OnWordGuess(index == correctBtn);
+    }
+
+    public void comprehensionHandler(float hitQuote)
+    {
+        OnFeedback(hitQuote);
+    }
+
+    public void classicHandler(int correctWords)
+    {
+        if(correctWords > sentenceLen)
+        {
+            Debug.LogWarning("Invalid entry. 'correctWords' " + correctWords + " > sentence length " + sentenceLen);
+            return;
+        }
+        OnFeedback((float)correctWords / (float)sentenceLen);
+    }
+
+
+    //// Private methods
     private void OnWordGuess(bool correct)
     {
         wordCounter++;
@@ -237,7 +247,6 @@ public class FeedbackManager : MonoBehaviour
 
     }
 
-    // new interface: string correctWord, string[] randomSelection
     private void AssignWordsToButtons(string[] words)
     {
         if (words.Length != wordBtns.Length)

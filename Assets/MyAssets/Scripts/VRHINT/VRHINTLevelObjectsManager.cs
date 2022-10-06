@@ -11,24 +11,40 @@ public class VRHINTLevelObjectsManager : MonoBehaviour
     [SerializeField] GameObject DistractorObj;
     [SerializeField] GameObject uiObj;
 
-    private bool distActive = true;
+    private bool targetVisible = true;
+    private bool distVisible = true;
+    private bool uiVisible = true;
 
     /**
      * Change distractor visibility.
      */
-    public void ToggleDistractor(bool showDist)
+    public void ChangeObjectVisibility(hintObjects obj, bool isVisible)
     {
-        distActive = showDist;
+        switch(obj)
+            {
+            case hintObjects.target:
+                targetVisible = isVisible;
+                break;
+            case hintObjects.distractor:
+                distVisible = isVisible;
+                break;
+            case hintObjects.userInterface:
+                uiVisible = isVisible;
+                break;
+            default:
+                Debug.LogError("Invalid type: " + obj);
+                break;
+        }
     }
 
 
     /**
      * Set position of LevelObjects (target, distractor, userInferface) relative to camera using euler coordinates
      */
-    public void AngularPosition(hintObjects obj, float _angle, float _distance, float _height = 0)
+    public void SetRelativePosition(hintObjects obj, float angle, float distance, float height = 0)
     {
-        Vector3 tmp = Quaternion.AngleAxis(_angle, Vector3.up) * (PlayerCamera.transform.forward * _distance);
-        tmp.y += _height;
+        Vector3 tmp = Quaternion.AngleAxis(angle, Vector3.up) * (PlayerCamera.transform.forward * distance);
+        tmp.y += height;
 
         switch (obj)
         {
@@ -38,7 +54,7 @@ public class VRHINTLevelObjectsManager : MonoBehaviour
                 break;
             case hintObjects.distractor:
                 DistractorObj.transform.position = PlayerCamera.transform.position + tmp;
-                DistractorObj.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up) * Quaternion.Euler(0, _angle, 0);
+                DistractorObj.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up) * Quaternion.Euler(0, angle, 0);
                 break;
             case hintObjects.userInterface:
                 uiObj.transform.position = PlayerCamera.transform.position + tmp;
@@ -57,9 +73,9 @@ public class VRHINTLevelObjectsManager : MonoBehaviour
      */
     public void ShowLevelObjects(bool showObjects)
     {
-        TargetObj.SetActive(showObjects);
-        // only set distractor object to active if global and local setting is true
-        DistractorObj.SetActive(showObjects && distActive);
+        TargetObj.SetActive(showObjects && targetVisible);
+        DistractorObj.SetActive(showObjects && distVisible);
+        uiObj.SetActive(showObjects && uiVisible);
     }
         
 }

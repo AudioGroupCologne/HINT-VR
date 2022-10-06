@@ -109,12 +109,12 @@ public class VRHINTManager : MonoBehaviour
     void Start()
     {
         // set delegates
-        audioManager.OnPlayingDoneCallback = OnPlayingDone;
+        audioManager.OnPlayingDone = OnPlayingDone;
         feedbackManager.OnFeedback = OnFeedback;
-        settingsManager.OnSettingsDoneCallback = OnStart;
+        settingsManager.OnSettingsDone = OnStart;
 
         // place userInterface in correct position for setting selection
-        levelManager.AngularPosition(hintObjects.userInterface, 0, interfaceDistance, interfaceHeight);
+        levelManager.SetRelativePosition(hintObjects.userInterface, 0, interfaceDistance, interfaceHeight);
 
         // show settings screen
         settingsManager.ShowSettings(true);
@@ -179,7 +179,7 @@ public class VRHINTManager : MonoBehaviour
         // hold indices of sentences from currentList
         listIndices = new List<int>();
 
-        feedbackManager.showFeedbackSystem(feedbackSystem, false);
+        feedbackManager.ShowFeedbackUI(feedbackSystem, false);
 
         // randomly sort test conditions and sentence lists with no direct repetitions
         ImportCounterBalancedTestSetup();
@@ -204,10 +204,10 @@ public class VRHINTManager : MonoBehaviour
         audioManager.SetTargetAudio(database.getSentenceAudio(currentListIndex, currentSentenceIndex));
 
         // target & UI are always at front position
-        levelManager.AngularPosition(hintObjects.target, 0, objectDistance);
+        levelManager.SetRelativePosition(hintObjects.target, 0, objectDistance);
 
-        // VRHINT only uses dist1 in all conditions except 'quiet' (will be overwritten in this case)
-        levelManager.ToggleDistractor(true);
+        // VRHINT shows distractor in all conditions except 'quiet' (will be overwritten in this case)
+        levelManager.ChangeObjectVisibility(hintObjects.distractor, true);
 
         audioManager.SetDistractorAudio(noise, true);
          
@@ -247,7 +247,7 @@ public class VRHINTManager : MonoBehaviour
             case feedbackSettings.classicDark:
                 // visualize correct sentence to experimenter
                 // sanity check: numHits <= sentenceLength
-                feedbackManager.setSentenceLength(sentenceLength);
+                feedbackManager.SetSentenceLength(sentenceLength);
                 break;
             case feedbackSettings.wordSelection:
 
@@ -274,7 +274,7 @@ public class VRHINTManager : MonoBehaviour
                 break;
         }
 
-        feedbackManager.showFeedbackSystem(feedbackSystem, true);
+        feedbackManager.ShowFeedbackUI(feedbackSystem, true);
 
     }
 
@@ -302,7 +302,7 @@ public class VRHINTManager : MonoBehaviour
     void OnContinue()
     {
         // hide feedbackUI
-        feedbackManager.showFeedbackSystem(feedbackSystem, false);
+        feedbackManager.ShowFeedbackUI(feedbackSystem, false);
         // remove index of last sentence from list
         listIndices.Remove(currentSentenceIndex);
 
@@ -557,22 +557,22 @@ public class VRHINTManager : MonoBehaviour
         levelManager.ShowLevelObjects(false);
 
         // always show distractor object if hintCondition is not 'quiet'
-        levelManager.ToggleDistractor(true);
+        levelManager.ChangeObjectVisibility(hintObjects.distractor, true);
 
         switch (currentCondition)
         {
             case hintConditions.quiet:
                 // deactive distractor object
-                levelManager.ToggleDistractor(false);
+                levelManager.ChangeObjectVisibility(hintObjects.distractor, false);
                 break;
             case hintConditions.noiseFront:
-                levelManager.AngularPosition(hintObjects.distractor, 0, objectDistance);
+                levelManager.SetRelativePosition(hintObjects.distractor, 0, objectDistance);
                 break;
             case hintConditions.noiseLeft:
-                levelManager.AngularPosition(hintObjects.distractor, 270, objectDistance);
+                levelManager.SetRelativePosition(hintObjects.distractor, 270, objectDistance);
                 break;
             case hintConditions.noiseRight:
-                levelManager.AngularPosition(hintObjects.distractor, 90, objectDistance);
+                levelManager.SetRelativePosition(hintObjects.distractor, 90, objectDistance);
                 break;
             default:
                 Debug.LogError("Invalid locationCondition: " + currentCondition);

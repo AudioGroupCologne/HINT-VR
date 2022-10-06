@@ -13,7 +13,7 @@ public class VRHINTSettings : MonoBehaviour
 
 
     public delegate void onSettingsDone(testOrder order, feedbackSettings setting);
-    public onSettingsDone OnSettingsDoneCallback = delegate { Debug.Log("No settingsDone delegate set!"); };
+    public onSettingsDone OnSettingsDone = delegate { Debug.Log("No settingsDone delegate set!"); };
 
     private int settingState = 0;
     private testOrder _order;
@@ -75,13 +75,13 @@ public class VRHINTSettings : MonoBehaviour
             switch (setting)
             {
                 case 1:
-                    OnSettingsDoneCallback(_order, feedbackSettings.classic);
+                    OnSettingsDone(_order, feedbackSettings.classic);
                     break;
                 case 2:
-                    OnSettingsDoneCallback(_order, feedbackSettings.wordSelection);
+                    OnSettingsDone(_order, feedbackSettings.wordSelection);
                     break;
                 case 3:
-                    OnSettingsDoneCallback(_order, feedbackSettings.classicDark);
+                    OnSettingsDone(_order, feedbackSettings.classicDark);
                     break;
                 default:
                     Debug.Log("Invalid selection!");

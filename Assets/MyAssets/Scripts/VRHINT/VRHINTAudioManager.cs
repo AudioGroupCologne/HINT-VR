@@ -34,7 +34,7 @@ public class VRHINTAudioManager : MonoBehaviour
     [SerializeField] readonly float max_vol_dB = 10;
 
     public delegate void onPlayingDone();
-    public onPlayingDone OnPlayingDoneCallback = delegate { Debug.Log("No OnPlayingDone delegate set!"); };
+    public onPlayingDone OnPlayingDone = delegate { Debug.Log("No OnPlayingDone delegate set!"); };
 
     private float noiseLen = 0;
     private float noiseIndex = 0;
@@ -152,7 +152,7 @@ public class VRHINTAudioManager : MonoBehaviour
 
         distractor.Pause();
 
-        OnPlayingDoneCallback();
+        OnPlayingDone();
     }
 
     /**
