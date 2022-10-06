@@ -261,7 +261,7 @@ public class VRHINTManager : MonoBehaviour
                     rands[0] = currentSentence[i];
 
                     // get random words from data base
-                    database.getRandomWords(wordOptions - 1, currentSentence[i], database.isCapital(currentSentence[i]), (i == 0)).CopyTo(rands, 1);
+                    database.getRandomWords(wordOptions - 1, currentSentence[i], (i == 0)).CopyTo(rands, 1);
 
                     // copy random words to List
                     randomWords.Add(rands);

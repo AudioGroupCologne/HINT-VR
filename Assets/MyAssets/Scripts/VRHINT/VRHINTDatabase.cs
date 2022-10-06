@@ -14,6 +14,9 @@ public class VRHINTDatabase
     int listEntries;
     
     
+    /**
+     * Create a database object that imports and holds all audio files and strings required to run the HINT procedure.
+     */
     public VRHINTDatabase(string _targetAudioPath, int _numLists, int _listEntries)
     {
         sentenceAudio = new List<AudioClip[]>();
@@ -63,6 +66,9 @@ public class VRHINTDatabase
         }
     }
 
+    /**
+     * Get all audio files of a given list
+     */
     public AudioClip[] getListAudio(int index)
     {
         if(index - 1 >= sentenceAudio.Count)
@@ -74,6 +80,9 @@ public class VRHINTDatabase
         return sentenceAudio[index - 1];
     }
 
+    /**
+     * Get all strings of a given list
+     */
     public string[] getListStrings(int index)
     {
         if (index - 1 >= sentenceStrings.Count)
@@ -85,6 +94,9 @@ public class VRHINTDatabase
         return sentenceStrings[index - 1];
     }
 
+    /**
+     * Get the audio file of a sentence of a list by index
+     */
     public AudioClip getSentenceAudio(int listIndex, int sentenceIndex)
     {
         if (listIndex - 1 >= sentenceAudio.Count)
@@ -102,6 +114,9 @@ public class VRHINTDatabase
         return sentenceAudio[listIndex - 1][sentenceIndex];
     }
 
+    /**
+     * Get sentence of a list as string ("Die Farbe tropft auf den Boden")
+     */
     public string getSentenceString(int listIndex, int sentenceIndex)
     {
         if (listIndex - 1 >= sentenceStrings.Count)
@@ -119,6 +134,9 @@ public class VRHINTDatabase
         return sentenceStrings[listIndex - 1][sentenceIndex];
     }
 
+    /**
+     * Get the words of a sentence of a list by as string array ("Die", "Farbe", "tropft", "auf", "den", "Boden")
+     */
     public string[] getSentenceWords(int listIndex, int sentenceIndex)
     {
         if (listIndex - 1 >= sentenceStrings.Count)
@@ -140,12 +158,16 @@ public class VRHINTDatabase
         
     }
 
-    public string[] getRandomWords(int count, string exclude, bool capital, bool sentenceStart)
+    /**
+     * Get 'count' random words from the database, matched by length, capitalization and start/end of sentence
+     */
+    public string[] getRandomWords(int count, string exclude, bool sentenceStart)
     {
 
         int cnt = 0;
         string[] tmp = new string[count];
-        bool match = false;       
+        bool match = false;
+        bool capital = isCapital(exclude);
 
         while(cnt < count)
         {
@@ -163,7 +185,6 @@ public class VRHINTDatabase
             {
                 randomWord = ret[Random.Range(1, ret.Length)];
             }
-            //Debug.Log("RandomWord: " + randomWord);
 
             // call continue if anything does not match
             if(capital && !isCapital(randomWord))
@@ -210,8 +231,10 @@ public class VRHINTDatabase
 
     }
 
-
-    public bool isCapital(string word)
+    /**
+     * Simple utility to check capitalization of a given word.
+     */
+    private bool isCapital(string word)
     {
         if (word[0] >= 'A' && word[0] <= 'Z')
             return true;
