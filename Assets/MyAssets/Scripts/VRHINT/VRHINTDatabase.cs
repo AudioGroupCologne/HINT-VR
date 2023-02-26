@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class VRHINTDatabase
 {
+    // hodls the distracter noise signal
+    AudioClip noise;
     // hold the target sentences audio clips as list of AudioClips
     List<AudioClip[]> sentenceAudio;
     // hold the target sentences as list of strings
@@ -17,7 +19,7 @@ public class VRHINTDatabase
     /**
      * Create a database object that imports and holds all audio files and strings required to run the HINT procedure.
      */
-    public VRHINTDatabase(string _targetAudioPath, int _numLists, int _listEntries)
+    public VRHINTDatabase(string _targetAudioPath, string _noisePath, int _numLists, int _listEntries)
     {
         sentenceAudio = new List<AudioClip[]>();
         sentenceStrings = new List<string[]>();
@@ -25,6 +27,8 @@ public class VRHINTDatabase
         string textPath;
         numLists = _numLists;
         listEntries = _listEntries;
+
+        noise  = Resources.Load<AudioClip>(_noisePath);
 
         for (int i = 1; i <= numLists; i++)
         {
@@ -64,6 +68,14 @@ public class VRHINTDatabase
         {
             Debug.LogError("Number of string lists loaded does not match expected number of lists: " + numLists + " (expected) " + sentenceStrings.Count + "(loaded)");
         }
+    }
+
+    /**
+     * Get noise file
+     */
+    public AudioClip getNoise()
+    {
+        return noise;
     }
 
     /**

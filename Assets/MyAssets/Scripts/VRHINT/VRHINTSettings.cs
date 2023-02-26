@@ -32,21 +32,21 @@ public class VRHINTSettings : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            ButtonHandler(1);
+            SettingsUIHandler(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            ButtonHandler(2);
+            SettingsUIHandler(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            ButtonHandler(3);
+            SettingsUIHandler(3);
         }
         
     }
 
 
-    public void ButtonHandler(int setting)
+    public void SettingsUIHandler(int setting)
     {
 
         if (settingState == 0)

@@ -13,13 +13,12 @@ public class DemoSceneManager : MonoBehaviour
     [SerializeField] DemoSettings settingsManager;
     [SerializeField] CircMovement distMover;
 
-    [SerializeField] AudioClip noise;
-
     [SerializeField] float objectDistance = 10.0f;
     [SerializeField] float interfaceDistance = 9.0f;
     [SerializeField] float interfaceHeight = 2.5f;
 
     [SerializeField] string targetAudioPath = "audio/german-hint/";
+    [SerializeField] string noisePath = "audio/german-hint/hd600noiseGR_male";
     [SerializeField] int numLists = 12;
     [SerializeField] int numSentences = 20;
 
@@ -43,7 +42,7 @@ public class DemoSceneManager : MonoBehaviour
         settingsManager.onStartTestMode = OnTestModeStart;
 
         // create database to hold target sentence lists
-        database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
+        database = new VRHINTDatabase(targetAudioPath, noisePath, numLists, numSentences);
 
         GameObject Camera = GameObject.Find("CenterEyeAnchor");
         distMover.SetMovementParameters(Camera.transform.position, objectDistance);
@@ -57,7 +56,7 @@ public class DemoSceneManager : MonoBehaviour
         levelManager.showLevelObject(levelObjects.distractor1, true);
 
         //audioManager.setTargetSentence(target);
-        audioManager.setDistractorAudio(levelObjects.distractor1, noise, true);
+        audioManager.setDistractorAudio(levelObjects.distractor1, database.getNoise(), true);
 
         comb = audioManager.Combine(database.getListAudio(1));
         testClips = new AudioClip[10];

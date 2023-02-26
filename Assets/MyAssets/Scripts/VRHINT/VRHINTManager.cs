@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using CustomTypes;
 using CustomTypes.VRHINTTypes;
 
-
 public class VRHINTManager : MonoBehaviour
 {
     [SerializeField] VRHINTAudioManager audioManager;
@@ -14,27 +13,23 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] VRHINTSettings settingsManager;
     [SerializeField] OverviewManager overviewManager;
 
-    // the first 4 sentences are adjusted in 4 dB steps
-    [SerializeField] readonly float initSNRStep = 4.0f;
-    // the remaining 16 sentences are adjusted in 16 dB steps
-    [SerializeField] readonly float adaptiveSNRStep = 2.0f;
-    // initial level of Talker channel at the start of each list
-    [SerializeField] readonly float targetStartLevel = 0.5f;  // -1.5f would be correct but we're not changing this!
-    // fixed level of dist channel (has to be calibrated!)
-    [SerializeField] readonly float distractorLevel = 0.0f;
-    // Noise condition have the same starting level for speech and noise
-    // For the quiet condition this won't make sense
-    // Instead set starting level to 25 dBA (65 dBA [calib] - 40 dB)
-    [SerializeField] readonly float quietStartingOffset = -40.0f;
 
-    // database object (loads target sentences from resource system)
-    private VRHINTDatabase database;
-
+    // position of the UI in the scene relative to the camera
     [SerializeField] float objectDistance = 10.0f;
     [SerializeField] float interfaceDistance = 9.0f;
     [SerializeField] float interfaceHeight = 2.0f;
 
+    // objects required for 'classicDark' mode
+    [SerializeField] GameObject darkRoom;
+    [SerializeField] GameObject environment;
+    [SerializeField] GameObject directionalLight;
+
+    /*
+    // Path to the HINT stimuli
     [SerializeField] string targetAudioPath = "audio/german-hint/";
+    // Path to the nopse signal
+    [SerializeField] string noisePath = "audio/german-hint/hd600noiseGR_male";
+    // Total number of test lists available
     [SerializeField] int numLists = 12;
     // this determines the number of sentences within each list!
     // If there is a mismatch between this and the actual number of files there will be errors during asset loading
@@ -44,24 +39,46 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] int numTestSentences = 20;
     // Number of lists used during test procedure (must be smaller than numLists)
     [SerializeField] int numTestLists = 5;
-    [SerializeField] int wordOptions = 5;
-   
-    [SerializeField] AudioClip noise;
-
-    [SerializeField] int practiceList =  12;
+    // List used for pratice mode (should be either 11 or 12 for German HINT)
+    [SerializeField] int practiceList = 12;
+    // Number of practice rounds (max. 20)
     [SerializeField] int numPracticeRounds = 5;
-    [SerializeField] hintConditions practiceCondition =  hintConditions.noiseRight;
+    // Noise condition for practice mode
+    [SerializeField] hintConditions practiceCondition = hintConditions.noiseRight;
 
-    [SerializeField] GameObject darkRoom;
-    [SerializeField] GameObject environment;
-    [SerializeField] GameObject directionalLight;
+    // increased step size (4 dB), no logging of SNR and hitQuotes
+    [SerializeField] int calibrationRounds = 4;
+    // ratio of correct words required to lower SNR
+    [SerializeField] float decisionThreshold = 0.5f;
 
+    // the first 4 sentences are adjusted in 4 dB steps
+    [SerializeField] float initSNRStep = 4.0f;
+    // the remaining 16 sentences are adjusted in 16 dB steps
+    [SerializeField] float adaptiveSNRStep = 2.0f;
+    // initial level of Talker channel at the start of each list
+    [SerializeField] float targetStartLevel = 0.5f;
+    // fixed level of dist channel (should be set according to calibration)
+    [SerializeField] float distractorLevel = 0.0f;
+    // Noise condition have the same starting level for speech and noise
+    // For the quiet condition this won't make sense
+    // Instead set starting level to 25 dBA (65 dBA [calib] - 40 dB)
+    [SerializeField] float quietStartingOffset = -40.0f;
+
+    // Number of options shown when using the wordSelection feedbackSystems
+    [SerializeField] int wordOptions = 5;
+    */
+    // database object (loads target sentences from resource system)
+    private VRHINTDatabase database;    
+
+    private VRHINTParameters parameters;
     /// Control variables
     // start each session with practice mode
     private bool practiceMode = true;
 
+    // number of lists that have already been done
     private int listCounter = 0;
 
+    // holds the selected feedbackSystem
     private feedbackSettings feedbackSystem;
 
     // SNR data for each sentence
@@ -72,42 +89,45 @@ public class VRHINTManager : MonoBehaviour
     // estimated SRT for each list
     private List<float> eSRT;
 
+    // timestamps for the completion of each test list
     private List<string> timestamps;
 
     // noise conditions for each list
     private List<hintConditions> conditions;
 
-
     // order of all lists for the test (counter balance stuff)
     private List<int> listOrder;
-
 
     // create an List on indices of all sentences of the current list
     // after each round the index of the current sentence is deleted
     // randomly pick an entry from the remaining indices and get AudioClips/Strings that way
     private List<int> listIndices;
 
+    // userIndex used for counterbalancing (determined by number of JSON files in the result directory)
     private int userIndex = 0;
 
+    // state variables
     private hintConditions currentCondition;
     private int currentSentenceIndex;
     private int currentListIndex;
     private int sentenceCounter = 0;
-
-    private string[] currentSentence;
-    private int sentenceLength = 0;
     private int practiceCounter = 0;
 
-    // increased step size (4 dB), no logging of SNR and hitQuotes
-    private int calibrationRounds = 4;
-    // ratio of correct words required to lower SNR
-    private float decisionThreshold = 0.5f;
-
+    // information about current sentence to be provided to experimenter and feedbackSystem
+    private string[] currentSentence;
+    private int sentenceLength = 0;
+    
+    // testOrder (first or second) determines counterbalacning
     private testOrder order = 0;
 
 
     void Start()
     {
+
+        // create parameters object
+        //parameters = new VRHINTParameters();
+        parameters = GetComponent<VRHINTParameters>();
+
         // set delegates
         audioManager.OnPlayingDone = OnPlayingDone;
         feedbackManager.OnFeedback = OnFeedback;
@@ -146,19 +166,19 @@ public class VRHINTManager : MonoBehaviour
         }
 
 
-        // create database to hold target sentence lists
-        database = new VRHINTDatabase(targetAudioPath, numLists, numSentences);
+        // create database to hold target sentence lists and noise signal
+        database = new VRHINTDatabase(parameters.targetAudioPath, parameters.noisePath, parameters.numLists, parameters.numSentences);
 
         // hold every SNR datapoint that goes into SRT calculation
-        SNR = new List<float>[numTestLists];
-        for(int i = 0; i < numTestLists; i++)
+        SNR = new List<float>[parameters.numTestLists];
+        for(int i = 0; i < parameters.numTestLists; i++)
         {
             SNR[i] = new List<float>();
         }
 
         // hold hit/miss relation for each sentence (e.g. 5 hits, 1 miss on 6 word sentence: 5/6 hitQuote)
-        hitQuote = new List<float>[numTestLists];
-        for (int i = 0; i < numTestLists; i++)
+        hitQuote = new List<float>[parameters.numTestLists];
+        for (int i = 0; i < parameters.numTestLists; i++)
         {
             hitQuote[i] = new List<float>();
         }
@@ -189,8 +209,8 @@ public class VRHINTManager : MonoBehaviour
         overviewManager.ShowPractice(true);
 
         // keep track of current assets
-        currentListIndex = practiceList;
-        currentCondition = practiceCondition;
+        currentListIndex = parameters.practiceList;
+        currentCondition = parameters.practiceCondition;
   
         listIndices.AddRange(System.Linq.Enumerable.Range(0, 20));
 
@@ -209,7 +229,7 @@ public class VRHINTManager : MonoBehaviour
         // VRHINT shows distractor in all conditions except 'quiet' (will be overwritten in this case)
         levelManager.ChangeObjectVisibility(hintObjects.distractor, true);
 
-        audioManager.SetDistractorAudio(noise, true);
+        audioManager.SetDistractorAudio(database.getNoise(), true);
          
         ApplyTestConditions();
 
@@ -218,15 +238,15 @@ public class VRHINTManager : MonoBehaviour
         // set target channel to initial level
         if (currentCondition == hintConditions.quiet)
         {
-            audioManager.SetChannelLevel(audioChannels.target, targetStartLevel + quietStartingOffset);
+            audioManager.SetChannelLevel(audioChannels.target, parameters.targetStartLevel + parameters.quietStartingOffset);
         }
         else
         {
-            audioManager.SetChannelLevel(audioChannels.target, targetStartLevel);
+            audioManager.SetChannelLevel(audioChannels.target, parameters.targetStartLevel);
         }
         
         // ensure that dist channel is set to correct level
-        audioManager.SetChannelLevel(audioChannels.distractor, distractorLevel);
+        audioManager.SetChannelLevel(audioChannels.distractor, parameters.distractorLevel);
 
         // start playing again
         audioManager.StartPlaying();
@@ -256,12 +276,12 @@ public class VRHINTManager : MonoBehaviour
                 
                 for (int i = 0; i < sentenceLength; i++)
                 {
-                    string[] rands = new string[wordOptions];
+                    string[] rands = new string[parameters.wordOptions];
                     // set correct word to first array index
                     rands[0] = currentSentence[i];
 
                     // get random words from data base
-                    database.getRandomWords(wordOptions - 1, currentSentence[i], (i == 0)).CopyTo(rands, 1);
+                    database.getRandomWords(parameters.wordOptions - 1, currentSentence[i], (i == 0)).CopyTo(rands, 1);
 
                     // copy random words to List
                     randomWords.Add(rands);
@@ -309,7 +329,7 @@ public class VRHINTManager : MonoBehaviour
         // check if practice mode is done
         if(practiceMode)
         {
-            if (++practiceCounter >= numPracticeRounds)
+            if (++practiceCounter >= parameters.numPracticeRounds)
             {
                 //Debug.Log("Leaving practice mode");
                 overviewManager.ShowPractice(false);
@@ -320,7 +340,7 @@ public class VRHINTManager : MonoBehaviour
         }
 
         // check if list is done
-        if(++sentenceCounter >= numTestSentences)
+        if(++sentenceCounter >= parameters.numTestSentences)
         {
             OnListDone();
             return;
@@ -366,7 +386,7 @@ public class VRHINTManager : MonoBehaviour
         }
 
         // check if test procedure is done
-        if (listCounter >= numTestLists)
+        if (listCounter >= parameters.numTestLists)
         {
             OnSessionDone();
             return;
@@ -393,11 +413,11 @@ public class VRHINTManager : MonoBehaviour
         // set target channel to initial level
         if(currentCondition == hintConditions.quiet)
         {
-            audioManager.SetChannelLevel(audioChannels.target, targetStartLevel + quietStartingOffset); 
+            audioManager.SetChannelLevel(audioChannels.target, parameters.targetStartLevel + parameters.quietStartingOffset); 
         }
         else
         {
-            audioManager.SetChannelLevel(audioChannels.target, targetStartLevel);
+            audioManager.SetChannelLevel(audioChannels.target, parameters.targetStartLevel);
         }
         
         // start playing again
@@ -458,7 +478,7 @@ public class VRHINTManager : MonoBehaviour
             }
         }
         
-        for (int i = 0; i < numTestLists; i++)
+        for (int i = 0; i < parameters.numTestLists; i++)
         {
             // jump into the next row if the length of a row has been exceed (e.g. take conds [0...3] from row 2 and conds [4..5] from row 3
             if (i > 0 && i % lqConditions[0].Length == 0)
@@ -504,12 +524,12 @@ public class VRHINTManager : MonoBehaviour
         }
 
         // temporary storage
-        int[] tmp = new int[numTestLists];
+        int[] tmp = new int[parameters.numTestLists];
 
         // if more than half of lqLists dim is used, take 'fresh' rows for both tests
-        if(numTestLists > lqLists[0].Length / 2)
+        if(parameters.numTestLists > lqLists[0].Length / 2)
         {
-            for (int i = 0; i < numTestLists; i++)
+            for (int i = 0; i < parameters.numTestLists; i++)
             {
                 if (order == testOrder.first)
                 {
@@ -527,7 +547,7 @@ public class VRHINTManager : MonoBehaviour
         // - second: 4, 8, 5, 7, 6
         else
         {
-            for (int i = 0; i < numTestLists; i++)
+            for (int i = 0; i < parameters.numTestLists; i++)
             {
                 if (order == testOrder.first)
                 {
@@ -535,7 +555,7 @@ public class VRHINTManager : MonoBehaviour
                 }
                 else if (order == testOrder.second)
                 {
-                    tmp[i] = lqLists[userIndex % lqLists.Count][i + numTestLists];
+                    tmp[i] = lqLists[userIndex % lqLists.Count][i + parameters.numTestLists];
                 }
             }
         }
@@ -591,31 +611,31 @@ public class VRHINTManager : MonoBehaviour
     private void FeedbackHelper(float _hitQuote)
     {
         // handle calibration rounds
-        if(sentenceCounter < calibrationRounds)
+        if(sentenceCounter < parameters.calibrationRounds)
         {
-            if (_hitQuote < decisionThreshold)
+            if (_hitQuote < parameters.decisionThreshold)
             {
-                audioManager.ChangeChannelLevel(audioChannels.target, initSNRStep);
+                audioManager.ChangeChannelLevel(audioChannels.target, parameters.initSNRStep);
             }
             else
             {
-                audioManager.ChangeChannelLevel(audioChannels.target, -initSNRStep);
+                audioManager.ChangeChannelLevel(audioChannels.target, -parameters.initSNRStep);
             }
         }
         else
         {
             // store current SNR data point
-            SNR[listCounter].Add(audioManager.GetChannelLevel(audioChannels.target) - targetStartLevel);
+            SNR[listCounter].Add(audioManager.GetChannelLevel(audioChannels.target) - parameters.targetStartLevel);
             // store current hitQuote data point
             hitQuote[listCounter].Add(_hitQuote);
 
-            if (_hitQuote < decisionThreshold)
+            if (_hitQuote < parameters.decisionThreshold)
             {
-                audioManager.ChangeChannelLevel(audioChannels.target, adaptiveSNRStep);
+                audioManager.ChangeChannelLevel(audioChannels.target, parameters.adaptiveSNRStep);
             }
             else
             {
-                audioManager.ChangeChannelLevel(audioChannels.target, -adaptiveSNRStep);
+                audioManager.ChangeChannelLevel(audioChannels.target, -parameters.adaptiveSNRStep);
             }
         }
     }
@@ -627,14 +647,14 @@ public class VRHINTManager : MonoBehaviour
     {
         if (practiceMode)
         {
-            overviewManager.SetRounds(practiceCounter + 1, numPracticeRounds);
+            overviewManager.SetRounds(practiceCounter + 1, parameters.numPracticeRounds);
             // always display "List 1 of 1" for practice mode
             overviewManager.SetLists(1, 1);
         }
         else
         {
-            overviewManager.SetRounds(sentenceCounter, numTestSentences);
-            overviewManager.SetLists(listCounter + 1, numTestLists);
+            overviewManager.SetRounds(sentenceCounter, parameters.numTestSentences);
+            overviewManager.SetLists(listCounter + 1, parameters.numTestLists);
         }
 
         overviewManager.SetCond(currentCondition);
