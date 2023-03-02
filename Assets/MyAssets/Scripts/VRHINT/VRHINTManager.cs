@@ -19,56 +19,17 @@ public class VRHINTManager : MonoBehaviour
     [SerializeField] float interfaceDistance = 9.0f;
     [SerializeField] float interfaceHeight = 2.0f;
 
+    [SerializeField] bool showOverviewUI = true;
+
     // objects required for 'classicDark' mode
     [SerializeField] GameObject darkRoom;
     [SerializeField] GameObject environment;
     [SerializeField] GameObject directionalLight;
 
-    /*
-    // Path to the HINT stimuli
-    [SerializeField] string targetAudioPath = "audio/german-hint/";
-    // Path to the nopse signal
-    [SerializeField] string noisePath = "audio/german-hint/hd600noiseGR_male";
-    // Total number of test lists available
-    [SerializeField] int numLists = 12;
-    // this determines the number of sentences within each list!
-    // If there is a mismatch between this and the actual number of files there will be errors during asset loading
-    [SerializeField] int numSentences = 20;
-
-    // Number of sentences played from each list during test procedure (must be smaller than numSentences)
-    [SerializeField] int numTestSentences = 20;
-    // Number of lists used during test procedure (must be smaller than numLists)
-    [SerializeField] int numTestLists = 5;
-    // List used for pratice mode (should be either 11 or 12 for German HINT)
-    [SerializeField] int practiceList = 12;
-    // Number of practice rounds (max. 20)
-    [SerializeField] int numPracticeRounds = 5;
-    // Noise condition for practice mode
-    [SerializeField] hintConditions practiceCondition = hintConditions.noiseRight;
-
-    // increased step size (4 dB), no logging of SNR and hitQuotes
-    [SerializeField] int calibrationRounds = 4;
-    // ratio of correct words required to lower SNR
-    [SerializeField] float decisionThreshold = 0.5f;
-
-    // the first 4 sentences are adjusted in 4 dB steps
-    [SerializeField] float initSNRStep = 4.0f;
-    // the remaining 16 sentences are adjusted in 16 dB steps
-    [SerializeField] float adaptiveSNRStep = 2.0f;
-    // initial level of Talker channel at the start of each list
-    [SerializeField] float targetStartLevel = 0.5f;
-    // fixed level of dist channel (should be set according to calibration)
-    [SerializeField] float distractorLevel = 0.0f;
-    // Noise condition have the same starting level for speech and noise
-    // For the quiet condition this won't make sense
-    // Instead set starting level to 25 dBA (65 dBA [calib] - 40 dB)
-    [SerializeField] float quietStartingOffset = -40.0f;
-
-    // Number of options shown when using the wordSelection feedbackSystems
-    [SerializeField] int wordOptions = 5;
-    */
     // database object (loads target sentences from resource system)
+
     private VRHINTDatabase database;    
+    // parameter object (refactor at this at some point)
 
     private VRHINTParameters parameters;
     /// Control variables
@@ -125,13 +86,15 @@ public class VRHINTManager : MonoBehaviour
     {
 
         // create parameters object
-        //parameters = new VRHINTParameters();
         parameters = GetComponent<VRHINTParameters>();
 
         // set delegates
         audioManager.OnPlayingDone = OnPlayingDone;
         feedbackManager.OnFeedback = OnFeedback;
+        feedbackManager.OnContinue = OnContinue;
         settingsManager.OnSettingsDone = OnStart;
+
+        overviewManager.ShowOverview(showOverviewUI);
 
         // place userInterface in correct position for setting selection
         levelManager.SetRelativePosition(hintObjects.userInterface, 0, interfaceDistance, interfaceHeight);
@@ -306,7 +269,19 @@ public class VRHINTManager : MonoBehaviour
     void OnFeedback(float _hitQuote)
     {
         FeedbackHelper(_hitQuote);
-        OnContinue();
+
+        // directly continue for user-controlled systems
+        if(feedbackSystem == feedbackSettings.wordSelection || feedbackSystem == feedbackSettings.comprehensionLevel)
+        {
+            OnContinue();
+        }
+        else
+        {
+            feedbackManager.ShowFeedbackUI(feedbackSystem, false);
+            feedbackManager.ShowContinue(true);
+        }
+
+        
     }
 
 

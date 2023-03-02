@@ -170,10 +170,8 @@ public class VRHINTAudioManager : MonoBehaviour
                 return targetChannel;
             case audioChannels.distractor:
                 return distractorChannel;
-                break;
             case audioChannels.player:
                 return playerChannel;
-                break;
             default:
                 Debug.LogWarning("Invalid channel selection!");
                 return null;

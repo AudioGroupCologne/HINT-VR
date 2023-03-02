@@ -12,10 +12,14 @@ public class FeedbackManager : MonoBehaviour
     [SerializeField] GameObject classicUI;
     [SerializeField] GameObject comprehensionUI;
     [SerializeField] GameObject fourWayComprehensionUI;
+    [SerializeField] GameObject continueUI;
     [SerializeField] bool useFourWayComprehension = false;
 
     public delegate void onFeedback(float hitQuote);
     public onFeedback OnFeedback = delegate { Debug.Log("No OnFeedback delegate set!"); };
+
+    public delegate void onContinue();
+    public onContinue OnContinue = delegate { Debug.Log("No OnContinue delegate set!"); };
 
     int correctBtn;
     int sentenceLen;
@@ -134,6 +138,13 @@ public class FeedbackManager : MonoBehaviour
                 comprehensionHandler(0.0f);
             }
         }
+        else if(continueUI.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                continueHanlder();
+            }
+        }
 
 
     }
@@ -166,7 +177,20 @@ public class FeedbackManager : MonoBehaviour
                 Debug.LogError("Invalid feedback system: " + setting);
                 return;
         }
+
+        // make sure to hide continueUI
+        if(!show)
+        {
+            ShowContinue(false);
+        }
     }
+
+
+    public void ShowContinue(bool show)
+    {
+        continueUI.SetActive(show);
+    }
+
 
     /**
      * Set the length of the current target sentence (required for classic and classicDark)
@@ -221,9 +245,14 @@ public class FeedbackManager : MonoBehaviour
             Debug.LogWarning("Invalid entry. 'correctWords' " + correctWords + " > sentence length " + sentenceLen);
             return;
         }
+
         OnFeedback((float)correctWords / (float)sentenceLen);
     }
 
+    public void continueHanlder()
+    {
+        OnContinue();
+    }
 
     //// Private methods
     private void OnWordGuess(bool correct)
