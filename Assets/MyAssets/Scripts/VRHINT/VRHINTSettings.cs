@@ -46,60 +46,80 @@ public class VRHINTSettings : MonoBehaviour
     }
 
 
-    public void SettingsUIHandler(int setting)
+    public void SettingsUIHandler(int selection)
     {
 
         if (settingState == 0)
         {
-            switch (setting)
-            {
-                case 1:
-                    _order = testOrder.first;
-                    break;
-                case 2:
-                    _order = testOrder.second;
-                    break;
-                default:
-                    Debug.Log("Invalid selection!");
-                    return;
-            }
-
+            TestOrder(selection);
             settingState = 1;
             settingsGroup1.SetActive(false);
             settingsGroup2.SetActive(true);
-
         }
 
         else if(settingState == 1)
         {
-            switch (setting)
-            {
-                case 1:
-                    OnSettingsDone(_order, feedbackSettings.classic);
-                    break;
-                case 2:
-                    OnSettingsDone(_order, feedbackSettings.wordSelection);
-                    break;
-                case 3:
-                    OnSettingsDone(_order, feedbackSettings.classicDark);
-                    break;
-                default:
-                    Debug.Log("Invalid selection!");
-                    return;
-            }
-
+            FeedbackSystem(selection);
             settingState = 0;
             settingsGroup1.SetActive(true);
             settingsGroup2.SetActive(false);
             ShowSettings(false);
-
         }
-        
+    
+    }
+
+    private void TestOrder(int selection)
+    {
+        switch (selection)
+        {
+            case 1:
+                _order = testOrder.first;
+                break;
+            case 2:
+                _order = testOrder.second;
+                break;
+            default:
+                Debug.Log("Invalid selection!");
+                return;
+        }
+    }
+
+    private void FeedbackSystem(int selection)
+    {
+        switch (selection)
+        {
+            case 1:
+                OnSettingsDone(_order, feedbackSettings.classic);
+                break;
+            case 2:
+                OnSettingsDone(_order, feedbackSettings.wordSelection);
+                break;
+            case 3:
+                OnSettingsDone(_order, feedbackSettings.classicDark);
+                break;
+            default:
+                Debug.Log("Invalid selection!");
+                return;
+        }
     }
 
     public void ShowSettings(bool show)
     {
         settings.SetActive(show);
+
+        // make sure that the correct sub-UI component is shown
+        if(settingState == 0)
+        {
+            settingsGroup1.SetActive(true);
+            settingsGroup2.SetActive(false);
+        }
+        else if(settingState == 1)
+        {
+            settingsGroup1.SetActive(false);
+            settingsGroup2.SetActive(true);
+        }
+        
+
     }
 
     public void QuitButtonCallback()
