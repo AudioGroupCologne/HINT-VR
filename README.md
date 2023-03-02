@@ -1,8 +1,4 @@
 # unity_vraudio
 
-Research project for TH Köln Communication Systems and Networks master degree.
+This project was created to translate auditory test and training procedure into Virtual Reality (VR) using Unity as delevopment platfrom.
 
-## Broad description
-
-Recreate the LiSN & LEARN auditory training software as a Unity VR game to analyse if the improved virtual audio features (e.g. directional sound based on head movements)
-offers advantages during the training sessions.
