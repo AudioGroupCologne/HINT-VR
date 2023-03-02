@@ -241,10 +241,12 @@ public class userData
 
 }
 
-
+// ### Unity does not understand the use of variables as JsonProperties. This disabled the 'variable assigned but value is never used warning'
+#pragma warning disable 0414
 
 public class VRHintResults
 {
+
     [JsonProperty] string testSetup;
     [JsonProperty] int userIndex;
     [JsonProperty] List<VRHintListResult> subResults;
@@ -253,6 +255,7 @@ public class VRHintResults
     {
         subResults = new List<VRHintListResult>();
         userIndex = _userIndex;
+
 
         switch (_setup)
         {
@@ -288,11 +291,10 @@ public class VRHintResults
         [JsonProperty] List<float> listSNRs;
         [JsonProperty] List<float> listHitQuotes;
         [JsonProperty] float ListAverageSNR;
-        
-
 
         public VRHintListResult(int _listIndex, hintConditions _condition, float _listSRT, List<float> _listSNRs, List<float> _hitQuotes, string _time)
         {
+
             ListIndex = _listIndex;
             listSNRs = _listSNRs;
             listHitQuotes = _hitQuotes;
@@ -317,7 +319,10 @@ public class VRHintResults
             }
             
         }
+
     }
 
 
 }
+
+#pragma warning restore 0414
