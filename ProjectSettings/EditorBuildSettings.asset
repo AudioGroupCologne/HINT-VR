@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/MyAssets/Scenes/VRMenuScene.unity
     guid: 714cb87e6a86a0f4db2b1c1bcfb99ef6
   - enabled: 1
-    path: Assets/MyAssets/Scenes/TrainingScene.unity
+    path: Assets/MyAssets/Scenes/outdated/TrainingScene.unity
     guid: ed949b8449d45f944ad070943f6891e8
   - enabled: 1
     path: Assets/MyAssets/Scenes/VRHINTScene.unity
