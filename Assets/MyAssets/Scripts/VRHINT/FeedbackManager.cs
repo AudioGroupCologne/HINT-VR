@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 using CustomTypes.VRHINTTypes;
+
 public class FeedbackManager : MonoBehaviour
 {
 
@@ -41,6 +41,7 @@ public class FeedbackManager : MonoBehaviour
      */
     void Update()
     {
+
         if (wordSelectionUI.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))

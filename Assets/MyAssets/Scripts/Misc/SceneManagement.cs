@@ -8,6 +8,7 @@ public class SceneManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // unload all Scenes except preload
         for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
         {

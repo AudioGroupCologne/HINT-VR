@@ -845,6 +845,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room
       objectReference: {fileID: 0}
+    - target: {fileID: 433262245220294338, guid: bf32f08b7f56611459849f3f650a9290,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 433262245220294349, guid: bf32f08b7f56611459849f3f650a9290,
         type: 3}
       propertyPath: m_RootOrder
@@ -1886,6 +1891,50 @@ Material:
     - _Color: {r: 0, g: 1, b: 0.006896496, a: 1}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!1 &970972407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970972408}
+  - component: {fileID: 970972409}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970972408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970972407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8303898656669004744}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &970972409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970972407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b10ff907870a2e48939ee051243519b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1001958009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4299,14 +4348,24 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 970972408}
     m_Modifications:
+    - target: {fileID: 1688071022604481160, guid: 92ed3b8ffe986b4459518078ee5b2389,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1688071022604481160, guid: 92ed3b8ffe986b4459518078ee5b2389,
         type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 24300002, guid: 71a768edbca59a5489350524443deff8,
+      objectReference: {fileID: 24300001, guid: 02d04237d0308a14ea0c3b720849faae,
         type: 2}
+    - target: {fileID: 1688071022604481160, guid: 92ed3b8ffe986b4459518078ee5b2389,
+        type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].value
+      value: 0.99768066
+      objectReference: {fileID: 0}
     - target: {fileID: 8303898657411862438, guid: 92ed3b8ffe986b4459518078ee5b2389,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4395,3 +4454,9 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8303898656669004742}
   m_Enabled: 1
+--- !u!4 &8303898656669004744 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8303898657653653689, guid: 92ed3b8ffe986b4459518078ee5b2389,
+    type: 3}
+  m_PrefabInstance: {fileID: 8303898656669004740}
+  m_PrefabAsset: {fileID: 0}

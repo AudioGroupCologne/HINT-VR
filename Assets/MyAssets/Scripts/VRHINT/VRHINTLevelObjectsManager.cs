@@ -11,32 +11,6 @@ public class VRHINTLevelObjectsManager : MonoBehaviour
     [SerializeField] GameObject DistractorObj;
     [SerializeField] GameObject uiObj;
 
-    private bool targetVisible = true;
-    private bool distVisible = true;
-    private bool uiVisible = true;
-
-    /**
-     * Change distractor visibility.
-     */
-    public void ChangeObjectVisibility(hintObjects obj, bool isVisible)
-    {
-        switch(obj)
-            {
-            case hintObjects.target:
-                targetVisible = isVisible;
-                break;
-            case hintObjects.distractor:
-                distVisible = isVisible;
-                break;
-            case hintObjects.userInterface:
-                uiVisible = isVisible;
-                break;
-            default:
-                Debug.LogError("Invalid type: " + obj);
-                break;
-        }
-    }
-
 
     /**
      * Set position of LevelObjects (target, distractor, userInferface) relative to camera using euler coordinates
@@ -69,13 +43,35 @@ public class VRHINTLevelObjectsManager : MonoBehaviour
 
 
     /**
-     * Set LevelObjects active or inactive
+     * Hide/show all objects
      */
     public void ShowLevelObjects(bool showObjects)
     {
-        TargetObj.SetActive(showObjects && targetVisible);
-        DistractorObj.SetActive(showObjects && distVisible);
-        uiObj.SetActive(showObjects && uiVisible);
+        TargetObj.SetActive(showObjects);
+        DistractorObj.SetActive(showObjects);
+        uiObj.SetActive(showObjects );
+    }
+
+    /**
+     * Hide/show a specific object
+     */ 
+    public void ShowLevelObject(hintObjects obj, bool show)
+    {
+        switch (obj)
+        {
+            case hintObjects.target:
+                TargetObj.SetActive(show);
+                break;
+            case hintObjects.distractor:
+                DistractorObj.SetActive(show);
+                break;
+            case hintObjects.userInterface:
+                uiObj.SetActive(show);
+                break;
+            default:
+                Debug.LogError("Invalid levelObject selector: " + obj);
+                return;
+        }
     }
         
 }
