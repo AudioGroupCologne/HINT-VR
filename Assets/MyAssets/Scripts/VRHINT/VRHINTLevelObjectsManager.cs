@@ -18,7 +18,6 @@ public class VRHINTLevelObjectsManager : MonoBehaviour
     public void SetRelativePosition(hintObjects obj, float angle, float distance, float height = 0)
     {
         Vector3 tmp = Quaternion.AngleAxis(angle, Vector3.up) * (PlayerCamera.transform.forward * distance);
-        tmp.y += height;
 
         switch (obj)
         {
@@ -31,6 +30,7 @@ public class VRHINTLevelObjectsManager : MonoBehaviour
                 DistractorObj.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up) * Quaternion.Euler(0, angle, 0);
                 break;
             case hintObjects.userInterface:
+                tmp.y += height;
                 uiObj.transform.position = PlayerCamera.transform.position + tmp;
                 uiObj.transform.rotation = Quaternion.LookRotation(-PlayerCamera.transform.forward, PlayerCamera.transform.up) * Quaternion.Euler(0, 180, 0);
                 break;
