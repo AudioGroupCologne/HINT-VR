@@ -12,6 +12,10 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        // ### only added for screen recordings
+        Cursor.visible = false;
+
         main.progressCallback = ShowProgess;
         progress.returnCallback = ShowMainMenu;
         ShowMainMenu();
