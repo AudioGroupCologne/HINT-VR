@@ -32,13 +32,13 @@ Neusserstr. 27-92, 50670 Cologne, Germany
 https://imagineon.de/
 
 ## References
-[1] Müller, A., Ramírez, M., Arend, J. M., Rader, T., & Pörschmann, C. (2023). HINT-VR: A child-appropriate application for the self-assessment of spatial hearing abilities in VR. Proceedings of the 49th DAGA.
+[1] Müller, A., Ramírez, M., Arend, J. M., Rader, T., & Pörschmann, C. HINT-VR: A child-appropriate application for the self-assessment of spatial hearing abilities in VR. Proceedings of the 49th DAGA (2023).
 
 [2] Reyes-Lecuona, A. & Picinali, L. Unity Wrapper for 3DTI. https://github.com/3DTune-In/3dti_AudioToolkit_UnityWrapper (2022).
 
 [3] Cuevas-Rodríguez, M. et al. 3D Tune-In Toolkit: An open-source library for real-time binaural spatialisation. PLoS ONE 14, (2019).
 
-[4] Bernschütz, B. A Spherical Far Field HRIR HRTF Compilation of the Neumann KU 100. in Proceedings of the 39th DAGA 592–595 (2013)
+[4] Bernschütz, B. A Spherical Far Field HRIR HRTF Compilation of the Neumann KU 100. in Proceedings of the 39th DAGA 592–595 (2013).
 
 [5] Nilsson, M., Soli, S. D. & Sullivan, J. A. Development of the Hearing In Noise Test for the measurement of speech reception thresholds in quiet and in noise. The Journal of the Acoustical Society of America 95, 1085–1099 (1994).
 
