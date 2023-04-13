@@ -43,3 +43,9 @@ https://imagineon.de/
 [5] Nilsson, M., Soli, S. D. & Sullivan, J. A. Development of the Hearing In Noise Test for the measurement of speech reception thresholds in quiet and in noise. The Journal of the Acoustical Society of America 95, 1085–1099 (1994).
 
 [6] Joiko, J., Bohnert, A., Strieth, S., Soli, S. D. & Rader, T. The German hearing in noise test. International Journal of Audiology 60, 927–933 (2021).
+
+## License
+HINT-VR is freely available under a Creative Commons CC BY-NC-SA 4.0. 
+
+## Citation
+Müller, A., Ramírez, M., Arend, J. M., Rader, T., & Pörschmann, C. HINT-VR: A child-appropriate application for the self-assessment of spatial hearing abilities in VR. Proceedings of the 49th DAGA (2023)
