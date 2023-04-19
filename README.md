@@ -48,4 +48,4 @@ https://imagineon.de/
 HINT-VR is freely available under a Creative Commons CC BY-NC-SA 4.0. 
 
 ## Citation
-Müller, A., Ramírez, M., Arend, J. M., Rader, T., & Pörschmann, C. HINT-VR: A child-appropriate application for the self-assessment of spatial hearing abilities in VR. Proceedings of the 49th DAGA (2023)
+Müller, A., Ramírez, M., Arend, J. M., Rader, T., & Pörschmann, C. (2023). HINT-VR : A child-appropriate application for the self-assessment of spatial hearing abilities in VR. DAGA 2023 - 49. Jahrestagung Für Akustik, 188–191.
