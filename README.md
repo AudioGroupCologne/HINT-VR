@@ -1,5 +1,5 @@
 # HINT-VR
-HINT-VR is a child-appropriate application for the self-assessment of spatial hearing abilities in VR. The application is described in [1].
+HINT-VR is an application for the self-assessment of spatial hearing abilities in VR. The application is described in [1].
 The VR peripherals are integrated using the Oculus SDK and audio spatialization is handled using the Unity wrapper [2] for 3D Tune-In Toolkit (3DTI) [3] with far-field
 measured non-individual HRTFs (Neumann KU100 dummy head) [4]. 
 
@@ -45,7 +45,7 @@ https://imagineon.de/
 [6] Joiko, J., Bohnert, A., Strieth, S., Soli, S. D. & Rader, T. The German hearing in noise test. International Journal of Audiology 60, 927–933 (2021).
 
 ## License
-HINT-VR is freely available under a Creative Commons CC BY-NC-SA 4.0. 
+HINT-VR is freely available under a Creative Commons license CC BY-NC-SA 4.0. 
 
 ## Citation
 Müller, A., Ramírez, M., Arend, J. M., Rader, T., & Pörschmann, C. (2023). HINT-VR : A child-appropriate application for the self-assessment of spatial hearing abilities in VR. DAGA 2023 - 49. Jahrestagung Für Akustik, 188–191.
