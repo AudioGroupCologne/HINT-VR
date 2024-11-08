@@ -49,4 +49,5 @@ HINT-VR is freely available under a Creative Commons license CC BY-NC-SA 4.0.
 
 ## Citation
 Ramírez, M., Müller, A., Arend, J. M., Himmelein, H., Rader, T., & Pörschmann, C. (2024). Speech-in-noise testing in virtual reality. Frontiers in Virtual Reality, 5, 1–14. https://doi.org/10.3389/frvir.2024.1470382   
+
 Müller, A., Ramírez, M., Arend, J. M., Rader, T., & Pörschmann, C. (2023). HINT-VR : A child-appropriate application for the self-assessment of spatial hearing abilities in VR. DAGA 2023 - 49. Jahrestagung Für Akustik, 188–191.
